@@ -17,4 +17,4 @@ Status: `open` → `taken` (handle, date) → `review` (PR #) → `done`.
 | PG-11 | Theme engine: presets, accent from cover image (auto palette), custom HSL, density; light/dark | TS package | open | | |
 | PG-12 | Report renderer: neutral report JSON → Markdown and PDF (Typst) with optional sections | Rust crate | open | | |
 | PG-13 | GEXF 1.3 writer for typed graphs (node/edge attributes, time slices) | Rust crate | open | | |
-| PG-14 | Localization exchange: string table JSON ↔ XLIFF 2.1 / CSV, with per-line context and character name | Rust crate | open | | |
+| PG-14 | Localization exchange: string table JSON ↔ XLIFF 2.1 / CSV, with per-line context and character name | Rust crate | review | Mwapi, 2026-10-07 | #17 |
