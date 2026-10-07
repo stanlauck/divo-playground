@@ -10,7 +10,7 @@ Status: `open` → `taken` (handle, date) → `review` (PR #) → `done`.
 | PG-04 | Godot 4 importer add-on for neutral scene/dialogue JSON (locations, exits, items, dialogue nodes) | GDScript add-on | open | | |
 | PG-05 | Production breakdown export: neutral breakdown JSON → Movie Magic Scheduling–compatible file + CSV schedule | Rust crate | open | | |
 | PG-06 | Editorial timeline writer: neutral shot list JSON → OpenTimelineIO → FCPXML; round-trip ids | Rust crate | open | | |
-| PG-07 | ComfyUI client: submit workflow, poll progress, cancel, fetch outputs, retries; mock server for tests | Rust crate | taken | stanlauck, 2026-10-07 | |
+| PG-07 | ComfyUI client: submit workflow, poll progress, cancel, fetch outputs, retries; mock server for tests | Rust crate | review | stanlauck, 2026-10-07 | #20 |
 | PG-08 | glTF scene mock-up writer: camera markers + placeholder props from neutral shot JSON | Rust crate | review | Droid, 2026-10-07 | #19 |
 | PG-09 | Unicode test corpus + checks: RTL (Arabic/Hebrew), Devanagari, CJK, combining marks — line breaking, cursor movement, grapheme counting | TS package + corpus | open | | |
 | PG-10 | Minimap component for large node graphs (pan, zoom, viewport rect, 10k nodes at 60 fps) | TS / React package | open | | |
