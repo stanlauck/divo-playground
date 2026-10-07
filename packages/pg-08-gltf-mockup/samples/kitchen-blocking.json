@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "scene": "Kitchen blocking (synthetic sample)",
+  "shots": [
+    {
+      "id": "sh010",
+      "name": "Wide, establishing",
+      "camera": { "position": [3.2, 1.6, 3.6], "look_at": [0.0, 0.9, 0.0], "focal_length_mm": 24 }
+    },
+    {
+      "id": "sh020",
+      "name": "Single on A",
+      "camera": { "position": [-0.4, 1.55, 1.3], "look_at": [0.95, 1.6, -0.7], "focal_length_mm": 50 }
+    },
+    {
+      "id": "sh030",
+      "name": "Over the shoulder on B",
+      "camera": {
+        "position": [1.4, 1.6, -1.3],
+        "look_at": [-0.95, 1.55, 0.7],
+        "focal_length_mm": 40,
+        "sensor_mm": [24.89, 18.66]
+      }
+    },
+    {
+      "id": "sh040",
+      "name": "Top shot of the table",
+      "camera": { "position": [0.0, 3.4, 0.0], "look_at": [0.0, 0.75, 0.0], "focal_length_mm": 18 }
+    },
+    {
+      "id": "sh050",
+      "name": "Dutch angle from the doorway",
+      "camera": {
+        "position": [-2.6, 1.2, -2.2],
+        "pan_deg": -135,
+        "tilt_deg": 8,
+        "roll_deg": -12,
+        "focal_length_mm": 28,
+        "near_m": 0.05,
+        "far_m": 60
+      }
+    }
+  ],
+  "props": [
+    { "id": "table", "name": "Kitchen table", "position": [0.0, 0.0, 0.0], "size": [1.6, 0.75, 0.9], "yaw_deg": 10, "color": "#8B5A2B" },
+    { "id": "chair-1", "position": [0.35, 0.0, -0.75], "size": [0.45, 0.9, 0.45], "yaw_deg": 10, "color": "#6D4C41" },
+    { "id": "chair-2", "position": [-0.35, 0.0, 0.75], "size": [0.45, 0.9, 0.45], "yaw_deg": 190, "color": "#6D4C41" },
+    { "id": "fridge", "position": [-2.4, 0.0, -1.6], "size": [0.7, 1.85, 0.7], "yaw_deg": 45, "color": "#D8DEE4" },
+    { "id": "pendant-lamp", "shape": "cylinder", "position": [0.0, 1.9, 0.0], "size": [0.35, 0.25, 0.35], "color": "#F2C14E" },
+    { "id": "fruit-bowl", "shape": "sphere", "position": [0.2, 0.75, -0.1], "size": [0.28, 0.12, 0.28], "color": "#C0392B" },
+    { "id": "stand-in-a", "name": "Actor A stand-in", "shape": "cylinder", "position": [0.95, 0.0, -0.7], "size": [0.45, 1.75, 0.45], "color": "#3E7CB1" },
+    { "id": "stand-in-b", "name": "Actor B stand-in", "shape": "cylinder", "position": [-0.95, 0.0, 0.7], "size": [0.45, 1.68, 0.45], "color": "#5BA55B" },
+    { "id": "crate", "position": [2.1, 0.0, -2.0], "size": [0.5, 0.4, 0.4] }
+  ]
+}
