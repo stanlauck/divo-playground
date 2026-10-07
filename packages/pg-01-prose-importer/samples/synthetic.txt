@@ -1,0 +1,4 @@
+Synthetic first paragraph.
+Its second line stays in the same paragraph.
+
+Synthetic second paragraph with Unicode: Север, 南, عربي.

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<w:footnotes xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <w:footnote w:id="1"><w:p><w:r><w:footnoteRef/><w:t>A synthetic footnote.</w:t></w:r><w:r><w:rPr><w:i/></w:rPr><w:t xml:space="preserve"> With italic text.</w:t></w:r></w:p></w:footnote>
+</w:footnotes>
