@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "source_lang": "en",
+  "target_lang": "de",
+  "strings": [
+    {
+      "id": "lighthouse.keeper.greeting",
+      "source": "You came up all those stairs? Sit, the kettle is warm.",
+      "target": "Du bist all die Stufen hochgestiegen? Setz dich, der Kessel ist warm.",
+      "context": "Lighthouse lamp room, first visit, evening",
+      "character": "Keeper Odile",
+      "state": "translated"
+    },
+    {
+      "id": "lighthouse.keeper.storm",
+      "source": "When the bell rings twice, \"close\" the shutters & stay inside.",
+      "context": "Storm warning, repeated on every visit",
+      "character": "Keeper Odile",
+      "note": "Quotes are part of the line; keep them.",
+      "state": "initial"
+    },
+    {
+      "id": "lighthouse.player.reply",
+      "source": "Line one.\nLine two, after a pause.",
+      "target": "Zeile eins.\nZeile zwei, nach einer Pause.",
+      "character": "Visitor",
+      "state": "reviewed"
+    },
+    {
+      "id": "ui.button.continue",
+      "source": "Continue",
+      "target": "Weiter",
+      "context": "Main menu button",
+      "max_length": 12,
+      "state": "final"
+    },
+    {
+      "id": "ui.toast.saved",
+      "source": "Saved <slot 3>",
+      "context": "Toast after manual save",
+      "max_length": 20
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" xmlns:slr="urn:oasis:names:tc:xliff:sizerestriction:2.0" version="2.1" srcLang="en" trgLang="de">
+  <file id="f1" xml:space="preserve">
+    <slr:profiles generalProfile="xliff:codepoints"/>
+    <unit id="lighthouse.keeper.greeting">
+      <notes>
+        <note category="context">Lighthouse lamp room, first visit, evening</note>
+        <note category="character">Keeper Odile</note>
+      </notes>
+      <segment state="translated">
+        <source>You came up all those stairs? Sit, the kettle is warm.</source>
+        <target>Du bist all die Stufen hochgestiegen? Setz dich, der Kessel ist warm.</target>
+      </segment>
+    </unit>
+    <unit id="lighthouse.keeper.storm">
+      <notes>
+        <note category="context">Storm warning, repeated on every visit</note>
+        <note category="character">Keeper Odile</note>
+        <note category="comment">Quotes are part of the line; keep them.</note>
+      </notes>
+      <segment state="initial">
+        <source>When the bell rings twice, "close" the shutters &amp; stay inside.</source>
+      </segment>
+    </unit>
+    <unit id="lighthouse.player.reply">
+      <notes>
+        <note category="character">Visitor</note>
+      </notes>
+      <segment state="reviewed">
+        <source>Line one.
+Line two, after a pause.</source>
+        <target>Zeile eins.
+Zeile zwei, nach einer Pause.</target>
+      </segment>
+    </unit>
+    <unit id="ui.button.continue" slr:sizeRestriction="12">
+      <notes>
+        <note category="context">Main menu button</note>
+      </notes>
+      <segment state="final">
+        <source>Continue</source>
+        <target>Weiter</target>
+      </segment>
+    </unit>
+    <unit id="ui.toast.saved" slr:sizeRestriction="20">
+      <notes>
+        <note category="context">Toast after manual save</note>
+      </notes>
+      <segment>
+        <source>Saved &lt;slot 3&gt;</source>
+      </segment>
+    </unit>
+  </file>
+</xliff>

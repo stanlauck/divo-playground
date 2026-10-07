@@ -1,0 +1,8 @@
+id,source,target,context,character,note,max_length,state
+lighthouse.keeper.greeting,"You came up all those stairs? Sit, the kettle is warm.","Du bist all die Stufen hochgestiegen? Setz dich, der Kessel ist warm.","Lighthouse lamp room, first visit, evening",Keeper Odile,,,translated
+lighthouse.keeper.storm,"When the bell rings twice, ""close"" the shutters & stay inside.",,"Storm warning, repeated on every visit",Keeper Odile,Quotes are part of the line; keep them.,,initial
+lighthouse.player.reply,"Line one.
+Line two, after a pause.","Zeile eins.
+Zeile zwei, nach einer Pause.",,Visitor,,,reviewed
+ui.button.continue,Continue,Weiter,Main menu button,,,12,final
+ui.toast.saved,Saved <slot 3>,,Toast after manual save,,,20,
