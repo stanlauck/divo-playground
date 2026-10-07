@@ -303,3 +303,22 @@ fn malformed_image_resources_still_report_presence_and_image_loss() {
         .iter()
         .any(|warning| warning.kind == WarningKind::ImageContentNotImported));
 }
+
+#[test]
+fn spaced_russian_combined_heading_replaces_the_previous_active_scene() {
+    let screenplay = read(pdf(&[SamplePage {
+        lines: vec![
+            TextLine::new("ИНТ. УЧЕБНАЯ КОМНАТА - ДЕНЬ", 72.0, 720.0),
+            TextLine::new("Первое учебное действие.", 72.0, 690.0),
+            TextLine::new("ИНТ. / НАТ. УЧЕБНЫЙ ДВОР - НОЧЬ", 72.0, 654.0),
+            TextLine::new("Второе учебное действие.", 72.0, 624.0),
+        ],
+        ..SamplePage::default()
+    }]));
+    assert_eq!(screenplay.lines[2].kind, ElementKind::SceneHeading);
+    assert_eq!(screenplay.blocks[1].scene.as_deref(), Some("block-1"));
+    assert_eq!(screenplay.blocks[2].kind, ElementKind::SceneHeading);
+    assert_eq!(screenplay.blocks[2].scene, None);
+    assert_eq!(screenplay.blocks[3].scene.as_deref(), Some("block-3"));
+    assert!(screenplay.doubts.is_empty());
+}
