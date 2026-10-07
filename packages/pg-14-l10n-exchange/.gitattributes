@@ -1,0 +1,2 @@
+# Golden files are compared byte for byte; CSV uses CRLF per RFC 4180.
+samples/* -text
