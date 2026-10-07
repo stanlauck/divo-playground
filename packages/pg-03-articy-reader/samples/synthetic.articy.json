@@ -1,0 +1,136 @@
+{
+  "Settings": {
+    "ExportVersion": "1.0",
+    "set_Localization": "False",
+    "set_TextFormatter": "BBCode",
+    "set_UseScriptSupport": "True"
+  },
+  "Project": {
+    "Name": "Synthetic crossroads",
+    "TechnicalName": "SyntheticCrossroads",
+    "Guid": "11111111-2222-4333-8444-555555555555"
+  },
+  "ObjectDefinitions": [
+    { "Type": "CustomLine", "Class": "DialogueFragment", "InheritsFrom": "DialogueFragment", "Template": { "TechnicalName": "CustomLine", "Features": [] } }
+  ],
+  "GlobalVariables": [
+    {
+      "Namespace": "Story",
+      "Description": "Synthetic state only.",
+      "Variables": [
+        { "Variable": "visited", "Type": "Boolean", "Value": "False", "Description": "Visited the crossroads." },
+        { "Variable": "coins", "Type": "Integer", "Value": "3", "Description": "" },
+        { "Variable": "pace", "Type": "Float", "Value": "1.25", "Description": "" },
+        { "Variable": "sign", "Type": "String", "Value": "Север 南", "Description": "" }
+      ]
+    },
+    { "Namespace": "Empty", "Variables": [] }
+  ],
+  "Packages": [
+    {
+      "Name": "Synthetic flow",
+      "Description": "Hand-authored synthetic native-export shape.",
+      "IsDefaultPackage": true,
+      "Models": [
+        {
+          "Type": "FlowFragment",
+          "Properties": {
+            "Id": "0x0100000000000001", "TechnicalName": "Crossroads",
+            "DisplayName": "Crossroads", "Text": "A synthetic container.",
+            "Parent": "0x0000000000000000",
+            "InputPins": [], "OutputPins": []
+          }
+        },
+        {
+          "Type": "Entity",
+          "Properties": {
+            "Id": "0x0100000000000002", "TechnicalName": "Guide",
+            "DisplayName": "Synthetic guide", "Parent": "0x0000000000000000"
+          }
+        },
+        {
+          "Type": "CustomLine",
+          "Properties": {
+            "Id": "0x0100000000000003", "TechnicalName": "Greeting",
+            "Parent": "0x0100000000000001", "Speaker": "0x0100000000000002",
+            "Text": "The [b]amber[/b] path divides.", "MenuText": "",
+            "InputPins": [
+              { "Id": "0x0100000000000011", "Owner": "0x0100000000000003", "Text": "" }
+            ],
+            "OutputPins": [
+              {
+                "Id": "0x0100000000000012", "Owner": "0x0100000000000003",
+                "Text": "Story.visited = true;",
+                "Connections": [
+                  { "Target": "0x0100000000000004", "TargetPin": "0x0100000000000021", "Label": "North" },
+                  { "Target": "0x0100000000000005", "TargetPin": "0x0100000000000031", "Label": "" }
+                ]
+              }
+            ]
+          },
+          "Template": { "Mood": { "Tone": "curious", "Weight": 0.5 } }
+        },
+        {
+          "Type": "DialogueFragment",
+          "Properties": {
+            "Id": "0x0100000000000004", "TechnicalName": "North",
+            "Parent": "0x0100000000000001", "Speaker": "0x0100000000000002",
+            "Text": "A quiet field lies north.", "MenuText": "Take the northern path",
+            "InputPins": [
+              { "Id": "0x0100000000000021", "Owner": "0x0100000000000004", "Text": "Story.coins > 0" }
+            ],
+            "OutputPins": []
+          }
+        },
+        {
+          "Type": "DialogueFragment",
+          "Properties": {
+            "Id": "0x0100000000000005", "TechnicalName": "East",
+            "Parent": "0x0100000000000001", "Speaker": "0x0100000000000002",
+            "Text": "The eastern road follows a river.", "MenuText": "Follow the river",
+            "InputPins": [
+              { "Id": "0x0100000000000031", "Owner": "0x0100000000000005", "Text": "" }
+            ],
+            "OutputPins": []
+          }
+        },
+        {
+          "Type": "Condition",
+          "Properties": {
+            "Id": "0x0100000000000006", "Parent": "0x0100000000000001",
+            "Expression": "Story.visited", "InputPins": [], "OutputPins": []
+          }
+        },
+        {
+          "Type": "Instruction",
+          "Properties": {
+            "Id": "0x0100000000000007", "Parent": "0x0100000000000001",
+            "Expression": "Story.coins = Story.coins + 1;", "InputPins": [], "OutputPins": []
+          }
+        },
+        {
+          "Type": "Jump",
+          "Properties": {
+            "Id": "0x0100000000000008", "Parent": "0x0100000000000001",
+            "Target": "0x0100000000000003", "TargetPin": "0x0100000000000011",
+            "InputPins": [], "OutputPins": []
+          }
+        }
+      ]
+    }
+  ],
+  "Hierarchy": {
+    "Id": "0x0100000000000001", "Type": "FlowFragment",
+    "Children": [
+      { "Id": "0x0100000000000003", "Type": "CustomLine", "Children": [] },
+      { "Id": "0x0100000000000004", "Type": "DialogueFragment", "Children": [] },
+      { "Id": "0x0100000000000005", "Type": "DialogueFragment", "Children": [] },
+      { "Id": "0x0100000000000006", "Type": "Condition", "Children": [] },
+      { "Id": "0x0100000000000007", "Type": "Instruction", "Children": [] },
+      { "Id": "0x0100000000000008", "Type": "Jump", "Children": [] }
+    ]
+  },
+  "ScriptMethods": [
+    { "Name": "SyntheticFunction", "ReturnType": "void" }
+  ]
+}
