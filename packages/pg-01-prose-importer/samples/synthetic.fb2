@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FictionBook xmlns="http://www.gribuser.ru/xml/fictionbook/2.0" xmlns:l="http://www.w3.org/1999/xlink">
+  <description><title-info><book-title>Synthetic sample</book-title></title-info></description>
+  <body>
+    <section id="opening">
+      <title><p>Synthetic opening</p></title>
+      <epigraph><p>A <emphasis>small</emphasis> beginning.</p><text-author>Synthetic author</text-author></epigraph>
+      <p>A <strong>bold <emphasis>and italic</emphasis></strong> phrase,
+        <strikethrough>crossed out</strikethrough>, x<sup>2</sup> and H<sub>2</sub>O.
+        <a l:href="https://example.invalid/synthetic">Synthetic link</a>
+        <a type="note" l:href="#note-one">1</a>.</p>
+      <cite><p>Synthetic quotation.</p><text-author>Synthetic speaker</text-author></cite>
+      <poem>
+        <title><p>Synthetic verse</p></title>
+        <stanza><v>Amber light</v><v>Over a <strong>quiet</strong> field</v></stanza>
+        <stanza><v>A second stanza</v><v>A separate line</v></stanza>
+        <text-author>Synthetic poet</text-author>
+      </poem>
+      <table><tr><th>Item</th><th>Value</th></tr><tr><td>Amber</td><td>7</td></tr></table>
+      <image l:href="#synthetic-image"/>
+      <section id="nested"><title><p>Nested heading</p></title><p>Nested prose.</p></section>
+      <p>Parent prose after the nested section.</p>
+    </section>
+  </body>
+  <body name="notes"><section id="note-one"><p>A synthetic footnote with <emphasis>formatting</emphasis>.</p></section></body>
+  <binary id="synthetic-image" content-type="image/png">AA==</binary>
+</FictionBook>
