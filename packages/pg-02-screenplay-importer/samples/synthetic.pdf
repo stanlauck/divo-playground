@@ -1,0 +1,170 @@
+%PDF-1.7
+% SPDX-License-Identifier: MIT OR Apache-2.0
+%synthetic
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type3 /FontBBox [0 -200 600 800] /FontMatrix [0.001 0 0 0.001 0 0] /CharProcs << /g1 5 0 R /g2 5 0 R /g3 5 0 R /g4 5 0 R /g5 5 0 R /g6 5 0 R /g7 5 0 R /g8 5 0 R /g9 5 0 R /g10 5 0 R /g11 5 0 R /g12 5 0 R /g13 5 0 R /g14 5 0 R /g15 5 0 R /g16 5 0 R /g17 5 0 R /g18 5 0 R /g19 5 0 R /g20 5 0 R /g21 5 0 R /g22 5 0 R /g23 5 0 R /g24 5 0 R /g25 5 0 R /g26 5 0 R /g27 5 0 R /g28 5 0 R /g29 5 0 R /g30 5 0 R /g31 5 0 R /g32 5 0 R /g33 5 0 R /g34 5 0 R /g35 5 0 R /g36 5 0 R /g37 5 0 R /g38 5 0 R /g39 5 0 R /g40 5 0 R /g41 5 0 R /g42 5 0 R /g43 5 0 R /g44 5 0 R /g45 5 0 R /g46 5 0 R /g47 5 0 R /g48 5 0 R /g49 5 0 R /g50 5 0 R /g51 5 0 R /g52 5 0 R /g53 5 0 R /g54 5 0 R /g55 5 0 R /g56 5 0 R /g57 5 0 R /g58 5 0 R /g59 5 0 R /g60 5 0 R /g61 5 0 R /g62 5 0 R /g63 5 0 R /g64 5 0 R /g65 5 0 R /g66 5 0 R /g67 5 0 R /g68 5 0 R /g69 5 0 R /g70 5 0 R /g71 5 0 R /g72 5 0 R /g73 5 0 R /g74 5 0 R /g75 5 0 R /g76 5 0 R /g77 5 0 R /g78 5 0 R /g79 5 0 R /g80 5 0 R >> /Encoding << /Type /Encoding /Differences [1 /g1 /g2 /g3 /g4 /g5 /g6 /g7 /g8 /g9 /g10 /g11 /g12 /g13 /g14 /g15 /g16 /g17 /g18 /g19 /g20 /g21 /g22 /g23 /g24 /g25 /g26 /g27 /g28 /g29 /g30 /g31 /g32 /g33 /g34 /g35 /g36 /g37 /g38 /g39 /g40 /g41 /g42 /g43 /g44 /g45 /g46 /g47 /g48 /g49 /g50 /g51 /g52 /g53 /g54 /g55 /g56 /g57 /g58 /g59 /g60 /g61 /g62 /g63 /g64 /g65 /g66 /g67 /g68 /g69 /g70 /g71 /g72 /g73 /g74 /g75 /g76 /g77 /g78 /g79 /g80] >> /FirstChar 1 /LastChar 80 /Widths [600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600 600] /ToUnicode 4 0 R /Resources << >> >>
+endobj
+4 0 obj
+<< /Length 1282 >>
+stream
+/CIDInit /ProcSet findresource begin
+12 dict begin
+begincmap
+/CIDSystemInfo << /Registry (Synthetic) /Ordering (Synthetic) /Supplement 0 >> def
+/CMapName /Synthetic def
+/CMapType 2 def
+1 begincodespacerange
+<01> <FF>
+endcodespacerange
+80 beginbfchar
+<01> <0020>
+<02> <0028>
+<03> <0029>
+<04> <002D>
+<05> <002E>
+<06> <0031>
+<07> <0032>
+<08> <003A>
+<09> <0041>
+<0A> <0042>
+<0B> <0043>
+<0C> <0044>
+<0D> <0045>
+<0E> <0049>
+<0F> <004B>
+<10> <004D>
+<11> <004E>
+<12> <004F>
+<13> <0052>
+<14> <0053>
+<15> <0054>
+<16> <0055>
+<17> <0059>
+<18> <0061>
+<19> <0062>
+<1A> <0063>
+<1B> <0065>
+<1C> <0067>
+<1D> <0068>
+<1E> <0069>
+<1F> <006C>
+<20> <006D>
+<21> <006E>
+<22> <006F>
+<23> <0070>
+<24> <0071>
+<25> <0072>
+<26> <0073>
+<27> <0074>
+<28> <0075>
+<29> <0079>
+<2A> <0410>
+<2B> <0412>
+<2C> <0414>
+<2D> <0415>
+<2E> <0417>
+<2F> <0418>
+<30> <0419>
+<31> <041A>
+<32> <041C>
+<33> <041D>
+<34> <041E>
+<35> <0420>
+<36> <0421>
+<37> <0422>
+<38> <0427>
+<39> <042C>
+<3A> <042D>
+<3B> <0430>
+<3C> <0431>
+<3D> <0432>
+<3E> <0435>
+<3F> <0438>
+<40> <0439>
+<41> <043A>
+<42> <043B>
+<43> <043C>
+<44> <043D>
+<45> <043E>
+<46> <043F>
+<47> <0440>
+<48> <0441>
+<49> <0442>
+<4A> <0443>
+<4B> <0445>
+<4C> <0447>
+<4D> <0448>
+<4E> <044B>
+<4F> <044C>
+<50> <044F>
+endbfchar
+endcmap
+CMapName currentdict /CMap defineresource pop
+end
+end
+
+endstream
+endobj
+5 0 obj
+<< /Length 41 >>
+stream
+600 0 0 -200 600 800 d1
+0 0 500 700 re f
+
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792]  /Rotate 0 /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 559 >>
+stream
+BT /F1 12 Tf 0 Tr 1 0 0 1 72 720 Tm <06010E1115050109100A0D1301131212100104010C0917> Tj ET
+BT /F1 12 Tf 0 Tr 1 0 0 1 72 690 Tm <0E251E2601231F181A1B26011801191F281B011A28191B0122210118012718191F1B05> Tj ET
+BT /F1 12 Tf 0 Tr 1 0 0 1 252 654 Tm <0E130E14> Tj ET
+BT /F1 12 Tf 0 Tr 1 0 0 1 180 636 Tm <0224281E1B271F2903> Tj ET
+BT /F1 12 Tf 0 Tr 1 0 0 1 144 618 Tm <151D1B01261820231F1B011F1E1C1D27011E26011C251B1B2105> Tj ET
+BT /F1 12 Tf 0 Tr 1 0 0 1 432 570 Tm <0B161501151208> Tj ET
+BT /F1 12 Tf 0 Tr 1 0 0 1 72 534 Tm <16110B0D1315090E11011009130F0D13> Tj ET
+
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792]  /Rotate 0 /Resources << /Font << /F1 3 0 R >> >> /Contents 9 0 R >>
+endobj
+9 0 obj
+<< /Length 549 >>
+stream
+BT /F1 12 Tf 0 Tr 1 0 0 1 72 720 Tm <0701332A370501362F33372D372F382D36312F30012C2B34350104012C2D3339> Tj ET
+BT /F1 12 Tf 0 Tr 1 0 0 1 72 690 Tm <2F473F4801463E473E48493B3D42503E49014A4C3E3C444E4001414A3C05> Tj ET
+BT /F1 12 Tf 0 Tr 1 0 0 1 252 654 Tm <2F352F36> Tj ET
+BT /F1 12 Tf 0 Tr 1 0 0 1 180 636 Tm <02493F4B4503> Tj ET
+BT /F1 12 Tf 0 Tr 1 0 0 1 144 618 Tm <3A4945014945424F4145013D4E434E4D423E44444E400146473F433E4705> Tj ET
+BT /F1 12 Tf 0 Tr 1 0 0 1 432 570 Tm <2E2A372D32332D332F2D05> Tj ET
+BT /F1 12 Tf 0 Tr 1 0 0 1 540 30 Tm <0705> Tj ET
+
+endstream
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000065 00000 n 
+0000000114 00000 n 
+0000000177 00000 n 
+0000002005 00000 n 
+0000003339 00000 n 
+0000003430 00000 n 
+0000003567 00000 n 
+0000004177 00000 n 
+0000004314 00000 n 
+trailer
+<< /Size 10 /Root 1 0 R >>
+startxref
+4914
+%%EOF
