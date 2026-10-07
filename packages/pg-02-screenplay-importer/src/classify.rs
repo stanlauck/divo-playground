@@ -36,6 +36,7 @@ pub(crate) fn classify(screenplay: &mut Screenplay, options: &ImportOptions) -> 
                 && next.baseline[1] - line.baseline[1] <= line.font_size.max(next.font_size) * 3.1
                 && next.bounds.left / width >= 0.18
                 && next.bounds.left / width <= 0.58
+                && !next.text.trim().is_empty()
                 && !scene_marker(next.text.trim())
                 && !transition(next.text.trim())
                 && (!cue(next.text.trim())
@@ -69,7 +70,15 @@ pub(crate) fn classify(screenplay: &mut Screenplay, options: &ImportOptions) -> 
             kind = ElementKind::Unknown;
             confidence = Confidence::Low;
             reasons.push(Reason::PossibleHeaderFooter);
+            speaker = None;
+            parenthetical_open = false;
             // Page furniture does not become dialogue or a speaker cue.
+        } else if text.is_empty() {
+            kind = ElementKind::Unknown;
+            confidence = Confidence::Low;
+            reasons.push(Reason::UnrecognizedText);
+            speaker = None;
+            parenthetical_open = false;
         } else if scene_heading {
             kind = ElementKind::SceneHeading;
             confidence = Confidence::High;
@@ -99,10 +108,7 @@ pub(crate) fn classify(screenplay: &mut Screenplay, options: &ImportOptions) -> 
                 reasons.push(Reason::UnexpectedParenthetical);
             }
             parenthetical_open = speaker.is_some() && !text.contains(')');
-        } else if (upper_cue && centered)
-            || title_case_cue
-            || (upper_cue && following_dialogue && speaker.is_none())
-        {
+        } else if (upper_cue && centered) || title_case_cue {
             kind = ElementKind::Character;
             confidence = Confidence::High;
             if !upper_cue || !centered || !following_dialogue || scene.is_none() {
@@ -259,7 +265,7 @@ fn scene_marker(text: &str) -> bool {
     .any(|marker| {
         text.strip_prefix(marker).is_some_and(|rest| {
             rest.is_empty()
-                || rest.starts_with(|character: char| character.is_whitespace() || character == '/')
+                || (rest.starts_with(char::is_whitespace) && !rest.trim_start().starts_with('/'))
         })
     })
 }
@@ -336,6 +342,8 @@ fn marginal_lines(screenplay: &Screenplay) -> Vec<bool> {
             let text = line.text.trim();
             let zone = zone(line);
             zone != 0
+                && !scene_marker(text)
+                && !transition(text)
                 && (counts.get(&(text, zone)).is_some_and(|value| value.1 >= 2)
                     || (!text.is_empty()
                         && text.chars().count() <= 10

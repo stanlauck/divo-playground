@@ -45,6 +45,9 @@ Dependencies must be fetched once before offline builds.
 - Text+image pages retain their text and report `image_content_not_imported`.
   Images/attachments are not exported. Raster image pixels are not requested
   by the extraction device.
+- Image presence counts invoked image operations (including failed resources),
+  not unique embedded files or successfully decoded bitmaps. Preflight is
+  conservative about hidden content. Backend decode failures also signal loss.
 - PDF JavaScript, launch actions, URLs and embedded files are never executed or
   opened. Annotation appearance streams are disabled, not screenplay text.
 - Password/decryption failures are explicit errors. No password option is
@@ -74,6 +77,10 @@ Kinds: `scene_heading`, `action`, `character`, `dialogue`, `parenthetical`,
 calibrated probability**. Every extracted line belongs to exactly one block,
 including uncertain lines and page furniture. Doubts contain references, not
 another copy of the story text.
+
+`text` page status means at least one glyph was extracted, including a
+whitespace-only text layer. Whitespace-only source rows remain `unknown` with
+doubts, never spoken dialogue or an assertion that the page needs OCR.
 
 `line-1` / `block-1` IDs are deterministic for unchanged input/settings, not
 stable after insertions, changed fonts or different backend versions. A block's
@@ -118,11 +125,15 @@ Normal screenplay layout is assumed, not required. Character cues, dialogue,
 wrapped parentheticals and action paragraphs use position/context. Title-case
 or isolated cues are uncertain. Repeated marginal headers/footers and marginal
 page numbers stay in the source as `unknown`, never silently dropped.
+Recognized scene headings/transitions are exempt from that furniture heuristic.
+Action-margin uppercase prose is not promoted to a character merely because
+an indented line follows it. Combined scene prefixes require a complete marker.
 
 The report flags ambiguous uppercase text, orphan dialogue/parentheticals,
 incomplete headings, uncertain cues, columns/orientation, missing Unicode,
 control characters, fallback/unsupported backend content and possible page
-furniture. Speaker state resets at page boundaries and large vertical gaps.
+furniture. Speaker state resets at page boundaries, large vertical gaps,
+whitespace-only rows and recognized headers/footers.
 Possible cross-page speech stays unlinked and is reported instead of guessed.
 This is not scene understanding, dialogue execution or perfect classification.
 

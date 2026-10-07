@@ -8,6 +8,12 @@ use hayro_interpret::hayro_syntax::{
 };
 use std::collections::BTreeSet;
 
+#[derive(Default)]
+pub(crate) struct Inspection {
+    pub warnings: Vec<WarningKind>,
+    pub images: usize,
+}
+
 pub(crate) struct Budget<'o> {
     options: &'o ImportOptions,
     decoded: usize,
@@ -27,10 +33,10 @@ impl<'o> Budget<'o> {
         &mut self,
         content: &[u8],
         resources: &Resources<'_>,
-    ) -> Result<Vec<WarningKind>> {
-        let mut warnings = Vec::new();
-        self.walk(content, resources, 0, &mut BTreeSet::new(), &mut warnings)?;
-        Ok(warnings)
+    ) -> Result<Inspection> {
+        let mut inspection = Inspection::default();
+        self.walk(content, resources, 0, &mut BTreeSet::new(), &mut inspection)?;
+        Ok(inspection)
     }
 
     fn walk(
@@ -39,7 +45,7 @@ impl<'o> Budget<'o> {
         resources: &Resources<'_>,
         depth: usize,
         active: &mut BTreeSet<ObjectIdentifier>,
-        warnings: &mut Vec<WarningKind>,
+        inspection: &mut Inspection,
     ) -> Result<()> {
         if content.len() > self.options.max_decoded_page_bytes {
             return Err(Error::Limit("decoded page or Form bytes"));
@@ -57,14 +63,28 @@ impl<'o> Budget<'o> {
             match operation {
                 TypedInstruction::XObject(object) => {
                     let Some(stream) = resources.get_x_object(object.0) else {
-                        add(warnings, WarningKind::BackendInvalidResource);
+                        add(
+                            &mut inspection.warnings,
+                            WarningKind::BackendInvalidResource,
+                        );
                         continue;
                     };
                     let Some(subtype) = stream.dict().get::<Name<'_>>(b"Subtype") else {
-                        add(warnings, WarningKind::BackendInvalidResource);
+                        add(
+                            &mut inspection.warnings,
+                            WarningKind::BackendInvalidResource,
+                        );
                         continue;
                     };
+                    if subtype.as_ref() == b"Image" {
+                        inspection.images = inspection.images.saturating_add(1);
+                        continue;
+                    }
                     if subtype.as_ref() != b"Form" {
+                        add(
+                            &mut inspection.warnings,
+                            WarningKind::BackendInvalidResource,
+                        );
                         continue;
                     }
                     if depth >= self.options.max_form_depth {
@@ -80,7 +100,7 @@ impl<'o> Budget<'o> {
                         .get::<Dict<'_>>(b"Resources")
                         .unwrap_or_default();
                     let resources = Resources::from_parent(local, resources.clone());
-                    self.walk(decoded.as_ref(), &resources, depth + 1, active, warnings)?;
+                    self.walk(decoded.as_ref(), &resources, depth + 1, active, inspection)?;
                     active.remove(&id);
                 }
                 TypedInstruction::TextFont(font) => {
@@ -99,10 +119,19 @@ impl<'o> Budget<'o> {
                             )
                         });
                     if !supported {
-                        add(warnings, WarningKind::BackendInvalidResource);
+                        add(
+                            &mut inspection.warnings,
+                            WarningKind::BackendInvalidResource,
+                        );
                     }
                 }
-                TypedInstruction::Fallback(_) => add(warnings, WarningKind::BackendUnknownOperator),
+                TypedInstruction::InlineImage(_) => {
+                    inspection.images = inspection.images.saturating_add(1);
+                }
+                TypedInstruction::Fallback(_) => add(
+                    &mut inspection.warnings,
+                    WarningKind::BackendUnknownOperator,
+                ),
                 _ => {}
             }
         }

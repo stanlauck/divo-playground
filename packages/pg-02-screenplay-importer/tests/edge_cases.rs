@@ -152,3 +152,154 @@ fn degenerate_text_geometry_is_an_error_not_nonfinite_json() {
         Err(Error::InvalidGeometry)
     ));
 }
+
+#[test]
+fn incomplete_combined_markers_do_not_replace_the_active_scene() {
+    for invalid in [
+        "INT./EXTERIOR notes",
+        "INT. / EXTERIOR notes",
+        "ИНТ./НАТУРА заметки",
+    ] {
+        let screenplay = read(pdf(&[SamplePage {
+            lines: vec![
+                TextLine::new("INT. SYNTHETIC ROOM - DAY", 72.0, 720.0),
+                TextLine::new(invalid, 72.0, 684.0),
+                TextLine::new("A synthetic action.", 72.0, 648.0),
+            ],
+            ..SamplePage::default()
+        }]));
+        assert_ne!(screenplay.lines[1].kind, ElementKind::SceneHeading);
+        assert_eq!(screenplay.blocks[2].scene.as_deref(), Some("block-1"));
+    }
+    for valid in [
+        "INT./EXT. SAMPLE - DAY",
+        "INT. / EXT. SAMPLE - DAY",
+        "ИНТ. / НАТ. ПРИМЕР - ДЕНЬ",
+    ] {
+        let screenplay = read(pdf(&[SamplePage {
+            lines: vec![TextLine::new(valid, 72.0, 720.0)],
+            ..SamplePage::default()
+        }]));
+        assert_eq!(screenplay.lines[0].kind, ElementKind::SceneHeading);
+    }
+}
+
+#[test]
+fn uppercase_action_at_left_margin_never_becomes_a_speaker() {
+    let screenplay = read(pdf(&[SamplePage {
+        lines: vec![
+            TextLine::new("IRIS MOVES", 72.0, 720.0),
+            TextLine::new("Indented synthetic prose.", 144.0, 702.0),
+        ],
+        ..SamplePage::default()
+    }]));
+    assert_eq!(screenplay.lines[0].kind, ElementKind::Unknown);
+    assert!(screenplay
+        .blocks
+        .iter()
+        .all(|block| block.speaker.is_none()));
+    assert!(screenplay
+        .doubts
+        .iter()
+        .any(|doubt| doubt.reasons.contains(&Reason::AmbiguousUppercase)));
+}
+
+#[test]
+fn whitespace_rows_are_not_spoken_or_merged_into_dialogue() {
+    let screenplay = read(pdf(&[SamplePage {
+        lines: vec![
+            TextLine::new("IRIS", 252.0, 720.0),
+            TextLine::new("   ", 144.0, 702.0),
+            TextLine::new("A synthetic response.", 144.0, 684.0),
+        ],
+        ..SamplePage::default()
+    }]));
+    assert_eq!(screenplay.lines[1].raw_text, "   ");
+    assert_eq!(screenplay.lines[1].kind, ElementKind::Unknown);
+    assert_eq!(screenplay.blocks[1].lines, ["line-2"]);
+    assert!(screenplay.blocks[1].speaker.is_none());
+    assert!(screenplay.blocks[2].speaker.is_none());
+}
+
+#[test]
+fn whitespace_only_text_layer_is_not_misreported_as_an_unsupported_scan() {
+    let screenplay = read(pdf(&[SamplePage {
+        lines: vec![TextLine::new("   ", 144.0, 720.0)],
+        ..SamplePage::default()
+    }]));
+    assert_eq!(screenplay.pages[0].status, PageStatus::Text);
+    assert_eq!(screenplay.lines[0].kind, ElementKind::Unknown);
+    assert!(!screenplay
+        .warnings
+        .iter()
+        .any(|warning| warning.kind == WarningKind::NoExtractableText));
+}
+
+#[test]
+fn marginal_furniture_between_cue_and_text_clears_speaker_state() {
+    let screenplay = read(pdf(&[
+        SamplePage {
+            lines: vec![
+                TextLine::new("IRIS", 252.0, 782.0),
+                TextLine::new("SYNTHETIC DRAFT", 200.0, 764.0),
+                TextLine::new("A synthetic response.", 144.0, 746.0),
+            ],
+            ..SamplePage::default()
+        },
+        SamplePage {
+            lines: vec![TextLine::new("SYNTHETIC DRAFT", 200.0, 764.0)],
+            ..SamplePage::default()
+        },
+    ]));
+    assert!(screenplay.doubts.iter().any(
+        |doubt| doubt.line == "line-2" && doubt.reasons.contains(&Reason::PossibleHeaderFooter)
+    ));
+    assert!(screenplay.blocks[2].speaker.is_none());
+    assert!(screenplay
+        .doubts
+        .iter()
+        .any(|doubt| doubt.line == "line-3" && doubt.reasons.contains(&Reason::MissingSpeaker)));
+}
+
+#[test]
+fn repeated_marginal_scene_headings_keep_their_scene_roles() {
+    let screenplay = read(pdf(&[
+        SamplePage {
+            lines: vec![TextLine::new("INT. SYNTHETIC ROOM - DAY", 72.0, 772.0)],
+            ..SamplePage::default()
+        },
+        SamplePage {
+            lines: vec![TextLine::new("INT. SYNTHETIC ROOM - DAY", 72.0, 772.0)],
+            ..SamplePage::default()
+        },
+    ]));
+    assert!(screenplay
+        .lines
+        .iter()
+        .all(|line| line.kind == ElementKind::SceneHeading));
+    assert!(!screenplay
+        .doubts
+        .iter()
+        .any(|doubt| doubt.reasons.contains(&Reason::PossibleHeaderFooter)));
+}
+
+#[test]
+fn malformed_image_resources_still_report_presence_and_image_loss() {
+    let objects = vec![
+        b"<< /Type /Catalog /Pages 2 0 R >>".to_vec(),
+        b"<< /Type /Pages /Kids [3 0 R] /Count 1 >>".to_vec(),
+        b"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /XObject << /Bad 5 0 R >> >> /Contents 4 0 R >>".to_vec(),
+        support::stream(b"/Bad Do"),
+        b"<< /Type /XObject /Subtype /Image /Height 1 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Length 0 >>\nstream\n\nendstream".to_vec(),
+    ];
+    let screenplay = read(support::serialize(&objects));
+    assert_eq!(screenplay.pages[0].images, 1);
+    assert_eq!(
+        screenplay.pages[0].status,
+        PageStatus::UnsupportedNoTextLayer
+    );
+    assert!(screenplay
+        .warnings
+        .iter()
+        .any(|warning| warning.kind == WarningKind::ImageContentNotImported));
+}

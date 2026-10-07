@@ -190,7 +190,8 @@ pub(crate) fn extract<R: Read>(reader: R, options: &ImportOptions) -> Result<Scr
         let number = index + 1;
         let warning_start = result.warnings.len();
         let content = page.page_stream();
-        for kind in budget.check(content.unwrap_or_default(), page.resources())? {
+        let inspection = budget.check(content.unwrap_or_default(), page.resources())?;
+        for kind in inspection.warnings {
             warning(&mut result, options, kind, number)?;
         }
         let (width, height) = page.render_dimensions();
@@ -255,13 +256,16 @@ pub(crate) fn extract<R: Read>(reader: R, options: &ImportOptions) -> Result<Scr
         {
             warning(&mut result, options, *kind, number)?;
         }
-        let status = if extractor
-            .glyphs
+        let image_failed = result.warnings[warning_start..]
             .iter()
-            .any(|glyph| !glyph.text.trim().is_empty())
-        {
+            .any(|warning| warning.kind == WarningKind::BackendImageDecodeFailure);
+        let images = extractor
+            .images
+            .max(inspection.images)
+            .max(usize::from(image_failed));
+        let status = if !extractor.glyphs.is_empty() {
             PageStatus::Text
-        } else if extractor.images == 0
+        } else if images == 0
             && content.is_none_or(|content| content.iter().all(u8::is_ascii_whitespace))
         {
             PageStatus::Blank
@@ -273,7 +277,7 @@ pub(crate) fn extract<R: Read>(reader: R, options: &ImportOptions) -> Result<Scr
         } else if status == PageStatus::UnsupportedNoTextLayer {
             warning(&mut result, options, WarningKind::NoExtractableText, number)?;
         }
-        if extractor.images > 0 {
+        if images > 0 {
             warning(
                 &mut result,
                 options,
@@ -308,7 +312,7 @@ pub(crate) fn extract<R: Read>(reader: R, options: &ImportOptions) -> Result<Scr
                 Rotation::FlippedHorizontal => 270,
             },
             status,
-            images: extractor.images,
+            images,
             lines: line_ids,
         });
     }
