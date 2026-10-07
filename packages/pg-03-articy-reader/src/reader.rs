@@ -280,7 +280,7 @@ fn identifier(value: Option<&Value>, path: &str, options: &ImportOptions) -> Res
 fn is_null_id(id: &str) -> bool {
     id.strip_prefix("0x")
         .or_else(|| id.strip_prefix("0X"))
-        .is_some_and(|hex| !hex.is_empty() && hex.len() <= 16 && hex.bytes().all(|b| b == b'0'))
+        .is_some_and(|hex| !hex.is_empty() && hex.bytes().all(|b| b == b'0'))
 }
 fn reference(value: Option<&Value>, path: &str, options: &ImportOptions) -> Result<Option<String>> {
     if matches!(value, None | Some(Value::Null)) {
@@ -679,8 +679,8 @@ fn parse_hierarchy(
     }
     let mut properties = object(value, "Hierarchy")?;
     let id = identifier(properties.get("Id"), "Hierarchy.Id", options)?;
-    if !ids.insert(id.clone()) {
-        return Err(Error::invalid("Hierarchy", "repeated hierarchy ID"));
+    if is_null_id(&id) || !ids.insert(id.clone()) {
+        return Err(Error::invalid("Hierarchy", "zero or repeated hierarchy ID"));
     }
     let children = optional_array(properties.remove("Children"), "Hierarchy.Children")?;
     graph.hierarchy.push(HierarchyEntry {
@@ -723,6 +723,26 @@ fn validate(graph: &mut DialogueGraph, options: &ImportOptions) -> Result<()> {
         warnings.push((kind, source.to_owned(), reference.to_owned()));
         Ok(())
     };
+    for entry in &graph.hierarchy {
+        if pins.contains_key(&entry.id) {
+            return Err(Error::invalid(
+                "Hierarchy.Id",
+                "hierarchy entry is a pin, not a model",
+            ));
+        }
+        if let Some(index) = nodes.get(&entry.id) {
+            let node = &mut graph.nodes[*index];
+            if !node.properties.contains_key("Parent") {
+                node.parent.clone_from(&entry.parent);
+            } else if let Some(parent) = &entry.parent {
+                if node.parent.as_deref() != Some(parent.as_str()) {
+                    pending(WarningKind::HierarchyParentMismatch, &entry.id, parent)?;
+                }
+            }
+        } else {
+            pending(WarningKind::MissingHierarchyObject, &entry.id, &entry.id)?;
+        }
+    }
     for node in &graph.nodes {
         if let Some(parent) = &node.parent {
             if pins.contains_key(parent) {
@@ -772,23 +792,6 @@ fn validate(graph: &mut DialogueGraph, options: &ImportOptions) -> Result<()> {
                 }
                 pending(WarningKind::MissingPin, &edge.id, target_pin)?;
             }
-        }
-    }
-    for entry in &graph.hierarchy {
-        if pins.contains_key(&entry.id) {
-            return Err(Error::invalid(
-                "Hierarchy.Id",
-                "hierarchy entry is a pin, not a model",
-            ));
-        }
-        if let Some(index) = nodes.get(&entry.id) {
-            if let (Some(declared), Some(parent)) = (&graph.nodes[*index].parent, &entry.parent) {
-                if declared != parent {
-                    pending(WarningKind::HierarchyParentMismatch, &entry.id, parent)?;
-                }
-            }
-        } else {
-            pending(WarningKind::MissingHierarchyObject, &entry.id, &entry.id)?;
         }
     }
     for (kind, source, reference) in warnings {

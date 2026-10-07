@@ -80,7 +80,7 @@ Model/pin IDs are nonempty opaque strings, retained **exactly**, not converted
 to numbers or case-normalized. Lookup is case-sensitive. Model and pin IDs
 share a global uniqueness domain; duplicates are rejected, not deduplicated.
 Missing/null references and all-zero hexadecimal references mean no reference;
-actual object/pin IDs cannot be the zero sentinel.
+actual model, pin and hierarchy IDs cannot be the zero sentinel.
 
 Built-in flow/dialogue/entity/folder/asset kinds are recognized. Other models
 remain `other`, never dropped. Raw model properties are retained except embedded
@@ -88,6 +88,13 @@ pins; pin properties are retained except connections. Templates and
 model/package-level unknown fields survive.
 
 ### Topology and choices
+
+`nodes[].parent` uses `Properties.Parent` when that field is present, including
+an explicit null/zero sentinel. If the field is absent, containment comes from
+the matching `Hierarchy` entry. Explicit parents that disagree with a nested
+hierarchy entry produce a warning (or strict error); raw properties and hierarchy
+remain unchanged. Inferred parents also undergo reference and cycle validation.
+The hierarchy root is an export boundary, not a claim that its model is parentless.
 
 Edges preserve `Target` / `TargetPin` records **on every pin**, including
 container input pins. No assumption that every edge is output-to-input is

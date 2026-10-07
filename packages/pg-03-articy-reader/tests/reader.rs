@@ -235,6 +235,139 @@ fn hierarchy_order_depth_unknown_objects_and_metadata_are_preserved() {
 }
 
 #[test]
+fn omitted_model_parents_are_inferred_from_hierarchy_without_changing_properties() {
+    let mut value = export(json!([
+        node("parent", "FlowFragment"),
+        node("child", "Hub")
+    ]));
+    value["Hierarchy"] = json!({"Id":"parent","Children":[{"Id":"child"}]});
+    let graph = read_export(
+        Cursor::new(serde_json::to_vec(&value).unwrap()),
+        &ImportOptions {
+            strict_references: true,
+            ..ImportOptions::default()
+        },
+    )
+    .unwrap();
+    assert_eq!(graph.nodes[0].parent, None);
+    assert_eq!(graph.nodes[1].parent.as_deref(), Some("parent"));
+    assert!(!graph.nodes[1].properties.contains_key("Parent"));
+    assert_eq!(graph.hierarchy[1].parent.as_deref(), Some("parent"));
+    assert!(graph.warnings.is_empty());
+}
+
+#[test]
+fn explicit_null_model_parents_conflict_with_nested_hierarchy() {
+    for declared in [Value::Null, json!("0x0"), json!("0X00000000000000000")] {
+        let mut value = export(json!([
+            node("parent", "FlowFragment"),
+            node("child", "Hub")
+        ]));
+        value["Packages"][0]["Models"][1]["Properties"]["Parent"] = declared.clone();
+        value["Hierarchy"] = json!({"Id":"parent","Children":[{"Id":"child"}]});
+        let graph = read(value.clone());
+        assert_eq!(graph.nodes[1].parent, None);
+        assert_eq!(graph.nodes[1].properties["Parent"], declared);
+        assert_eq!(graph.hierarchy[1].parent.as_deref(), Some("parent"));
+        assert_eq!(graph.warnings.len(), 1);
+        assert_eq!(graph.warnings[0].kind, WarningKind::HierarchyParentMismatch);
+        assert!(read_export(
+            Cursor::new(serde_json::to_vec(&value).unwrap()),
+            &ImportOptions {
+                strict_references: true,
+                ..ImportOptions::default()
+            },
+        )
+        .is_err());
+    }
+}
+
+#[test]
+fn inferred_parents_report_filtered_hierarchy_roots() {
+    let mut value = export(json!([node("child", "Hub")]));
+    value["Hierarchy"] = json!({"Id":"not_exported","Children":[{"Id":"child"}]});
+    let graph = read(value.clone());
+    assert_eq!(graph.nodes[0].parent.as_deref(), Some("not_exported"));
+    assert!(graph
+        .warnings
+        .iter()
+        .any(|warning| warning.kind == WarningKind::MissingParent));
+    assert!(graph
+        .warnings
+        .iter()
+        .any(|warning| warning.kind == WarningKind::MissingHierarchyObject));
+    assert!(read_export(
+        Cursor::new(serde_json::to_vec(&value).unwrap()),
+        &ImportOptions {
+            strict_references: true,
+            ..ImportOptions::default()
+        },
+    )
+    .is_err());
+}
+
+#[test]
+fn inferred_parents_cannot_complete_a_model_parent_cycle() {
+    let mut value = export(json!([
+        {"Type":"Hub","Properties":{"Id":"a","Parent":"b"}},
+        node("b", "Hub")
+    ]));
+    value["Hierarchy"] = json!({"Id":"a","Children":[{"Id":"b"}]});
+    assert!(fails(value));
+}
+
+#[test]
+fn zero_model_pin_and_hierarchy_ids_are_rejected_at_every_supported_width() {
+    for digits in [1, 16, 17, 32, 126] {
+        for prefix in ["0x", "0X"] {
+            let zero = format!("{prefix}{}", "0".repeat(digits));
+            assert!(fails(export(json!([node(&zero, "Hub")]))));
+            let mut value = linked();
+            value["Packages"][0]["Models"][0]["Properties"]["OutputPins"][0]["Id"] = json!(zero);
+            assert!(fails(value));
+            assert!(fails(json!({"Packages":[],"Hierarchy":{"Id":zero}})));
+            assert!(fails(
+                json!({"Packages":[],"Hierarchy":{"Id":"root","Children":[{"Id":zero}]}})
+            ));
+        }
+    }
+}
+
+#[test]
+fn zero_references_have_no_arbitrary_hex_width_restriction() {
+    for digits in [1, 16, 17, 32, 126] {
+        for prefix in ["0x", "0X"] {
+            let zero = format!("{prefix}{}", "0".repeat(digits));
+            let value = export(json!([
+                {"Type":"DialogueFragment","Properties":{"Id":"line","Parent":zero,"Speaker":zero}},
+                {"Type":"Jump","Properties":{"Id":"jump","Target":zero,"TargetPin":zero}}
+            ]));
+            let graph = read_export(
+                Cursor::new(serde_json::to_vec(&value).unwrap()),
+                &ImportOptions {
+                    strict_references: true,
+                    ..ImportOptions::default()
+                },
+            )
+            .unwrap();
+            assert_eq!(graph.nodes[0].parent, None);
+            assert_eq!(graph.nodes[0].speaker, None);
+            assert_eq!(graph.nodes[0].properties["Parent"], zero);
+            assert!(graph.edges.is_empty());
+            assert!(graph.warnings.is_empty());
+        }
+    }
+    // Nonzero IDs and bare prefixes remain opaque IDs, not null references.
+    for id in ["0x", "0X", "0x00000000000000001", "0X00000000000000001"] {
+        let value = export(json!([
+            node(id, "Hub"),
+            {"Type":"Hub","Properties":{"Id":"child","Parent":id}}
+        ]));
+        assert_eq!(read(value).nodes[1].parent.as_deref(), Some(id));
+    }
+}
+
+#[test]
 fn variable_values_are_typed_but_original_values_survive() {
     let value = json!({"Packages":[],"GlobalVariables":[{"Namespace":"N","Description":"namespace data","Variables":[
         {"Variable":"bool","Type":"Boolean","Value":"True"},
