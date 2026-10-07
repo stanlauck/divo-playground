@@ -1,0 +1,99 @@
+{
+  "mode": "dynamic",
+  "time_format": "date",
+  "default_edge_type": "directed",
+  "attributes": [
+    {
+      "id": "role",
+      "title": "Role",
+      "class": "node",
+      "mode": "dynamic",
+      "value_type": "string",
+      "default": {
+        "kind": "string",
+        "value": "person"
+      }
+    },
+    {
+      "id": "rank",
+      "title": "Rank",
+      "class": "node",
+      "mode": "dynamic",
+      "value_type": "integer"
+    },
+    {
+      "id": "weight",
+      "title": "Weight",
+      "class": "edge",
+      "mode": "dynamic",
+      "value_type": "double"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "synthetic-north",
+      "label": "Synthetic North",
+      "attributes": [
+        {
+          "attribute_id": "role",
+          "value": {
+            "kind": "string",
+            "value": "witness & archivist"
+          }
+        },
+        {
+          "attribute_id": "rank",
+          "value": {
+            "kind": "integer",
+            "value": 7
+          },
+          "interval": {
+            "start": "2026-01-01",
+            "end": "2026-06-30"
+          }
+        }
+      ],
+      "spells": [
+        {
+          "start": "2026-01-01",
+          "end": "2026-12-31"
+        }
+      ]
+    },
+    {
+      "id": "synthetic-south",
+      "label": "Synthetic South",
+      "attributes": [],
+      "spells": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "synthetic-link",
+      "source": "synthetic-north",
+      "target": "synthetic-south",
+      "label": "sample connection",
+      "attributes": [
+        {
+          "attribute_id": "weight",
+          "value": {
+            "kind": "double",
+            "value": 0.75
+          },
+          "interval": {
+            "start": "2026-03-01",
+            "end": "2026-12-31",
+            "end_open": true
+          }
+        }
+      ],
+      "spells": [
+        {
+          "start": "2026-03-01",
+          "end": "2026-12-31",
+          "end_open": true
+        }
+      ]
+    }
+  ]
+}
