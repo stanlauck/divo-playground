@@ -1,0 +1,94 @@
+{
+  "mode": "static",
+  "default_edge_type": "undirected",
+  "attributes": [
+    {
+      "id": "count",
+      "title": "Count",
+      "class": "node",
+      "mode": "static",
+      "value_type": "integer"
+    },
+    {
+      "id": "serial",
+      "title": "Serial",
+      "class": "node",
+      "mode": "static",
+      "value_type": "long",
+      "default": { "kind": "long", "value": 0 }
+    },
+    {
+      "id": "score",
+      "title": "Score",
+      "class": "node",
+      "mode": "static",
+      "value_type": "double"
+    },
+    {
+      "id": "ratio",
+      "title": "Ratio",
+      "class": "node",
+      "mode": "static",
+      "value_type": "float"
+    },
+    {
+      "id": "active",
+      "title": "Active",
+      "class": "node",
+      "mode": "static",
+      "value_type": "boolean"
+    },
+    {
+      "id": "note",
+      "title": "Note",
+      "class": "node",
+      "mode": "static",
+      "value_type": "string"
+    },
+    {
+      "id": "tags",
+      "title": "Tags",
+      "class": "node",
+      "mode": "static",
+      "value_type": "list_string",
+      "default": { "kind": "list_string", "value": [] }
+    }
+  ],
+  "nodes": [
+    {
+      "id": "synthetic-static",
+      "label": "Synthetic static node",
+      "attributes": [
+        {
+          "attribute_id": "count",
+          "value": { "kind": "integer", "value": 7 }
+        },
+        {
+          "attribute_id": "serial",
+          "value": { "kind": "long", "value": 9007199254740993 }
+        },
+        {
+          "attribute_id": "score",
+          "value": { "kind": "double", "value": 0.75 }
+        },
+        {
+          "attribute_id": "ratio",
+          "value": { "kind": "float", "value": 0.5 }
+        },
+        {
+          "attribute_id": "active",
+          "value": { "kind": "boolean", "value": true }
+        },
+        {
+          "attribute_id": "note",
+          "value": { "kind": "string", "value": "Synthetic & offline" }
+        },
+        {
+          "attribute_id": "tags",
+          "value": { "kind": "list_string", "value": ["north", "south & east"] }
+        }
+      ]
+    }
+  ],
+  "edges": []
+}
