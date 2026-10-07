@@ -55,14 +55,11 @@ pub fn import_fb2<R: BufRead, W: Write>(
             }
             Token::Start(element) if body && element.name.fb("section") => {
                 if notes {
-                    let id = element.attr("id").map(str::to_owned).unwrap_or_else(|| {
-                        note_number += 1;
-                        format!("fb2-note-{note_number}")
-                    });
                     let (node, bytes) = xml.tree(element, options.max_block_bytes)?;
                     engine.source_block(bytes)?;
-                    let blocks = children_blocks(&node, 1, &mut engine)?;
-                    engine.block(Block::Footnote { id, blocks })?;
+                    for note in notes_for(&node, 1, &mut note_number, &mut engine)? {
+                        engine.block(note)?;
+                    }
                 } else {
                     if !sections.is_empty() {
                         ensure_section(&mut sections, &mut engine)?;
@@ -217,6 +214,34 @@ fn children_blocks<W: Write>(
         blocks.extend(convert(child, level, engine)?);
     }
     Ok(blocks)
+}
+
+fn notes_for<W: Write>(
+    node: &Node,
+    level: u32,
+    note_number: &mut u64,
+    engine: &mut Engine<W>,
+) -> Result<Vec<Block>> {
+    let id = node
+        .element
+        .attr("id")
+        .map(str::to_owned)
+        .unwrap_or_else(|| {
+            *note_number += 1;
+            format!("fb2-note-{note_number}")
+        });
+    let mut blocks = Vec::new();
+    let mut nested = Vec::new();
+    for child in node.nodes() {
+        if child.element.name.fb("section") {
+            nested.extend(notes_for(child, level + 1, note_number, engine)?);
+        } else {
+            blocks.extend(convert(child, level, engine)?);
+        }
+    }
+    let mut notes = vec![Block::Footnote { id, blocks }];
+    notes.extend(nested);
+    Ok(notes)
 }
 
 fn convert<W: Write>(node: &Node, level: u32, engine: &mut Engine<W>) -> Result<Vec<Block>> {
@@ -406,7 +431,42 @@ fn title_spans<W: Write>(node: &Node, engine: &mut Engine<W>) -> Result<Vec<Span
     Ok(spans)
 }
 
-fn inline<W: Write>(node: &Node, mut mark: Span, engine: &mut Engine<W>) -> Result<Vec<Span>> {
+fn inline<W: Write>(node: &Node, mark: Span, engine: &mut Engine<W>) -> Result<Vec<Span>> {
+    let mut spans = inline_inner(node, mark, engine)?;
+    let mut content = false;
+    let mut space = false;
+    for span in &mut spans {
+        let source = std::mem::take(&mut span.text);
+        for character in source.chars() {
+            if matches!(character, ' ' | '\t' | '\r' | '\n') {
+                if content && !space {
+                    span.text.push(' ');
+                    space = true;
+                }
+            } else {
+                span.text.push(character);
+                content = true;
+                space = false;
+            }
+        }
+    }
+    for span in spans.iter_mut().rev() {
+        if !span.text.is_empty() {
+            if space {
+                span.text.pop();
+            }
+            break;
+        }
+    }
+    spans.retain(|span| !span.text.is_empty());
+    Ok(spans)
+}
+
+fn inline_inner<W: Write>(
+    node: &Node,
+    mut mark: Span,
+    engine: &mut Engine<W>,
+) -> Result<Vec<Span>> {
     if node.element.name.ns != crate::xml::FB {
         engine.loss(format!("fb2.extension.{}", node.element.name.local))?;
     } else {
@@ -454,7 +514,7 @@ fn inline<W: Write>(node: &Node, mut mark: Span, engine: &mut Engine<W>) -> Resu
             Child::Text(text) => push_span(&mut spans, engine.clone_mark(&mark)?, text),
             Child::Node(child) => {
                 let inherited = engine.clone_mark(&mark)?;
-                for mut span in inline(child, inherited, engine)? {
+                for mut span in inline_inner(child, inherited, engine)? {
                     let text = std::mem::take(&mut span.text);
                     push_span(&mut spans, span, &text);
                 }

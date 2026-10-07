@@ -109,9 +109,17 @@ impl<W: Write> Engine<W> {
     }
 
     pub fn link_copy(&mut self, bytes: usize) -> Result<()> {
+        self.metadata_copy(bytes, "expanded link bytes")
+    }
+
+    pub fn list_copy(&mut self, bytes: usize) -> Result<()> {
+        self.metadata_copy(bytes, "expanded list metadata bytes")
+    }
+
+    fn metadata_copy(&mut self, bytes: usize, reason: &'static str) -> Result<()> {
         self.link_bytes = self.link_bytes.saturating_add(bytes);
         if self.link_bytes > self.options.max_block_bytes {
-            return Err(Error::Limit("expanded link bytes"));
+            return Err(Error::Limit(reason));
         }
         Ok(())
     }

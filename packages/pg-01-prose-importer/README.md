@@ -56,7 +56,8 @@ navigation. Consumers must apply their own URL-scheme policy.
 ### Format mapping
 
 - **TXT:** UTF-8, optional BOM; blank lines separate paragraphs; internal
-  line breaks and Unicode are preserved. No guessed headings or markup.
+  line breaks and Unicode are preserved. Consecutive blank lines collapse to
+  one paragraph separator. No guessed headings or markup.
 - **FB2:** namespace-qualified FictionBook 2.0, including UTF-8 and
   ASCII-compatible declared encodings such as Windows-1251. Titles/subtitles
   become headings, nested section depth becomes chapter/heading level.
@@ -64,7 +65,11 @@ navigation. Consumers must apply their own URL-scheme policy.
   a continuation with `continuation_of` pointing to the parent's first chapter.
   Citations, epigraphs, poems (distinct stanzas and verse lines), inline marks,
   links and table spans are preserved. `body name="notes"` / `"comments"`
-  sections become separate footnotes; `a type="note"` links carry `note_id`.
+  sections, including nested sections, become separate footnotes in section
+  preorder. Nested note text is not absorbed into its parent's own blocks.
+  `a type="note"` links carry `note_id`.
+  Inline XML whitespace is collapsed/trimmed, so pretty-printing indentation
+  does not become hard prose line breaks; verse-line boundaries stay separate.
 - **DOCX:** transitional and strict WordprocessingML element namespaces.
   Reads conventional `word/document.xml`, styles, numbering, document
   relationships and footnotes (with their own relationships). Headings use
@@ -77,6 +82,15 @@ navigation. Consumers must apply their own URL-scheme policy.
   consumer, without buffering an unbounded list. Tables retain header rows,
   horizontal and vertical grid merges. Footnote spans link to separate
   `docx-footnote-<id>` blocks in a trailing chapter.
+
+DOCX `number_format: "none"` means unmarked list items, not generated bullets
+or numbers. Regular `b`/`i` run formatting is preserved; separate complex-script
+`bCs`/`iCs` formatting and `cs`/`rtl` selection are unsupported and reported as
+`docx.complex_script_formatting`, without changing ordinary text's marks.
+Paragraph-end mark formatting is skipped and reported separately. Numbered
+headings retain their heading level and advance/reset list counters, but
+numbering metadata on the heading itself is reported as
+`docx.heading_numbering` because the heading schema has no numbering fields.
 
 FB2 levels can exceed six for deeply nested sections. Word outline levels up
 to nine are retained instead of clamped. Table columns and list-item levels are
@@ -117,7 +131,7 @@ Default limits (all configurable in `ImportOptions`, all must be positive):
 | Limit | Default |
 |---|---|
 | Input / DOCX archive and each document/footnote part | 256 MiB |
-| Logical source tree, serialized JSON, or cumulative link-copy bytes for one block | 8 MiB |
+| Logical source tree, serialized JSON, or cumulative link/list metadata-copy bytes for one block | 8 MiB |
 | Each metadata part / expanded numbering / section-stack text / report ID and loss strings | 4 MiB |
 | XML depth / style inheritance depth | 128 |
 | ZIP entries, checked after central-directory parsing | 10,000 |
@@ -165,9 +179,9 @@ exact word/block counts and reports timing and logical peak block bytes.
 
 | Format | Mean import time | Logical peak block bytes |
 |---|---:|---:|
-| TXT | 6.886 ms | 71 |
-| FB2 | 21.855 ms | 72 |
-| DOCX | 43.247 ms | 212 |
+| TXT | 6.795 ms | 71 |
+| FB2 | 26.795 ms | 72 |
+| DOCX | 41.331 ms | 212 |
 
 These synthetic sink-output timings are observations, not performance
 guarantees or process-memory measurements.

@@ -949,3 +949,253 @@ fn large_hyperlink_targets_cannot_amplify_small_blocks_without_a_bound() {
         Err(pg_01_prose_importer::Error::Limit("expanded link bytes"))
     ));
 }
+
+#[test]
+fn fb2_nested_notes_keep_each_id_without_absorbing_child_text() {
+    let source = fb("<body><section><p><a type=\"note\" l:href=\"#outer\">1</a><a type=\"note\" l:href=\"#inner\">2</a></p></section></body><body name=\"notes\"><section id=\"outer\"><p>before</p><section id=\"inner\"><p><emphasis>inner text</emphasis></p></section><p>after</p></section></body>");
+    let document = read_fb(&source);
+    let notes: Vec<_> = document
+        .chapters
+        .iter()
+        .flat_map(|c| &c.blocks)
+        .filter_map(|block| {
+            if let Block::Footnote { id, blocks } = block {
+                Some((id.as_str(), blocks))
+            } else {
+                None
+            }
+        })
+        .collect();
+    assert_eq!(
+        notes.iter().map(|(id, _)| *id).collect::<Vec<_>>(),
+        ["outer", "inner"]
+    );
+    assert_eq!(notes[0].1.len(), 2);
+    assert_eq!(text(spans(&notes[0].1[0])), "before");
+    assert_eq!(text(spans(&notes[0].1[1])), "after");
+    assert_eq!(text(spans(&notes[1].1[0])), "inner text");
+    assert!(spans(&notes[1].1[0])[0].italic);
+    assert!(document.report.unresolved_footnotes.is_empty());
+}
+
+#[test]
+fn fb2_nested_note_under_anonymous_wrapper_resolves_and_duplicate_ids_fail() {
+    let source = fb("<body><section><p><a type=\"note\" l:href=\"#inner\">1</a></p></section></body><body name=\"notes\"><section><section id=\"inner\"><p>text</p></section></section></body>");
+    let document = read_fb(&source);
+    assert!(document.report.unresolved_footnotes.is_empty());
+    let source = fb("<body name=\"notes\"><section id=\"same\"><section id=\"same\"><p>text</p></section></section></body>");
+    assert!(import_fb2(Cursor::new(source), io::sink(), &ImportOptions::default()).is_err());
+}
+
+#[test]
+fn docx_complex_script_bold_and_italic_do_not_override_regular_marks() {
+    for properties in [
+        "<w:b/><w:i/><w:bCs w:val=\"0\"/><w:iCs w:val=\"0\"/>",
+        "<w:bCs w:val=\"0\"/><w:iCs w:val=\"0\"/><w:b/><w:i/>",
+    ] {
+        let source = word(&format!(
+            "<w:p><w:r><w:rPr>{properties}</w:rPr><w:t>Latin</w:t></w:r></w:p>"
+        ));
+        let document = read_docx(&[("word/document.xml", &source)]);
+        assert!(spans(&document.chapters[0].blocks[0])[0].bold);
+        assert!(spans(&document.chapters[0].blocks[0])[0].italic);
+        assert!(losses(&document).contains(&"docx.complex_script_formatting"));
+    }
+    let source =
+        word("<w:p><w:r><w:rPr><w:bCs/><w:iCs/></w:rPr><w:t>Latin and العربية</w:t></w:r></w:p>");
+    let document = read_docx(&[("word/document.xml", &source)]);
+    assert!(!spans(&document.chapters[0].blocks[0])[0].bold);
+    assert!(!spans(&document.chapters[0].blocks[0])[0].italic);
+    assert_eq!(
+        text(spans(&document.chapters[0].blocks[0])),
+        "Latin and العربية"
+    );
+    assert!(losses(&document).contains(&"docx.complex_script_formatting"));
+}
+
+#[test]
+fn docx_none_numbering_is_not_marked_ordered() {
+    let numbering = "<w:numbering xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:abstractNum w:abstractNumId=\"1\"><w:lvl w:ilvl=\"0\"><w:numFmt w:val=\"none\"/><w:lvlText w:val=\"\"/></w:lvl></w:abstractNum><w:num w:numId=\"2\"><w:abstractNumId w:val=\"1\"/></w:num></w:numbering>";
+    let source = word("<w:p><w:pPr><w:numPr><w:numId w:val=\"2\"/></w:numPr></w:pPr><w:r><w:t>unmarked item</w:t></w:r></w:p>");
+    let document = read_docx(&[
+        ("word/document.xml", &source),
+        ("word/numbering.xml", numbering),
+    ]);
+    let Block::List {
+        ordered,
+        number_format,
+        ..
+    } = &document.chapters[0].blocks[0]
+    else {
+        panic!("list")
+    };
+    assert!(!ordered);
+    assert_eq!(number_format, "none");
+}
+
+#[test]
+fn txt_multiple_blank_lines_are_one_paragraph_separator() {
+    let mut json = Vec::new();
+    import_txt(
+        Cursor::new("one\n\n\n\n two\n"),
+        &mut json,
+        &ImportOptions::default(),
+    )
+    .expect("TXT");
+    let document: Document = serde_json::from_slice(&json).expect("JSON");
+    assert_eq!(document.chapters[0].blocks.len(), 2);
+}
+
+#[test]
+fn docx_paragraph_mark_formatting_does_not_format_ordinary_runs() {
+    let source = word("<w:p><w:pPr><w:rPr><w:b/><w:i/><w:strike/><w:vertAlign w:val=\"superscript\"/></w:rPr></w:pPr><w:r><w:t>plain</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t>bold</w:t></w:r></w:p>");
+    let document = read_docx(&[("word/document.xml", &source)]);
+    let rich = spans(&document.chapters[0].blocks[0]);
+    assert!(!rich[0].bold && !rich[0].italic && !rich[0].strike && !rich[0].superscript);
+    assert!(rich[1].bold);
+    assert!(losses(&document).contains(&"docx.paragraph_mark_format"));
+}
+
+#[test]
+fn docx_localized_heading_names_fall_back_to_builtin_ids() {
+    let styles = "<w:styles xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:style w:styleId=\"Heading1\"><w:name w:val=\"Заголовок 1\"/></w:style><w:style w:styleId=\"Heading6\"><w:name w:val=\"Titre 6\"/></w:style></w:styles>";
+    let source = word("<w:p><w:pPr><w:pStyle w:val=\"Heading1\"/></w:pPr><w:r><w:t>first</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val=\"Heading6\"/></w:pPr><w:r><w:t>sixth</w:t></w:r></w:p>");
+    let document = read_docx(&[("word/document.xml", &source), ("word/styles.xml", styles)]);
+    assert_eq!(
+        document
+            .chapters
+            .iter()
+            .map(|chapter| chapter.level)
+            .collect::<Vec<_>>(),
+        [1, 6]
+    );
+}
+
+#[test]
+fn docx_numbered_headings_advance_counters_and_reset_their_own_sublevels() {
+    let numbering = include_str!("../samples/docx/word/numbering.xml");
+    let mut body = String::new();
+    for (heading, level, text) in [
+        (false, 0, "item one"),
+        (false, 1, "nested"),
+        (true, 0, "Heading"),
+        (false, 1, "restarted"),
+        (false, 0, "item three"),
+    ] {
+        let style = if heading {
+            "<w:pStyle w:val=\"Heading1\"/>"
+        } else {
+            ""
+        };
+        body.push_str(&format!("<w:p><w:pPr>{style}<w:numPr><w:ilvl w:val=\"{level}\"/><w:numId w:val=\"1\"/></w:numPr></w:pPr><w:r><w:t>{text}</w:t></w:r></w:p>"));
+    }
+    let source = word(&body);
+    let document = read_docx(&[
+        ("word/document.xml", &source),
+        ("word/numbering.xml", numbering),
+    ]);
+    assert!(matches!(
+        &document.chapters[1].blocks[0],
+        Block::Heading { level: 1, .. }
+    ));
+    let starts: Vec<_> = document
+        .chapters
+        .iter()
+        .flat_map(|c| &c.blocks)
+        .filter_map(|block| {
+            if let Block::List { start, .. } = block {
+                Some(*start)
+            } else {
+                None
+            }
+        })
+        .collect();
+    assert_eq!(starts, [1, 1, 1, 3]);
+    assert!(losses(&document).contains(&"docx.heading_numbering"));
+}
+
+#[test]
+fn docx_list_items_keep_quote_blocks_instead_of_losing_quote_style() {
+    let source = word("<w:p><w:pPr><w:pStyle w:val=\"Quote\"/><w:numPr><w:numId w:val=\"1\"/></w:numPr></w:pPr><w:r><w:t>quoted item</w:t></w:r></w:p>");
+    let document = read_docx(&[
+        ("word/document.xml", &source),
+        (
+            "word/numbering.xml",
+            include_str!("../samples/docx/word/numbering.xml"),
+        ),
+    ]);
+    let Block::List { items, .. } = &document.chapters[0].blocks[0] else {
+        panic!("list")
+    };
+    assert!(matches!(items[0].blocks[0], Block::Quote { .. }));
+}
+
+#[test]
+fn docx_many_distinct_lists_keep_independent_counters_and_definitions() {
+    let mut numbering =
+        "<w:numbering xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\">"
+            .to_string();
+    let mut body = String::new();
+    for id in 0..500 {
+        numbering.push_str(&format!("<w:abstractNum w:abstractNumId=\"{id}\"><w:lvl w:ilvl=\"0\"><w:start w:val=\"{}\"/></w:lvl></w:abstractNum><w:num w:numId=\"{}\"><w:abstractNumId w:val=\"{id}\"/></w:num>", id + 1, id + 1));
+    }
+    numbering.push_str("</w:numbering>");
+    for _ in 0..2 {
+        for id in 1..=500 {
+            body.push_str(&format!("<w:p><w:pPr><w:numPr><w:numId w:val=\"{id}\"/></w:numPr></w:pPr><w:r><w:t>item</w:t></w:r></w:p>"));
+        }
+    }
+    let source = word(&body);
+    let document = read_docx(&[
+        ("word/document.xml", &source),
+        ("word/numbering.xml", &numbering),
+    ]);
+    for (index, block) in document.chapters[0].blocks.iter().enumerate() {
+        let Block::List { start, .. } = block else {
+            panic!("list")
+        };
+        assert_eq!(*start, (index % 500 + 1 + index / 500) as u64);
+    }
+}
+
+#[test]
+fn fb2_pretty_printing_does_not_add_hard_breaks_or_split_words() {
+    let source = fb("<body><section><p>\n  A  <strong>bold</strong>\n\tword and co<strong>oper</strong>ate\u{00a0}now.\n </p><poem><stanza><v>\n  first <emphasis>line</emphasis>\n</v><v>second line</v></stanza></poem></section></body>");
+    let document = read_fb(&source);
+    assert_eq!(
+        text(spans(&document.chapters[0].blocks[0])),
+        "A bold word and cooperate\u{00a0}now."
+    );
+    assert!(!text(spans(&document.chapters[0].blocks[0])).contains('\n'));
+    let Block::Poem { stanzas, .. } = &document.chapters[0].blocks[1] else {
+        panic!("poem")
+    };
+    assert_eq!(stanzas[0].lines.len(), 2);
+    assert_eq!(text(&stanzas[0].lines[0]), "first line");
+}
+
+#[test]
+fn expanded_list_markers_in_one_table_are_bounded() {
+    let numbering = format!("<w:numbering xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:abstractNum w:abstractNumId=\"0\"><w:lvl w:ilvl=\"0\"><w:lvlText w:val=\"{}\"/></w:lvl></w:abstractNum><w:num w:numId=\"1\"><w:abstractNumId w:val=\"0\"/></w:num></w:numbering>", "x".repeat(16_000));
+    let paragraphs = "<w:p><w:pPr><w:numPr><w:numId w:val=\"1\"/></w:numPr></w:pPr><w:r><w:t>item</w:t></w:r></w:p>".repeat(20);
+    let source = word(&format!(
+        "<w:tbl><w:tr><w:tc>{paragraphs}</w:tc></w:tr></w:tbl>"
+    ));
+    let options = ImportOptions {
+        max_block_bytes: 64_000,
+        ..ImportOptions::default()
+    };
+    assert!(matches!(
+        import_docx(
+            Cursor::new(zip(&[
+                ("word/document.xml", &source),
+                ("word/numbering.xml", &numbering)
+            ])),
+            io::sink(),
+            &options
+        ),
+        Err(pg_01_prose_importer::Error::Limit(
+            "expanded list metadata bytes"
+        ))
+    ));
+}

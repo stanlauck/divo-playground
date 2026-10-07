@@ -95,7 +95,7 @@ struct Context {
     default_style: Option<String>,
     links: BTreeMap<String, String>,
     nums: BTreeMap<(String, u32), Numbering>,
-    counters: BTreeMap<(String, u32), u64>,
+    counters: BTreeMap<String, BTreeMap<u32, u64>>,
     numbering_bytes: usize,
 }
 impl Context {
@@ -121,6 +121,21 @@ impl Context {
         self.nums.insert(key, definition.clone());
         self.numbering_bytes = bytes;
         Ok(())
+    }
+
+    fn advance(&mut self, id: &str, level: u32) -> Result<(u64, &Numbering)> {
+        let definition = self
+            .nums
+            .get(&(id.to_owned(), level))
+            .ok_or(Error::Invalid("undefined list numbering"))?;
+        let counters = self.counters.entry(id.to_owned()).or_default();
+        let start = counters.get(&level).copied().unwrap_or(definition.start);
+        let next = start
+            .checked_add(1)
+            .ok_or(Error::Limit("list item count"))?;
+        counters.insert(level, next);
+        counters.retain(|nested, _| *nested <= level);
+        Ok((start, definition))
     }
 }
 
@@ -341,8 +356,14 @@ fn props(node: &Node) -> Result<Props> {
         }
         let value = child.element.attr("val");
         match child.element.name.local.as_str() {
-            "b" | "bCs" => result.bold = Some(toggle(child)?),
-            "i" | "iCs" => result.italic = Some(toggle(child)?),
+            "b" => result.bold = Some(toggle(child)?),
+            "i" => result.italic = Some(toggle(child)?),
+            "bCs" | "iCs" | "cs" | "rtl" => {
+                toggle(child)?;
+                result
+                    .losses
+                    .insert("docx.complex_script_formatting".into());
+            }
             "strike" | "dstrike" => result.strike = Some(toggle(child)?),
             "vertAlign" => match value {
                 Some("superscript") => {
@@ -381,6 +402,9 @@ fn props(node: &Node) -> Result<Props> {
                     .transpose()?;
             }
             "pStyle" | "rStyle" => {}
+            "rPr" if node.element.name.word("pPr") => {
+                result.losses.insert("docx.paragraph_mark_format".into());
+            }
             "rPr" | "pPr" => result.overlay(&props(child)?),
             "rFonts" | "sz" | "szCs" => {
                 result.losses.insert("docx.font_styles".into());
@@ -422,11 +446,7 @@ fn parse_styles(node: &Node, context: &mut Context, options: &ImportOptions) -> 
                 .unwrap_or(id);
             let normalized = display_name.to_ascii_lowercase().replace(' ', "");
             if properties.heading.is_none() {
-                if let Some(level) = normalized
-                    .strip_prefix("heading")
-                    .and_then(|n| n.parse::<u32>().ok())
-                    .filter(|n| (1..=9).contains(n))
-                {
+                if let Some(level) = heading_level(display_name).or_else(|| heading_level(id)) {
                     properties.heading = Some(level);
                 }
             }
@@ -459,6 +479,14 @@ fn parse_styles(node: &Node, context: &mut Context, options: &ImportOptions) -> 
         }
     }
     Ok(())
+}
+
+fn heading_level(name: &str) -> Option<u32> {
+    name.to_ascii_lowercase()
+        .replace(' ', "")
+        .strip_prefix("heading")
+        .and_then(|n| n.parse().ok())
+        .filter(|n| (1..=9).contains(n))
 }
 
 fn style(id: &str, context: &Context, limit: usize) -> Result<Props> {
@@ -524,10 +552,10 @@ fn parse_numbering(node: &Node, context: &mut Context, options: &ImportOptions) 
             .child_word("abstractNumId")
             .and_then(|n| n.element.attr("val"))
             .ok_or(Error::Invalid("numbering has no abstract ID"))?;
-        for ((source_id, level), definition) in &abstracts {
-            if source_id == abstract_id {
-                context.number(id, *level, definition, options)?;
-            }
+        for ((_, level), definition) in
+            abstracts.range((abstract_id.to_owned(), 0)..=(abstract_id.to_owned(), u32::MAX))
+        {
+            context.number(id, *level, definition, options)?;
         }
         for override_node in num.nodes().filter(|n| n.element.name.word("lvlOverride")) {
             let level = override_node
@@ -662,11 +690,7 @@ fn paragraph<W: Write>(
         properties.overlay_style(&style(id, context, engine.options.max_depth)?);
         if !context.styles.contains_key(id) {
             let normalized = id.to_ascii_lowercase();
-            if let Some(level) = normalized
-                .strip_prefix("heading")
-                .and_then(|n| n.parse::<u32>().ok())
-                .filter(|n| (1..=9).contains(n))
-            {
+            if let Some(level) = heading_level(id) {
                 properties.heading = Some(level);
             } else if normalized == "quote" {
                 properties.quote = true;
@@ -686,31 +710,28 @@ fn paragraph<W: Write>(
         spans.extend(inline(child, &properties, context, engine)?);
     }
     if let Some(level) = properties.heading.filter(|level| *level > 0) {
+        if let Some(id) = properties.num.as_deref().filter(|id| *id != "0") {
+            context.advance(id, properties.list_level.unwrap_or(0))?;
+            engine.loss("docx.heading_numbering")?;
+        }
         return Ok(Block::Heading { level, spans });
     }
     let paragraph = Block::Paragraph { spans };
     if let Some(id) = properties.num.filter(|id| id != "0") {
         let level = properties.list_level.unwrap_or(0);
-        let key = (id.clone(), level);
-        let definition = context
-            .nums
-            .get(&key)
-            .ok_or(Error::Invalid("undefined list numbering"))?;
-        let start = context
-            .counters
-            .get(&key)
-            .copied()
-            .unwrap_or(definition.start);
-        let next = start
-            .checked_add(1)
-            .ok_or(Error::Limit("list item count"))?;
-        context.counters.insert(key, next);
-        context
-            .counters
-            .retain(|(list, nested), _| list != &id || *nested <= level);
+        let (start, definition) = context.advance(&id, level)?;
+        engine.list_copy(definition.bytes(&id))?;
+        let paragraph = if properties.quote {
+            Block::Quote {
+                blocks: vec![paragraph],
+                attribution: Vec::new(),
+            }
+        } else {
+            paragraph
+        };
         return Ok(Block::List {
             id: format!("docx-num-{id}"),
-            ordered: definition.format != "bullet",
+            ordered: !matches!(definition.format.as_str(), "bullet" | "none"),
             start,
             number_format: definition.format.clone(),
             marker: definition.marker.clone(),
