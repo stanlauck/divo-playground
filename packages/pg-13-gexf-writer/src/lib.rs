@@ -181,15 +181,17 @@ impl AttributeValue {
             Self::String(value) => Ok(value.clone()),
             Self::ListString(values) => {
                 if values.iter().any(|value| {
-                    value
-                        .chars()
-                        .any(|character| matches!(character, '|' | ',' | ';'))
+                    value.is_empty()
+                        || value.trim() != value
+                        || value.chars().any(|character| {
+                            matches!(character, '|' | ',' | ';' | '[' | ']' | '\'' | '"' | '\\')
+                        })
                 }) {
                     return Err(ValidationError(
-                        "liststring items cannot contain '|', ',' or ';'".into(),
+                        "liststring items must be nonempty, trimmed, and contain no list delimiters, quotes, or backslashes".into(),
                     ));
                 }
-                Ok(values.join("|"))
+                Ok(format!("[{}]", values.join(", ")))
             }
         }
     }
@@ -227,21 +229,14 @@ pub struct TimedAttributeValue {
     pub interval: Option<TimeInterval>,
 }
 
-/// An inclusive or open-ended GEXF time interval.
+/// An inclusive GEXF 1.3 time interval, with optional unbounded endpoints.
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
 pub struct TimeInterval {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub start: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub end: Option<String>,
-    #[serde(default, skip_serializing_if = "is_false")]
-    pub start_open: bool,
-    #[serde(default, skip_serializing_if = "is_false")]
-    pub end_open: bool,
-}
-
-fn is_false(value: &bool) -> bool {
-    !value
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -309,7 +304,6 @@ impl Graph {
         }
 
         let mut definitions = HashMap::new();
-        let mut class_modes = HashMap::new();
         for definition in &self.attributes {
             if definition.id.is_empty() {
                 return Err(ValidationError(
@@ -329,14 +323,6 @@ impl Graph {
                     "dynamic attribute '{}' requires a dynamic graph",
                     definition.id
                 )));
-            }
-            if let Some(existing_mode) = class_modes.insert(definition.class, definition.mode) {
-                if existing_mode != definition.mode {
-                    return Err(ValidationError(format!(
-                        "{:?} attributes must use one mode per class",
-                        definition.class
-                    )));
-                }
             }
             let key = (definition.class, definition.id.clone());
             if definitions
@@ -490,20 +476,10 @@ impl Graph {
         let time_format = self
             .time_format
             .ok_or_else(|| ValidationError("time intervals require a time_format".into()))?;
-        let left_before_right = interval_precedes(
-            left.end.as_deref(),
-            left.end_open,
-            right.start.as_deref(),
-            right.start_open,
-            time_format,
-        )?;
-        let right_before_left = interval_precedes(
-            right.end.as_deref(),
-            right.end_open,
-            left.start.as_deref(),
-            left.start_open,
-            time_format,
-        )?;
+        let left_before_right =
+            interval_precedes(left.end.as_deref(), right.start.as_deref(), time_format)?;
+        let right_before_left =
+            interval_precedes(right.end.as_deref(), left.start.as_deref(), time_format)?;
         Ok(!left_before_right && !right_before_left)
     }
 
@@ -529,16 +505,6 @@ impl Graph {
                 "{owner} has a time interval without a graph time_format"
             )));
         };
-        if interval.start_open && interval.start.is_none() {
-            return Err(ValidationError(format!(
-                "{owner} has start_open without a start value"
-            )));
-        }
-        if interval.end_open && interval.end.is_none() {
-            return Err(ValidationError(format!(
-                "{owner} has end_open without an end value"
-            )));
-        }
         let start = interval
             .start
             .as_deref()
@@ -554,11 +520,6 @@ impl Graph {
                 Some(Ordering::Greater) => {
                     return Err(ValidationError(format!(
                         "{owner} interval starts after it ends"
-                    )));
-                }
-                Some(Ordering::Equal) if interval.start_open || interval.end_open => {
-                    return Err(ValidationError(format!(
-                        "{owner} has an empty open interval"
                     )));
                 }
                 None => {
@@ -593,20 +554,16 @@ impl Graph {
         writeln!(output, ">")?;
 
         self.write_attribute_definitions(&mut output)?;
-        if !self.nodes.is_empty() {
-            writeln!(output, "    <nodes>")?;
-            for node in &self.nodes {
-                self.write_node(&mut output, node)?;
-            }
-            writeln!(output, "    </nodes>")?;
+        writeln!(output, "    <nodes>")?;
+        for node in &self.nodes {
+            self.write_node(&mut output, node)?;
         }
-        if !self.edges.is_empty() {
-            writeln!(output, "    <edges>")?;
-            for edge in &self.edges {
-                self.write_edge(&mut output, edge)?;
-            }
-            writeln!(output, "    </edges>")?;
+        writeln!(output, "    </nodes>")?;
+        writeln!(output, "    <edges>")?;
+        for edge in &self.edges {
+            self.write_edge(&mut output, edge)?;
         }
+        writeln!(output, "    </edges>")?;
         writeln!(output, "  </graph>")?;
         writeln!(output, "</gexf>")?;
         Ok(())
@@ -614,38 +571,39 @@ impl Graph {
 
     fn write_attribute_definitions<W: Write>(&self, output: &mut W) -> io::Result<()> {
         for class in [AttributeClass::Node, AttributeClass::Edge] {
-            let definitions: Vec<_> = self
-                .attributes
-                .iter()
-                .filter(|item| item.class == class)
-                .collect();
-            if definitions.is_empty() {
-                continue;
-            }
-            let mode = definitions[0].mode;
-            writeln!(
-                output,
-                "    <attributes class=\"{}\" mode=\"{}\">",
-                class.as_gexf(),
-                mode.as_gexf()
-            )?;
-            for definition in definitions {
+            for mode in [AttributeMode::Static, AttributeMode::Dynamic] {
+                let mut definitions = self
+                    .attributes
+                    .iter()
+                    .filter(|item| item.class == class && item.mode == mode)
+                    .peekable();
+                if definitions.peek().is_none() {
+                    continue;
+                }
                 writeln!(
                     output,
-                    "      <attribute id=\"{}\" title=\"{}\" type=\"{}\">",
-                    escape_xml(&definition.id),
-                    escape_xml(&definition.title),
-                    definition.value_type.as_gexf()
+                    "    <attributes class=\"{}\" mode=\"{}\">",
+                    class.as_gexf(),
+                    mode.as_gexf()
                 )?;
-                if let Some(default) = &definition.default {
-                    let value = default
-                        .lexical_value()
-                        .expect("graph validation checked default values");
-                    writeln!(output, "        <default>{}</default>", escape_xml(&value))?;
+                for definition in definitions {
+                    writeln!(
+                        output,
+                        "      <attribute id=\"{}\" title=\"{}\" type=\"{}\">",
+                        escape_xml(&definition.id),
+                        escape_xml(&definition.title),
+                        definition.value_type.as_gexf()
+                    )?;
+                    if let Some(default) = &definition.default {
+                        let value = default
+                            .lexical_value()
+                            .expect("graph validation checked default values");
+                        writeln!(output, "        <default>{}</default>", escape_xml(&value))?;
+                    }
+                    writeln!(output, "      </attribute>")?;
                 }
-                writeln!(output, "      </attribute>")?;
+                writeln!(output, "    </attributes>")?;
             }
-            writeln!(output, "    </attributes>")?;
         }
         Ok(())
     }
@@ -735,16 +693,10 @@ impl Graph {
 
 fn write_interval_attributes<W: Write>(output: &mut W, interval: &TimeInterval) -> io::Result<()> {
     if let Some(start) = &interval.start {
-        let attribute = if interval.start_open {
-            "startopen"
-        } else {
-            "start"
-        };
-        write!(output, " {attribute}=\"{}\"", escape_xml(start))?;
+        write!(output, " start=\"{}\"", escape_xml(start))?;
     }
     if let Some(end) = &interval.end {
-        let attribute = if interval.end_open { "endopen" } else { "end" };
-        write!(output, " {attribute}=\"{}\"", escape_xml(end))?;
+        write!(output, " end=\"{}\"", escape_xml(end))?;
     }
     Ok(())
 }
@@ -803,9 +755,7 @@ fn parse_time(value: &str, format: TimeFormat) -> Result<ParsedTime, ValidationE
 
 fn interval_precedes(
     left_end: Option<&str>,
-    left_end_open: bool,
     right_start: Option<&str>,
-    right_start_open: bool,
     time_format: TimeFormat,
 ) -> Result<bool, ValidationError> {
     match (left_end, right_start) {
@@ -814,8 +764,7 @@ fn interval_precedes(
             let right_start = parse_time(right_start, time_format)?;
             Ok(match left_end.compare(right_start) {
                 Some(Ordering::Less) => true,
-                Some(Ordering::Equal) => left_end_open || right_start_open,
-                Some(Ordering::Greater) => false,
+                Some(Ordering::Equal | Ordering::Greater) => false,
                 None => {
                     return Err(ValidationError(
                         "interval endpoints cannot be compared".into(),
@@ -841,7 +790,7 @@ fn parse_date(value: &str) -> Option<i64> {
     let year = value[0..4].parse::<i64>().ok()?;
     let month = value[5..7].parse::<u32>().ok()?;
     let day = value[8..10].parse::<u32>().ok()?;
-    if !(1..=12).contains(&month) {
+    if year == 0 || !(1..=12).contains(&month) {
         return None;
     }
     let leap = year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
@@ -935,7 +884,7 @@ fn parse_datetime(value: &str) -> Option<i128> {
     let hour = u32::from(time_bytes[0] - b'0') * 10 + u32::from(time_bytes[1] - b'0');
     let minute = u32::from(time_bytes[3] - b'0') * 10 + u32::from(time_bytes[4] - b'0');
     let second = u32::from(seconds[0] - b'0') * 10 + u32::from(seconds[1] - b'0');
-    if hour > 23 || minute > 59 || second > 60 {
+    if hour > 23 || minute > 59 || second > 59 {
         return None;
     }
     let timestamp_seconds = i128::from(days) * 86_400
@@ -989,6 +938,11 @@ mod tests {
             .expect("synthetic sample should deserialize")
     }
 
+    fn static_sample_graph() -> Graph {
+        serde_json::from_str(include_str!("../samples/typed_static_graph.json"))
+            .expect("synthetic static sample should deserialize")
+    }
+
     fn write(graph: &Graph) -> String {
         let mut xml = Vec::new();
         graph.write_to(&mut xml).expect("sample graph should write");
@@ -1012,11 +966,80 @@ mod tests {
         assert!(xml.contains("<spells>"));
         assert!(xml.contains("<spell start=\"2026-01-01\" end=\"2026-12-31\"/>"));
         assert!(xml.contains(
-            "<attvalue for=\"weight\" value=\"0.75\" start=\"2026-03-01\" endopen=\"2026-12-31\"/>"
+            "<attvalue for=\"weight\" value=\"0.75\" start=\"2026-03-01\" end=\"2026-12-31\"/>"
         ));
-        assert!(xml.contains("<spell start=\"2026-03-01\" endopen=\"2026-12-31\"/>"));
-        assert!(!xml.contains("endopen=\"true\""));
+        assert!(xml.contains("<spell start=\"2026-03-01\" end=\"2026-12-31\"/>"));
+        assert!(!xml.contains("startopen="));
+        assert!(!xml.contains("endopen="));
         assert!(xml.contains("type=\"double\""));
+    }
+
+    #[test]
+    fn serializes_all_supported_types_and_defaults_in_static_graph() {
+        let xml = write(&static_sample_graph());
+        assert!(xml.contains("mode=\"static\" defaultedgetype=\"undirected\""));
+        assert!(!xml.contains("timeformat="));
+        for value_type in [
+            "integer",
+            "long",
+            "double",
+            "float",
+            "boolean",
+            "string",
+            "liststring",
+        ] {
+            assert!(xml.contains(&format!("type=\"{value_type}\"")));
+        }
+        for (attribute, value) in [
+            ("count", "7"),
+            ("serial", "9007199254740993"),
+            ("score", "0.75"),
+            ("ratio", "0.5"),
+            ("active", "true"),
+            ("note", "Synthetic &amp; offline"),
+            ("tags", "[north, south &amp; east]"),
+        ] {
+            assert!(xml.contains(&format!(
+                "<attvalue for=\"{attribute}\" value=\"{value}\"/>"
+            )));
+        }
+        assert!(xml.contains("<default>0</default>"));
+        assert!(xml.contains("<default>[]</default>"));
+        assert!(xml.contains("    <edges>\n    </edges>"));
+    }
+
+    #[test]
+    fn serializes_required_containers_for_empty_graph() {
+        let graph = Graph {
+            mode: GraphMode::Static,
+            time_format: None,
+            default_edge_type: DefaultEdgeType::Directed,
+            attributes: Vec::new(),
+            nodes: Vec::new(),
+            edges: Vec::new(),
+        };
+        let xml = write(&graph);
+        assert!(xml.contains("    <nodes>\n    </nodes>"));
+        assert!(xml.contains("    <edges>\n    </edges>"));
+    }
+
+    #[test]
+    fn json_round_trips_both_synthetic_samples() {
+        for graph in [sample_graph(), static_sample_graph()] {
+            let json = serde_json::to_string(&graph).expect("sample should serialize");
+            assert_eq!(
+                serde_json::from_str::<Graph>(&json).expect("sample should deserialize"),
+                graph
+            );
+        }
+    }
+
+    #[test]
+    fn rejects_legacy_exclusive_bound_fields_in_json() {
+        for field in ["start_open", "end_open", "startopen", "endopen"] {
+            let json = format!(r#"{{"start":"2026-01-01","{field}":true}}"#);
+            assert!(serde_json::from_str::<TimeInterval>(&json).is_err());
+        }
     }
 
     #[test]
@@ -1028,7 +1051,6 @@ mod tests {
             interval: Some(TimeInterval {
                 start: Some("2026-07-01".into()),
                 end: Some("2026-12-31".into()),
-                ..TimeInterval::default()
             }),
         });
 
@@ -1039,15 +1061,14 @@ mod tests {
     }
 
     #[test]
-    fn rejects_overlapping_dynamic_values_and_mixed_class_modes() {
+    fn rejects_overlapping_dynamic_values_including_shared_endpoints() {
         let mut graph = sample_graph();
         graph.nodes[0].attributes.push(TimedAttributeValue {
             attribute_id: "rank".into(),
             value: AttributeValue::Integer(9),
             interval: Some(TimeInterval {
-                start: Some("2026-06-01".into()),
+                start: Some("2026-06-30".into()),
                 end: Some("2026-12-31".into()),
-                ..TimeInterval::default()
             }),
         });
         assert!(graph
@@ -1055,14 +1076,27 @@ mod tests {
             .unwrap_err()
             .to_string()
             .contains("overlapping intervals"));
+    }
 
-        graph.nodes[0].attributes.pop();
+    #[test]
+    fn groups_static_and_dynamic_definitions_of_the_same_class() {
+        let mut graph = sample_graph();
         graph.attributes[0].mode = AttributeMode::Static;
-        assert!(graph
-            .validate()
-            .unwrap_err()
-            .to_string()
-            .contains("one mode per class"));
+        let xml = write(&graph);
+        let static_start = xml
+            .find("<attributes class=\"node\" mode=\"static\">")
+            .expect("static container should be present");
+        let static_end = static_start
+            + xml[static_start..]
+                .find("</attributes>")
+                .expect("static container should end");
+        let dynamic_start = xml
+            .find("<attributes class=\"node\" mode=\"dynamic\">")
+            .expect("dynamic container should be present");
+        assert!(xml[static_start..static_end].contains("<attribute id=\"role\""));
+        assert!(!xml[static_start..static_end].contains("<attribute id=\"rank\""));
+        assert!(dynamic_start > static_end);
+        assert!(xml[dynamic_start..].contains("<attribute id=\"rank\""));
     }
 
     #[test]
@@ -1095,6 +1129,12 @@ mod tests {
 
         let error = graph.validate().expect_err("type mismatch is invalid");
         assert!(error.to_string().contains("expected String"));
+
+        graph.nodes[0].attributes[0].attribute_id = "undeclared".into();
+        let error = graph
+            .validate()
+            .expect_err("undeclared attribute is invalid");
+        assert!(error.to_string().contains("undeclared"));
     }
 
     #[test]
@@ -1107,12 +1147,11 @@ mod tests {
     }
 
     #[test]
-    fn rejects_invalid_and_empty_open_intervals() {
+    fn rejects_reversed_intervals_and_accepts_singleton_intervals() {
         let mut graph = sample_graph();
         graph.edges[0].spells[0] = TimeInterval {
             start: Some("2026-12-31".into()),
             end: Some("2026-01-01".into()),
-            ..TimeInterval::default()
         };
         assert!(graph
             .validate()
@@ -1123,14 +1162,8 @@ mod tests {
         graph.edges[0].spells[0] = TimeInterval {
             start: Some("2026-01-01".into()),
             end: Some("2026-01-01".into()),
-            start_open: true,
-            ..TimeInterval::default()
         };
-        assert!(graph
-            .validate()
-            .unwrap_err()
-            .to_string()
-            .contains("empty open interval"));
+        assert!(graph.validate().is_ok());
     }
 
     #[test]
@@ -1147,7 +1180,6 @@ mod tests {
                 spells: vec![TimeInterval {
                     start: Some("2026-01-01T02:00:00+02:00".into()),
                     end: Some("2026-01-01T01:00:00Z".into()),
-                    ..TimeInterval::default()
                 }],
             }],
             edges: Vec::new(),
@@ -1160,9 +1192,7 @@ mod tests {
     fn compares_datetime_intervals_at_nanosecond_precision() {
         assert!(interval_precedes(
             Some("2026-01-01T00:00:00.000000001Z"),
-            false,
             Some("2026-01-01T00:00:00.000000002Z"),
-            false,
             TimeFormat::DateTime,
         )
         .expect("valid date-time endpoints should compare"));
@@ -1183,7 +1213,6 @@ mod tests {
         graph.nodes[0].spells[0] = TimeInterval {
             start: Some("9007199254740993".into()),
             end: Some("9007199254740992".into()),
-            ..TimeInterval::default()
         };
 
         assert!(graph
@@ -1203,5 +1232,121 @@ mod tests {
             .unwrap_err()
             .to_string()
             .contains("XML 1.0"));
+    }
+
+    #[test]
+    fn rejects_ambiguous_list_items_and_non_finite_values() {
+        for item in [
+            "", " north", "south ", "a|b", "a,b", "a;b", "[a]", "'a'", "\"a\"", "a\\b",
+        ] {
+            assert!(AttributeValue::ListString(vec![item.into()])
+                .lexical_value()
+                .is_err());
+        }
+        assert_eq!(
+            AttributeValue::ListString(Vec::new())
+                .lexical_value()
+                .expect("empty list should be valid"),
+            "[]"
+        );
+        assert!(AttributeValue::Double(f64::INFINITY)
+            .lexical_value()
+            .is_err());
+        assert!(AttributeValue::Float(f32::NAN).lexical_value().is_err());
+    }
+
+    #[test]
+    fn rejects_duplicate_ids_static_values_and_invalid_defaults() {
+        let mut graph = static_sample_graph();
+        graph.nodes.push(graph.nodes[0].clone());
+        assert!(graph
+            .validate()
+            .unwrap_err()
+            .to_string()
+            .contains("duplicate node"));
+        graph.nodes.pop();
+        graph.attributes.push(graph.attributes[0].clone());
+        assert!(graph
+            .validate()
+            .unwrap_err()
+            .to_string()
+            .contains("duplicate Node attribute"));
+        graph.attributes.pop();
+        let duplicate = graph.nodes[0].attributes[0].clone();
+        graph.nodes[0].attributes.push(duplicate);
+        assert!(graph
+            .validate()
+            .unwrap_err()
+            .to_string()
+            .contains("duplicate value"));
+        graph.nodes[0].attributes.pop();
+        graph.attributes[0].default = Some(AttributeValue::String("wrong type".into()));
+        assert!(graph
+            .validate()
+            .unwrap_err()
+            .to_string()
+            .contains("default for"));
+    }
+
+    #[test]
+    fn validates_numeric_and_calendar_time_formats() {
+        for (value, format) in [
+            ("-42", TimeFormat::Integer),
+            ("1.25e2", TimeFormat::Double),
+            ("2024-02-29", TimeFormat::Date),
+            ("2026-01-01T23:59:59.123456789-05:30", TimeFormat::DateTime),
+        ] {
+            assert!(parse_time(value, format).is_ok());
+        }
+        for (value, format) in [
+            ("1.5", TimeFormat::Integer),
+            ("NaN", TimeFormat::Double),
+            ("inf", TimeFormat::Double),
+            ("0000-01-01", TimeFormat::Date),
+            ("2025-02-29", TimeFormat::Date),
+            ("2026-01-01T00:00:60Z", TimeFormat::DateTime),
+            ("2026-01-01T00:00:00+14:01", TimeFormat::DateTime),
+            ("2026-01-01T00:00:00.1234567890Z", TimeFormat::DateTime),
+        ] {
+            assert!(parse_time(value, format).is_err(), "{value}");
+        }
+        assert!(interval_precedes(Some("1"), Some("2"), TimeFormat::Integer)
+            .expect("integer endpoints should compare"));
+        assert!(
+            !interval_precedes(Some("2"), Some("2"), TimeFormat::Integer)
+                .expect("inclusive endpoints should overlap")
+        );
+        assert!(!interval_precedes(None, Some("2"), TimeFormat::Integer)
+            .expect("unbounded intervals should overlap"));
+    }
+
+    #[test]
+    fn validates_before_writing_and_propagates_io_errors() {
+        let mut graph = sample_graph();
+        graph.time_format = None;
+        let mut output = Vec::new();
+        assert!(matches!(
+            graph.write_to(&mut output),
+            Err(GexfError::Validation(_))
+        ));
+        assert!(output.is_empty());
+
+        struct FailingWriter;
+        impl Write for FailingWriter {
+            fn write(&mut self, _: &[u8]) -> io::Result<usize> {
+                Err(io::Error::new(
+                    io::ErrorKind::BrokenPipe,
+                    "synthetic failure",
+                ))
+            }
+
+            fn flush(&mut self) -> io::Result<()> {
+                Ok(())
+            }
+        }
+        assert!(matches!(
+            sample_graph().write_to(FailingWriter),
+            Err(GexfError::Io(error)) if error.kind() == io::ErrorKind::BrokenPipe
+        ));
     }
 }
