@@ -136,6 +136,8 @@ including `unsupported_runtime`; exception messages are never included.
 Mismatch values are detached, deeply frozen JSON snapshots, so a backend can
 reuse its result arrays without rewriting earlier errors. Non-JSON values are
 represented by a fixed diagnostic instead of retained by reference.
+Snapshot copying never calls `toJSON`; exotic prototypes, accessors, cycles and
+sparse arrays are rejected. Snapshot nesting is capped at 32.
 Analyzer code itself is trusted, not sandboxed.
 
 `UnicodeError.code` distinguishes invalid text/positions/corpus, exceeded

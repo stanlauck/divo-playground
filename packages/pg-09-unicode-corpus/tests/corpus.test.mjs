@@ -230,6 +230,55 @@ test("non-JSON analyzer mismatch values are replaced with a stable diagnostic", 
   }
 });
 
+test("snapshotting does not call toJSON or disguise a mismatch as the expected result", () => {
+  let calls = 0;
+  const deceptive = {
+    toJSON() {
+      calls += 1;
+      return corpus.cases[0].expected.cursor;
+    },
+  };
+  const report = checkCorpus(one("empty"), (text) => ({
+    ...analyzeText(text),
+    cursor: deceptive,
+  }));
+  assert.equal(report.failed, 1);
+  assert.equal(report.issues[0].actual, "non-JSON analyzer value");
+  assert.equal(calls, 0);
+  JSON.stringify(report);
+  assert.equal(calls, 0);
+});
+
+test("exotic objects, accessors, sparse arrays and deep data get stable snapshot diagnostics", () => {
+  let getterCalls = 0;
+  const accessor = Object.defineProperty({}, "value", {
+    enumerable: true,
+    get() {
+      getterCalls += 1;
+      return 0;
+    },
+  });
+  let deep = {};
+  for (let i = 0; i < 40; i += 1) deep = { child: deep };
+  for (const value of [
+    new Map(),
+    new Set(),
+    new Date(0),
+    accessor,
+    Array(1),
+    deep,
+  ]) {
+    const report = checkCorpus(one("empty"), (text) => ({
+      ...analyzeText(text),
+      cursor: value,
+    }));
+    assert.equal(report.failed, 1);
+    assert.equal(report.issues[0].actual, "non-JSON analyzer value");
+    assert.doesNotThrow(() => JSON.stringify(report));
+  }
+  assert.equal(getterCalls, 0);
+});
+
 test("known package error codes remain actionable without disclosing messages", () => {
   for (const code of ["unsupported_runtime", "backend_invariant"]) {
     const report = checkCorpus(one("empty"), () => {

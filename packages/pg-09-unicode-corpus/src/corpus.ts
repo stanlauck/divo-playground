@@ -5,6 +5,7 @@ import {
   MAX_CORPUS_CASES,
   MAX_CORPUS_JSON_UTF16,
   MAX_CORPUS_TEXT_UTF16,
+  MAX_TEXT_UTF16,
   UNICODE_ERROR_CODES,
   UNICODE_VERSION,
   UnicodeError,
@@ -366,31 +367,69 @@ function same(expected: unknown, actual: unknown): boolean {
   );
 }
 
-function freezeJson(value: unknown): unknown {
-  if (value !== null && typeof value === "object") {
-    for (const child of Object.values(value)) {
-      freezeJson(child);
-    }
-    Object.freeze(value);
+function copyJson(value: unknown, active: Set<object>, depth: number): unknown {
+  if (depth > 32) throw new Error("Snapshot depth limit");
+  if (
+    value === null ||
+    typeof value === "string" ||
+    typeof value === "boolean"
+  ) {
+    return value;
   }
-  return value;
+  if (typeof value === "number" && Number.isFinite(value)) return value;
+  if (typeof value !== "object" || active.has(value)) {
+    throw new Error("Not plain JSON data");
+  }
+  active.add(value);
+  try {
+    const keys = Reflect.ownKeys(value);
+    if (Array.isArray(value)) {
+      if (
+        Object.getPrototypeOf(value) !== Array.prototype ||
+        value.length > MAX_TEXT_UTF16 + 1 ||
+        keys.length !== value.length + 1
+      ) {
+        throw new Error("Not a bounded plain JSON array");
+      }
+      const result: unknown[] = [];
+      for (let i = 0; i < value.length; i += 1) {
+        const descriptor = Object.getOwnPropertyDescriptor(value, i);
+        if (!descriptor?.enumerable || !Object.hasOwn(descriptor, "value")) {
+          throw new Error("Sparse or accessor array");
+        }
+        result.push(copyJson(descriptor.value, active, depth + 1));
+      }
+      return Object.freeze(result);
+    }
+    const prototype = Object.getPrototypeOf(value);
+    if (prototype !== null && prototype !== Object.prototype) {
+      throw new Error("Not a plain JSON object");
+    }
+    const result: Record<string, unknown> = {};
+    for (const key of keys) {
+      const descriptor = Object.getOwnPropertyDescriptor(value, key);
+      if (
+        typeof key !== "string" ||
+        key === "toJSON" ||
+        !descriptor?.enumerable ||
+        !Object.hasOwn(descriptor, "value")
+      ) {
+        throw new Error("Not plain JSON object data");
+      }
+      Object.defineProperty(result, key, {
+        value: copyJson(descriptor.value, active, depth + 1),
+        enumerable: true,
+      });
+    }
+    return Object.freeze(result);
+  } finally {
+    active.delete(value);
+  }
 }
 
 function snapshot(value: unknown): unknown {
   try {
-    const json = JSON.stringify(value, (_key, part: unknown) => {
-      if (
-        typeof part === "bigint" ||
-        typeof part === "undefined" ||
-        typeof part === "function" ||
-        typeof part === "symbol" ||
-        (typeof part === "number" && !Number.isFinite(part))
-      ) {
-        throw new Error("Not a portable JSON value");
-      }
-      return part;
-    });
-    return freezeJson(JSON.parse(json));
+    return copyJson(value, new Set(), 0);
   } catch {
     return "non-JSON analyzer value";
   }
