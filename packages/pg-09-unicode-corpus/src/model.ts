@@ -83,14 +83,17 @@ export interface CheckReport {
   readonly issues: readonly CheckIssue[];
 }
 
-export type UnicodeErrorCode =
-  | "invalid_text"
-  | "invalid_position"
-  | "invalid_direction"
-  | "invalid_corpus"
-  | "limit_exceeded"
-  | "unsupported_runtime"
-  | "backend_invariant";
+export const UNICODE_ERROR_CODES = Object.freeze([
+  "invalid_text",
+  "invalid_position",
+  "invalid_direction",
+  "invalid_corpus",
+  "limit_exceeded",
+  "unsupported_runtime",
+  "backend_invariant",
+] as const);
+
+export type UnicodeErrorCode = (typeof UNICODE_ERROR_CODES)[number];
 
 export class UnicodeError extends Error {
   constructor(

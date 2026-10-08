@@ -131,7 +131,12 @@ paired offsets. Native grapheme algorithms and Unicode versions must be
 compatible with this corpus; the checker reports a version mismatch rather than
 silently updating expectations. Object-property order does not matter.
 Exceptions from a custom analyzer produce a sanitized failed case; other cases
-still run. Analyzer code itself is trusted, not sandboxed.
+still run. Allowlisted `UnicodeError` codes are retained as `{ errorCode }`,
+including `unsupported_runtime`; exception messages are never included.
+Mismatch values are detached, deeply frozen JSON snapshots, so a backend can
+reuse its result arrays without rewriting earlier errors. Non-JSON values are
+represented by a fixed diagnostic instead of retained by reference.
+Analyzer code itself is trusted, not sandboxed.
 
 `UnicodeError.code` distinguishes invalid text/positions/corpus, exceeded
 limits, unsupported native Unicode versions and backend invariant failures.

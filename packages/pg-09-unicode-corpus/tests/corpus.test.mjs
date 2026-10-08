@@ -189,6 +189,82 @@ test("analyzer exceptions are sanitized and other cases still run", () => {
   assert.ok(!JSON.stringify(report).includes("private backend diagnostic"));
 });
 
+test("reports snapshot reused backend arrays, including nested paired positions", () => {
+  const input = validateCorpus({ ...corpus, cases: corpus.cases.slice(0, 2) });
+  const reused = [];
+  const report = checkCorpus(input, (text) => {
+    const actual = analyzeText(text);
+    reused.splice(0, reused.length, ...structuredClone(actual.cursor));
+    reused[0].at.utf8 = text.length + 99;
+    return { ...actual, cursor: reused };
+  });
+  const first = report.issues.find((issue) => issue.caseId === "empty");
+  const second = report.issues.find((issue) => issue.caseId === "ascii-space");
+  assert.equal(first.actual[0].at.utf8, 99);
+  assert.equal(second.actual[0].at.utf8, 102);
+  reused[0].at.utf8 = 500;
+  reused.length = 0;
+  assert.equal(first.actual[0].at.utf8, 99);
+  assert.equal(second.actual[0].at.utf8, 102);
+  assert.throws(() => {
+    first.actual[0].at.utf8 = 9;
+  }, TypeError);
+  assert.ok(Object.isFrozen(first.actual));
+  assert.equal(
+    JSON.parse(JSON.stringify(report)).issues[0].actual[0].at.utf8,
+    99,
+  );
+});
+
+test("non-JSON analyzer mismatch values are replaced with a stable diagnostic", () => {
+  const cyclic = [];
+  cyclic.push(cyclic);
+  for (const value of [cyclic, [undefined], [1n], [NaN], [() => {}]]) {
+    const report = checkCorpus(one("empty"), (text) => ({
+      ...analyzeText(text),
+      cursor: value,
+    }));
+    assert.equal(report.failed, 1);
+    assert.equal(report.issues[0].actual, "non-JSON analyzer value");
+    assert.doesNotThrow(() => JSON.stringify(report));
+  }
+});
+
+test("known package error codes remain actionable without disclosing messages", () => {
+  for (const code of ["unsupported_runtime", "backend_invariant"]) {
+    const report = checkCorpus(one("empty"), () => {
+      throw new UnicodeError(code, "private backend diagnostic");
+    });
+    assert.deepEqual(report.issues[0].actual, { errorCode: code });
+    assert.ok(!JSON.stringify(report).includes("private backend diagnostic"));
+  }
+  const unknown = checkCorpus(one("empty"), () => {
+    throw new UnicodeError(
+      "private-backend-code",
+      "private backend diagnostic",
+    );
+  });
+  assert.equal(unknown.issues[0].actual, "analyzer failed");
+  assert.ok(!JSON.stringify(unknown).includes("private-backend-code"));
+});
+
+test("default checker reports unsupported native Unicode versions with a safe code", () => {
+  const descriptor = Object.getOwnPropertyDescriptor(
+    process.versions,
+    "unicode",
+  );
+  try {
+    Object.defineProperty(process.versions, "unicode", { value: "18.0" });
+    const report = checkCorpus(one("empty"));
+    assert.equal(report.failed, 1);
+    assert.deepEqual(report.issues[0].actual, {
+      errorCode: "unsupported_runtime",
+    });
+  } finally {
+    Object.defineProperty(process.versions, "unicode", descriptor);
+  }
+});
+
 test("JSON syntax, profile drift and unknown fields are rejected", () => {
   assert.throws(() => parseCorpus("{"), hasCode("invalid_corpus"));
   assert.throws(() => parseCorpus(null), hasCode("invalid_corpus"));

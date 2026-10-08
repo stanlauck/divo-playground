@@ -5,6 +5,7 @@ import {
   MAX_CORPUS_CASES,
   MAX_CORPUS_JSON_UTF16,
   MAX_CORPUS_TEXT_UTF16,
+  UNICODE_ERROR_CODES,
   UNICODE_VERSION,
   UnicodeError,
   type Analyzer,
@@ -365,6 +366,36 @@ function same(expected: unknown, actual: unknown): boolean {
   );
 }
 
+function freezeJson(value: unknown): unknown {
+  if (value !== null && typeof value === "object") {
+    for (const child of Object.values(value)) {
+      freezeJson(child);
+    }
+    Object.freeze(value);
+  }
+  return value;
+}
+
+function snapshot(value: unknown): unknown {
+  try {
+    const json = JSON.stringify(value, (_key, part: unknown) => {
+      if (
+        typeof part === "bigint" ||
+        typeof part === "undefined" ||
+        typeof part === "function" ||
+        typeof part === "symbol" ||
+        (typeof part === "number" && !Number.isFinite(part))
+      ) {
+        throw new Error("Not a portable JSON value");
+      }
+      return part;
+    });
+    return freezeJson(JSON.parse(json));
+  } catch {
+    return "non-JSON analyzer value";
+  }
+}
+
 /** A custom analyzer can check another backend's portable result shape. */
 export function checkCorpus(
   corpus: Corpus,
@@ -383,7 +414,7 @@ export function checkCorpus(
             caseId: item.id,
             field: "unicodeVersion",
             expected: input.unicodeVersion,
-            actual: actual?.unicodeVersion ?? null,
+            actual: snapshot(actual?.unicodeVersion ?? null),
           }),
         );
       }
@@ -399,19 +430,24 @@ export function checkCorpus(
               caseId: item.id,
               field,
               expected: item.expected[field],
-              actual: actual?.[field] ?? null,
+              actual: snapshot(actual?.[field] ?? null),
             }),
           );
         }
       }
-    } catch {
-      // Do not echo an external backend's exception, input text or machine paths.
+    } catch (error: unknown) {
+      // Keep only allowlisted package codes, never exception messages or paths.
+      const diagnostic =
+        error instanceof UnicodeError &&
+        UNICODE_ERROR_CODES.includes(error.code)
+          ? Object.freeze({ errorCode: error.code })
+          : "analyzer failed";
       issues.push(
         Object.freeze({
           caseId: item.id,
           field: "analyzer",
           expected: "successful analysis",
-          actual: "analyzer failed",
+          actual: diagnostic,
         }),
       );
     }
