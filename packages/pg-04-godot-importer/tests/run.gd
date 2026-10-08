@@ -31,6 +31,8 @@ func _initialize() -> void:
 	_test("PG-03 name, opaque type and localization compatibility", _pg03_edge_types)
 	_test("hierarchy, zero references and pin indices", _hierarchy_rejections)
 	_test("nested DSL and exotic op/value types", _dsl_depth_and_types)
+	_test("first ID diagnostic survives later duplicate guard", _first_id_diagnostics)
+	_test("PG-03 source pin-side records are preserved", _input_side_connections)
 	print("PG-04: %d tests passed, %d assertions, %d failed" % [_passed, _assertions, _failed])
 	quit(1 if _failed > 0 else 0)
 
@@ -457,3 +459,68 @@ func _dsl_depth_and_types() -> void:
 		not result.ok and result.error.code == "lossy_float_literal",
 		"int cannot silently round as float"
 	)
+
+
+func _first_id_diagnostics() -> void:
+	for field: String in ["nodes", "pins", "edges", "variable_namespaces", "hierarchy"]:
+		for sample: Array in [
+			["", "invalid_id"],
+			[" contains-edges ", "invalid_id"],
+			["control\t", "invalid_id"],
+			[42, "expected_string"]
+		]:
+			var document := _base.duplicate(true)
+			var key := "name" if field == "variable_namespaces" else "id"
+			document.dialogue[field][0][key] = sample[0]
+			_reject(document, sample[1])
+		if field != "variable_namespaces":
+			var document := _base.duplicate(true)
+			document.dialogue[field][0].id = "0x000"
+			_reject(document, "zero_id")
+
+
+func _input_side_connections() -> void:
+	var document := _base.duplicate(true)
+	var owner: String = document.dialogue.nodes[0].id
+	var input_id := "synthetic-container-input"
+	var output_id := "synthetic-container-output"
+	document.dialogue.nodes[0].input_pins = [input_id]
+	document.dialogue.nodes[0].output_pins = [output_id]
+	for pair: Array in [[input_id, "input"], [output_id, "output"]]:
+		document.dialogue.pins.append(
+			{
+				"id": pair[0],
+				"owner": owner,
+				"direction": pair[1],
+				"index": 0,
+				"script": null,
+				"properties": {"Id": pair[0], "Owner": owner}
+			}
+		)
+	var pairs := [
+		[input_id, "0x0100000000000004", "0x0100000000000021"],
+		[input_id, "0x0100000000000003", "0x0100000000000012"],
+		[output_id, "0x0100000000000003", "0x0100000000000012"]
+	]
+	for i in range(pairs.size()):
+		document.dialogue.edges.append(
+			{
+				"id": "pin-side-record-%d" % i,
+				"kind": "connection",
+				"source": owner,
+				"source_pin": pairs[i][0],
+				"target": pairs[i][1],
+				"target_pin": pairs[i][2],
+				"index": i if i < 2 else 0,
+				"label": null,
+				"properties": {"Target": pairs[i][1], "TargetPin": pairs[i][2]}
+			}
+		)
+	var result := _import(document)
+	_check(result.ok, "input-input, input-output, output-output records accepted")
+	if result.ok:
+		_check(result.resource.dialogue == document.dialogue, "connection records unchanged")
+		_check(result.resource.dialogue.choices == _base.dialogue.choices, "no invented choices")
+	document.dialogue.nodes[0].input_pins = [output_id]
+	document.dialogue.nodes[0].output_pins = [input_id]
+	_reject(document, "pin_owner_mismatch")
