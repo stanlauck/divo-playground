@@ -1,0 +1,45 @@
+{
+  "name": "@divo-playground/pg-10-graph-minimap",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Controlled Canvas minimap for neutral node graphs, with cached edges and viewport-only updates",
+  "license": "MIT OR Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    },
+    "./schema": "./schema.json"
+  },
+  "files": [
+    "dist/src",
+    "schema.json",
+    "README.md",
+    "benchmarks/local-report.md",
+    "LICENSE-MIT",
+    "LICENSE-APACHE"
+  ],
+  "peerDependencies": {
+    "react": "^18.3.1 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "esbuild": "0.28.2",
+    "prettier": "3.9.9",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "typescript": "7.0.2"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "demo:build": "node examples/build.mjs",
+    "format:check": "prettier --check src tests examples samples benchmarks schema.json README.md package.json tsconfig.json"
+  }
+}

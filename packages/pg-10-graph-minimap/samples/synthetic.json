@@ -1,0 +1,264 @@
+{
+  "version": 1,
+  "nodes": [
+    {
+      "id": "node-0",
+      "x": -100,
+      "y": -60,
+      "width": 20,
+      "height": 12
+    },
+    {
+      "id": "node-1",
+      "x": -68,
+      "y": -60,
+      "width": 20,
+      "height": 12
+    },
+    {
+      "id": "node-2",
+      "x": -36,
+      "y": -60,
+      "width": 20,
+      "height": 12
+    },
+    {
+      "id": "node-3",
+      "x": -4,
+      "y": -60,
+      "width": 20,
+      "height": 12
+    },
+    {
+      "id": "node-4",
+      "x": -100,
+      "y": -36,
+      "width": 20,
+      "height": 12
+    },
+    {
+      "id": "node-5",
+      "x": -68,
+      "y": -36,
+      "width": 20,
+      "height": 12
+    },
+    {
+      "id": "node-6",
+      "x": -36,
+      "y": -36,
+      "width": 20,
+      "height": 12
+    },
+    {
+      "id": "node-7",
+      "x": -4,
+      "y": -36,
+      "width": 20,
+      "height": 12
+    },
+    {
+      "id": "node-8",
+      "x": -100,
+      "y": -12,
+      "width": 20,
+      "height": 12
+    },
+    {
+      "id": "node-9",
+      "x": -68,
+      "y": -12,
+      "width": 20,
+      "height": 12
+    },
+    {
+      "id": "node-10",
+      "x": -36,
+      "y": -12,
+      "width": 20,
+      "height": 12
+    },
+    {
+      "id": "node-11",
+      "x": -4,
+      "y": -12,
+      "width": 20,
+      "height": 12
+    },
+    {
+      "id": "node-12",
+      "x": -100,
+      "y": 12,
+      "width": 20,
+      "height": 12
+    },
+    {
+      "id": "node-13",
+      "x": -68,
+      "y": 12,
+      "width": 20,
+      "height": 12
+    },
+    {
+      "id": "node-14",
+      "x": -36,
+      "y": 12,
+      "width": 20,
+      "height": 12
+    },
+    {
+      "id": "node-15",
+      "x": -4,
+      "y": 12,
+      "width": 20,
+      "height": 12
+    }
+  ],
+  "edges": [
+    {
+      "id": "right-0",
+      "source": "node-0",
+      "target": "node-1"
+    },
+    {
+      "id": "down-0",
+      "source": "node-0",
+      "target": "node-4"
+    },
+    {
+      "id": "right-1",
+      "source": "node-1",
+      "target": "node-2"
+    },
+    {
+      "id": "down-1",
+      "source": "node-1",
+      "target": "node-5"
+    },
+    {
+      "id": "right-2",
+      "source": "node-2",
+      "target": "node-3"
+    },
+    {
+      "id": "down-2",
+      "source": "node-2",
+      "target": "node-6"
+    },
+    {
+      "id": "down-3",
+      "source": "node-3",
+      "target": "node-7"
+    },
+    {
+      "id": "right-4",
+      "source": "node-4",
+      "target": "node-5"
+    },
+    {
+      "id": "down-4",
+      "source": "node-4",
+      "target": "node-8"
+    },
+    {
+      "id": "right-5",
+      "source": "node-5",
+      "target": "node-6"
+    },
+    {
+      "id": "down-5",
+      "source": "node-5",
+      "target": "node-9"
+    },
+    {
+      "id": "right-6",
+      "source": "node-6",
+      "target": "node-7"
+    },
+    {
+      "id": "down-6",
+      "source": "node-6",
+      "target": "node-10"
+    },
+    {
+      "id": "down-7",
+      "source": "node-7",
+      "target": "node-11"
+    },
+    {
+      "id": "right-8",
+      "source": "node-8",
+      "target": "node-9"
+    },
+    {
+      "id": "down-8",
+      "source": "node-8",
+      "target": "node-12"
+    },
+    {
+      "id": "right-9",
+      "source": "node-9",
+      "target": "node-10"
+    },
+    {
+      "id": "down-9",
+      "source": "node-9",
+      "target": "node-13"
+    },
+    {
+      "id": "right-10",
+      "source": "node-10",
+      "target": "node-11"
+    },
+    {
+      "id": "down-10",
+      "source": "node-10",
+      "target": "node-14"
+    },
+    {
+      "id": "down-11",
+      "source": "node-11",
+      "target": "node-15"
+    },
+    {
+      "id": "right-12",
+      "source": "node-12",
+      "target": "node-13"
+    },
+    {
+      "id": "right-13",
+      "source": "node-13",
+      "target": "node-14"
+    },
+    {
+      "id": "right-14",
+      "source": "node-14",
+      "target": "node-15"
+    },
+    {
+      "id": "synthetic-route",
+      "source": "node-0",
+      "target": "node-15",
+      "points": [
+        {
+          "x": -90,
+          "y": -54
+        },
+        {
+          "x": -90,
+          "y": 18
+        },
+        {
+          "x": 6,
+          "y": 18
+        }
+      ]
+    }
+  ],
+  "viewport": {
+    "x": -80,
+    "y": -48,
+    "width": 80,
+    "height": 50
+  }
+}
