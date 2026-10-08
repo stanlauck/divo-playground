@@ -74,7 +74,9 @@ the consumer. The example is intentionally minimal, not a theme engine.
   only on the enabled minimap. Pixel, line and page wheel delta modes are handled.
 - Arrow keys pan by 10% of the viewport (Shift: 50%); `+`/`-` zoom; Home fits.
   Named Zoom in/out and Fit graph buttons provide a keyboard alternative.
-- `disabled` prevents gestures/callbacks and disables the buttons.
+- Horizontal-only wheel gestures pass through without a zoom callback.
+- `disabled` prevents gestures/callbacks and disables the buttons while allowing
+  native touch and wheel page scrolling.
 
 Zoom preserves viewport aspect ratio, except floating-point rounding.
 Fit prefers the current aspect but relaxes it if the finite extent limit would
@@ -136,6 +138,8 @@ The static graph and viewport use **separate Canvas layers**. Graph validation,
 edge resolution, bounds and deep copying happen once in `prepareGraph()`,
 not inside each viewport update. The base layer repaints only when its snapshot,
 projection, palette, surface size, or device-pixel ratio changes.
+Palette invalidation compares the five validated color values, not object
+identity; supplying an equivalent inline palette does not repaint the graph.
 Viewport-only paints do constant work independent of node/edge count.
 Paints coalesce through requestAnimationFrame; cleanup cancels pending frames
 and removes wheel/DPR listeners, including under React StrictMode.
@@ -161,8 +165,9 @@ Initial preparation and graph changes have separate linear work.
 RAF cadence is not a portable 60-FPS promise. Throttling, refresh rate, graph
 density, Canvas implementation and hardware all affect the result.
 
-The measured [local report](benchmarks/local-report.md) recorded three runs at
-59.971–59.973 RAF FPS, with 390 overlay paints and zero graph repaints per run.
+The measured [local report](benchmarks/local-report.md) recorded baseline and
+inline-palette runs at 59.967–59.973 RAF FPS, with 389–390 overlay paints and
+zero graph repaints per run.
 It also records the separate cold costs, environment and limitations.
 
 ## Offline development

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   GraphMinimap,
+  DEFAULT_PALETTE,
   prepareGraph,
   type Rect,
   type RenderStats,
@@ -159,6 +160,7 @@ function App() {
         width={320}
         height={200}
         disabled={disabled}
+        palette={{ ...DEFAULT_PALETTE }}
         onViewportChange={(next) => {
           callbacks.current++;
           if (window.pg10) window.pg10.callbacks = callbacks.current;

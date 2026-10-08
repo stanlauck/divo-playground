@@ -92,7 +92,7 @@ export function GraphMinimap({
 }: GraphMinimapProps) {
   requirePreparedGraph(graph);
   const viewport = validateViewport(rawViewport);
-  const colors = useMemo(() => {
+  const suppliedColors = (() => {
     const keys = [
       "background",
       "nodes",
@@ -121,7 +121,24 @@ export function GraphMinimap({
       values[key] = descriptor.value;
     }
     return values;
-  }, [palette]);
+  })();
+  const {
+    background,
+    nodes,
+    edges,
+    viewport: viewportColor,
+    viewportFill,
+  } = suppliedColors;
+  const colors = useMemo(
+    () => ({
+      background,
+      nodes,
+      edges,
+      viewport: viewportColor,
+      viewportFill,
+    }),
+    [background, nodes, edges, viewportColor, viewportFill],
+  );
   const t = useMemo(
     () => projection(graph.bounds, width, height, padding),
     [graph, width, height, padding],
@@ -228,7 +245,12 @@ export function GraphMinimap({
     if (!element) return;
     const wheel = (event: WheelEvent) => {
       const current = live.current;
-      if (current.disabled || !Number.isFinite(event.deltaY)) return;
+      if (
+        current.disabled ||
+        !Number.isFinite(event.deltaY) ||
+        event.deltaY === 0
+      )
+        return;
       const box = element.getBoundingClientRect();
       if (box.width <= 0 || box.height <= 0) return;
       event.preventDefault();
@@ -368,7 +390,7 @@ export function GraphMinimap({
           position: "relative",
           width,
           height,
-          touchAction: "none",
+          touchAction: disabled ? "auto" : "none",
           cursor: disabled ? "default" : "grab",
         }}
         onPointerDown={pointerDown}

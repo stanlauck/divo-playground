@@ -92,6 +92,19 @@ test("palette accessors are not executed", () => {
   );
   assert.equal(calls, 0);
 });
+test("disabled surface permits native touch scrolling", () => {
+  for (const disabled of [true, false]) {
+    const html = renderToString(
+      createElement(GraphMinimap, {
+        graph,
+        viewport,
+        disabled,
+        onViewportChange() {},
+      }),
+    );
+    assert.ok(html.includes(`touch-action:${disabled ? "auto" : "none"}`));
+  }
+});
 test("static graph painter is separate from constant-work overlay", () => {
   const calls = [];
   const context = new Proxy(

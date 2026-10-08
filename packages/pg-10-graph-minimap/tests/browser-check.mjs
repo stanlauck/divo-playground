@@ -86,8 +86,27 @@
   );
   await tick();
   check(window.pg10.callbacks === beforeDisabled, "disabled ignores all input");
+  check(
+    getComputedStyle(surface).touchAction === "auto",
+    "disabled permits native touch scrolling",
+  );
   window.pg10.setDisabled(false);
   await tick();
+  const beforeHorizontal = window.pg10.callbacks;
+  const horizontal = new WheelEvent("wheel", {
+    deltaX: 100,
+    deltaY: 0,
+    clientX: box.left + 160,
+    clientY: box.top + 100,
+    bubbles: true,
+    cancelable: true,
+  });
+  surface.dispatchEvent(horizontal);
+  await tick();
+  check(
+    !horizontal.defaultPrevented && window.pg10.callbacks === beforeHorizontal,
+    "horizontal wheel passes through without callback",
+  );
   const wheelBefore = current();
   const wheel = new WheelEvent("wheel", {
     deltaY: -100,
@@ -245,7 +264,7 @@
   );
   check(
     window.pg10.stats.graphDraws === base,
-    "viewport interactions reuse graph layer",
+    "viewport interactions with inline palette reuse graph layer",
   );
   check(window.pg10.stats.viewportDraws > 10, "actual overlay paints");
   const bitmaps = [...document.querySelectorAll("canvas")];

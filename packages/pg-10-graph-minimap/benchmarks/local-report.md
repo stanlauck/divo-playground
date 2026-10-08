@@ -31,13 +31,31 @@ measure Canvas command submission, not GPU completion. Tiny durations are
 subject to browser timer quantization; each measured frame samples the most
 recent overlay paint.
 
+## Post-review inline-palette regression
+
+The final demo supplies a newly allocated equivalent palette on every React
+render. Three further runs verify value-based caching after the review fix:
+
+| Run | RAF FPS | p50 interval | p95 interval | Sampled overlay CPU mean | Overlay paints, including warm-up | Graph repaints |
+| --- | ------- | ------------ | ------------ | ------------------------ | --------------------------------- | -------------- |
+| 1   | 59.967  | 16.70 ms     | 16.90 ms     | 0.0167 ms                | 389                               | 0              |
+| 2   | 59.973  | 16.70 ms     | 16.90 ms     | 0.0186 ms                | 390                               | 0              |
+| 3   | 59.972  | 16.70 ms     | 16.80 ms     | 0.0150 ms                | 390                               | 0              |
+
+This second page load prepared the graph in 117.4 ms and painted it initially
+in 8.2 ms. One coalesced overlay update in the first run is reported honestly;
+frame cadence and actual Canvas draw counts are distinct measurements.
+
 ## UI verification
 
-- 20 in-page checks passed: zoom/buttons/keyboard, controlled rejection,
+- 22 in-page checks passed: zoom/buttons/keyboard, controlled rejection,
   disabled input, wheel modes, pan/cancel/lost capture, scaled wheel anchors,
-  fit, actual paints and static graph layer reuse.
+  fit, actual paints, equivalent inline palette cache reuse and horizontal-only
+  wheel pass-through.
 - Trusted native pointer capture, drag beyond the surface, release and wheel
   anchor/scroll prevention passed separately.
+- Trusted native touch events starting on the disabled surface scrolled the
+  page by 145 pixels and emitted zero minimap callbacks.
 - DPR transitions 1.5 → 2 → 1 with viewport resize rebuilt both backing stores
   and rearmed listeners. A synthetic resize also verified the fallback when
   DPR-only browser emulation deferred media-query events.
