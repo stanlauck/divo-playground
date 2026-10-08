@@ -421,6 +421,8 @@ func _node_reference(id: Variant, path: String, source: Variant, allow_missing :
 
 
 func _pin_reference(id: Variant, owner: String, path: String) -> bool:
+	# PG-03 retains source records on either pin side, including container inputs.
+	# Ownership is required; imposing output-to-input polarity would change its graph.
 	if id == null:
 		return true
 	if _nodes.has(id):

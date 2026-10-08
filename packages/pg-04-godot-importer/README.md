@@ -98,7 +98,8 @@ The entire `dialogue` object uses the field names, enums and arrays from
 
 - Nodes, input/output pins, connection/jump edges and choice edge IDs are
   separate, not collapsed into a new simplified dialogue model.
-- Package membership, pin ownership/direction/index, choice-edge agreement,
+- Package membership, pin ownership and direction/index within node pin lists,
+  choice-edge agreement (including output-only choice source pins),
   nonzero node/pin IDs, parent cycles and hierarchy structure are checked.
 - Missing referenced dialogue nodes/pins are retained and warned, matching
   PG-03's filtered-export behavior. Edge sources and world links must exist.
@@ -110,6 +111,15 @@ The entire `dialogue` object uses the field names, enums and arrays from
 The only schema additions are optional **`condition` and `event` on dialogue
 nodes and choices**. They use the same DSL as world records below.
 No PG-03 package changes are needed.
+
+Edges preserve **source connection records**, not an execution plan. PG-03
+explicitly retains container input-pin connections and does not constrain an
+edge to output→input polarity. Input→input, input→output and output→output
+records therefore remain valid here when ownership is correct; they are not
+silently flipped or removed. See PG-03's
+`container_input_pin_connections_are_retained_without_direction_restrictions`
+and `input_pin_connections_do_not_create_false_output_branch_candidates` tests.
+This differs from the output-only requirement for a **choice's** source pin.
 
 `samples/pg03-neutral.json` is the actual PG-03 strict-reader output for its
 hand-authored `samples/synthetic.articy.json`. The baseline
@@ -210,6 +220,7 @@ fails on engine error/warning output **even if Godot exits zero**.
 Coverage includes strict JSON/UTF-8 and budgets; PG-03 equality;
 filtered/localized exports; graph references and hierarchy; typed DSL and
 precedence; detached lookups; int64/double/control-string `.tres` round trips;
+first-error diagnostics and PG-03 input-side connection preservation;
 and proof that neither scripts nor `set`/`emit` run during import/load.
 The included synthetic corpus and schema are reproducible:
 
