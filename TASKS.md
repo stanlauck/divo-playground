@@ -13,7 +13,7 @@ Status: `open` → `taken` (handle, date) → `review` (PR #) → `done`.
 | PG-07 | ComfyUI client: submit workflow, poll progress, cancel, fetch outputs, retries; mock server for tests | Rust crate | review | stanlauck, 2026-10-07 | #20 |
 | PG-08 | glTF scene mock-up writer: camera markers + placeholder props from neutral shot JSON | Rust crate | review | Droid, 2026-10-07 | #19 |
 | PG-09 | Unicode test corpus + checks: RTL (Arabic/Hebrew), Devanagari, CJK, combining marks — line breaking, cursor movement, grapheme counting | TS package + corpus | review | stanlauck, 2026-10-08 | #24 |
-| PG-10 | Minimap component for large node graphs (pan, zoom, viewport rect, 10k nodes at 60 fps) | TS / React package | taken | stanlauck, 2026-10-08 | |
+| PG-10 | Minimap component for large node graphs (pan, zoom, viewport rect, 10k nodes at 60 fps) | TS / React package | review | stanlauck, 2026-10-08 | #27 |
 | PG-11 | Theme engine: presets, accent from cover image (auto palette), custom HSL, density; light/dark | TS package | open | | |
 | PG-12 | Report renderer: neutral report JSON → Markdown and PDF (Typst) with optional sections | Rust crate | open | | |
 | PG-13 | GEXF 1.3 writer for typed graphs (node/edge attributes, time slices) | Rust crate | review | stanlauck, 2026-10-07 | #18 |
