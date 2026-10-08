@@ -1,0 +1,43 @@
+{
+  "name": "@divo-playground/pg-09-unicode-corpus",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Synthetic Unicode corpus and logical cursor / line-break checks with paired UTF-16 and UTF-8 offsets",
+  "license": "MIT OR Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=24.18.0"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    },
+    "./corpus": "./corpus/corpus.json",
+    "./corpus-schema": "./corpus/schema.json"
+  },
+  "files": [
+    "dist/src",
+    "dist/examples",
+    "corpus",
+    "README.md",
+    "LICENSE-MIT",
+    "LICENSE-APACHE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node --test tests/unicode.test.mjs tests/corpus.test.mjs tests/cli.test.mjs",
+    "check:corpus": "npm run build && node dist/examples/check.js corpus/corpus.json",
+    "format:check": "prettier --check src examples tests corpus README.md package.json tsconfig.json"
+  },
+  "dependencies": {
+    "@cto.af/linebreak": "4.0.3",
+    "unicode-segmenter": "0.17.3"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.1",
+    "prettier": "3.6.2",
+    "typescript": "5.9.3"
+  }
+}
