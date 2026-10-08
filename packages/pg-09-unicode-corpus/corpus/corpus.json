@@ -1,0 +1,5778 @@
+{
+  "version": 1,
+  "unicodeVersion": "17.0.0",
+  "indexEncodings": [
+    "utf16",
+    "utf8"
+  ],
+  "cursorMode": "logical",
+  "lineBreakMode": "uax14-default",
+  "normalization": "none",
+  "cases": [
+    {
+      "id": "empty",
+      "tags": [
+        "boundary"
+      ],
+      "text": "",
+      "expected": {
+        "graphemeCount": 0,
+        "graphemes": [],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "ascii-space",
+      "tags": [
+        "ascii",
+        "space"
+      ],
+      "text": "A B",
+      "expected": {
+        "graphemeCount": 3,
+        "graphemes": [
+          {
+            "text": "A",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "text": " ",
+            "start": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 2
+            }
+          },
+          {
+            "text": "B",
+            "start": {
+              "utf16": 2,
+              "utf8": 2
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 3
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 2
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 2
+            },
+            "previous": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 3
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 3
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 2
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 2
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 3
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "latin-combining",
+      "tags": [
+        "combining"
+      ],
+      "text": "á̧b",
+      "expected": {
+        "graphemeCount": 2,
+        "graphemes": [
+          {
+            "text": "á̧",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          },
+          {
+            "text": "b",
+            "start": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "end": {
+              "utf16": 4,
+              "utf8": 6
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 3
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 4,
+              "utf8": 6
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 6
+            },
+            "previous": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 6
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "leading-combining",
+      "tags": [
+        "combining"
+      ],
+      "text": "̧́x",
+      "expected": {
+        "graphemeCount": 2,
+        "graphemes": [
+          {
+            "text": "̧́",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "text": "x",
+            "start": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "precomposed",
+      "tags": [
+        "normalization"
+      ],
+      "text": "é",
+      "expected": {
+        "graphemeCount": 1,
+        "graphemes": [
+          {
+            "text": "é",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 1,
+              "utf8": 2
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 1,
+              "utf8": 2
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "decomposed",
+      "tags": [
+        "normalization"
+      ],
+      "text": "é",
+      "expected": {
+        "graphemeCount": 1,
+        "graphemes": [
+          {
+            "text": "é",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 3
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 2,
+              "utf8": 3
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 3
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 3
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 3
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "crlf-cr-lf",
+      "tags": [
+        "mandatory",
+        "crlf"
+      ],
+      "text": "A\r\nB\nC\rD",
+      "expected": {
+        "graphemeCount": 7,
+        "graphemes": [
+          {
+            "text": "A",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "text": "\r\n",
+            "start": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 3
+            }
+          },
+          {
+            "text": "B",
+            "start": {
+              "utf16": 3,
+              "utf8": 3
+            },
+            "end": {
+              "utf16": 4,
+              "utf8": 4
+            }
+          },
+          {
+            "text": "\n",
+            "start": {
+              "utf16": 4,
+              "utf8": 4
+            },
+            "end": {
+              "utf16": 5,
+              "utf8": 5
+            }
+          },
+          {
+            "text": "C",
+            "start": {
+              "utf16": 5,
+              "utf8": 5
+            },
+            "end": {
+              "utf16": 6,
+              "utf8": 6
+            }
+          },
+          {
+            "text": "\r",
+            "start": {
+              "utf16": 6,
+              "utf8": 6
+            },
+            "end": {
+              "utf16": 7,
+              "utf8": 7
+            }
+          },
+          {
+            "text": "D",
+            "start": {
+              "utf16": 7,
+              "utf8": 7
+            },
+            "end": {
+              "utf16": 8,
+              "utf8": 8
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 3
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 2
+            },
+            "previous": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 3
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 3
+            },
+            "previous": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "next": {
+              "utf16": 4,
+              "utf8": 4
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 4
+            },
+            "previous": {
+              "utf16": 3,
+              "utf8": 3
+            },
+            "next": {
+              "utf16": 5,
+              "utf8": 5
+            }
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 5
+            },
+            "previous": {
+              "utf16": 4,
+              "utf8": 4
+            },
+            "next": {
+              "utf16": 6,
+              "utf8": 6
+            }
+          },
+          {
+            "at": {
+              "utf16": 6,
+              "utf8": 6
+            },
+            "previous": {
+              "utf16": 5,
+              "utf8": 5
+            },
+            "next": {
+              "utf16": 7,
+              "utf8": 7
+            }
+          },
+          {
+            "at": {
+              "utf16": 7,
+              "utf8": 7
+            },
+            "previous": {
+              "utf16": 6,
+              "utf8": 6
+            },
+            "next": {
+              "utf16": 8,
+              "utf8": 8
+            }
+          },
+          {
+            "at": {
+              "utf16": 8,
+              "utf8": 8
+            },
+            "previous": {
+              "utf16": 7,
+              "utf8": 7
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 3
+            },
+            "required": true
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 5
+            },
+            "required": true
+          },
+          {
+            "at": {
+              "utf16": 7,
+              "utf8": 7
+            },
+            "required": true
+          },
+          {
+            "at": {
+              "utf16": 8,
+              "utf8": 8
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "vertical-tab",
+      "tags": [
+        "mandatory"
+      ],
+      "text": "A\u000bB",
+      "expected": {
+        "graphemeCount": 3,
+        "graphemes": [
+          {
+            "text": "A",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "text": "\u000b",
+            "start": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 2
+            }
+          },
+          {
+            "text": "B",
+            "start": {
+              "utf16": 2,
+              "utf8": 2
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 3
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 2
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 2
+            },
+            "previous": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 3
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 3
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 2
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 2
+            },
+            "required": true
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 3
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "form-feed",
+      "tags": [
+        "mandatory"
+      ],
+      "text": "A\fB",
+      "expected": {
+        "graphemeCount": 3,
+        "graphemes": [
+          {
+            "text": "A",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "text": "\f",
+            "start": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 2
+            }
+          },
+          {
+            "text": "B",
+            "start": {
+              "utf16": 2,
+              "utf8": 2
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 3
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 2
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 2
+            },
+            "previous": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 3
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 3
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 2
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 2
+            },
+            "required": true
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 3
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "next-line",
+      "tags": [
+        "mandatory"
+      ],
+      "text": "AB",
+      "expected": {
+        "graphemeCount": 3,
+        "graphemes": [
+          {
+            "text": "A",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "text": "",
+            "start": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 3
+            }
+          },
+          {
+            "text": "B",
+            "start": {
+              "utf16": 2,
+              "utf8": 3
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 4
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 3
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 3
+            },
+            "previous": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 4
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 4
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 3
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 3
+            },
+            "required": true
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 4
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "line-paragraph-separators",
+      "tags": [
+        "mandatory"
+      ],
+      "text": "A B C",
+      "expected": {
+        "graphemeCount": 5,
+        "graphemes": [
+          {
+            "text": "A",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "text": " ",
+            "start": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "text": "B",
+            "start": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          },
+          {
+            "text": " ",
+            "start": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "end": {
+              "utf16": 4,
+              "utf8": 8
+            }
+          },
+          {
+            "text": "C",
+            "start": {
+              "utf16": 4,
+              "utf8": 8
+            },
+            "end": {
+              "utf16": 5,
+              "utf8": 9
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "previous": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "next": {
+              "utf16": 4,
+              "utf8": 8
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 8
+            },
+            "previous": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "next": {
+              "utf16": 5,
+              "utf8": 9
+            }
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 9
+            },
+            "previous": {
+              "utf16": 4,
+              "utf8": 8
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "required": true
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 8
+            },
+            "required": true
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 9
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "tab",
+      "tags": [
+        "space"
+      ],
+      "text": "A\tB",
+      "expected": {
+        "graphemeCount": 3,
+        "graphemes": [
+          {
+            "text": "A",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "text": "\t",
+            "start": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 2
+            }
+          },
+          {
+            "text": "B",
+            "start": {
+              "utf16": 2,
+              "utf8": 2
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 3
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 2
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 2
+            },
+            "previous": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 3
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 3
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 2
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 2
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 3
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "multiple-spaces",
+      "tags": [
+        "space"
+      ],
+      "text": "A  B",
+      "expected": {
+        "graphemeCount": 4,
+        "graphemes": [
+          {
+            "text": "A",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "text": " ",
+            "start": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 2
+            }
+          },
+          {
+            "text": " ",
+            "start": {
+              "utf16": 2,
+              "utf8": 2
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 3
+            }
+          },
+          {
+            "text": "B",
+            "start": {
+              "utf16": 3,
+              "utf8": 3
+            },
+            "end": {
+              "utf16": 4,
+              "utf8": 4
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 2
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 2
+            },
+            "previous": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 3
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 3
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 2
+            },
+            "next": {
+              "utf16": 4,
+              "utf8": 4
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 4
+            },
+            "previous": {
+              "utf16": 3,
+              "utf8": 3
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 3
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 4
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "zero-width-space",
+      "tags": [
+        "space",
+        "invisible"
+      ],
+      "text": "A​B",
+      "expected": {
+        "graphemeCount": 3,
+        "graphemes": [
+          {
+            "text": "A",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "text": "​",
+            "start": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "text": "B",
+            "start": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "previous": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "word-joiner",
+      "tags": [
+        "no-break",
+        "invisible"
+      ],
+      "text": "A⁠B",
+      "expected": {
+        "graphemeCount": 3,
+        "graphemes": [
+          {
+            "text": "A",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "text": "⁠",
+            "start": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "text": "B",
+            "start": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "previous": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "nbsp",
+      "tags": [
+        "no-break",
+        "russian",
+        "nbsp"
+      ],
+      "text": "А Б",
+      "expected": {
+        "graphemeCount": 3,
+        "graphemes": [
+          {
+            "text": "А",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 1,
+              "utf8": 2
+            }
+          },
+          {
+            "text": " ",
+            "start": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "text": "Б",
+            "start": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 6
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 1,
+              "utf8": 2
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "previous": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 6
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 6
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 6
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "narrow-nbsp",
+      "tags": [
+        "no-break",
+        "russian",
+        "narrow-nbsp"
+      ],
+      "text": "10 м",
+      "expected": {
+        "graphemeCount": 4,
+        "graphemes": [
+          {
+            "text": "1",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "text": "0",
+            "start": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 2
+            }
+          },
+          {
+            "text": " ",
+            "start": {
+              "utf16": 2,
+              "utf8": 2
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          },
+          {
+            "text": "м",
+            "start": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "end": {
+              "utf16": 4,
+              "utf8": 7
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 2
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 2
+            },
+            "previous": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 2
+            },
+            "next": {
+              "utf16": 4,
+              "utf8": 7
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 7
+            },
+            "previous": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 7
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "soft-hyphen",
+      "tags": [
+        "russian",
+        "soft-hyphen",
+        "invisible"
+      ],
+      "text": "по­ле",
+      "expected": {
+        "graphemeCount": 5,
+        "graphemes": [
+          {
+            "text": "п",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 1,
+              "utf8": 2
+            }
+          },
+          {
+            "text": "о",
+            "start": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "text": "­",
+            "start": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 6
+            }
+          },
+          {
+            "text": "л",
+            "start": {
+              "utf16": 3,
+              "utf8": 6
+            },
+            "end": {
+              "utf16": 4,
+              "utf8": 8
+            }
+          },
+          {
+            "text": "е",
+            "start": {
+              "utf16": 4,
+              "utf8": 8
+            },
+            "end": {
+              "utf16": 5,
+              "utf8": 10
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 1,
+              "utf8": 2
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "previous": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 6
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 6
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "next": {
+              "utf16": 4,
+              "utf8": 8
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 8
+            },
+            "previous": {
+              "utf16": 3,
+              "utf8": 6
+            },
+            "next": {
+              "utf16": 5,
+              "utf8": 10
+            }
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 10
+            },
+            "previous": {
+              "utf16": 4,
+              "utf8": 8
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 6
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 10
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "russian-hyphen",
+      "tags": [
+        "russian",
+        "hyphen"
+      ],
+      "text": "альфа-бета",
+      "expected": {
+        "graphemeCount": 10,
+        "graphemes": [
+          {
+            "text": "а",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 1,
+              "utf8": 2
+            }
+          },
+          {
+            "text": "л",
+            "start": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "text": "ь",
+            "start": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 6
+            }
+          },
+          {
+            "text": "ф",
+            "start": {
+              "utf16": 3,
+              "utf8": 6
+            },
+            "end": {
+              "utf16": 4,
+              "utf8": 8
+            }
+          },
+          {
+            "text": "а",
+            "start": {
+              "utf16": 4,
+              "utf8": 8
+            },
+            "end": {
+              "utf16": 5,
+              "utf8": 10
+            }
+          },
+          {
+            "text": "-",
+            "start": {
+              "utf16": 5,
+              "utf8": 10
+            },
+            "end": {
+              "utf16": 6,
+              "utf8": 11
+            }
+          },
+          {
+            "text": "б",
+            "start": {
+              "utf16": 6,
+              "utf8": 11
+            },
+            "end": {
+              "utf16": 7,
+              "utf8": 13
+            }
+          },
+          {
+            "text": "е",
+            "start": {
+              "utf16": 7,
+              "utf8": 13
+            },
+            "end": {
+              "utf16": 8,
+              "utf8": 15
+            }
+          },
+          {
+            "text": "т",
+            "start": {
+              "utf16": 8,
+              "utf8": 15
+            },
+            "end": {
+              "utf16": 9,
+              "utf8": 17
+            }
+          },
+          {
+            "text": "а",
+            "start": {
+              "utf16": 9,
+              "utf8": 17
+            },
+            "end": {
+              "utf16": 10,
+              "utf8": 19
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 1,
+              "utf8": 2
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "previous": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 6
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 6
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "next": {
+              "utf16": 4,
+              "utf8": 8
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 8
+            },
+            "previous": {
+              "utf16": 3,
+              "utf8": 6
+            },
+            "next": {
+              "utf16": 5,
+              "utf8": 10
+            }
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 10
+            },
+            "previous": {
+              "utf16": 4,
+              "utf8": 8
+            },
+            "next": {
+              "utf16": 6,
+              "utf8": 11
+            }
+          },
+          {
+            "at": {
+              "utf16": 6,
+              "utf8": 11
+            },
+            "previous": {
+              "utf16": 5,
+              "utf8": 10
+            },
+            "next": {
+              "utf16": 7,
+              "utf8": 13
+            }
+          },
+          {
+            "at": {
+              "utf16": 7,
+              "utf8": 13
+            },
+            "previous": {
+              "utf16": 6,
+              "utf8": 11
+            },
+            "next": {
+              "utf16": 8,
+              "utf8": 15
+            }
+          },
+          {
+            "at": {
+              "utf16": 8,
+              "utf8": 15
+            },
+            "previous": {
+              "utf16": 7,
+              "utf8": 13
+            },
+            "next": {
+              "utf16": 9,
+              "utf8": 17
+            }
+          },
+          {
+            "at": {
+              "utf16": 9,
+              "utf8": 17
+            },
+            "previous": {
+              "utf16": 8,
+              "utf8": 15
+            },
+            "next": {
+              "utf16": 10,
+              "utf8": 19
+            }
+          },
+          {
+            "at": {
+              "utf16": 10,
+              "utf8": 19
+            },
+            "previous": {
+              "utf16": 9,
+              "utf8": 17
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 6,
+              "utf8": 11
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 10,
+              "utf8": 19
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "nonbreaking-hyphen",
+      "tags": [
+        "russian",
+        "hyphen",
+        "no-break"
+      ],
+      "text": "а‑б",
+      "expected": {
+        "graphemeCount": 3,
+        "graphemes": [
+          {
+            "text": "а",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 1,
+              "utf8": 2
+            }
+          },
+          {
+            "text": "‑",
+            "start": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 5
+            }
+          },
+          {
+            "text": "б",
+            "start": {
+              "utf16": 2,
+              "utf8": 5
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 7
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 1,
+              "utf8": 2
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 5
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 5
+            },
+            "previous": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 7
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 7
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 5
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 7
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "russian-spaced-em-dash",
+      "tags": [
+        "russian",
+        "dash"
+      ],
+      "text": "А — Б",
+      "expected": {
+        "graphemeCount": 5,
+        "graphemes": [
+          {
+            "text": "А",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 1,
+              "utf8": 2
+            }
+          },
+          {
+            "text": " ",
+            "start": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 3
+            }
+          },
+          {
+            "text": "—",
+            "start": {
+              "utf16": 2,
+              "utf8": 3
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 6
+            }
+          },
+          {
+            "text": " ",
+            "start": {
+              "utf16": 3,
+              "utf8": 6
+            },
+            "end": {
+              "utf16": 4,
+              "utf8": 7
+            }
+          },
+          {
+            "text": "Б",
+            "start": {
+              "utf16": 4,
+              "utf8": 7
+            },
+            "end": {
+              "utf16": 5,
+              "utf8": 9
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 1,
+              "utf8": 2
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 3
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 3
+            },
+            "previous": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 6
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 6
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 3
+            },
+            "next": {
+              "utf16": 4,
+              "utf8": 7
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 7
+            },
+            "previous": {
+              "utf16": 3,
+              "utf8": 6
+            },
+            "next": {
+              "utf16": 5,
+              "utf8": 9
+            }
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 9
+            },
+            "previous": {
+              "utf16": 4,
+              "utf8": 7
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 3
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 7
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 9
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "russian-em-dash",
+      "tags": [
+        "russian",
+        "dash"
+      ],
+      "text": "А—Б",
+      "expected": {
+        "graphemeCount": 3,
+        "graphemes": [
+          {
+            "text": "А",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 1,
+              "utf8": 2
+            }
+          },
+          {
+            "text": "—",
+            "start": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 5
+            }
+          },
+          {
+            "text": "Б",
+            "start": {
+              "utf16": 2,
+              "utf8": 5
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 7
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 1,
+              "utf8": 2
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 5
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 5
+            },
+            "previous": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 7
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 7
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 5
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 5
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 7
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "russian-en-dash",
+      "tags": [
+        "russian",
+        "dash"
+      ],
+      "text": "А–Б",
+      "expected": {
+        "graphemeCount": 3,
+        "graphemes": [
+          {
+            "text": "А",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 1,
+              "utf8": 2
+            }
+          },
+          {
+            "text": "–",
+            "start": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 5
+            }
+          },
+          {
+            "text": "Б",
+            "start": {
+              "utf16": 2,
+              "utf8": 5
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 7
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 1,
+              "utf8": 2
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 5
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 5
+            },
+            "previous": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 7
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 7
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 5
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 5
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 7
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "paired-em-dash",
+      "tags": [
+        "russian",
+        "dash"
+      ],
+      "text": "А——Б",
+      "expected": {
+        "graphemeCount": 4,
+        "graphemes": [
+          {
+            "text": "А",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 1,
+              "utf8": 2
+            }
+          },
+          {
+            "text": "—",
+            "start": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 5
+            }
+          },
+          {
+            "text": "—",
+            "start": {
+              "utf16": 2,
+              "utf8": 5
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 8
+            }
+          },
+          {
+            "text": "Б",
+            "start": {
+              "utf16": 3,
+              "utf8": 8
+            },
+            "end": {
+              "utf16": 4,
+              "utf8": 10
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 1,
+              "utf8": 2
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 5
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 5
+            },
+            "previous": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 8
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 8
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 5
+            },
+            "next": {
+              "utf16": 4,
+              "utf8": 10
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 10
+            },
+            "previous": {
+              "utf16": 3,
+              "utf8": 8
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 8
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 10
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "cjk-punctuation",
+      "tags": [
+        "cjk",
+        "punctuation"
+      ],
+      "text": "山水。花",
+      "expected": {
+        "graphemeCount": 4,
+        "graphemes": [
+          {
+            "text": "山",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 1,
+              "utf8": 3
+            }
+          },
+          {
+            "text": "水",
+            "start": {
+              "utf16": 1,
+              "utf8": 3
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 6
+            }
+          },
+          {
+            "text": "。",
+            "start": {
+              "utf16": 2,
+              "utf8": 6
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 9
+            }
+          },
+          {
+            "text": "花",
+            "start": {
+              "utf16": 3,
+              "utf8": 9
+            },
+            "end": {
+              "utf16": 4,
+              "utf8": 12
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 1,
+              "utf8": 3
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 3
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 6
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 6
+            },
+            "previous": {
+              "utf16": 1,
+              "utf8": 3
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 9
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 9
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 6
+            },
+            "next": {
+              "utf16": 4,
+              "utf8": 12
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 12
+            },
+            "previous": {
+              "utf16": 3,
+              "utf8": 9
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 3
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 9
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 12
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "japanese-brackets",
+      "tags": [
+        "cjk",
+        "punctuation"
+      ],
+      "text": "「あい」。う",
+      "expected": {
+        "graphemeCount": 6,
+        "graphemes": [
+          {
+            "text": "「",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 1,
+              "utf8": 3
+            }
+          },
+          {
+            "text": "あ",
+            "start": {
+              "utf16": 1,
+              "utf8": 3
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 6
+            }
+          },
+          {
+            "text": "い",
+            "start": {
+              "utf16": 2,
+              "utf8": 6
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 9
+            }
+          },
+          {
+            "text": "」",
+            "start": {
+              "utf16": 3,
+              "utf8": 9
+            },
+            "end": {
+              "utf16": 4,
+              "utf8": 12
+            }
+          },
+          {
+            "text": "。",
+            "start": {
+              "utf16": 4,
+              "utf8": 12
+            },
+            "end": {
+              "utf16": 5,
+              "utf8": 15
+            }
+          },
+          {
+            "text": "う",
+            "start": {
+              "utf16": 5,
+              "utf8": 15
+            },
+            "end": {
+              "utf16": 6,
+              "utf8": 18
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 1,
+              "utf8": 3
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 3
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 6
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 6
+            },
+            "previous": {
+              "utf16": 1,
+              "utf8": 3
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 9
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 9
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 6
+            },
+            "next": {
+              "utf16": 4,
+              "utf8": 12
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 12
+            },
+            "previous": {
+              "utf16": 3,
+              "utf8": 9
+            },
+            "next": {
+              "utf16": 5,
+              "utf8": 15
+            }
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 15
+            },
+            "previous": {
+              "utf16": 4,
+              "utf8": 12
+            },
+            "next": {
+              "utf16": 6,
+              "utf8": 18
+            }
+          },
+          {
+            "at": {
+              "utf16": 6,
+              "utf8": 18
+            },
+            "previous": {
+              "utf16": 5,
+              "utf8": 15
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 6
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 15
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 6,
+              "utf8": 18
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "hangul-jamo",
+      "tags": [
+        "cjk",
+        "hangul"
+      ],
+      "text": "각나",
+      "expected": {
+        "graphemeCount": 2,
+        "graphemes": [
+          {
+            "text": "각",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 9
+            }
+          },
+          {
+            "text": "나",
+            "start": {
+              "utf16": 3,
+              "utf8": 9
+            },
+            "end": {
+              "utf16": 5,
+              "utf8": 15
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 3,
+              "utf8": 9
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 3
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 9
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 6
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 9
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 9
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 5,
+              "utf8": 15
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 12
+            },
+            "previous": {
+              "utf16": 3,
+              "utf8": 9
+            },
+            "next": {
+              "utf16": 5,
+              "utf8": 15
+            }
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 15
+            },
+            "previous": {
+              "utf16": 3,
+              "utf8": 9
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 9
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 15
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "devanagari-matra",
+      "tags": [
+        "devanagari",
+        "combining"
+      ],
+      "text": "कि ना",
+      "expected": {
+        "graphemeCount": 3,
+        "graphemes": [
+          {
+            "text": "कि",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 6
+            }
+          },
+          {
+            "text": " ",
+            "start": {
+              "utf16": 2,
+              "utf8": 6
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 7
+            }
+          },
+          {
+            "text": "ना",
+            "start": {
+              "utf16": 3,
+              "utf8": 7
+            },
+            "end": {
+              "utf16": 5,
+              "utf8": 13
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 2,
+              "utf8": 6
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 3
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 6
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 6
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 7
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 7
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 6
+            },
+            "next": {
+              "utf16": 5,
+              "utf8": 13
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 10
+            },
+            "previous": {
+              "utf16": 3,
+              "utf8": 7
+            },
+            "next": {
+              "utf16": 5,
+              "utf8": 13
+            }
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 13
+            },
+            "previous": {
+              "utf16": 3,
+              "utf8": 7
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 7
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 13
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "devanagari-conjunct",
+      "tags": [
+        "devanagari",
+        "conjunct"
+      ],
+      "text": "क्षि ग",
+      "expected": {
+        "graphemeCount": 3,
+        "graphemes": [
+          {
+            "text": "क्षि",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 4,
+              "utf8": 12
+            }
+          },
+          {
+            "text": " ",
+            "start": {
+              "utf16": 4,
+              "utf8": 12
+            },
+            "end": {
+              "utf16": 5,
+              "utf8": 13
+            }
+          },
+          {
+            "text": "ग",
+            "start": {
+              "utf16": 5,
+              "utf8": 13
+            },
+            "end": {
+              "utf16": 6,
+              "utf8": 16
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 4,
+              "utf8": 12
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 3
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 4,
+              "utf8": 12
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 6
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 4,
+              "utf8": 12
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 9
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 4,
+              "utf8": 12
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 12
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 5,
+              "utf8": 13
+            }
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 13
+            },
+            "previous": {
+              "utf16": 4,
+              "utf8": 12
+            },
+            "next": {
+              "utf16": 6,
+              "utf8": 16
+            }
+          },
+          {
+            "at": {
+              "utf16": 6,
+              "utf8": 16
+            },
+            "previous": {
+              "utf16": 5,
+              "utf8": 13
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 13
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 6,
+              "utf8": 16
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "devanagari-zwj-conjunct",
+      "tags": [
+        "devanagari",
+        "conjunct",
+        "zwj"
+      ],
+      "text": "क्‍ष ग",
+      "expected": {
+        "graphemeCount": 3,
+        "graphemes": [
+          {
+            "text": "क्‍ष",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 4,
+              "utf8": 12
+            }
+          },
+          {
+            "text": " ",
+            "start": {
+              "utf16": 4,
+              "utf8": 12
+            },
+            "end": {
+              "utf16": 5,
+              "utf8": 13
+            }
+          },
+          {
+            "text": "ग",
+            "start": {
+              "utf16": 5,
+              "utf8": 13
+            },
+            "end": {
+              "utf16": 6,
+              "utf8": 16
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 4,
+              "utf8": 12
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 3
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 4,
+              "utf8": 12
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 6
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 4,
+              "utf8": 12
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 9
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 4,
+              "utf8": 12
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 12
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 5,
+              "utf8": 13
+            }
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 13
+            },
+            "previous": {
+              "utf16": 4,
+              "utf8": 12
+            },
+            "next": {
+              "utf16": 6,
+              "utf8": 16
+            }
+          },
+          {
+            "at": {
+              "utf16": 6,
+              "utf8": 16
+            },
+            "previous": {
+              "utf16": 5,
+              "utf8": 13
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 13
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 6,
+              "utf8": 16
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "emoji-supplementary",
+      "tags": [
+        "emoji",
+        "supplementary"
+      ],
+      "text": "😀 X",
+      "expected": {
+        "graphemeCount": 3,
+        "graphemes": [
+          {
+            "text": "😀",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "text": " ",
+            "start": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          },
+          {
+            "text": "X",
+            "start": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "end": {
+              "utf16": 4,
+              "utf8": 6
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "next": {
+              "utf16": 4,
+              "utf8": 6
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 6
+            },
+            "previous": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 6
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "emoji-modifier",
+      "tags": [
+        "emoji",
+        "modifier"
+      ],
+      "text": "👍🏽X",
+      "expected": {
+        "graphemeCount": 2,
+        "graphemes": [
+          {
+            "text": "👍🏽",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 4,
+              "utf8": 8
+            }
+          },
+          {
+            "text": "X",
+            "start": {
+              "utf16": 4,
+              "utf8": 8
+            },
+            "end": {
+              "utf16": 5,
+              "utf8": 9
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 4,
+              "utf8": 8
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 4,
+              "utf8": 8
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 8
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 5,
+              "utf8": 9
+            }
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 9
+            },
+            "previous": {
+              "utf16": 4,
+              "utf8": 8
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 8
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 9
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "emoji-family",
+      "tags": [
+        "emoji",
+        "zwj"
+      ],
+      "text": "👨‍👩‍👧‍👦 X",
+      "expected": {
+        "graphemeCount": 3,
+        "graphemes": [
+          {
+            "text": "👨‍👩‍👧‍👦",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 11,
+              "utf8": 25
+            }
+          },
+          {
+            "text": " ",
+            "start": {
+              "utf16": 11,
+              "utf8": 25
+            },
+            "end": {
+              "utf16": 12,
+              "utf8": 26
+            }
+          },
+          {
+            "text": "X",
+            "start": {
+              "utf16": 12,
+              "utf8": 26
+            },
+            "end": {
+              "utf16": 13,
+              "utf8": 27
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 11,
+              "utf8": 25
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 11,
+              "utf8": 25
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 7
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 11,
+              "utf8": 25
+            }
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 11
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 11,
+              "utf8": 25
+            }
+          },
+          {
+            "at": {
+              "utf16": 6,
+              "utf8": 14
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 11,
+              "utf8": 25
+            }
+          },
+          {
+            "at": {
+              "utf16": 8,
+              "utf8": 18
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 11,
+              "utf8": 25
+            }
+          },
+          {
+            "at": {
+              "utf16": 9,
+              "utf8": 21
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 11,
+              "utf8": 25
+            }
+          },
+          {
+            "at": {
+              "utf16": 11,
+              "utf8": 25
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 12,
+              "utf8": 26
+            }
+          },
+          {
+            "at": {
+              "utf16": 12,
+              "utf8": 26
+            },
+            "previous": {
+              "utf16": 11,
+              "utf8": 25
+            },
+            "next": {
+              "utf16": 13,
+              "utf8": 27
+            }
+          },
+          {
+            "at": {
+              "utf16": 13,
+              "utf8": 27
+            },
+            "previous": {
+              "utf16": 12,
+              "utf8": 26
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 12,
+              "utf8": 26
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 13,
+              "utf8": 27
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "emoji-professions",
+      "tags": [
+        "emoji",
+        "zwj",
+        "modifier"
+      ],
+      "text": "👩🏽‍🚀👨‍💻",
+      "expected": {
+        "graphemeCount": 2,
+        "graphemes": [
+          {
+            "text": "👩🏽‍🚀",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 7,
+              "utf8": 15
+            }
+          },
+          {
+            "text": "👨‍💻",
+            "start": {
+              "utf16": 7,
+              "utf8": 15
+            },
+            "end": {
+              "utf16": 12,
+              "utf8": 26
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 7,
+              "utf8": 15
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 7,
+              "utf8": 15
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 8
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 7,
+              "utf8": 15
+            }
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 11
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 7,
+              "utf8": 15
+            }
+          },
+          {
+            "at": {
+              "utf16": 7,
+              "utf8": 15
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 12,
+              "utf8": 26
+            }
+          },
+          {
+            "at": {
+              "utf16": 9,
+              "utf8": 19
+            },
+            "previous": {
+              "utf16": 7,
+              "utf8": 15
+            },
+            "next": {
+              "utf16": 12,
+              "utf8": 26
+            }
+          },
+          {
+            "at": {
+              "utf16": 10,
+              "utf8": 22
+            },
+            "previous": {
+              "utf16": 7,
+              "utf8": 15
+            },
+            "next": {
+              "utf16": 12,
+              "utf8": 26
+            }
+          },
+          {
+            "at": {
+              "utf16": 12,
+              "utf8": 26
+            },
+            "previous": {
+              "utf16": 7,
+              "utf8": 15
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 7,
+              "utf8": 15
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 12,
+              "utf8": 26
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "regional-indicator-parity",
+      "tags": [
+        "emoji",
+        "regional-indicator"
+      ],
+      "text": "🇦🇧🇨🇩🇪",
+      "expected": {
+        "graphemeCount": 3,
+        "graphemes": [
+          {
+            "text": "🇦🇧",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 4,
+              "utf8": 8
+            }
+          },
+          {
+            "text": "🇨🇩",
+            "start": {
+              "utf16": 4,
+              "utf8": 8
+            },
+            "end": {
+              "utf16": 8,
+              "utf8": 16
+            }
+          },
+          {
+            "text": "🇪",
+            "start": {
+              "utf16": 8,
+              "utf8": 16
+            },
+            "end": {
+              "utf16": 10,
+              "utf8": 20
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 4,
+              "utf8": 8
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 4,
+              "utf8": 8
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 8
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 8,
+              "utf8": 16
+            }
+          },
+          {
+            "at": {
+              "utf16": 6,
+              "utf8": 12
+            },
+            "previous": {
+              "utf16": 4,
+              "utf8": 8
+            },
+            "next": {
+              "utf16": 8,
+              "utf8": 16
+            }
+          },
+          {
+            "at": {
+              "utf16": 8,
+              "utf8": 16
+            },
+            "previous": {
+              "utf16": 4,
+              "utf8": 8
+            },
+            "next": {
+              "utf16": 10,
+              "utf8": 20
+            }
+          },
+          {
+            "at": {
+              "utf16": 10,
+              "utf8": 20
+            },
+            "previous": {
+              "utf16": 8,
+              "utf8": 16
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 8
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 8,
+              "utf8": 16
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 10,
+              "utf8": 20
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "emoji-keycaps",
+      "tags": [
+        "emoji",
+        "combining",
+        "keycap"
+      ],
+      "text": "1️⃣2️⃣",
+      "expected": {
+        "graphemeCount": 2,
+        "graphemes": [
+          {
+            "text": "1️⃣",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 7
+            }
+          },
+          {
+            "text": "2️⃣",
+            "start": {
+              "utf16": 3,
+              "utf8": 7
+            },
+            "end": {
+              "utf16": 6,
+              "utf8": 14
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 3,
+              "utf8": 7
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 7
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 7
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 7
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 6,
+              "utf8": 14
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 8
+            },
+            "previous": {
+              "utf16": 3,
+              "utf8": 7
+            },
+            "next": {
+              "utf16": 6,
+              "utf8": 14
+            }
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 11
+            },
+            "previous": {
+              "utf16": 3,
+              "utf8": 7
+            },
+            "next": {
+              "utf16": 6,
+              "utf8": 14
+            }
+          },
+          {
+            "at": {
+              "utf16": 6,
+              "utf8": 14
+            },
+            "previous": {
+              "utf16": 3,
+              "utf8": 7
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 6,
+              "utf8": 14
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "emoji-tags",
+      "tags": [
+        "emoji",
+        "supplementary",
+        "tag-sequence"
+      ],
+      "text": "🏴󠁡󠁢󠁿X",
+      "expected": {
+        "graphemeCount": 2,
+        "graphemes": [
+          {
+            "text": "🏴󠁡󠁢󠁿",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 8,
+              "utf8": 16
+            }
+          },
+          {
+            "text": "X",
+            "start": {
+              "utf16": 8,
+              "utf8": 16
+            },
+            "end": {
+              "utf16": 9,
+              "utf8": 17
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 8,
+              "utf8": 16
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 8,
+              "utf8": 16
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 8
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 8,
+              "utf8": 16
+            }
+          },
+          {
+            "at": {
+              "utf16": 6,
+              "utf8": 12
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 8,
+              "utf8": 16
+            }
+          },
+          {
+            "at": {
+              "utf16": 8,
+              "utf8": 16
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 9,
+              "utf8": 17
+            }
+          },
+          {
+            "at": {
+              "utf16": 9,
+              "utf8": 17
+            },
+            "previous": {
+              "utf16": 8,
+              "utf8": 16
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 8,
+              "utf8": 16
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 9,
+              "utf8": 17
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "emoji-variation-selector",
+      "tags": [
+        "emoji",
+        "variation-selector"
+      ],
+      "text": "✈️X",
+      "expected": {
+        "graphemeCount": 2,
+        "graphemes": [
+          {
+            "text": "✈️",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 6
+            }
+          },
+          {
+            "text": "X",
+            "start": {
+              "utf16": 2,
+              "utf8": 6
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 7
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 2,
+              "utf8": 6
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 3
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 6
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 6
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 7
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 7
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 6
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 6
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 7
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "supplementary-cjk",
+      "tags": [
+        "cjk",
+        "supplementary"
+      ],
+      "text": "𠀀中",
+      "expected": {
+        "graphemeCount": 2,
+        "graphemes": [
+          {
+            "text": "𠀀",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "text": "中",
+            "start": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 7
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 7
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 7
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 7
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "supplementary-combining",
+      "tags": [
+        "combining",
+        "supplementary"
+      ],
+      "text": "A𝅥B",
+      "expected": {
+        "graphemeCount": 2,
+        "graphemes": [
+          {
+            "text": "A𝅥",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          },
+          {
+            "text": "B",
+            "start": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "end": {
+              "utf16": 4,
+              "utf8": 6
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 4,
+              "utf8": 6
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 6
+            },
+            "previous": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 6
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "space-combining-rule-boundary",
+      "tags": [
+        "combining",
+        "uax14-vs-uax29"
+      ],
+      "text": " ́A",
+      "expected": {
+        "graphemeCount": 2,
+        "graphemes": [
+          {
+            "text": " ́",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 3
+            }
+          },
+          {
+            "text": "A",
+            "start": {
+              "utf16": 2,
+              "utf8": 3
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 4
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 2,
+              "utf8": 3
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 3
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 3
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 4
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 4
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 3
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 4
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "embedded-bom-word-joiner",
+      "tags": [
+        "no-break",
+        "invisible",
+        "normalization"
+      ],
+      "text": "A﻿B",
+      "expected": {
+        "graphemeCount": 3,
+        "graphemes": [
+          {
+            "text": "A",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "text": "﻿",
+            "start": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "text": "B",
+            "start": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 1,
+              "utf8": 1
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "previous": {
+              "utf16": 1,
+              "utf8": 1
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "arabic-logical-only",
+      "tags": [
+        "rtl",
+        "arabic",
+        "combining"
+      ],
+      "text": "اَ ب",
+      "deferred": [
+        "visual_cursor",
+        "bidi_reordering"
+      ],
+      "expected": {
+        "graphemeCount": 3,
+        "graphemes": [
+          {
+            "text": "اَ",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "text": " ",
+            "start": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          },
+          {
+            "text": "ب",
+            "start": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "end": {
+              "utf16": 4,
+              "utf8": 7
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "next": {
+              "utf16": 4,
+              "utf8": 7
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 7
+            },
+            "previous": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 7
+            },
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "hebrew-mixed-logical-only",
+      "tags": [
+        "rtl",
+        "hebrew",
+        "combining"
+      ],
+      "text": "אְ B1",
+      "deferred": [
+        "visual_cursor",
+        "bidi_reordering"
+      ],
+      "expected": {
+        "graphemeCount": 4,
+        "graphemes": [
+          {
+            "text": "אְ",
+            "start": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "end": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "text": " ",
+            "start": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "end": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          },
+          {
+            "text": "B",
+            "start": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "end": {
+              "utf16": 4,
+              "utf8": 6
+            }
+          },
+          {
+            "text": "1",
+            "start": {
+              "utf16": 4,
+              "utf8": 6
+            },
+            "end": {
+              "utf16": 5,
+              "utf8": 7
+            }
+          }
+        ],
+        "cursor": [
+          {
+            "at": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "previous": null,
+            "next": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "at": {
+              "utf16": 1,
+              "utf8": 2
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 2,
+              "utf8": 4
+            }
+          },
+          {
+            "at": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "previous": {
+              "utf16": 0,
+              "utf8": 0
+            },
+            "next": {
+              "utf16": 3,
+              "utf8": 5
+            }
+          },
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "previous": {
+              "utf16": 2,
+              "utf8": 4
+            },
+            "next": {
+              "utf16": 4,
+              "utf8": 6
+            }
+          },
+          {
+            "at": {
+              "utf16": 4,
+              "utf8": 6
+            },
+            "previous": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "next": {
+              "utf16": 5,
+              "utf8": 7
+            }
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 7
+            },
+            "previous": {
+              "utf16": 4,
+              "utf8": 6
+            },
+            "next": null
+          }
+        ],
+        "lineBreaks": [
+          {
+            "at": {
+              "utf16": 3,
+              "utf8": 5
+            },
+            "required": false
+          },
+          {
+            "at": {
+              "utf16": 5,
+              "utf8": 7
+            },
+            "required": true
+          }
+        ]
+      }
+    }
+  ]
+}

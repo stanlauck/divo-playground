@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PG-09 Unicode corpus, version 1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "unicodeVersion",
+    "indexEncodings",
+    "cursorMode",
+    "lineBreakMode",
+    "normalization",
+    "cases"
+  ],
+  "properties": {
+    "version": { "const": 1 },
+    "unicodeVersion": { "const": "17.0.0" },
+    "indexEncodings": { "const": ["utf16", "utf8"] },
+    "cursorMode": { "const": "logical" },
+    "lineBreakMode": { "const": "uax14-default" },
+    "normalization": { "const": "none" },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 256,
+      "items": { "$ref": "#/$defs/case" }
+    }
+  },
+  "$defs": {
+    "token": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_.-]{0,79}$"
+    },
+    "position": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["utf16", "utf8"],
+      "properties": {
+        "utf16": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "utf8": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 }
+      }
+    },
+    "nullablePosition": {
+      "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/position" }]
+    },
+    "grapheme": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "start", "end"],
+      "properties": {
+        "text": { "type": "string", "minLength": 1, "maxLength": 100000 },
+        "start": { "$ref": "#/$defs/position" },
+        "end": { "$ref": "#/$defs/position" }
+      }
+    },
+    "cursor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["at", "previous", "next"],
+      "properties": {
+        "at": { "$ref": "#/$defs/position" },
+        "previous": { "$ref": "#/$defs/nullablePosition" },
+        "next": { "$ref": "#/$defs/nullablePosition" }
+      }
+    },
+    "lineBreak": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["at", "required"],
+      "properties": {
+        "at": { "$ref": "#/$defs/position" },
+        "required": { "type": "boolean" }
+      }
+    },
+    "expected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["graphemeCount", "graphemes", "cursor", "lineBreaks"],
+      "properties": {
+        "graphemeCount": { "type": "integer", "minimum": 0, "maximum": 100000 },
+        "graphemes": {
+          "type": "array",
+          "maxItems": 100000,
+          "items": { "$ref": "#/$defs/grapheme" }
+        },
+        "cursor": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 100001,
+          "items": { "$ref": "#/$defs/cursor" }
+        },
+        "lineBreaks": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 100001,
+          "items": { "$ref": "#/$defs/lineBreak" }
+        }
+      }
+    },
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "tags", "text", "expected"],
+      "properties": {
+        "id": { "$ref": "#/$defs/token" },
+        "tags": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/token" }
+        },
+        "text": { "type": "string", "maxLength": 100000 },
+        "deferred": {
+          "type": "array",
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": { "enum": ["visual_cursor", "bidi_reordering"] }
+        },
+        "expected": { "$ref": "#/$defs/expected" }
+      }
+    }
+  }
+}
