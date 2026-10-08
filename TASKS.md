@@ -5,7 +5,7 @@ Status: `open` → `taken` (handle, date) → `review` (PR #) → `done`.
 | ID | Task | Stack | Status | Taken | PR |
 |---|---|---|---|---|---|
 | PG-01 | Prose importer: FB2 / DOCX / TXT → chapters + paragraphs JSON; streaming; benchmark on 200k words | Rust crate | review | stanlauck, 2026-10-07 | #21 |
-| PG-02 | Screenplay PDF importer: text extraction, element classification (scene heading, action, character, dialogue, parenthetical, transition) + "doubtful lines" report | Rust crate | open | | |
+| PG-02 | Screenplay PDF importer: text extraction, element classification (scene heading, action, character, dialogue, parenthetical, transition) + "doubtful lines" report | Rust crate | review | stanlauck, 2026-10-07 | #23 |
 | PG-03 | articy:draft JSON export reader → neutral dialogue-graph JSON (nodes, choices, conditions, variables) | Rust crate | review | stanlauck, 2026-10-07 | #22 |
 | PG-04 | Godot 4 importer add-on for neutral scene/dialogue JSON (locations, exits, items, dialogue nodes) | GDScript add-on | open | | |
 | PG-05 | Production breakdown export: neutral breakdown JSON → Movie Magic Scheduling–compatible file + CSV schedule | Rust crate | open | | |
