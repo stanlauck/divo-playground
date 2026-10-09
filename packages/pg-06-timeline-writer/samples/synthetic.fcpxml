@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fcpxml>
+<fcpxml version="1.9">
+  <resources>
+    <format id="r1" frameDuration="1001/24000s" width="1280" height="720"/>
+    <asset id="r2" name="Media 1" start="0s" duration="9009/2000s" hasVideo="1" hasAudio="0" videoSources="1" format="r1">
+      <media-rep kind="original-media" src="file:///synthetic/orbit.mov"/>
+    </asset>
+    <asset id="r3" name="Media 2" start="0s" duration="1001/400s" hasVideo="1" hasAudio="0" videoSources="1" format="r1">
+      <media-rep kind="original-media" src="https://example.invalid/synthetic/remote.mov?variant=1&amp;take=2"/>
+    </asset>
+  </resources>
+  <library><event name="Timeline"><project name="Synthetic orbit study">
+    <sequence format="r1" duration="31031/4000s" tcStart="18018/5s" tcFormat="NDF">
+      <spine>
+        <asset-clip name="Wide &lt;orbit&gt; &amp; approach" offset="18018/5s" start="1001/1000s" duration="1001/500s" ref="r2" srcEnable="video"><metadata><md key="shot_list.id" value="shot-001"/></metadata></asset-clip>
+        <gap name="Gap" offset="1802801/500s" start="0s" duration="1001/2000s"/>
+        <asset-clip name="Detail &quot;amber&quot;" offset="1442441/400s" start="3003/1000s" duration="3003/2000s" ref="r2" srcEnable="video"><metadata><md key="shot_list.id" value="שׁוֹט-002"/></metadata></asset-clip>
+        <gap name="Gap" offset="901901/250s" start="0s" duration="1001/4000s"/>
+        <gap name="Placeholder, no media" offset="14431417/4000s" start="0s" duration="1001/1000s"><metadata><md key="shot_list.id" value="कक्षा-003"/></metadata></gap>
+        <asset-clip name="Synthetic remote reference" offset="14435421/4000s" start="0s" duration="1001/400s" ref="r3" srcEnable="video"><metadata><md key="shot_list.id" value="镜头-004"/></metadata></asset-clip>
+      </spine>
+    </sequence>
+  </project></event></library>
+</fcpxml>

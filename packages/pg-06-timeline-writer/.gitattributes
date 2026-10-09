@@ -1,0 +1,4 @@
+# Keep byte-exact synthetic goldens reproducible in Windows checkouts too.
+*.json text eol=lf
+*.otio text eol=lf
+*.fcpxml text eol=lf
