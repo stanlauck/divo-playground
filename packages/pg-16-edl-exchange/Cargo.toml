@@ -1,0 +1,17 @@
+[package]
+name = "edl-exchange"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+license = "MIT OR Apache-2.0"
+description = "Bounded neutral shot-list JSON and cut-only CMX 3600 EDL exchange"
+readme = "README.md"
+repository = "https://github.com/stanlauck/divo-playground"
+publish = false
+
+[dependencies]
+serde = { version = "=1.0.229", features = ["derive"] }
+serde_json = "=1.0.151"
+url = "=2.5.8"
+# Keep URL's Unicode dependency tree compatible with the declared MSRV.
+idna_adapter = "=1.2.0"

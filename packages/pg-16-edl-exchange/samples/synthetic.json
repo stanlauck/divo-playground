@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "title": "Invented cut list",
+  "frame_rate": { "num": 24000, "den": 1001 },
+  "record_start": "01:00:00:00",
+  "resolution": [1280, 720],
+  "shots": [
+    {
+      "id": "synthetic-01",
+      "name": "Invented establishing view",
+      "duration_frames": 48,
+      "media": {
+        "url": "file:///synthetic/camera-a.mov",
+        "reel": "CAMERA_A_LONG",
+        "source_in_frame": 72
+      }
+    },
+    {
+      "id": "synthetic-02",
+      "name": "Invented reverse angle",
+      "duration_frames": 36,
+      "gap_before_frames": 12,
+      "media": { "reel": "CAMB", "source_in_frame": 24 }
+    },
+    {
+      "id": "synthetic-03",
+      "name": "Placeholder",
+      "duration_frames": 24
+    },
+    {
+      "id": "synthetic-04-λ",
+      "duration_frames": 60,
+      "media": {
+        "url": "https://example.invalid/invented.mov",
+        "reel": "R0000001"
+      }
+    }
+  ]
+}
