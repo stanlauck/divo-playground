@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "title": "Invented DF / 测试",
+  "frame_rate": { "num": 30000, "den": 1001 },
+  "timecode_mode": "drop",
+  "record_start": "00:00:59;28",
+  "shots": [
+    {
+      "id": "df-01",
+      "duration_frames": 45,
+      "media": {
+        "url": "file:///synthetic/drop-a.mov",
+        "reel": "INVENTED_LONG_REEL",
+        "source_in_frame": 1785
+      }
+    },
+    {
+      "id": "df-02",
+      "name": "Hour boundary",
+      "duration_frames": 30,
+      "gap_before_frames": 16139,
+      "media": { "reel": "CAMB", "source_in_frame": 107877 }
+    },
+    {
+      "id": "df-placeholder",
+      "duration_frames": 15,
+      "gap_before_frames": 30
+    }
+  ]
+}
