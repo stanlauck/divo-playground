@@ -1,0 +1,230 @@
+{
+  "OTIO_SCHEMA": "Timeline.1",
+  "global_start_time": {
+    "OTIO_SCHEMA": "RationalTime.1",
+    "rate": 23.976023976023978,
+    "value": 86400.0
+  },
+  "metadata": {
+    "shot_list": {
+      "frame_rate": {
+        "den": 1001,
+        "num": 24000
+      },
+      "resolution": [
+        1280,
+        720
+      ],
+      "version": 1
+    }
+  },
+  "name": "Synthetic orbit study",
+  "tracks": {
+    "OTIO_SCHEMA": "Stack.1",
+    "children": [
+      {
+        "OTIO_SCHEMA": "Track.1",
+        "children": [
+          {
+            "OTIO_SCHEMA": "Clip.2",
+            "active_media_reference_key": "DEFAULT_MEDIA",
+            "effects": [],
+            "enabled": true,
+            "markers": [],
+            "media_references": {
+              "DEFAULT_MEDIA": {
+                "OTIO_SCHEMA": "ExternalReference.1",
+                "available_image_bounds": null,
+                "available_range": null,
+                "metadata": {},
+                "name": "",
+                "target_url": "file:///synthetic/orbit.mov"
+              }
+            },
+            "metadata": {
+              "shot_list": {
+                "id": "shot-001"
+              }
+            },
+            "name": "Wide <orbit> & approach",
+            "source_range": {
+              "OTIO_SCHEMA": "TimeRange.1",
+              "duration": {
+                "OTIO_SCHEMA": "RationalTime.1",
+                "rate": 23.976023976023978,
+                "value": 48.0
+              },
+              "start_time": {
+                "OTIO_SCHEMA": "RationalTime.1",
+                "rate": 23.976023976023978,
+                "value": 24.0
+              }
+            }
+          },
+          {
+            "OTIO_SCHEMA": "Gap.1",
+            "effects": [],
+            "enabled": true,
+            "markers": [],
+            "metadata": {},
+            "name": "",
+            "source_range": {
+              "OTIO_SCHEMA": "TimeRange.1",
+              "duration": {
+                "OTIO_SCHEMA": "RationalTime.1",
+                "rate": 23.976023976023978,
+                "value": 12.0
+              },
+              "start_time": {
+                "OTIO_SCHEMA": "RationalTime.1",
+                "rate": 23.976023976023978,
+                "value": 0.0
+              }
+            }
+          },
+          {
+            "OTIO_SCHEMA": "Clip.2",
+            "active_media_reference_key": "DEFAULT_MEDIA",
+            "effects": [],
+            "enabled": true,
+            "markers": [],
+            "media_references": {
+              "DEFAULT_MEDIA": {
+                "OTIO_SCHEMA": "ExternalReference.1",
+                "available_image_bounds": null,
+                "available_range": null,
+                "metadata": {},
+                "name": "",
+                "target_url": "file:///synthetic/orbit.mov"
+              }
+            },
+            "metadata": {
+              "shot_list": {
+                "id": "שׁוֹט-002"
+              }
+            },
+            "name": "Detail \"amber\"",
+            "source_range": {
+              "OTIO_SCHEMA": "TimeRange.1",
+              "duration": {
+                "OTIO_SCHEMA": "RationalTime.1",
+                "rate": 23.976023976023978,
+                "value": 36.0
+              },
+              "start_time": {
+                "OTIO_SCHEMA": "RationalTime.1",
+                "rate": 23.976023976023978,
+                "value": 72.0
+              }
+            }
+          },
+          {
+            "OTIO_SCHEMA": "Gap.1",
+            "effects": [],
+            "enabled": true,
+            "markers": [],
+            "metadata": {},
+            "name": "",
+            "source_range": {
+              "OTIO_SCHEMA": "TimeRange.1",
+              "duration": {
+                "OTIO_SCHEMA": "RationalTime.1",
+                "rate": 23.976023976023978,
+                "value": 6.0
+              },
+              "start_time": {
+                "OTIO_SCHEMA": "RationalTime.1",
+                "rate": 23.976023976023978,
+                "value": 0.0
+              }
+            }
+          },
+          {
+            "OTIO_SCHEMA": "Clip.2",
+            "active_media_reference_key": "DEFAULT_MEDIA",
+            "effects": [],
+            "enabled": true,
+            "markers": [],
+            "media_references": {
+              "DEFAULT_MEDIA": {
+                "OTIO_SCHEMA": "MissingReference.1",
+                "available_image_bounds": null,
+                "available_range": null,
+                "metadata": {},
+                "name": ""
+              }
+            },
+            "metadata": {
+              "shot_list": {
+                "id": "कक्षा-003"
+              }
+            },
+            "name": "Placeholder, no media",
+            "source_range": {
+              "OTIO_SCHEMA": "TimeRange.1",
+              "duration": {
+                "OTIO_SCHEMA": "RationalTime.1",
+                "rate": 23.976023976023978,
+                "value": 24.0
+              },
+              "start_time": {
+                "OTIO_SCHEMA": "RationalTime.1",
+                "rate": 23.976023976023978,
+                "value": 0.0
+              }
+            }
+          },
+          {
+            "OTIO_SCHEMA": "Clip.2",
+            "active_media_reference_key": "DEFAULT_MEDIA",
+            "effects": [],
+            "enabled": true,
+            "markers": [],
+            "media_references": {
+              "DEFAULT_MEDIA": {
+                "OTIO_SCHEMA": "ExternalReference.1",
+                "available_image_bounds": null,
+                "available_range": null,
+                "metadata": {},
+                "name": "",
+                "target_url": "https://example.invalid/synthetic/remote.mov?variant=1&take=2"
+              }
+            },
+            "metadata": {
+              "shot_list": {
+                "id": "镜头-004"
+              }
+            },
+            "name": "Synthetic remote reference",
+            "source_range": {
+              "OTIO_SCHEMA": "TimeRange.1",
+              "duration": {
+                "OTIO_SCHEMA": "RationalTime.1",
+                "rate": 23.976023976023978,
+                "value": 60.0
+              },
+              "start_time": {
+                "OTIO_SCHEMA": "RationalTime.1",
+                "rate": 23.976023976023978,
+                "value": 0.0
+              }
+            }
+          }
+        ],
+        "effects": [],
+        "enabled": true,
+        "kind": "Video",
+        "markers": [],
+        "metadata": {},
+        "name": "V1",
+        "source_range": null
+      }
+    ],
+    "effects": [],
+    "enabled": true,
+    "markers": [],
+    "metadata": {},
+    "name": "tracks",
+    "source_range": null
+  }
+}

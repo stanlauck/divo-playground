@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "title": "Synthetic orbit study",
+  "frame_rate": { "num": 24000, "den": 1001 },
+  "record_start": "01:00:00:00",
+  "resolution": [1280, 720],
+  "shots": [
+    {
+      "id": "shot-001",
+      "name": "Wide <orbit> & approach",
+      "duration_frames": 48,
+      "media": { "url": "file:///synthetic/orbit.mov", "source_in_frame": 24 },
+      "camera": { "position": [1, 2, 3] }
+    },
+    {
+      "id": "שׁוֹט-002",
+      "name": "Detail \"amber\"",
+      "duration_frames": 36,
+      "gap_before_frames": 12,
+      "media": { "url": "file:///synthetic/orbit.mov", "source_in_frame": 72 }
+    },
+    {
+      "id": "कक्षा-003",
+      "name": "Placeholder, no media",
+      "duration_frames": 24,
+      "gap_before_frames": 6
+    },
+    {
+      "id": "镜头-004",
+      "name": "Synthetic remote reference",
+      "duration_frames": 60,
+      "media": { "url": "https://example.invalid/synthetic/remote.mov?variant=1&take=2" }
+    }
+  ]
+}

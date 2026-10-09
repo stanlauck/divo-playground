@@ -1,0 +1,18 @@
+[package]
+name = "timeline-writer"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+license = "MIT OR Apache-2.0"
+description = "Neutral shot list JSON -> OpenTimelineIO -> FCPXML, with shot ids that survive the round trip"
+readme = "README.md"
+repository = "https://github.com/stanlauck/divo-playground"
+publish = false
+
+[dependencies]
+roxmltree = "=0.21.1"
+serde = { version = "=1.0.229", features = ["derive"] }
+serde_json = "=1.0.151"
+url = "=2.5.8"
+# Keep URL's Unicode dependency tree compatible with the declared MSRV.
+idna_adapter = "=1.2.0"
