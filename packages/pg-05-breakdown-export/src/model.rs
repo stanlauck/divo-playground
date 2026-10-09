@@ -19,7 +19,7 @@ pub struct Breakdown {
     pub elements: Vec<Element>,
     /// Narrative order, also the fallback order for unscheduled scenes.
     pub scenes: Vec<Scene>,
-    #[serde(default)]
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub shooting_days: Vec<ShootingDay>,
 }
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
@@ -33,11 +33,14 @@ pub struct Element {
 #[serde(deny_unknown_fields)]
 pub struct ElementRef {
     pub element_id: String,
-    #[serde(default = "one")]
+    #[serde(default = "one", skip_serializing_if = "is_one")]
     pub quantity: u32,
 }
 fn one() -> u32 {
     1
+}
+fn is_one(value: &u32) -> bool {
+    *value == 1
 }
 #[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(rename_all = "snake_case")]
@@ -92,15 +95,15 @@ pub struct Scene {
     pub set: String,
     pub time_of_day: TimeOfDay,
     pub pages_eighths: u32,
-    #[serde(default)]
+    #[serde(default, skip_serializing_if = "String::is_empty")]
     pub synopsis: String,
-    #[serde(default)]
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub elements: Vec<ElementRef>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub script_day: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub unit: Option<String>,
-    #[serde(default)]
+    #[serde(default, skip_serializing_if = "String::is_empty")]
     pub notes: String,
 }
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
@@ -255,7 +258,12 @@ impl TextBudget {
         if value.len() > max {
             return Err(Error::new("text_limit", path));
         }
-        if single_line && (value.trim().is_empty() || value.chars().any(char::is_control)) {
+        if single_line
+            && (value.trim().is_empty()
+                || value
+                    .chars()
+                    .any(|c| c.is_control() || matches!(c, '\u{2028}' | '\u{2029}')))
+        {
             return Err(Error::new("text", path));
         }
         if value.chars().any(|c| !matches!(c as u32, 0x9 | 0xA | 0xD | 0x20..=0xD7FF | 0xE000..=0xFFFD | 0x10000..=0x10FFFF)) {

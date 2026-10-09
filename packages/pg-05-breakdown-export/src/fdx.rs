@@ -17,6 +17,7 @@ struct Registry {
     definitions: Vec<Definition>,
     categories: BTreeMap<u8, FdxCategory>,
     element_tags: HashMap<String, usize>,
+    shared_tags: HashMap<(u8, String), usize>,
     scene_tags: Vec<[Option<usize>; 5]>,
 }
 impl Registry {
@@ -25,6 +26,7 @@ impl Registry {
             definitions: Vec::new(),
             categories: BTreeMap::new(),
             element_tags: HashMap::new(),
+            shared_tags: HashMap::new(),
             scene_tags: Vec::new(),
         };
         for item in &value.elements {
@@ -54,8 +56,22 @@ impl Registry {
             let mut tags = [None; 5];
             for (i, (category, name, label)) in fields.into_iter().enumerate() {
                 if let Some(label) = label {
-                    tags[i] =
-                        Some(registry.add(category, &format!("scene:{}:{name}", scene.id), label));
+                    tags[i] = Some(if matches!(category.number, 27 | 28 | 30) {
+                        let key = (category.number, label.to_owned());
+                        if let Some(&tag) = registry.shared_tags.get(&key) {
+                            tag
+                        } else {
+                            let tag = registry.add(
+                                category,
+                                &format!("shared:{}:{label}", category.id),
+                                label,
+                            );
+                            registry.shared_tags.insert(key, tag);
+                            tag
+                        }
+                    } else {
+                        registry.add(category, &format!("scene:{}:{name}", scene.id), label)
+                    });
                 }
             }
             registry.scene_tags.push(tags);
@@ -117,6 +133,7 @@ impl Xml {
 }
 
 /// A numbered, tagged FDX Script carrier, not a native MMS schedule or screenplay.
+/// Requires a tag-aware FDX import route; legacy SEX-only element import is unsupported.
 pub fn to_fdx(value: &Breakdown) -> Result<String> {
     value.validate()?;
     let registry = Registry::new(value);

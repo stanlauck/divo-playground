@@ -389,3 +389,47 @@ fn every_supported_category_uses_a_distinct_standard_fdx_identity() {
     assert!(ids.contains("12ab0932-e3b9-4b4a-bcd0-3da1b4e61d5e"));
     assert!(ids.contains("0ae40617-cc7c-48e6-ae2b-5aaecc09986f"));
 }
+#[test]
+fn shared_location_script_day_and_unit_have_one_definition_each() {
+    let mut value = fixture();
+    for scene in &mut value.scenes {
+        scene.set = "Kitchen".into();
+        scene.script_day = Some("Story 1".into());
+        scene.unit = Some("Main".into());
+        scene.synopsis = "Shared synopsis".into();
+        scene.notes = "Shared note".into();
+    }
+    let xml = to_fdx(&value).unwrap();
+    let doc = Document::parse(&xml).unwrap();
+    for category in [
+        "c5e89e4d-f83e-4c28-950c-92a63f1b5f26",
+        "63c140da-ef2b-491a-b416-b46f461abb89",
+        "849f1ebf-5507-4f33-bff6-3a5b4d73be14",
+    ] {
+        let definitions: Vec<_> = doc
+            .descendants()
+            .filter(|n| n.has_tag_name("TagDefinition") && n.attribute("CatId") == Some(category))
+            .collect();
+        assert_eq!(definitions.len(), 1);
+        let number = definitions[0].attribute("Number").unwrap();
+        assert_eq!(
+            doc.descendants()
+                .filter(|n| n.has_tag_name("Text") && n.attribute("TagNumber") == Some(number))
+                .count(),
+            3
+        );
+    }
+    for category in [
+        "8e5e75c2-713b-47df-a75f-f12648b98ded",
+        "15b6f4fd-4e74-4ad8-9971-b239d88c2997",
+    ] {
+        assert_eq!(
+            doc.descendants()
+                .filter(
+                    |n| n.has_tag_name("TagDefinition") && n.attribute("CatId") == Some(category)
+                )
+                .count(),
+            3
+        );
+    }
+}

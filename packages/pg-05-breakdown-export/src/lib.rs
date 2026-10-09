@@ -22,8 +22,7 @@ pub use model::{
 /// Validate and serialize the neutral representation, not an FDX import/roundtrip.
 pub fn to_json(value: &Breakdown) -> Result<String> {
     value.validate()?;
-    let mut text = serde_json::to_string_pretty(value).map_err(|_| Error::new("json", "$"))?;
-    text.push('\n');
+    let text = serde_json::to_string(value).map_err(|_| Error::new("json", "$"))?;
     if text.len() > MAX_INPUT_BYTES {
         return Err(Error::new("input_limit", "$"));
     }

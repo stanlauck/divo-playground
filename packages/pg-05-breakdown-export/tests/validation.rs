@@ -250,3 +250,56 @@ fn reader_size_depth_and_io_errors_are_bounded() {
     }
     assert_eq!(from_json(Broken).unwrap_err().to_string(), "read at $");
 }
+#[test]
+fn compact_json_roundtrip_does_not_inflate_many_accepted_default_references() {
+    let elements: Vec<_> = (0..20)
+        .map(|i| {
+            serde_json::json!({
+                "id":format!("e{i}"),"name":format!("Item {i}"),"category":"props"
+            })
+        })
+        .collect();
+    let references: Vec<_> = (0..20)
+        .map(|i| serde_json::json!({"element_id":format!("e{i}")}))
+        .collect();
+    let scenes: Vec<_> = (0..7_500)
+        .map(|i| {
+            serde_json::json!({
+                "id":format!("s{i}"),"number":i.to_string(),"int_ext":"interior",
+                "set":"Room","time_of_day":"day","pages_eighths":1,"elements":references
+            })
+        })
+        .collect();
+    let source =
+        serde_json::to_vec(&serde_json::json!({"version":1,"elements":elements,"scenes":scenes}))
+            .unwrap();
+    assert!(source.len() < MAX_INPUT_BYTES);
+    let value = from_json(source.as_slice()).unwrap();
+    assert!(serde_json::to_vec_pretty(&value).unwrap().len() > MAX_INPUT_BYTES);
+    let compact = to_json(&value).unwrap();
+    assert!(compact.len() <= source.len());
+    assert_eq!(from_json(compact.as_bytes()).unwrap(), value);
+}
+#[test]
+fn unicode_line_separators_reject_in_all_single_line_fields() {
+    for separator in ['\u{2028}', '\u{2029}'] {
+        for path in [
+            "/title",
+            "/elements/0/name",
+            "/scenes/0/number",
+            "/scenes/0/set",
+            "/scenes/0/script_day",
+            "/scenes/0/unit",
+            "/shooting_days/0/label",
+        ] {
+            let error =
+                changed(|v| *v.pointer_mut(path).unwrap() = Value::from(format!("a{separator}b")))
+                    .unwrap_err();
+            assert_eq!(error.code, "text");
+        }
+        let mut value = fixture();
+        value.scenes[0].synopsis = format!("a{separator}b");
+        value.scenes[0].notes = format!("c{separator}d");
+        value.validate().unwrap();
+    }
+}

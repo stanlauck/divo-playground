@@ -25,7 +25,9 @@ cargo run --locked --offline -- csv samples/synthetic.json - --raw-csv
 
 Run inside this package, after dependencies are installed. `from_json` accepts
 any Rust `Read`, bounds the bytes read and tolerates a UTF-8 BOM. `to_json`
-serializes the validated neutral representation. Both exporters also validate
+serializes compact neutral JSON and omits empty/default fields, so pretty-print
+or materialized defaults cannot inflate an accepted document beyond its input
+byte/value budgets. Both exporters also validate
 manually constructed `Breakdown` values. Failures contain stable codes and
 structural paths, never source text, user keys/IDs or filesystem names.
 CLI output is serialized before opening the destination. I/O failure can leave
@@ -78,6 +80,14 @@ Final Draft also documents exporting tagged scripts and synopsis tags to MMS:
 - [Final Draft tagged export](https://kb.finaldraft.com/hc/en-us/articles/15574927910036-How-do-I-get-my-tagged-FD-script-into-Movie-Magic-Scheduling)
 - [Final Draft synopsis tags](https://kb.finaldraft.com/hc/en-us/articles/30533150147604-How-do-I-use-Tags-to-add-a-Synopsis-to-a-scene)
 
+**Supported import route:** only the **FDX-tag-aware** Script import described
+in the current EP manual, which explicitly says tagged elements are imported.
+Legacy/scene-only FDX paths that require a `.sex` scheduling export for element
+categories are **not supported**. Do not use this writer for those paths; there
+is no automatic fallback or silent claim of compatibility with every MMS
+release. A numbered FDX scene alone is not evidence that its tags were imported.
+No specific installed MMS version has been verified here.
+
 This writer emits a `FinalDraft DocumentType="Script" Version="1"` document,
 scene-heading `Paragraph/@Number`, `SceneProperties` (number/length/start page),
 and `Summary/Paragraph/Text`. Each supplied synopsis, location, script day,
@@ -96,7 +106,10 @@ No third-party code, templates or screenplay fixtures are redistributed.
 The `SceneProperties/Summary` observation is also documented by
 [open-fdx-toolkit](https://github.com/sfingali/open-fdx-toolkit/blob/243486e6573e52d5e768d0c91bf366eb93324613/FDX_SPEC.md).
 Generated definition IDs use deterministic UUIDv5 under a fixed package
-namespace, keyed by neutral ID/field, not random values or input array index.
+namespace, keyed by neutral element ID or scene ID/field. Shared Location,
+Script Day and Unit definitions are deduplicated by `(category,label)` and
+keyed by that category UUID/label, not the first scene that mentions them.
+IDs are not random or based on input array index.
 
 **Validation boundary:** XML structure, tag/category references, escaping and
 metadata are tested independently. No proprietary MMS/Final Draft installation
@@ -138,7 +151,8 @@ in a spreadsheet.
   references. At most 10,000 assignments per day, no repeats globally.
 - IDs ≤128 bytes; scene numbers ≤32; single-line labels/title ≤1,024;
   synopsis/notes ≤65,536. Total validated text ≤8 MiB. XML 1.0 characters only;
-  tabs/CR/LF allowed only in multiline synopsis/notes.
+  tabs/CR/LF and Unicode U+2028/U+2029 line/paragraph separators are rejected in
+  single-line fields and allowed only in multiline synopsis/notes.
 - Each output ≤64 MiB, including expansion when one element is referenced many
   times. Both outputs are in-memory; no claim of constant-memory streaming.
 - Schema string limits count Unicode scalar characters; runtime limits count

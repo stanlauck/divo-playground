@@ -22,8 +22,9 @@ def text(maximum, nullable=False):
 
 
 def line(maximum, nullable=False):
+    forbidden = "\\u0000-\\u001F\\u007F-\\u009F\\u2028\\u2029"
     return {**text(maximum, nullable), "minLength": 1,
-            "pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F]*\\S[^\\u0000-\\u001F\\u007F-\\u009F]*$"}
+            "pattern": f"^[^{forbidden}]*[^\\s{forbidden}][^{forbidden}]*$(?![\\s\\S])"}
 
 
 def record(required, properties):
