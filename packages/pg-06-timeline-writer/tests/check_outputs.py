@@ -122,6 +122,21 @@ def check_otio(root, data, rate, work):
         "shots": [{"id": "external-origin", "name": "Synthetic origin clip", "duration_frames": 24,
                    "media": {"url": "file:///synthetic/origin.mov", "source_in_frame": 24}}],
     }
+    empty = otio.schema.Timeline(name="Synthetic native empty")
+    empty.global_start_time = rational(86400, 24)
+    empty.tracks.append(otio.schema.Track(kind=otio.schema.TrackKind.Video))
+    native = work / "external-empty.otio"
+    neutral = work / "external-empty.json"
+    otio.adapters.write_to_file(empty, str(native), "otio_json")
+    subprocess.run(
+        ["cargo", "run", "--quiet", "--locked", "--offline", "--", "--from", "otio", "--to", "json",
+         "--input", str(native), "--output", str(neutral)],
+        cwd=root, check=True, capture_output=True,
+    )
+    assert json.loads(neutral.read_text("utf-8")) == {
+        "version": 1, "title": "Synthetic native empty", "frame_rate": 24,
+        "record_start": "01:00:00:00", "shots": [],
+    }
 
 
 def check_xml(root, data, rate, dtd_path):

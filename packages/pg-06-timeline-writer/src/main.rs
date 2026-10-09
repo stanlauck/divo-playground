@@ -54,7 +54,7 @@ fn run(args: Vec<OsString>) -> Result<()> {
     let text = if input == "-" {
         read_input(io::stdin().lock(), limit)?
     } else {
-        read_input(File::open(input)?, limit)?
+        read_input(File::open(input).map_err(|e| io_error(e, "input"))?, limit)?
     };
     let list: ShotList = match from {
         "json" => from_json(&text)?,
@@ -69,15 +69,18 @@ fn run(args: Vec<OsString>) -> Result<()> {
     };
     if output == "-" {
         let mut out = io::stdout().lock();
-        out.write_all(text.as_bytes())?;
-        out.flush()?;
+        out.write_all(text.as_bytes())
+            .map_err(|e| io_error(e, "output"))?;
+        out.flush().map_err(|e| io_error(e, "output"))?;
     } else {
         let mut out = OpenOptions::new()
             .write(true)
             .create_new(true)
-            .open(output)?;
-        out.write_all(text.as_bytes())?;
-        out.flush()?;
+            .open(output)
+            .map_err(|e| io_error(e, "output"))?;
+        out.write_all(text.as_bytes())
+            .map_err(|e| io_error(e, "output"))?;
+        out.flush().map_err(|e| io_error(e, "output"))?;
     }
     Ok(())
 }
@@ -87,6 +90,11 @@ fn format(value: Option<&std::ffi::OsStr>) -> Result<&str> {
         Some(name @ ("json" | "otio" | "fcpxml")) => Ok(name),
         _ => Err(argument()),
     }
+}
+fn io_error(cause: io::Error, side: &'static str) -> Error {
+    let mut error = Error::from(cause);
+    error.path = side.into();
+    error
 }
 fn argument() -> Error {
     Error {

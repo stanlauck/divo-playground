@@ -52,10 +52,9 @@ fn cli_converts_without_overwriting_and_hides_paths() {
     let failure = run();
     assert!(!failure.status.success());
     assert_eq!(fs::read(&output).unwrap(), before);
-    assert!(
-        !String::from_utf8(failure.stderr)
-            .unwrap()
-            .contains("invented-private")
+    assert_eq!(
+        String::from_utf8(failure.stderr).unwrap().trim(),
+        "already_exists at output"
     );
     let bad = tmp.0.join("bad.json");
     let absent = tmp.0.join("must-not-exist.otio");
@@ -74,11 +73,10 @@ fn cli_converts_without_overwriting_and_hides_paths() {
         .args(["--output", "-"])
         .output()
         .unwrap();
-    assert!(
-        !failure.status.success()
-            && !String::from_utf8(failure.stderr)
-                .unwrap()
-                .contains("must-not-exist")
+    assert!(!failure.status.success());
+    assert_eq!(
+        String::from_utf8(failure.stderr).unwrap().trim(),
+        "not_found at input"
     );
 }
 

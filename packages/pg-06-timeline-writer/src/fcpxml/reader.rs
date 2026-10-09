@@ -7,6 +7,7 @@ use crate::{
     Error, FrameRate, MAX_FRAMES, MAX_SHOTS, Media, Result, Shot, ShotList, format_timecode,
 };
 use roxmltree::{Document, Node, ParsingOptions};
+use std::borrow::Cow;
 use std::collections::HashMap;
 
 type Element<'a> = Node<'a, 'a>;
@@ -17,22 +18,7 @@ pub fn from_fcpxml(text: &str) -> Result<ShotList> {
     if text.len() > MAX_TIMELINE_BYTES {
         return Err(Error::new("input_limit", "input"));
     }
-    // Accept the customary bare declaration, never an external or internal DTD.
-    let text = if let Some(start) = text.find("<!DOCTYPE") {
-        let end = text[start..]
-            .find('>')
-            .map(|i| start + i)
-            .ok_or_else(|| Error::new("invalid_xml", "input"))?;
-        let declaration = &text[start + 9..end];
-        if declaration.split_whitespace().collect::<Vec<_>>() != ["fcpxml"] {
-            return Err(Error::unsupported("input.doctype"));
-        }
-        let mut copy = text.to_owned();
-        copy.replace_range(start..=end, &" ".repeat(end - start + 1));
-        copy
-    } else {
-        text.to_owned()
-    };
+    let text = header_doctype(text)?;
     let doc = Document::parse_with_options(
         &text,
         ParsingOptions {
@@ -368,6 +354,46 @@ struct Asset<'a> {
     url: &'a str,
     start: u64,
     length: Option<u64>,
+}
+
+// Scan only the XML prolog, skipping complete comments and the XML declaration.
+// Leave invalid or later declarations for the parser; never repair root content.
+fn header_doctype(text: &str) -> Result<Cow<'_, str>> {
+    let space = [' ', '\t', '\r', '\n'];
+    let mut cursor = usize::from(text.starts_with('\u{feff}')) * '\u{feff}'.len_utf8();
+    loop {
+        cursor += text[cursor..].len() - text[cursor..].trim_start_matches(space).len();
+        let rest = &text[cursor..];
+        if rest.starts_with("<!--") {
+            let end = rest
+                .find("-->")
+                .ok_or_else(|| Error::new("invalid_xml", "input"))?;
+            cursor += end + 3;
+        } else if rest.starts_with("<?xml")
+            && rest
+                .as_bytes()
+                .get(5)
+                .is_some_and(|b| b" \t\r\n".contains(b))
+        {
+            let end = rest
+                .find("?>")
+                .ok_or_else(|| Error::new("invalid_xml", "input"))?;
+            cursor += end + 2;
+        } else if rest.starts_with("<!DOCTYPE") {
+            let end = rest
+                .find('>')
+                .ok_or_else(|| Error::new("invalid_xml", "input"))?;
+            let declaration = &rest[9..end];
+            if !declaration.starts_with(space) || declaration.trim_matches(space) != "fcpxml" {
+                return Err(Error::unsupported("input.doctype"));
+            }
+            let mut copy = text.to_owned();
+            copy.replace_range(cursor..=cursor + end, &" ".repeat(end + 1));
+            return Ok(Cow::Owned(copy));
+        } else {
+            return Ok(Cow::Borrowed(text));
+        }
+    }
 }
 
 fn read_format(node: Element<'_>) -> Result<(FrameRate, [u32; 2])> {

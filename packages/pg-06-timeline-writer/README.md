@@ -73,7 +73,9 @@ explicit `Gap.1`. IDs live in `clip.metadata.shot_list.id`. Timeline metadata
 `MissingReference.1`; media uses `ExternalReference.1`.
 
 The reader also supports legacy `Clip.1`. Without our metadata it infers integer
-or 24000/1001, 30000/1001, 60000/1001, 120000/1001 FPS. Input RationalTime values
+or 24000/1001, 30000/1001, 60000/1001, 120000/1001 FPS, from a timed track item
+or `global_start_time.rate` when no timed item is available (including an empty
+track). With neither source, rate inference is an error. Input RationalTime values
 must be whole, nonnegative frame counts. Different supported rates rescale
 exactly with integer ratios; fractional frames are errors, never rounded.
 Explicit `source_range` is required, and an optional media `available_range`
@@ -107,7 +109,9 @@ split edits, image sequences, alternate media references, and unsupported
 schema versions. FCPXML namespaces, processing instructions, external/internal
 DTDs, and unknown semantic elements/attributes are rejected. Only the customary
 bare `<!DOCTYPE fcpxml>` is allowed. Ordinary metadata values not mapped to
-neutral fields are ignored. Neither reader opens referenced media.
+neutral fields are ignored. The doctype handler scans only the XML prolog,
+skipping complete comments; declarations inside/after the root are not removed.
+Neither reader opens referenced media.
 
 ## Limits and errors
 
@@ -127,7 +131,10 @@ neutral fields are ignored. Neither reader opens referenced media.
 `Error { code, path }`, Display, and Debug contain only structural locations,
 never IDs, media URLs, XML/JSON values, filenames, or raw parser/I/O causes.
 Errors do not expose chained private causes. `read_input(reader, limit)` is
-bounded UTF-8 reading. Public timecode/duration helpers return `Result`,
+bounded UTF-8 reading. CLI I/O errors identify `input` or `output` and static
+kind codes (`already_exists`, `not_found`, `permission_denied`, `broken_pipe`,
+or `io_error`), never the filename or raw cause.
+Public timecode/duration helpers return `Result`,
 including on invalid directly constructed rates or overflowing frame sums.
 Library writers validate before emitting; callers should still treat the
 generated URLs as untrusted references when opening files in another tool.

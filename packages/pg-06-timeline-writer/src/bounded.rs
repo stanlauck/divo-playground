@@ -21,7 +21,14 @@ pub fn read_input(reader: impl Read, limit: usize) -> Result<String> {
         return Err(Error::invalid("limit"));
     }
     let mut bytes = Vec::new();
-    reader.take(limit as u64 + 1).read_to_end(&mut bytes)?;
+    reader
+        .take(limit as u64 + 1)
+        .read_to_end(&mut bytes)
+        .map_err(|cause| {
+            let mut error = Error::from(cause);
+            error.path = "input".into();
+            error
+        })?;
     if bytes.len() > limit {
         return Err(Error::new("input_limit", "input"));
     }

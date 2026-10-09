@@ -47,6 +47,10 @@ pub fn from_otio(text: &str) -> Result<ShotList> {
                 c.pointer("/source_range/duration/rate")
                     .and_then(Value::as_f64)
             })
+            .or_else(|| {
+                root.pointer("/global_start_time/rate")
+                    .and_then(Value::as_f64)
+            })
             .ok_or_else(|| Error::invalid("track.frame_rate"))?;
         infer_rate(number)?
     };

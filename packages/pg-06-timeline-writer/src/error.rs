@@ -49,7 +49,14 @@ impl From<roxmltree::Error> for Error {
 }
 
 impl From<std::io::Error> for Error {
-    fn from(_: std::io::Error) -> Self {
-        Self::new("io_error", "input/output")
+    fn from(error: std::io::Error) -> Self {
+        let code = match error.kind() {
+            std::io::ErrorKind::AlreadyExists => "already_exists",
+            std::io::ErrorKind::NotFound => "not_found",
+            std::io::ErrorKind::PermissionDenied => "permission_denied",
+            std::io::ErrorKind::BrokenPipe => "broken_pipe",
+            _ => "io_error",
+        };
+        Self::new(code, "input/output")
     }
 }
