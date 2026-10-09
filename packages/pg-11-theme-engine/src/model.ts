@@ -29,6 +29,24 @@ export class ThemeError extends Error {
 export function fail(code: string, path: string): never {
   throw new ThemeError(code, path);
 }
+export function ordinaryPrototype(
+  value: object,
+  constructor: Function,
+): boolean {
+  const prototype = Object.getPrototypeOf(value);
+  if (prototype === constructor.prototype) return true;
+  if (!prototype) return false;
+  const c = Object.getOwnPropertyDescriptor(prototype, "constructor");
+  if (!c || !("value" in c) || typeof c.value !== "function") return false;
+  const p = Object.getOwnPropertyDescriptor(c.value, "prototype");
+  return (
+    !!p &&
+    "value" in p &&
+    p.value === prototype &&
+    Function.prototype.toString.call(c.value) ===
+      Function.prototype.toString.call(constructor)
+  );
+}
 export function record(
   value: unknown,
   required: readonly string[],
@@ -38,8 +56,9 @@ export function record(
   if (
     !value ||
     typeof value !== "object" ||
-    (Object.getPrototypeOf(value) !== Object.prototype &&
-      Object.getPrototypeOf(value) !== null)
+    (Object.getPrototypeOf(value) !== null &&
+      (!ordinaryPrototype(value, Object) ||
+        Object.getPrototypeOf(Object.getPrototypeOf(value)) !== null))
   )
     fail("object", path);
   const result: Record<string, unknown> = Object.create(null);

@@ -39,6 +39,37 @@
     theme.pairs.every((p) => p.ratio >= p.minimum),
     "real PNG derived contrast",
   );
+  const iframe = document.createElement("iframe");
+  iframe.hidden = true;
+  document.body.append(iframe);
+  try {
+    const realm = iframe.contentWindow;
+    const foreignConfig = realm.JSON.parse(JSON.stringify(config));
+    const foreignImage = realm.Object.assign(new realm.Object(), {
+      width: 1,
+      height: 1,
+      pixels: new realm.Uint8ClampedArray([48, 104, 176, 255]),
+    });
+    const foreignTheme = api.createTheme(foreignConfig, foreignImage);
+    check(
+      foreignTheme.accent.requested === "#3068b0",
+      "iframe config and RGBA input",
+    );
+    check(
+      foreignTheme.pairs.every((p) => p.ratio >= p.minimum),
+      "iframe contrast",
+    );
+    const foreignFile = new realm.File([png], "invented-frame.png", {
+      type: "image/png",
+    });
+    const foreignDecoded = await api.decodeCover(foreignFile);
+    check(
+      foreignDecoded.width === 16 && foreignDecoded.height === 16,
+      "iframe File native decode",
+    );
+  } finally {
+    iframe.remove();
+  }
   const jpeg = await new Promise((resolve) =>
     canvas.toBlob(resolve, "image/jpeg", 0.95),
   );
@@ -141,13 +172,24 @@
   hue.dispatchEvent(new Event("input"));
   check(window.pg11.theme.config.accent.hsl.h === 0, "custom hue preview");
   let release;
+  let completed;
+  let finishTimer;
+  const decodedPending = new Promise((resolve) => {
+    completed = resolve;
+  });
   const originalBitmap = createImageBitmap;
   try {
     window.createImageBitmap = async (blob) => {
       await new Promise((resolve) => {
         release = resolve;
       });
-      return originalBitmap(blob);
+      const image = await originalBitmap(blob);
+      const close = image.close.bind(image);
+      image.close = () => {
+        close();
+        completed();
+      };
+      return image;
     };
     document.getElementById("synthetic").click();
     for (let i = 0; i < 100 && !release; i++)
@@ -156,13 +198,24 @@
     hue.value = "120";
     hue.dispatchEvent(new Event("input"));
     release();
-    await new Promise((resolve) => setTimeout(resolve, 50));
+    await Promise.race([
+      decodedPending,
+      new Promise(
+        (_, reject) =>
+          (finishTimer = setTimeout(
+            () => reject(new Error("Late cover did not finish decoding")),
+            2000,
+          )),
+      ),
+    ]);
+    await new Promise((resolve) => setTimeout(resolve, 0));
     check(
       window.pg11.theme.accent.source === "custom" &&
         window.pg11.theme.config.accent.hsl.h === 120,
       "late cover cannot replace newer accent",
     );
   } finally {
+    clearTimeout(finishTimer);
     window.createImageBitmap = originalBitmap;
     release?.();
   }

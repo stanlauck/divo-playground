@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT OR Apache-2.0
 import test from "node:test";
 import assert from "node:assert/strict";
+import { runInNewContext } from "node:vm";
 import { parseConfig, validateHsl, ThemeError } from "../dist/src/index.js";
 import { sample } from "../examples/fixture.mjs";
 test("config defaults, canonical hue, detached frozen values", () => {
@@ -92,4 +93,20 @@ test("HSL finite ranges and scalar fields", () => {
     { h: 0, s: 1, l: 1, a: 1 },
   ])
     assert.throws(() => validateHsl(value), ThemeError);
+});
+test("ordinary nested configs work across realms without accepting exotic prototypes", () => {
+  const foreign = runInNewContext(`(${JSON.stringify(sample)})`);
+  assert.notEqual(Object.getPrototypeOf(foreign), Object.prototype);
+  assert.deepEqual(parseConfig(foreign), parseConfig(sample));
+  const inherited = runInNewContext(`Object.create(${JSON.stringify(sample)})`);
+  assert.throws(() => parseConfig(inherited), ThemeError);
+  const fake = Object.assign(
+    Object.create(Object.assign(Object.create(null), { constructor: Object })),
+    sample,
+  );
+  assert.throws(() => parseConfig(fake), ThemeError);
+  const foreignSubclass = runInNewContext(
+    `Object.assign(new (class Extra extends Object {})(), ${JSON.stringify(sample)})`,
+  );
+  assert.throws(() => parseConfig(foreignSubclass), ThemeError);
 });

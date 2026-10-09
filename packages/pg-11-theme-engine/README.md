@@ -30,6 +30,10 @@ example. `parseConfig` validates plain/null-prototype data records, rejects
 unknown fields, inherited data and accessors, and returns detached frozen
 objects. It never copies via getters/toJSON. `ThemeError` reports a code and
 structural path, not user-provided text or image filenames.
+Ordinary config records and RGBA8 views from another realm/iframe are accepted.
+Subclasses, shared buffers and shadowed byte-view metadata remain rejected.
+The browser adapter also accepts native cross-realm File/Blob values; failed
+header reads report only a structural error.
 
 HSL hue is 0…360 degrees (360 canonicalizes to 0); saturation and lightness
 are 0…100 percentages. Nonfinite and out-of-range values fail. Custom HSL

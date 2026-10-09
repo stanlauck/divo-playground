@@ -1,6 +1,23 @@
 // SPDX-License-Identifier: MIT OR Apache-2.0
-import { fail, record } from "./model.js";
+import { fail, record, ordinaryPrototype } from "./model.js";
 import { toHex, type Hex } from "./color.js";
+const typedArrayPrototype = Object.getPrototypeOf(Uint8Array.prototype);
+const bufferOf = Object.getOwnPropertyDescriptor(
+  typedArrayPrototype,
+  "buffer",
+)!.get!;
+const lengthOf = Object.getOwnPropertyDescriptor(
+  typedArrayPrototype,
+  "length",
+)!.get!;
+const kindOf = Object.getOwnPropertyDescriptor(
+  typedArrayPrototype,
+  Symbol.toStringTag,
+)!.get!;
+const bufferLength = Object.getOwnPropertyDescriptor(
+  ArrayBuffer.prototype,
+  "byteLength",
+)!.get!;
 export interface RgbaImage {
   readonly width: number;
   readonly height: number;
@@ -34,14 +51,25 @@ export function dominantAccent(value: RgbaImage): CoverAccent {
   )
     fail("dimensions", "$.image");
   const pixels = r.pixels;
+  const kind = ArrayBuffer.isView(pixels) ? kindOf.call(pixels) : undefined;
   if (
-    !(pixels instanceof Uint8Array || pixels instanceof Uint8ClampedArray) ||
-    (Object.getPrototypeOf(pixels) !== Uint8Array.prototype &&
-      Object.getPrototypeOf(pixels) !== Uint8ClampedArray.prototype) ||
-    !(pixels.buffer instanceof ArrayBuffer) ||
-    pixels.length !== width * height * 4
+    ((kind !== "Uint8Array" ||
+      !ordinaryPrototype(pixels as object, Uint8Array)) &&
+      (kind !== "Uint8ClampedArray" ||
+        !ordinaryPrototype(pixels as object, Uint8ClampedArray))) ||
+    ["buffer", "length", "byteLength", "byteOffset"].some(
+      (key) => Object.getOwnPropertyDescriptor(pixels, key) !== undefined,
+    )
   )
     fail("pixels", "$.image.pixels");
+  try {
+    bufferLength.call(bufferOf.call(pixels));
+  } catch {
+    fail("pixels", "$.image.pixels");
+  }
+  if (lengthOf.call(pixels) !== width * height * 4)
+    fail("pixels", "$.image.pixels");
+  const bytes = pixels as Uint8Array | Uint8ClampedArray;
   const weight = new Float64Array(32768),
     red = new Float64Array(32768),
     green = new Float64Array(32768),
@@ -50,12 +78,12 @@ export function dominantAccent(value: RgbaImage): CoverAccent {
   let visible = 0;
   for (let i = 0; i < count; i++) {
     const p = 4 * Math.floor(((i + 0.5) * width * height) / count),
-      a = pixels[p + 3]!;
+      a = bytes[p + 3]!;
     if (a < 16) continue;
     visible++;
-    const r = pixels[p]!,
-      g = pixels[p + 1]!,
-      b = pixels[p + 2]!,
+    const r = bytes[p]!,
+      g = bytes[p + 1]!,
+      b = bytes[p + 2]!,
       bin = ((r >> 3) << 10) | ((g >> 3) << 5) | (b >> 3);
     weight[bin] = weight[bin]! + a;
     red[bin] = red[bin]! + r * a;

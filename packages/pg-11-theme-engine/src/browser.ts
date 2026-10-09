@@ -3,16 +3,23 @@ import { fail, ThemeError } from "./model.js";
 import { IMAGE_LIMITS, type RgbaImage } from "./palette.js";
 /** Browser-only local Blob decoder. No URLs, object URLs or network access. */
 export async function decodeCover(blob: Blob): Promise<RgbaImage> {
-  if (
-    typeof Blob === "undefined" ||
-    !(blob instanceof Blob) ||
-    blob.size < 1 ||
-    blob.size > IMAGE_LIMITS.bytes
-  )
-    fail("blob", "$.cover");
-  const header = new Uint8Array(
-    await blob.slice(0, Math.min(blob.size, 262144)).arrayBuffer(),
-  );
+  if (typeof Blob === "undefined") fail("blob", "$.cover");
+  let size: number;
+  try {
+    size = Object.getOwnPropertyDescriptor(Blob.prototype, "size")!.get!.call(
+      blob,
+    );
+  } catch {
+    return fail("blob", "$.cover");
+  }
+  if (size < 1 || size > IMAGE_LIMITS.bytes) fail("blob", "$.cover");
+  let header: Uint8Array;
+  try {
+    const part = Blob.prototype.slice.call(blob, 0, Math.min(size, 262144));
+    header = new Uint8Array(await Blob.prototype.arrayBuffer.call(part));
+  } catch {
+    return fail("read", "$.cover");
+  }
   let width = 0,
     height = 0;
   if (

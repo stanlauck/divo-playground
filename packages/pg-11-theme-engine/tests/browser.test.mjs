@@ -34,3 +34,34 @@ test("unknown JPEG markers do not produce unsafe errors", async () => {
     (error) => ["image_header", "dimensions"].includes(error.code),
   );
 });
+test("header read errors do not expose local filenames", async () => {
+  const read = Blob.prototype.arrayBuffer;
+  try {
+    Blob.prototype.arrayBuffer = async () => {
+      throw new Error("private filename");
+    };
+    await assert.rejects(
+      () => decodeCover(new Blob(["test"])),
+      (error) =>
+        error.code === "read" && !error.message.includes("private filename"),
+    );
+  } finally {
+    Blob.prototype.arrayBuffer = read;
+  }
+});
+test("Blob metadata overrides are not invoked", async () => {
+  let calls = 0;
+  const blob = new Blob(["not an image"]);
+  for (const key of ["size", "slice", "arrayBuffer"])
+    Object.defineProperty(blob, key, {
+      get() {
+        calls++;
+        throw new Error("private input");
+      },
+    });
+  await assert.rejects(
+    () => decodeCover(blob),
+    (error) => error.code === "image_format",
+  );
+  assert.equal(calls, 0);
+});

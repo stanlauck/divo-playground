@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT OR Apache-2.0
 import test from "node:test";
 import assert from "node:assert/strict";
+import { runInNewContext } from "node:vm";
 import { dominantAccent, IMAGE_LIMITS } from "../dist/src/index.js";
 import { syntheticImage } from "../examples/fixture.mjs";
 test("synthetic cover picks weighted majority, no mutation", () => {
@@ -32,9 +33,12 @@ test("equal-weight ties choose lowest RGB bin deterministically", () => {
     "#0000ff",
   );
   assert.equal(
-    dominantAccent({ width: 2, height: 1, pixels: pixels.slice().reverse() })
-      .sampled,
-    2,
+    dominantAccent({
+      width: 2,
+      height: 1,
+      pixels: new Uint8Array([...pixels.subarray(4), ...pixels.subarray(0, 4)]),
+    }).color,
+    "#0000ff",
   );
 });
 test("bin color averages visible samples by alpha", () => {
@@ -75,4 +79,52 @@ test("large image uses bounded deterministic stratified sampling", () => {
   const image = syntheticImage(512, 256);
   assert.equal(dominantAccent(image).sampled, IMAGE_LIMITS.samples);
   assert.deepEqual(dominantAccent(image), dominantAccent(image));
+});
+test("ordinary byte arrays and image records work across realms", () => {
+  for (const kind of ["Uint8Array", "Uint8ClampedArray"]) {
+    const foreign = runInNewContext(
+      `({width:1,height:1,pixels:new ${kind}([48,104,176,255])})`,
+    );
+    assert.equal(dominantAccent(foreign).color, "#3068b0");
+  }
+  for (const expression of [
+    "new (class Extra extends Uint8Array {})(4)",
+    "new Uint8Array(new SharedArrayBuffer(4))",
+    "new Uint16Array(4)",
+    "new DataView(new ArrayBuffer(4))",
+  ])
+    assert.throws(() =>
+      dominantAccent(
+        runInNewContext(`({width:1,height:1,pixels:${expression}})`),
+      ),
+    );
+});
+test("byte-view metadata accessors, tag spoofs and detached buffers reject safely", () => {
+  let calls = 0;
+  for (const key of ["buffer", "length", "byteLength", "byteOffset"]) {
+    const pixels = new Uint8Array(4);
+    Object.defineProperty(pixels, key, {
+      get() {
+        calls++;
+      },
+    });
+    assert.throws(() => dominantAccent({ width: 1, height: 1, pixels }));
+  }
+  assert.equal(calls, 0);
+  const fake = {
+    [Symbol.toStringTag]: "Uint8Array",
+    length: 4,
+    buffer: new ArrayBuffer(4),
+  };
+  assert.throws(() => dominantAccent({ width: 1, height: 1, pixels: fake }));
+  const wrongKind = new Float32Array(4);
+  Object.setPrototypeOf(wrongKind, Uint8Array.prototype);
+  assert.throws(() =>
+    dominantAccent({ width: 1, height: 1, pixels: wrongKind }),
+  );
+  const detached = new Uint8Array(4);
+  structuredClone(detached.buffer, { transfer: [detached.buffer] });
+  assert.throws(() =>
+    dominantAccent({ width: 1, height: 1, pixels: detached }),
+  );
 });
