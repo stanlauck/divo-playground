@@ -1,0 +1,5 @@
+"order","shooting_day_id","shooting_day","date","scene_id","scene_number","int_ext","set","time_of_day","pages_eighths","pages","synopsis","script_day","unit","elements_json","notes"
+"1","shoot-day-b","First supplied day","2026-10-14","yard","2","EXT.","Quiet yard","NIGHT","4","4/8","The blue cart rolls past a paper star 🌟.","","","[{""category"":""vehicles"",""id"":""cart"",""name"":""Blue cart"",""quantity"":1},{""category"":""visual_effects"",""id"":""sparks"",""name"":""Paper sparks"",""quantity"":1}]",""
+"2","shoot-day-b","First supplied day","2026-10-14","workshop","10A","INT.","Lantern workshop","DAY","13","1 5/8","НИЛА counts two cups, then checks the invented lantern.","Story day 1","Main","[{""category"":""cast"",""id"":""cast-nila"",""name"":""НИЛА"",""quantity"":1},{""category"":""props"",""id"":""cup"",""name"":""Copper cup & key"",""quantity"":2}]","Synthetic data only.
+No real production."
+"3","","","","doorway","3","INT./EXT.","Workshop doorway","DAWN","0","0","","","","[]",""
