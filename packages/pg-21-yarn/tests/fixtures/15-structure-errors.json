@@ -1,0 +1,274 @@
+{
+  "version": 1,
+  "sources": [
+    "15-structure-errors.yarn"
+  ],
+  "start_node": "Delimiters:1",
+  "titles": [
+    {
+      "id": "NoDelimiter",
+      "title": "NoDelimiter",
+      "source": 0,
+      "meta": {
+        "Ada": "These headers were never closed."
+      },
+      "entry": null,
+      "line": 6,
+      "col": 1
+    },
+    {
+      "id": "Delimiters",
+      "title": "Delimiters",
+      "source": 0,
+      "entry": "Delimiters:1",
+      "line": 10,
+      "col": 1
+    },
+    {
+      "id": "BadCommands",
+      "title": "BadCommands",
+      "source": 0,
+      "entry": "BadCommands:1",
+      "line": 18,
+      "col": 1
+    },
+    {
+      "id": "Hashtags",
+      "title": "Hashtags",
+      "source": 0,
+      "entry": "Hashtags:1",
+      "line": 27,
+      "col": 1
+    }
+  ],
+  "nodes": [
+    {
+      "id": "Delimiters:1",
+      "source": 0,
+      "title": "Delimiters",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "A well formed line.",
+      "line_id": "15a0001",
+      "line": 12,
+      "col": 6
+    },
+    {
+      "id": "Delimiters:2",
+      "source": 0,
+      "title": "Delimiters",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "A stray header delimiter inside the body.",
+      "line_id": "15a0002",
+      "line": 14,
+      "col": 6
+    },
+    {
+      "id": "BadCommands:1",
+      "source": 0,
+      "title": "BadCommands",
+      "kind": "jump",
+      "command": {
+        "name": "jump"
+      },
+      "line": 20,
+      "col": 1
+    },
+    {
+      "id": "BadCommands:2",
+      "source": 0,
+      "title": "BadCommands",
+      "kind": "command",
+      "command": {
+        "name": "set",
+        "args": "gold = 1"
+      },
+      "line": 21,
+      "col": 1
+    },
+    {
+      "id": "BadCommands:3",
+      "source": 0,
+      "title": "BadCommands",
+      "kind": "command",
+      "command": {
+        "name": "declare"
+      },
+      "line": 22,
+      "col": 1
+    },
+    {
+      "id": "BadCommands:4",
+      "source": 0,
+      "title": "BadCommands",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "After an unterminated command.",
+      "line_id": "15b0001",
+      "line": 24,
+      "col": 6
+    },
+    {
+      "id": "Hashtags:1",
+      "source": 0,
+      "title": "Hashtags",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "A malformed hashtag region.",
+      "line_id": "15c0001",
+      "tags": [
+        "ok"
+      ],
+      "line": 29,
+      "col": 6
+    },
+    {
+      "id": "Hashtags:2",
+      "source": 0,
+      "title": "Hashtags",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "An empty line id.",
+      "line": 30,
+      "col": 6
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "kind": "flow",
+      "source": "Delimiters:1",
+      "target": "Delimiters:2",
+      "index": 0
+    },
+    {
+      "id": "edge-2",
+      "kind": "flow",
+      "source": "BadCommands:2",
+      "target": "BadCommands:3",
+      "index": 1
+    },
+    {
+      "id": "edge-3",
+      "kind": "flow",
+      "source": "BadCommands:3",
+      "target": "BadCommands:4",
+      "index": 2
+    },
+    {
+      "id": "edge-4",
+      "kind": "flow",
+      "source": "Hashtags:1",
+      "target": "Hashtags:2",
+      "index": 3
+    }
+  ],
+  "variables": [],
+  "errors": [
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 1,
+      "col": 1,
+      "code": "content_outside_node",
+      "severity": "error",
+      "message": "content outside a node body; expected a `key: value` header or `---`"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 2,
+      "col": 1,
+      "code": "unexpected_node_end",
+      "severity": "error",
+      "message": "`===` with no open node"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 3,
+      "col": 1,
+      "code": "option_after_node_end",
+      "severity": "error",
+      "message": "option outside a node body; `===` already closed the node"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 4,
+      "col": 1,
+      "code": "unexpected_node_end",
+      "severity": "error",
+      "message": "`===` with no open node"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 6,
+      "col": 1,
+      "code": "missing_header_delimiter",
+      "severity": "error",
+      "message": "node headers are not followed by `---`"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 13,
+      "col": 1,
+      "code": "unexpected_header_delimiter",
+      "severity": "error",
+      "message": "`---` inside a node body; headers must come before the body"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 16,
+      "col": 1,
+      "code": "unexpected_node_end",
+      "severity": "error",
+      "message": "`===` with no open node"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 20,
+      "col": 1,
+      "code": "bad_command_syntax",
+      "severity": "error",
+      "message": "`<<jump>>` has no target node"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 21,
+      "col": 1,
+      "code": "bad_command_syntax",
+      "severity": "error",
+      "message": "`<<set>>` target is not a `$variable`"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 22,
+      "col": 1,
+      "code": "bad_command_syntax",
+      "severity": "error",
+      "message": "`<<declare>>` has no assignment operator"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 23,
+      "col": 1,
+      "code": "unterminated_command",
+      "severity": "error",
+      "message": "`<<` has no matching `>>`"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 29,
+      "col": 52,
+      "code": "malformed_hashtag",
+      "severity": "error",
+      "message": "hashtag region holds a token that does not start with `#`"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 30,
+      "col": 24,
+      "code": "empty_line_id",
+      "severity": "error",
+      "message": "`#line:` has no id"
+    }
+  ]
+}

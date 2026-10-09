@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "sources": [
+    "02-headers.yarn"
+  ],
+  "start_node": "Ledger:1",
+  "titles": [
+    {
+      "id": "Ledger",
+      "title": "Ledger",
+      "source": 0,
+      "tags": [
+        "night",
+        "quiet"
+      ],
+      "meta": {
+        "description": "The counting room at the back of the archive.",
+        "position": "120,-40"
+      },
+      "entry": "Ledger:1",
+      "line": 1,
+      "col": 1
+    }
+  ],
+  "nodes": [
+    {
+      "id": "Ledger:1",
+      "source": 0,
+      "title": "Ledger",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "Every column in this ledger is wrong.",
+      "line_id": "2a0001",
+      "line": 7,
+      "col": 6
+    }
+  ],
+  "edges": [],
+  "variables": [],
+  "errors": [
+    {
+      "file": "02-headers.yarn",
+      "line": 5,
+      "col": 1,
+      "code": "duplicate_header_key",
+      "severity": "warning",
+      "message": "header `position` appears more than once; the first value is kept"
+    }
+  ]
+}

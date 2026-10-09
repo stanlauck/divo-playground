@@ -1,0 +1,249 @@
+{
+  "version": 1,
+  "sources": [
+    "06-options-nested.yarn"
+  ],
+  "start_node": "Start:1",
+  "titles": [
+    {
+      "id": "Start",
+      "title": "Start",
+      "source": 0,
+      "entry": "Start:1",
+      "line": 1,
+      "col": 1
+    },
+    {
+      "id": "End",
+      "title": "End",
+      "source": 0,
+      "entry": "End:1",
+      "line": 16,
+      "col": 1
+    }
+  ],
+  "nodes": [
+    {
+      "id": "Start:1",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "Choose a road.",
+      "line_id": "6a0001",
+      "line": 3,
+      "col": 6
+    },
+    {
+      "id": "Start:2",
+      "source": 0,
+      "title": "Start",
+      "kind": "options",
+      "text": "Outer one.",
+      "line_id": "6o0001",
+      "option_group": 1,
+      "line": 4,
+      "col": 4
+    },
+    {
+      "id": "Start:3",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "You picked the first.",
+      "line_id": "6a0002",
+      "parent": "Start:2",
+      "line": 5,
+      "col": 10
+    },
+    {
+      "id": "Start:4",
+      "source": 0,
+      "title": "Start",
+      "kind": "options",
+      "text": "Inner one.",
+      "line_id": "6o0002",
+      "option_group": 2,
+      "parent": "Start:2",
+      "line": 6,
+      "col": 8
+    },
+    {
+      "id": "Start:5",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "Deeper still.",
+      "line_id": "6a0003",
+      "parent": "Start:4",
+      "line": 7,
+      "col": 14
+    },
+    {
+      "id": "Start:6",
+      "source": 0,
+      "title": "Start",
+      "kind": "options",
+      "text": "Inner two.",
+      "line_id": "6o0003",
+      "option_group": 2,
+      "parent": "Start:2",
+      "line": 8,
+      "col": 8
+    },
+    {
+      "id": "Start:7",
+      "source": 0,
+      "title": "Start",
+      "kind": "jump",
+      "parent": "Start:6",
+      "command": {
+        "name": "jump",
+        "args": "End",
+        "target": "End"
+      },
+      "line": 9,
+      "col": 9
+    },
+    {
+      "id": "Start:8",
+      "source": 0,
+      "title": "Start",
+      "kind": "options",
+      "text": "Inner three.",
+      "line_id": "6o0004",
+      "option_group": 2,
+      "parent": "Start:2",
+      "line": 10,
+      "col": 8
+    },
+    {
+      "id": "Start:9",
+      "source": 0,
+      "title": "Start",
+      "kind": "options",
+      "text": "Outer two.",
+      "line_id": "6o0005",
+      "option_group": 1,
+      "line": 11,
+      "col": 4
+    },
+    {
+      "id": "Start:10",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "This body is indented with one tab.",
+      "line_id": "6a0004",
+      "parent": "Start:9",
+      "line": 12,
+      "col": 7
+    },
+    {
+      "id": "Start:11",
+      "source": 0,
+      "title": "Start",
+      "kind": "options",
+      "text": "Outer three.",
+      "line_id": "6o0006",
+      "option_group": 1,
+      "line": 13,
+      "col": 4
+    },
+    {
+      "id": "End:1",
+      "source": 0,
+      "title": "End",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "It ends here.",
+      "line_id": "6b0001",
+      "line": 18,
+      "col": 6
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "kind": "option",
+      "source": "Start:1",
+      "target": "Start:2",
+      "index": 0
+    },
+    {
+      "id": "edge-2",
+      "kind": "option",
+      "source": "Start:1",
+      "target": "Start:9",
+      "index": 1
+    },
+    {
+      "id": "edge-3",
+      "kind": "option",
+      "source": "Start:1",
+      "target": "Start:11",
+      "index": 2
+    },
+    {
+      "id": "edge-4",
+      "kind": "flow",
+      "source": "Start:2",
+      "target": "Start:3",
+      "index": 3
+    },
+    {
+      "id": "edge-5",
+      "kind": "option",
+      "source": "Start:3",
+      "target": "Start:4",
+      "index": 4
+    },
+    {
+      "id": "edge-6",
+      "kind": "option",
+      "source": "Start:3",
+      "target": "Start:6",
+      "index": 5
+    },
+    {
+      "id": "edge-7",
+      "kind": "option",
+      "source": "Start:3",
+      "target": "Start:8",
+      "index": 6
+    },
+    {
+      "id": "edge-8",
+      "kind": "flow",
+      "source": "Start:4",
+      "target": "Start:5",
+      "index": 7
+    },
+    {
+      "id": "edge-9",
+      "kind": "flow",
+      "source": "Start:6",
+      "target": "Start:7",
+      "index": 8
+    },
+    {
+      "id": "edge-10",
+      "kind": "jump",
+      "source": "Start:7",
+      "target": "End:1",
+      "index": 9
+    },
+    {
+      "id": "edge-11",
+      "kind": "flow",
+      "source": "Start:9",
+      "target": "Start:10",
+      "index": 10
+    }
+  ],
+  "variables": [],
+  "errors": []
+}

@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "sources": [
+    "12-empty-untitled.yarn"
+  ],
+  "start_node": "Start:1",
+  "titles": [
+    {
+      "id": "Empty",
+      "title": "Empty",
+      "source": 0,
+      "tags": [
+        "placeholder"
+      ],
+      "entry": null,
+      "line": 1,
+      "col": 1
+    },
+    {
+      "id": "OnlyComments",
+      "title": "OnlyComments",
+      "source": 0,
+      "entry": null,
+      "line": 6,
+      "col": 1
+    },
+    {
+      "id": "untitled",
+      "title": "untitled",
+      "source": 0,
+      "tags": [
+        "orphan"
+      ],
+      "entry": "untitled:1",
+      "line": 12,
+      "col": 1
+    },
+    {
+      "id": "BlankBody",
+      "title": "BlankBody",
+      "source": 0,
+      "entry": null,
+      "line": 17,
+      "col": 1
+    },
+    {
+      "id": "Start",
+      "title": "Start",
+      "source": 0,
+      "entry": "Start:1",
+      "line": 22,
+      "col": 1
+    }
+  ],
+  "nodes": [
+    {
+      "id": "untitled:1",
+      "source": 0,
+      "title": "untitled",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "This block never declared a title.",
+      "line_id": "12a0001",
+      "line": 14,
+      "col": 6
+    },
+    {
+      "id": "Start:1",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "The real start.",
+      "line_id": "12a0002",
+      "line": 24,
+      "col": 6
+    }
+  ],
+  "edges": [],
+  "variables": [],
+  "errors": [
+    {
+      "file": "12-empty-untitled.yarn",
+      "line": 12,
+      "col": 1,
+      "code": "missing_node_title",
+      "severity": "error",
+      "message": "node has no usable `title:` header; an `untitled` scope was assigned"
+    }
+  ]
+}

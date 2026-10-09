@@ -1,0 +1,9 @@
+title: Reply
+---
+Ada: The second file answers, holding {$shared}. #line:16b0001
+<<set $shared += 1>>
+-> Take the answer. #line:16b0002
+    <<jump Start>>
+-> Refuse the answer. #line:16b0003
+    <<jump Aside>>
+===

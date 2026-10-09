@@ -1,0 +1,345 @@
+{
+  "version": 1,
+  "sources": [
+    "11-commands.yarn"
+  ],
+  "start_node": "Builtins:1",
+  "titles": [
+    {
+      "id": "Builtins",
+      "title": "Builtins",
+      "source": 0,
+      "entry": "Builtins:1",
+      "line": 1,
+      "col": 1
+    },
+    {
+      "id": "CaseVariants",
+      "title": "CaseVariants",
+      "source": 0,
+      "entry": "CaseVariants:1",
+      "line": 9,
+      "col": 1
+    },
+    {
+      "id": "JumpCase",
+      "title": "JumpCase",
+      "source": 0,
+      "entry": "JumpCase:1",
+      "line": 14,
+      "col": 1
+    },
+    {
+      "id": "SetCase",
+      "title": "SetCase",
+      "source": 0,
+      "entry": "SetCase:1",
+      "line": 19,
+      "col": 1
+    },
+    {
+      "id": "Customs",
+      "title": "Customs",
+      "source": 0,
+      "entry": "Customs:1",
+      "line": 25,
+      "col": 1
+    }
+  ],
+  "nodes": [
+    {
+      "id": "Builtins:1",
+      "source": 0,
+      "title": "Builtins",
+      "kind": "command",
+      "command": {
+        "name": "wait",
+        "args": "2"
+      },
+      "line": 3,
+      "col": 1
+    },
+    {
+      "id": "Builtins:2",
+      "source": 0,
+      "title": "Builtins",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "After a wait.",
+      "line_id": "11a0001",
+      "line": 4,
+      "col": 6
+    },
+    {
+      "id": "Builtins:3",
+      "source": 0,
+      "title": "Builtins",
+      "kind": "command",
+      "command": {
+        "name": "stop"
+      },
+      "line": 5,
+      "col": 1
+    },
+    {
+      "id": "Builtins:4",
+      "source": 0,
+      "title": "Builtins",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "After a stop, so never reached.",
+      "line_id": "11a0002",
+      "line": 6,
+      "col": 6
+    },
+    {
+      "id": "CaseVariants:1",
+      "source": 0,
+      "title": "CaseVariants",
+      "kind": "command",
+      "command": {
+        "name": "STOP"
+      },
+      "line": 11,
+      "col": 1
+    },
+    {
+      "id": "JumpCase:1",
+      "source": 0,
+      "title": "JumpCase",
+      "kind": "jump",
+      "command": {
+        "name": "Jump",
+        "args": "CaseVariants",
+        "target": "CaseVariants"
+      },
+      "line": 16,
+      "col": 1
+    },
+    {
+      "id": "SetCase:1",
+      "source": 0,
+      "title": "SetCase",
+      "kind": "command",
+      "command": {
+        "name": "Set",
+        "args": "$count = 1",
+        "variable": "count",
+        "operator": "=",
+        "expression": "1"
+      },
+      "line": 21,
+      "col": 1
+    },
+    {
+      "id": "SetCase:2",
+      "source": 0,
+      "title": "SetCase",
+      "kind": "command",
+      "command": {
+        "name": "DECLARE",
+        "args": "$count = 2",
+        "variable": "count",
+        "operator": "=",
+        "expression": "2"
+      },
+      "line": 22,
+      "col": 1
+    },
+    {
+      "id": "Customs:1",
+      "source": 0,
+      "title": "Customs",
+      "kind": "command",
+      "command": {
+        "name": "fadeIn",
+        "args": "1.5"
+      },
+      "line": 27,
+      "col": 1
+    },
+    {
+      "id": "Customs:2",
+      "source": 0,
+      "title": "Customs",
+      "kind": "command",
+      "command": {
+        "name": "playMusic",
+        "args": "\"night theme\" loop"
+      },
+      "line": 28,
+      "col": 1
+    },
+    {
+      "id": "Customs:3",
+      "source": 0,
+      "title": "Customs",
+      "kind": "command",
+      "command": {
+        "name": "customWithoutArguments"
+      },
+      "line": 29,
+      "col": 1
+    },
+    {
+      "id": "Customs:4",
+      "source": 0,
+      "title": "Customs",
+      "kind": "conditional",
+      "command": {
+        "name": "if",
+        "args": "true",
+        "expression": "true",
+        "clauses": [
+          {
+            "keyword": "if",
+            "label": "if",
+            "expression": "true",
+            "body": [
+              "Customs:5"
+            ],
+            "line": 30,
+            "col": 1
+          }
+        ]
+      },
+      "line": 30,
+      "col": 1
+    },
+    {
+      "id": "Customs:5",
+      "source": 0,
+      "title": "Customs",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "Inside a bare conditional.",
+      "line_id": "11b0001",
+      "parent": "Customs:4",
+      "clause": "if",
+      "line": 31,
+      "col": 10
+    },
+    {
+      "id": "Customs:6",
+      "source": 0,
+      "title": "Customs",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "A stray else outside any conditional.",
+      "line_id": "11b0002",
+      "line": 34,
+      "col": 6
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "kind": "flow",
+      "source": "Builtins:1",
+      "target": "Builtins:2",
+      "index": 0
+    },
+    {
+      "id": "edge-2",
+      "kind": "flow",
+      "source": "Builtins:2",
+      "target": "Builtins:3",
+      "index": 1
+    },
+    {
+      "id": "edge-3",
+      "kind": "jump",
+      "source": "JumpCase:1",
+      "target": "CaseVariants:1",
+      "index": 2
+    },
+    {
+      "id": "edge-4",
+      "kind": "flow",
+      "source": "SetCase:1",
+      "target": "SetCase:2",
+      "index": 3
+    },
+    {
+      "id": "edge-5",
+      "kind": "flow",
+      "source": "Customs:1",
+      "target": "Customs:2",
+      "index": 4
+    },
+    {
+      "id": "edge-6",
+      "kind": "flow",
+      "source": "Customs:2",
+      "target": "Customs:3",
+      "index": 5
+    },
+    {
+      "id": "edge-7",
+      "kind": "flow",
+      "source": "Customs:3",
+      "target": "Customs:4",
+      "index": 6
+    },
+    {
+      "id": "edge-8",
+      "kind": "branch",
+      "source": "Customs:4",
+      "target": "Customs:5",
+      "index": 7,
+      "label": "if"
+    },
+    {
+      "id": "edge-9",
+      "kind": "flow",
+      "source": "Customs:5",
+      "target": "Customs:6",
+      "index": 8
+    }
+  ],
+  "variables": [
+    {
+      "name": "count",
+      "type": "int",
+      "value": 2,
+      "source": 0,
+      "title": "SetCase",
+      "line": 22,
+      "col": 1
+    }
+  ],
+  "errors": [
+    {
+      "file": "11-commands.yarn",
+      "line": 27,
+      "col": 1,
+      "code": "unknown_command",
+      "severity": "warning",
+      "message": "`<<fadeIn>>` is not a Yarn Spinner 2 command; kept as a generic command node"
+    },
+    {
+      "file": "11-commands.yarn",
+      "line": 28,
+      "col": 1,
+      "code": "unknown_command",
+      "severity": "warning",
+      "message": "`<<playMusic>>` is not a Yarn Spinner 2 command; kept as a generic command node"
+    },
+    {
+      "file": "11-commands.yarn",
+      "line": 29,
+      "col": 1,
+      "code": "unknown_command",
+      "severity": "warning",
+      "message": "`<<customWithoutArguments>>` is not a Yarn Spinner 2 command; kept as a generic command node"
+    },
+    {
+      "file": "11-commands.yarn",
+      "line": 33,
+      "col": 1,
+      "code": "unbalanced_conditional",
+      "severity": "error",
+      "message": "`<<else>>` has no matching `<<if>>`"
+    }
+  ]
+}

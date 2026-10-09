@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "sources": [
+    "05-options-flat.yarn"
+  ],
+  "start_node": "Start:1",
+  "titles": [
+    {
+      "id": "Start",
+      "title": "Start",
+      "source": 0,
+      "entry": "Start:1",
+      "line": 1,
+      "col": 1
+    }
+  ],
+  "nodes": [
+    {
+      "id": "Start:1",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "Which way now?",
+      "line_id": "5a0001",
+      "line": 3,
+      "col": 6
+    },
+    {
+      "id": "Start:2",
+      "source": 0,
+      "title": "Start",
+      "kind": "options",
+      "text": "North, to the ridge.",
+      "line_id": "5o0001",
+      "option_group": 1,
+      "line": 4,
+      "col": 4
+    },
+    {
+      "id": "Start:3",
+      "source": 0,
+      "title": "Start",
+      "kind": "options",
+      "text": "South, to the ford.",
+      "line_id": "5o0002",
+      "option_group": 1,
+      "line": 5,
+      "col": 4
+    },
+    {
+      "id": "Start:4",
+      "source": 0,
+      "title": "Start",
+      "kind": "options",
+      "text": "Nowhere at all.",
+      "line_id": "5o0003",
+      "option_group": 1,
+      "line": 6,
+      "col": 4
+    },
+    {
+      "id": "Start:5",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "Then it is settled.",
+      "line_id": "5a0002",
+      "line": 7,
+      "col": 6
+    },
+    {
+      "id": "Start:6",
+      "source": 0,
+      "title": "Start",
+      "kind": "options",
+      "text": "One more question.",
+      "line_id": "5o0004",
+      "option_group": 2,
+      "line": 8,
+      "col": 4
+    },
+    {
+      "id": "Start:7",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "Ask it.",
+      "line_id": "5a0003",
+      "parent": "Start:6",
+      "line": 9,
+      "col": 10
+    },
+    {
+      "id": "Start:8",
+      "source": 0,
+      "title": "Start",
+      "kind": "options",
+      "text": "No more questions.",
+      "line_id": "5o0005",
+      "option_group": 2,
+      "line": 10,
+      "col": 4
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "kind": "option",
+      "source": "Start:1",
+      "target": "Start:2",
+      "index": 0
+    },
+    {
+      "id": "edge-2",
+      "kind": "option",
+      "source": "Start:1",
+      "target": "Start:3",
+      "index": 1
+    },
+    {
+      "id": "edge-3",
+      "kind": "option",
+      "source": "Start:1",
+      "target": "Start:4",
+      "index": 2
+    },
+    {
+      "id": "edge-4",
+      "kind": "flow",
+      "source": "Start:2",
+      "target": "Start:5",
+      "index": 3
+    },
+    {
+      "id": "edge-5",
+      "kind": "flow",
+      "source": "Start:3",
+      "target": "Start:5",
+      "index": 4
+    },
+    {
+      "id": "edge-6",
+      "kind": "flow",
+      "source": "Start:4",
+      "target": "Start:5",
+      "index": 5
+    },
+    {
+      "id": "edge-7",
+      "kind": "option",
+      "source": "Start:5",
+      "target": "Start:6",
+      "index": 6
+    },
+    {
+      "id": "edge-8",
+      "kind": "option",
+      "source": "Start:5",
+      "target": "Start:8",
+      "index": 7
+    },
+    {
+      "id": "edge-9",
+      "kind": "flow",
+      "source": "Start:6",
+      "target": "Start:7",
+      "index": 8
+    }
+  ],
+  "variables": [],
+  "errors": []
+}

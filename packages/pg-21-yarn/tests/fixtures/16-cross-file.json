@@ -1,0 +1,247 @@
+{
+  "version": 1,
+  "sources": [
+    "16-cross-file-a.yarn",
+    "16-cross-file-b.yarn"
+  ],
+  "start_node": "Start:1",
+  "titles": [
+    {
+      "id": "Start",
+      "title": "Start",
+      "source": 0,
+      "entry": "Start:1",
+      "line": 1,
+      "col": 1
+    },
+    {
+      "id": "Aside",
+      "title": "Aside",
+      "source": 0,
+      "entry": "Aside:1",
+      "line": 7,
+      "col": 1
+    },
+    {
+      "id": "Reply",
+      "title": "Reply",
+      "source": 1,
+      "entry": "Reply:1",
+      "line": 1,
+      "col": 1
+    }
+  ],
+  "nodes": [
+    {
+      "id": "Start:1",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "The first file opens the scene.",
+      "line_id": "16a0001",
+      "line": 3,
+      "col": 6
+    },
+    {
+      "id": "Start:2",
+      "source": 0,
+      "title": "Start",
+      "kind": "jump",
+      "command": {
+        "name": "jump",
+        "args": "Reply",
+        "target": "Reply"
+      },
+      "line": 4,
+      "col": 1
+    },
+    {
+      "id": "Aside:1",
+      "source": 0,
+      "title": "Aside",
+      "kind": "command",
+      "command": {
+        "name": "declare",
+        "args": "$shared = 3",
+        "variable": "shared",
+        "operator": "=",
+        "expression": "3"
+      },
+      "line": 10,
+      "col": 1
+    },
+    {
+      "id": "Aside:2",
+      "source": 0,
+      "title": "Aside",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "Only the first file declares it.",
+      "line_id": "16a0002",
+      "line": 11,
+      "col": 6
+    },
+    {
+      "id": "Reply:1",
+      "source": 1,
+      "title": "Reply",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "The second file answers, holding {$shared}.",
+      "line_id": "16b0001",
+      "line": 3,
+      "col": 6
+    },
+    {
+      "id": "Reply:2",
+      "source": 1,
+      "title": "Reply",
+      "kind": "command",
+      "command": {
+        "name": "set",
+        "args": "$shared += 1",
+        "variable": "shared",
+        "operator": "+=",
+        "expression": "1"
+      },
+      "line": 4,
+      "col": 1
+    },
+    {
+      "id": "Reply:3",
+      "source": 1,
+      "title": "Reply",
+      "kind": "options",
+      "text": "Take the answer.",
+      "line_id": "16b0002",
+      "option_group": 1,
+      "line": 5,
+      "col": 4
+    },
+    {
+      "id": "Reply:4",
+      "source": 1,
+      "title": "Reply",
+      "kind": "jump",
+      "parent": "Reply:3",
+      "command": {
+        "name": "jump",
+        "args": "Start",
+        "target": "Start"
+      },
+      "line": 6,
+      "col": 5
+    },
+    {
+      "id": "Reply:5",
+      "source": 1,
+      "title": "Reply",
+      "kind": "options",
+      "text": "Refuse the answer.",
+      "line_id": "16b0003",
+      "option_group": 1,
+      "line": 7,
+      "col": 4
+    },
+    {
+      "id": "Reply:6",
+      "source": 1,
+      "title": "Reply",
+      "kind": "jump",
+      "parent": "Reply:5",
+      "command": {
+        "name": "jump",
+        "args": "Aside",
+        "target": "Aside"
+      },
+      "line": 8,
+      "col": 5
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "kind": "flow",
+      "source": "Start:1",
+      "target": "Start:2",
+      "index": 0
+    },
+    {
+      "id": "edge-2",
+      "kind": "jump",
+      "source": "Start:2",
+      "target": "Reply:1",
+      "index": 1
+    },
+    {
+      "id": "edge-3",
+      "kind": "flow",
+      "source": "Aside:1",
+      "target": "Aside:2",
+      "index": 2
+    },
+    {
+      "id": "edge-4",
+      "kind": "flow",
+      "source": "Reply:1",
+      "target": "Reply:2",
+      "index": 3
+    },
+    {
+      "id": "edge-5",
+      "kind": "option",
+      "source": "Reply:2",
+      "target": "Reply:3",
+      "index": 4
+    },
+    {
+      "id": "edge-6",
+      "kind": "option",
+      "source": "Reply:2",
+      "target": "Reply:5",
+      "index": 5
+    },
+    {
+      "id": "edge-7",
+      "kind": "flow",
+      "source": "Reply:3",
+      "target": "Reply:4",
+      "index": 6
+    },
+    {
+      "id": "edge-8",
+      "kind": "jump",
+      "source": "Reply:4",
+      "target": "Start:1",
+      "index": 7
+    },
+    {
+      "id": "edge-9",
+      "kind": "flow",
+      "source": "Reply:5",
+      "target": "Reply:6",
+      "index": 8
+    },
+    {
+      "id": "edge-10",
+      "kind": "jump",
+      "source": "Reply:6",
+      "target": "Aside:1",
+      "index": 9
+    }
+  ],
+  "variables": [
+    {
+      "name": "shared",
+      "type": "int",
+      "value": 3,
+      "description": "Declared here, used in the second file.",
+      "source": 0,
+      "title": "Aside",
+      "line": 10,
+      "col": 1
+    }
+  ],
+  "errors": []
+}

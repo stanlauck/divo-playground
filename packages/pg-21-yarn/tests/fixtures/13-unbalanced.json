@@ -1,0 +1,379 @@
+{
+  "version": 1,
+  "sources": [
+    "13-unbalanced.yarn"
+  ],
+  "start_node": "Unbalanced:1",
+  "titles": [
+    {
+      "id": "Unbalanced",
+      "title": "Unbalanced",
+      "source": 0,
+      "entry": "Unbalanced:1",
+      "line": 1,
+      "col": 1
+    },
+    {
+      "id": "StrayElse",
+      "title": "StrayElse",
+      "source": 0,
+      "entry": "StrayElse:1",
+      "line": 8,
+      "col": 1
+    },
+    {
+      "id": "ElseifAfterElse",
+      "title": "ElseifAfterElse",
+      "source": 0,
+      "entry": "ElseifAfterElse:1",
+      "line": 16,
+      "col": 1
+    },
+    {
+      "id": "ElseWithCondition",
+      "title": "ElseWithCondition",
+      "source": 0,
+      "entry": "ElseWithCondition:1",
+      "line": 28,
+      "col": 1
+    }
+  ],
+  "nodes": [
+    {
+      "id": "Unbalanced:1",
+      "source": 0,
+      "title": "Unbalanced",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "Before.",
+      "line_id": "13a0001",
+      "line": 3,
+      "col": 6
+    },
+    {
+      "id": "Unbalanced:2",
+      "source": 0,
+      "title": "Unbalanced",
+      "kind": "conditional",
+      "command": {
+        "name": "if",
+        "args": "$x == 1",
+        "expression": "$x == 1",
+        "clauses": [
+          {
+            "keyword": "if",
+            "label": "if",
+            "expression": "$x == 1",
+            "body": [
+              "Unbalanced:3"
+            ],
+            "line": 4,
+            "col": 1
+          }
+        ]
+      },
+      "line": 4,
+      "col": 1
+    },
+    {
+      "id": "Unbalanced:3",
+      "source": 0,
+      "title": "Unbalanced",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "Inside an if with no endif.",
+      "line_id": "13a0002",
+      "parent": "Unbalanced:2",
+      "clause": "if",
+      "line": 5,
+      "col": 10
+    },
+    {
+      "id": "StrayElse:1",
+      "source": 0,
+      "title": "StrayElse",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "An else with no if.",
+      "line_id": "13b0001",
+      "line": 11,
+      "col": 6
+    },
+    {
+      "id": "StrayElse:2",
+      "source": 0,
+      "title": "StrayElse",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "An endif with no if.",
+      "line_id": "13b0002",
+      "line": 13,
+      "col": 6
+    },
+    {
+      "id": "ElseifAfterElse:1",
+      "source": 0,
+      "title": "ElseifAfterElse",
+      "kind": "conditional",
+      "command": {
+        "name": "if",
+        "args": "$y",
+        "expression": "$y",
+        "clauses": [
+          {
+            "keyword": "if",
+            "label": "if",
+            "expression": "$y",
+            "body": [
+              "ElseifAfterElse:2"
+            ],
+            "line": 18,
+            "col": 1
+          },
+          {
+            "keyword": "else",
+            "label": "else",
+            "body": [
+              "ElseifAfterElse:3",
+              "ElseifAfterElse:4"
+            ],
+            "line": 20,
+            "col": 1
+          }
+        ]
+      },
+      "line": 18,
+      "col": 1
+    },
+    {
+      "id": "ElseifAfterElse:2",
+      "source": 0,
+      "title": "ElseifAfterElse",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "The if body.",
+      "line_id": "13c0001",
+      "parent": "ElseifAfterElse:1",
+      "clause": "if",
+      "line": 19,
+      "col": 10
+    },
+    {
+      "id": "ElseifAfterElse:3",
+      "source": 0,
+      "title": "ElseifAfterElse",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "The else body.",
+      "line_id": "13c0002",
+      "parent": "ElseifAfterElse:1",
+      "clause": "else",
+      "line": 21,
+      "col": 10
+    },
+    {
+      "id": "ElseifAfterElse:4",
+      "source": 0,
+      "title": "ElseifAfterElse",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "Too late for an elseif.",
+      "line_id": "13c0003",
+      "parent": "ElseifAfterElse:1",
+      "clause": "else",
+      "line": 23,
+      "col": 10
+    },
+    {
+      "id": "ElseifAfterElse:5",
+      "source": 0,
+      "title": "ElseifAfterElse",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "After the block.",
+      "line_id": "13c0004",
+      "line": 25,
+      "col": 6
+    },
+    {
+      "id": "ElseWithCondition:1",
+      "source": 0,
+      "title": "ElseWithCondition",
+      "kind": "conditional",
+      "command": {
+        "name": "if",
+        "args": "$a",
+        "expression": "$a",
+        "clauses": [
+          {
+            "keyword": "if",
+            "label": "if",
+            "expression": "$a",
+            "body": [
+              "ElseWithCondition:2"
+            ],
+            "line": 30,
+            "col": 1
+          },
+          {
+            "keyword": "else",
+            "label": "else",
+            "body": [
+              "ElseWithCondition:3"
+            ],
+            "line": 32,
+            "col": 1
+          }
+        ]
+      },
+      "line": 30,
+      "col": 1
+    },
+    {
+      "id": "ElseWithCondition:2",
+      "source": 0,
+      "title": "ElseWithCondition",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "Then.",
+      "line_id": "13d0001",
+      "parent": "ElseWithCondition:1",
+      "clause": "if",
+      "line": 31,
+      "col": 10
+    },
+    {
+      "id": "ElseWithCondition:3",
+      "source": 0,
+      "title": "ElseWithCondition",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "Else takes no condition.",
+      "line_id": "13d0002",
+      "parent": "ElseWithCondition:1",
+      "clause": "else",
+      "line": 33,
+      "col": 10
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "kind": "flow",
+      "source": "Unbalanced:1",
+      "target": "Unbalanced:2",
+      "index": 0
+    },
+    {
+      "id": "edge-2",
+      "kind": "branch",
+      "source": "Unbalanced:2",
+      "target": "Unbalanced:3",
+      "index": 1,
+      "label": "if"
+    },
+    {
+      "id": "edge-3",
+      "kind": "flow",
+      "source": "StrayElse:1",
+      "target": "StrayElse:2",
+      "index": 2
+    },
+    {
+      "id": "edge-4",
+      "kind": "branch",
+      "source": "ElseifAfterElse:1",
+      "target": "ElseifAfterElse:2",
+      "index": 3,
+      "label": "if"
+    },
+    {
+      "id": "edge-5",
+      "kind": "flow",
+      "source": "ElseifAfterElse:2",
+      "target": "ElseifAfterElse:5",
+      "index": 4
+    },
+    {
+      "id": "edge-6",
+      "kind": "branch",
+      "source": "ElseifAfterElse:1",
+      "target": "ElseifAfterElse:3",
+      "index": 5,
+      "label": "else"
+    },
+    {
+      "id": "edge-7",
+      "kind": "flow",
+      "source": "ElseifAfterElse:3",
+      "target": "ElseifAfterElse:4",
+      "index": 6
+    },
+    {
+      "id": "edge-8",
+      "kind": "flow",
+      "source": "ElseifAfterElse:4",
+      "target": "ElseifAfterElse:5",
+      "index": 7
+    },
+    {
+      "id": "edge-9",
+      "kind": "branch",
+      "source": "ElseWithCondition:1",
+      "target": "ElseWithCondition:2",
+      "index": 8,
+      "label": "if"
+    },
+    {
+      "id": "edge-10",
+      "kind": "branch",
+      "source": "ElseWithCondition:1",
+      "target": "ElseWithCondition:3",
+      "index": 9,
+      "label": "else"
+    }
+  ],
+  "variables": [],
+  "errors": [
+    {
+      "file": "13-unbalanced.yarn",
+      "line": 4,
+      "col": 1,
+      "code": "unbalanced_conditional",
+      "severity": "error",
+      "message": "`<<if>>` has no matching `<<endif>>`"
+    },
+    {
+      "file": "13-unbalanced.yarn",
+      "line": 10,
+      "col": 1,
+      "code": "unbalanced_conditional",
+      "severity": "error",
+      "message": "`<<else>>` has no matching `<<if>>`"
+    },
+    {
+      "file": "13-unbalanced.yarn",
+      "line": 12,
+      "col": 1,
+      "code": "unbalanced_conditional",
+      "severity": "error",
+      "message": "`<<endif>>` has no matching `<<if>>`"
+    },
+    {
+      "file": "13-unbalanced.yarn",
+      "line": 22,
+      "col": 1,
+      "code": "unbalanced_conditional",
+      "severity": "error",
+      "message": "`<<elseif>>` after `<<else>>`"
+    },
+    {
+      "file": "13-unbalanced.yarn",
+      "line": 32,
+      "col": 1,
+      "code": "trailing_content_after_command",
+      "severity": "warning",
+      "message": "`<<else>>` takes no condition"
+    }
+  ]
+}

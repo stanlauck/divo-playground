@@ -1,0 +1,377 @@
+{
+  "version": 1,
+  "sources": [
+    "09-conditionals.yarn"
+  ],
+  "start_node": "Start:1",
+  "titles": [
+    {
+      "id": "Start",
+      "title": "Start",
+      "source": 0,
+      "entry": "Start:1",
+      "line": 1,
+      "col": 1
+    }
+  ],
+  "nodes": [
+    {
+      "id": "Start:1",
+      "source": 0,
+      "title": "Start",
+      "kind": "command",
+      "command": {
+        "name": "declare",
+        "args": "$visits = 0",
+        "variable": "visits",
+        "operator": "=",
+        "expression": "0"
+      },
+      "line": 3,
+      "col": 1
+    },
+    {
+      "id": "Start:2",
+      "source": 0,
+      "title": "Start",
+      "kind": "conditional",
+      "command": {
+        "name": "if",
+        "args": "$visits == 0",
+        "expression": "$visits == 0",
+        "clauses": [
+          {
+            "keyword": "if",
+            "label": "if",
+            "expression": "$visits == 0",
+            "body": [
+              "Start:3"
+            ],
+            "line": 4,
+            "col": 1
+          },
+          {
+            "keyword": "else_if",
+            "label": "elseif 1",
+            "expression": "$visits < 3",
+            "body": [
+              "Start:4",
+              "Start:5"
+            ],
+            "line": 6,
+            "col": 1
+          },
+          {
+            "keyword": "else",
+            "label": "else",
+            "body": [
+              "Start:8"
+            ],
+            "line": 13,
+            "col": 1
+          }
+        ]
+      },
+      "line": 4,
+      "col": 1
+    },
+    {
+      "id": "Start:3",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "This is your first time here.",
+      "line_id": "9a0001",
+      "parent": "Start:2",
+      "clause": "if",
+      "line": 5,
+      "col": 10
+    },
+    {
+      "id": "Start:4",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "A handful of visits, no more.",
+      "line_id": "9a0002",
+      "parent": "Start:2",
+      "clause": "elseif 1",
+      "line": 7,
+      "col": 10
+    },
+    {
+      "id": "Start:5",
+      "source": 0,
+      "title": "Start",
+      "kind": "conditional",
+      "parent": "Start:2",
+      "clause": "elseif 1",
+      "command": {
+        "name": "if",
+        "args": "$visits == 2",
+        "expression": "$visits == 2",
+        "clauses": [
+          {
+            "keyword": "if",
+            "label": "if",
+            "expression": "$visits == 2",
+            "body": [
+              "Start:6"
+            ],
+            "line": 8,
+            "col": 5
+          },
+          {
+            "keyword": "else",
+            "label": "else",
+            "body": [
+              "Start:7"
+            ],
+            "line": 10,
+            "col": 5
+          }
+        ]
+      },
+      "line": 8,
+      "col": 5
+    },
+    {
+      "id": "Start:6",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "The second of them.",
+      "line_id": "9a0003",
+      "parent": "Start:5",
+      "clause": "if",
+      "line": 9,
+      "col": 14
+    },
+    {
+      "id": "Start:7",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "Not the second.",
+      "line_id": "9a0004",
+      "parent": "Start:5",
+      "clause": "else",
+      "line": 11,
+      "col": 14
+    },
+    {
+      "id": "Start:8",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "You know this room as well as I do.",
+      "line_id": "9a0005",
+      "parent": "Start:2",
+      "clause": "else",
+      "line": 14,
+      "col": 10
+    },
+    {
+      "id": "Start:9",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "After the block.",
+      "line_id": "9a0006",
+      "line": 16,
+      "col": 6
+    },
+    {
+      "id": "Start:10",
+      "source": 0,
+      "title": "Start",
+      "kind": "options",
+      "text": "Stay and read.",
+      "line_id": "9o0001",
+      "option_group": 1,
+      "line": 17,
+      "col": 4
+    },
+    {
+      "id": "Start:11",
+      "source": 0,
+      "title": "Start",
+      "kind": "conditional",
+      "parent": "Start:10",
+      "command": {
+        "name": "if",
+        "args": "$gateOpen",
+        "expression": "$gateOpen",
+        "clauses": [
+          {
+            "keyword": "if",
+            "label": "if",
+            "expression": "$gateOpen",
+            "body": [
+              "Start:12"
+            ],
+            "line": 18,
+            "col": 5
+          }
+        ]
+      },
+      "line": 18,
+      "col": 5
+    },
+    {
+      "id": "Start:12",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "The gate is open.",
+      "line_id": "9a0007",
+      "parent": "Start:11",
+      "clause": "if",
+      "line": 19,
+      "col": 14
+    },
+    {
+      "id": "Start:13",
+      "source": 0,
+      "title": "Start",
+      "kind": "options",
+      "text": "Leave now.",
+      "line_id": "9o0002",
+      "option_group": 1,
+      "line": 21,
+      "col": 4
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "kind": "flow",
+      "source": "Start:1",
+      "target": "Start:2",
+      "index": 0
+    },
+    {
+      "id": "edge-2",
+      "kind": "branch",
+      "source": "Start:2",
+      "target": "Start:3",
+      "index": 1,
+      "label": "if"
+    },
+    {
+      "id": "edge-3",
+      "kind": "flow",
+      "source": "Start:3",
+      "target": "Start:9",
+      "index": 2
+    },
+    {
+      "id": "edge-4",
+      "kind": "branch",
+      "source": "Start:2",
+      "target": "Start:4",
+      "index": 3,
+      "label": "elseif 1"
+    },
+    {
+      "id": "edge-5",
+      "kind": "flow",
+      "source": "Start:4",
+      "target": "Start:5",
+      "index": 4
+    },
+    {
+      "id": "edge-6",
+      "kind": "branch",
+      "source": "Start:5",
+      "target": "Start:6",
+      "index": 5,
+      "label": "if"
+    },
+    {
+      "id": "edge-7",
+      "kind": "flow",
+      "source": "Start:6",
+      "target": "Start:9",
+      "index": 6
+    },
+    {
+      "id": "edge-8",
+      "kind": "branch",
+      "source": "Start:5",
+      "target": "Start:7",
+      "index": 7,
+      "label": "else"
+    },
+    {
+      "id": "edge-9",
+      "kind": "flow",
+      "source": "Start:7",
+      "target": "Start:9",
+      "index": 8
+    },
+    {
+      "id": "edge-10",
+      "kind": "branch",
+      "source": "Start:2",
+      "target": "Start:8",
+      "index": 9,
+      "label": "else"
+    },
+    {
+      "id": "edge-11",
+      "kind": "flow",
+      "source": "Start:8",
+      "target": "Start:9",
+      "index": 10
+    },
+    {
+      "id": "edge-12",
+      "kind": "option",
+      "source": "Start:9",
+      "target": "Start:10",
+      "index": 11
+    },
+    {
+      "id": "edge-13",
+      "kind": "option",
+      "source": "Start:9",
+      "target": "Start:13",
+      "index": 12
+    },
+    {
+      "id": "edge-14",
+      "kind": "flow",
+      "source": "Start:10",
+      "target": "Start:11",
+      "index": 13
+    },
+    {
+      "id": "edge-15",
+      "kind": "branch",
+      "source": "Start:11",
+      "target": "Start:12",
+      "index": 14,
+      "label": "if"
+    }
+  ],
+  "variables": [
+    {
+      "name": "visits",
+      "type": "int",
+      "value": 0,
+      "source": 0,
+      "title": "Start",
+      "line": 3,
+      "col": 1
+    }
+  ],
+  "errors": []
+}

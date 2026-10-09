@@ -1,0 +1,540 @@
+{
+  "version": 1,
+  "sources": [
+    "08-variables.yarn"
+  ],
+  "start_node": "Start:1",
+  "titles": [
+    {
+      "id": "Start",
+      "title": "Start",
+      "source": 0,
+      "entry": "Start:1",
+      "line": 1,
+      "col": 1
+    }
+  ],
+  "nodes": [
+    {
+      "id": "Start:1",
+      "source": 0,
+      "title": "Start",
+      "kind": "command",
+      "command": {
+        "name": "declare",
+        "args": "$gold = 0",
+        "variable": "gold",
+        "operator": "=",
+        "expression": "0"
+      },
+      "line": 4,
+      "col": 1
+    },
+    {
+      "id": "Start:2",
+      "source": 0,
+      "title": "Start",
+      "kind": "command",
+      "command": {
+        "name": "declare",
+        "args": "$gateOpen = false",
+        "variable": "gateOpen",
+        "operator": "=",
+        "expression": "false"
+      },
+      "line": 6,
+      "col": 1
+    },
+    {
+      "id": "Start:3",
+      "source": 0,
+      "title": "Start",
+      "kind": "command",
+      "command": {
+        "name": "declare",
+        "args": "$playerName = \"Wren\"",
+        "variable": "playerName",
+        "operator": "=",
+        "expression": "\"Wren\""
+      },
+      "line": 8,
+      "col": 1
+    },
+    {
+      "id": "Start:4",
+      "source": 0,
+      "title": "Start",
+      "kind": "command",
+      "command": {
+        "name": "declare",
+        "args": "$ratio = 0.25",
+        "variable": "ratio",
+        "operator": "=",
+        "expression": "0.25"
+      },
+      "line": 9,
+      "col": 1
+    },
+    {
+      "id": "Start:5",
+      "source": 0,
+      "title": "Start",
+      "kind": "command",
+      "command": {
+        "name": "declare",
+        "args": "$day = 3 as number",
+        "variable": "day",
+        "operator": "=",
+        "expression": "3 as number"
+      },
+      "line": 10,
+      "col": 1
+    },
+    {
+      "id": "Start:6",
+      "source": 0,
+      "title": "Start",
+      "kind": "command",
+      "command": {
+        "name": "declare",
+        "args": "$flag = true as bool",
+        "variable": "flag",
+        "operator": "=",
+        "expression": "true as bool"
+      },
+      "line": 11,
+      "col": 1
+    },
+    {
+      "id": "Start:7",
+      "source": 0,
+      "title": "Start",
+      "kind": "command",
+      "command": {
+        "name": "declare",
+        "args": "$label = \"six\" as STRING",
+        "variable": "label",
+        "operator": "=",
+        "expression": "\"six\" as STRING"
+      },
+      "line": 12,
+      "col": 1
+    },
+    {
+      "id": "Start:8",
+      "source": 0,
+      "title": "Start",
+      "kind": "command",
+      "command": {
+        "name": "declare",
+        "args": "$odd = 7 as string",
+        "variable": "odd",
+        "operator": "=",
+        "expression": "7 as string"
+      },
+      "line": 13,
+      "col": 1
+    },
+    {
+      "id": "Start:9",
+      "source": 0,
+      "title": "Start",
+      "kind": "command",
+      "command": {
+        "name": "declare",
+        "args": "$weird = 1 as banana",
+        "variable": "weird",
+        "operator": "=",
+        "expression": "1 as banana"
+      },
+      "line": 14,
+      "col": 1
+    },
+    {
+      "id": "Start:10",
+      "source": 0,
+      "title": "Start",
+      "kind": "command",
+      "command": {
+        "name": "declare",
+        "args": "$computed = $gold + 1",
+        "variable": "computed",
+        "operator": "=",
+        "expression": "$gold + 1"
+      },
+      "line": 15,
+      "col": 1
+    },
+    {
+      "id": "Start:11",
+      "source": 0,
+      "title": "Start",
+      "kind": "command",
+      "command": {
+        "name": "set",
+        "args": "$gold = 5",
+        "variable": "gold",
+        "operator": "=",
+        "expression": "5"
+      },
+      "line": 16,
+      "col": 1
+    },
+    {
+      "id": "Start:12",
+      "source": 0,
+      "title": "Start",
+      "kind": "command",
+      "command": {
+        "name": "set",
+        "args": "$gold += 2",
+        "variable": "gold",
+        "operator": "+=",
+        "expression": "2"
+      },
+      "line": 17,
+      "col": 1
+    },
+    {
+      "id": "Start:13",
+      "source": 0,
+      "title": "Start",
+      "kind": "command",
+      "command": {
+        "name": "set",
+        "args": "$gold -= 1",
+        "variable": "gold",
+        "operator": "-=",
+        "expression": "1"
+      },
+      "line": 18,
+      "col": 1
+    },
+    {
+      "id": "Start:14",
+      "source": 0,
+      "title": "Start",
+      "kind": "command",
+      "command": {
+        "name": "set",
+        "args": "$gold *= 3",
+        "variable": "gold",
+        "operator": "*=",
+        "expression": "3"
+      },
+      "line": 19,
+      "col": 1
+    },
+    {
+      "id": "Start:15",
+      "source": 0,
+      "title": "Start",
+      "kind": "command",
+      "command": {
+        "name": "set",
+        "args": "$gold /= 2",
+        "variable": "gold",
+        "operator": "/=",
+        "expression": "2"
+      },
+      "line": 20,
+      "col": 1
+    },
+    {
+      "id": "Start:16",
+      "source": 0,
+      "title": "Start",
+      "kind": "command",
+      "command": {
+        "name": "set",
+        "args": "$gold to 9",
+        "variable": "gold",
+        "operator": "to",
+        "expression": "9"
+      },
+      "line": 21,
+      "col": 1
+    },
+    {
+      "id": "Start:17",
+      "source": 0,
+      "title": "Start",
+      "kind": "command",
+      "command": {
+        "name": "declare",
+        "args": "$gold = 99",
+        "variable": "gold",
+        "operator": "=",
+        "expression": "99"
+      },
+      "line": 22,
+      "col": 1
+    },
+    {
+      "id": "Start:18",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "The arithmetic is never evaluated.",
+      "line_id": "8a0001",
+      "line": 23,
+      "col": 6
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "kind": "flow",
+      "source": "Start:1",
+      "target": "Start:2",
+      "index": 0
+    },
+    {
+      "id": "edge-2",
+      "kind": "flow",
+      "source": "Start:2",
+      "target": "Start:3",
+      "index": 1
+    },
+    {
+      "id": "edge-3",
+      "kind": "flow",
+      "source": "Start:3",
+      "target": "Start:4",
+      "index": 2
+    },
+    {
+      "id": "edge-4",
+      "kind": "flow",
+      "source": "Start:4",
+      "target": "Start:5",
+      "index": 3
+    },
+    {
+      "id": "edge-5",
+      "kind": "flow",
+      "source": "Start:5",
+      "target": "Start:6",
+      "index": 4
+    },
+    {
+      "id": "edge-6",
+      "kind": "flow",
+      "source": "Start:6",
+      "target": "Start:7",
+      "index": 5
+    },
+    {
+      "id": "edge-7",
+      "kind": "flow",
+      "source": "Start:7",
+      "target": "Start:8",
+      "index": 6
+    },
+    {
+      "id": "edge-8",
+      "kind": "flow",
+      "source": "Start:8",
+      "target": "Start:9",
+      "index": 7
+    },
+    {
+      "id": "edge-9",
+      "kind": "flow",
+      "source": "Start:9",
+      "target": "Start:10",
+      "index": 8
+    },
+    {
+      "id": "edge-10",
+      "kind": "flow",
+      "source": "Start:10",
+      "target": "Start:11",
+      "index": 9
+    },
+    {
+      "id": "edge-11",
+      "kind": "flow",
+      "source": "Start:11",
+      "target": "Start:12",
+      "index": 10
+    },
+    {
+      "id": "edge-12",
+      "kind": "flow",
+      "source": "Start:12",
+      "target": "Start:13",
+      "index": 11
+    },
+    {
+      "id": "edge-13",
+      "kind": "flow",
+      "source": "Start:13",
+      "target": "Start:14",
+      "index": 12
+    },
+    {
+      "id": "edge-14",
+      "kind": "flow",
+      "source": "Start:14",
+      "target": "Start:15",
+      "index": 13
+    },
+    {
+      "id": "edge-15",
+      "kind": "flow",
+      "source": "Start:15",
+      "target": "Start:16",
+      "index": 14
+    },
+    {
+      "id": "edge-16",
+      "kind": "flow",
+      "source": "Start:16",
+      "target": "Start:17",
+      "index": 15
+    },
+    {
+      "id": "edge-17",
+      "kind": "flow",
+      "source": "Start:17",
+      "target": "Start:18",
+      "index": 16
+    }
+  ],
+  "variables": [
+    {
+      "name": "gold",
+      "type": "int",
+      "value": 0,
+      "description": "Gold the player carries.",
+      "source": 0,
+      "title": "Start",
+      "line": 4,
+      "col": 1
+    },
+    {
+      "name": "gateOpen",
+      "type": "bool",
+      "value": false,
+      "description": "Whether the gate stands open.",
+      "source": 0,
+      "title": "Start",
+      "line": 6,
+      "col": 1
+    },
+    {
+      "name": "playerName",
+      "type": "string",
+      "value": "Wren",
+      "description": "The name the player chose.",
+      "source": 0,
+      "title": "Start",
+      "line": 8,
+      "col": 1
+    },
+    {
+      "name": "ratio",
+      "type": "float",
+      "value": 0.25,
+      "source": 0,
+      "title": "Start",
+      "line": 9,
+      "col": 1
+    },
+    {
+      "name": "day",
+      "type": "int",
+      "declared_as": "number",
+      "value": 3,
+      "source": 0,
+      "title": "Start",
+      "line": 10,
+      "col": 1
+    },
+    {
+      "name": "flag",
+      "type": "bool",
+      "declared_as": "bool",
+      "value": true,
+      "source": 0,
+      "title": "Start",
+      "line": 11,
+      "col": 1
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "declared_as": "STRING",
+      "value": "six",
+      "source": 0,
+      "title": "Start",
+      "line": 12,
+      "col": 1
+    },
+    {
+      "name": "odd",
+      "type": "string",
+      "declared_as": "string",
+      "value": 7,
+      "source": 0,
+      "title": "Start",
+      "line": 13,
+      "col": 1
+    },
+    {
+      "name": "weird",
+      "type": "int",
+      "declared_as": "banana",
+      "value": 1,
+      "source": 0,
+      "title": "Start",
+      "line": 14,
+      "col": 1
+    },
+    {
+      "name": "computed",
+      "type": "unknown",
+      "value": "$gold + 1",
+      "source": 0,
+      "title": "Start",
+      "line": 15,
+      "col": 1
+    }
+  ],
+  "errors": [
+    {
+      "file": "08-variables.yarn",
+      "line": 13,
+      "col": 1,
+      "code": "invalid_variable_type",
+      "severity": "warning",
+      "message": "`as string` does not match the initial value of `$odd`"
+    },
+    {
+      "file": "08-variables.yarn",
+      "line": 14,
+      "col": 1,
+      "code": "invalid_variable_type",
+      "severity": "warning",
+      "message": "`as banana` is not `bool`, `string`, `int`, `float` or `number`"
+    },
+    {
+      "file": "08-variables.yarn",
+      "line": 15,
+      "col": 1,
+      "code": "invalid_variable_type",
+      "severity": "warning",
+      "message": "the initial value of `$computed` is not a literal"
+    },
+    {
+      "file": "08-variables.yarn",
+      "line": 22,
+      "col": 1,
+      "code": "duplicate_variable",
+      "severity": "error",
+      "message": "`$gold` is declared more than once; the first declaration is kept"
+    }
+  ]
+}

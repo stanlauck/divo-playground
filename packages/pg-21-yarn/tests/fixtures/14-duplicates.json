@@ -1,0 +1,187 @@
+{
+  "version": 1,
+  "sources": [
+    "14-duplicates.yarn"
+  ],
+  "start_node": "Repeated:1",
+  "titles": [
+    {
+      "id": "Repeated",
+      "title": "Repeated",
+      "source": 0,
+      "entry": "Repeated:1",
+      "line": 1,
+      "col": 1
+    },
+    {
+      "id": "Repeated#2",
+      "title": "Repeated",
+      "source": 0,
+      "entry": "Repeated#2:1",
+      "line": 6,
+      "col": 1
+    },
+    {
+      "id": "Repeated#3",
+      "title": "Repeated",
+      "source": 0,
+      "entry": "Repeated#3:1",
+      "line": 12,
+      "col": 1
+    },
+    {
+      "id": "LineIds",
+      "title": "LineIds",
+      "source": 0,
+      "entry": "LineIds:1",
+      "line": 17,
+      "col": 1
+    }
+  ],
+  "nodes": [
+    {
+      "id": "Repeated:1",
+      "source": 0,
+      "title": "Repeated",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "The first block called Repeated.",
+      "line_id": "14a0001",
+      "line": 3,
+      "col": 6
+    },
+    {
+      "id": "Repeated#2:1",
+      "source": 0,
+      "title": "Repeated#2",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "The second block called Repeated.",
+      "line_id": "14a0002",
+      "line": 8,
+      "col": 6
+    },
+    {
+      "id": "Repeated#2:2",
+      "source": 0,
+      "title": "Repeated#2",
+      "kind": "jump",
+      "command": {
+        "name": "jump",
+        "args": "Repeated",
+        "target": "Repeated"
+      },
+      "line": 9,
+      "col": 1
+    },
+    {
+      "id": "Repeated#3:1",
+      "source": 0,
+      "title": "Repeated#3",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "The third block called Repeated.",
+      "line_id": "14a0003",
+      "line": 14,
+      "col": 6
+    },
+    {
+      "id": "LineIds:1",
+      "source": 0,
+      "title": "LineIds",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "First use of the id.",
+      "line_id": "14b0001",
+      "line": 19,
+      "col": 6
+    },
+    {
+      "id": "LineIds:2",
+      "source": 0,
+      "title": "LineIds",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "Second use of the same id.",
+      "line_id": "14b0001",
+      "line": 20,
+      "col": 6
+    },
+    {
+      "id": "LineIds:3",
+      "source": 0,
+      "title": "LineIds",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "A third line, and the id repeats again.",
+      "line_id": "14b0001",
+      "line": 21,
+      "col": 6
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "kind": "flow",
+      "source": "Repeated#2:1",
+      "target": "Repeated#2:2",
+      "index": 0
+    },
+    {
+      "id": "edge-2",
+      "kind": "jump",
+      "source": "Repeated#2:2",
+      "target": "Repeated:1",
+      "index": 1
+    },
+    {
+      "id": "edge-3",
+      "kind": "flow",
+      "source": "LineIds:1",
+      "target": "LineIds:2",
+      "index": 2
+    },
+    {
+      "id": "edge-4",
+      "kind": "flow",
+      "source": "LineIds:2",
+      "target": "LineIds:3",
+      "index": 3
+    }
+  ],
+  "variables": [],
+  "errors": [
+    {
+      "file": "14-duplicates.yarn",
+      "line": 6,
+      "col": 1,
+      "code": "duplicate_node_title",
+      "severity": "error",
+      "message": "node title `Repeated` is already defined; this block becomes `Repeated#2`"
+    },
+    {
+      "file": "14-duplicates.yarn",
+      "line": 12,
+      "col": 1,
+      "code": "duplicate_node_title",
+      "severity": "error",
+      "message": "node title `Repeated` is already defined; this block becomes `Repeated#3`"
+    },
+    {
+      "file": "14-duplicates.yarn",
+      "line": 20,
+      "col": 6,
+      "code": "duplicate_line_id",
+      "severity": "error",
+      "message": "`#line:14b0001` is already used by 14-duplicates.yarn line 19 column 6"
+    },
+    {
+      "file": "14-duplicates.yarn",
+      "line": 21,
+      "col": 6,
+      "code": "duplicate_line_id",
+      "severity": "error",
+      "message": "`#line:14b0001` is already used by 14-duplicates.yarn line 19 column 6"
+    }
+  ]
+}

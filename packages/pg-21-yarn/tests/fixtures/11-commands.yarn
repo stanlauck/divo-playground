@@ -1,0 +1,35 @@
+title: Builtins
+---
+<<wait 2>>
+Ada: After a wait. #line:11a0001
+<<stop>>
+Ada: After a stop, so never reached. #line:11a0002
+===
+
+title: CaseVariants
+---
+<<STOP>>
+===
+
+title: JumpCase
+---
+<<Jump CaseVariants>>
+===
+
+title: SetCase
+---
+<<Set $count = 1>>
+<<DECLARE $count = 2>>
+===
+
+title: Customs
+---
+<<fadeIn 1.5>>
+<<playMusic "night theme" loop>>
+<<customWithoutArguments>>
+<<if true>>
+    Ada: Inside a bare conditional. #line:11b0001
+<<endif>>
+<<else>>
+Ada: A stray else outside any conditional. #line:11b0002
+===

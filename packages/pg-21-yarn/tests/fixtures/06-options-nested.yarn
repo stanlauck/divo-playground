@@ -1,0 +1,19 @@
+title: Start
+---
+Ada: Choose a road. #line:6a0001
+-> Outer one. #line:6o0001
+    Ada: You picked the first. #line:6a0002
+    -> Inner one. #line:6o0002
+        Ada: Deeper still. #line:6a0003
+    -> Inner two. #line:6o0003
+        <<jump End>>
+    -> Inner three. #line:6o0004
+-> Outer two. #line:6o0005
+	Ada: This body is indented with one tab. #line:6a0004
+-> Outer three. #line:6o0006
+===
+
+title: End
+---
+Ada: It ends here. #line:6b0001
+===

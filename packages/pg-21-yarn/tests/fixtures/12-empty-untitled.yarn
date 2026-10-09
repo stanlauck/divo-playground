@@ -1,0 +1,25 @@
+title: Empty
+tags: placeholder
+---
+===
+
+title: OnlyComments
+---
+// Nothing but comments in here.
+/// Not a declaration doc, just a comment.
+===
+
+tags: orphan
+---
+Ada: This block never declared a title. #line:12a0001
+===
+
+title: BlankBody
+---
+
+===
+
+title: Start
+---
+Ada: The real start. #line:12a0002
+===

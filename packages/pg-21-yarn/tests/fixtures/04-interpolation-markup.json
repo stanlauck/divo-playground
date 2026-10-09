@@ -1,0 +1,195 @@
+{
+  "version": 1,
+  "sources": [
+    "04-interpolation-markup.yarn"
+  ],
+  "start_node": "Start:1",
+  "titles": [
+    {
+      "id": "Start",
+      "title": "Start",
+      "source": 0,
+      "entry": "Start:1",
+      "line": 1,
+      "col": 1
+    }
+  ],
+  "nodes": [
+    {
+      "id": "Start:1",
+      "source": 0,
+      "title": "Start",
+      "kind": "command",
+      "command": {
+        "name": "declare",
+        "args": "$gold = 12",
+        "variable": "gold",
+        "operator": "=",
+        "expression": "12"
+      },
+      "line": 3,
+      "col": 1
+    },
+    {
+      "id": "Start:2",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "You carry {$gold} coins, and {$gold + 3} more in the purse.",
+      "line_id": "4a0001",
+      "line": 4,
+      "col": 6
+    },
+    {
+      "id": "Start:3",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "[wave]Hello[/wave], traveller.",
+      "line_id": "4a0002",
+      "markup": true,
+      "line": 5,
+      "col": 6
+    },
+    {
+      "id": "Start:4",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "Escaped \\[not markup\\] here.",
+      "line_id": "4a0003",
+      "line": 6,
+      "col": 6
+    },
+    {
+      "id": "Start:5",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "Count {$gold} while [bold color=\"red\"]this[/bold] glows.",
+      "line_id": "4a0004",
+      "markup": true,
+      "line": 7,
+      "col": 6
+    },
+    {
+      "id": "Start:6",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "A bare [ bracket is not markup.",
+      "line_id": "4a0005",
+      "line": 8,
+      "col": 6
+    },
+    {
+      "id": "Start:7",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "An unclosed [wave tag stays prose.",
+      "line_id": "4a0006",
+      "line": 9,
+      "col": 6
+    },
+    {
+      "id": "Start:8",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "Plain text with nothing special.",
+      "line_id": "4a0007",
+      "line": 10,
+      "col": 6
+    },
+    {
+      "id": "Start:9",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "speaker": "Ada",
+      "text": "Markup in a \"quoted [wave] span\" still counts.",
+      "line_id": "4a0008",
+      "markup": true,
+      "line": 11,
+      "col": 6
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "kind": "flow",
+      "source": "Start:1",
+      "target": "Start:2",
+      "index": 0
+    },
+    {
+      "id": "edge-2",
+      "kind": "flow",
+      "source": "Start:2",
+      "target": "Start:3",
+      "index": 1
+    },
+    {
+      "id": "edge-3",
+      "kind": "flow",
+      "source": "Start:3",
+      "target": "Start:4",
+      "index": 2
+    },
+    {
+      "id": "edge-4",
+      "kind": "flow",
+      "source": "Start:4",
+      "target": "Start:5",
+      "index": 3
+    },
+    {
+      "id": "edge-5",
+      "kind": "flow",
+      "source": "Start:5",
+      "target": "Start:6",
+      "index": 4
+    },
+    {
+      "id": "edge-6",
+      "kind": "flow",
+      "source": "Start:6",
+      "target": "Start:7",
+      "index": 5
+    },
+    {
+      "id": "edge-7",
+      "kind": "flow",
+      "source": "Start:7",
+      "target": "Start:8",
+      "index": 6
+    },
+    {
+      "id": "edge-8",
+      "kind": "flow",
+      "source": "Start:8",
+      "target": "Start:9",
+      "index": 7
+    }
+  ],
+  "variables": [
+    {
+      "name": "gold",
+      "type": "int",
+      "value": 12,
+      "source": 0,
+      "title": "Start",
+      "line": 3,
+      "col": 1
+    }
+  ],
+  "errors": []
+}

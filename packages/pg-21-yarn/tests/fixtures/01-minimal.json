@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "sources": [
+    "01-minimal.yarn"
+  ],
+  "start_node": "Start:1",
+  "titles": [
+    {
+      "id": "Start",
+      "title": "Start",
+      "source": 0,
+      "entry": "Start:1",
+      "line": 1,
+      "col": 1
+    }
+  ],
+  "nodes": [
+    {
+      "id": "Start:1",
+      "source": 0,
+      "title": "Start",
+      "kind": "line",
+      "text": "The archive door is locked.",
+      "line": 3,
+      "col": 1
+    }
+  ],
+  "edges": [],
+  "variables": [],
+  "errors": []
+}

@@ -1,0 +1,39 @@
+title: Start
+tags: intro night
+position: 120,-40
+---
+// The opening beat of a synthetic sample script.
+Narrator: The lamp above the desk flickers. #line:1a0001 #atmosphere
+Ada: You came back. #line:1a0002
+/// How many times the player has spoken to Ada.
+<<declare $visits = 0>>
+<<set $visits += 1>>
+Ada: Visit number {$visits}, and still no apology. #line:1a0003
+-> I brought the ledger. #line:1a0004
+    Ada: Then we can finally balance it. #line:1a0005
+    <<jump Ledger>>
+-> I brought nothing. #line:1a0006
+    Ada: [wave]Empty handed[/wave], as usual. #line:1a0007 #mocking
+    -> That was a difficult year.
+        Ada: It was a difficult decade. #line:1a0008
+    -> Let us not discuss it.
+        <<jump Ledger>>
+-> Leave before she notices. <<if $visits > 3>> #line:1a0009
+    <<stop>>
+===
+
+title: Ledger
+tags:
+---
+Ada: Column after column, and every one of them wrong. #line:1b0001
+<<if $visits == 0>>
+    Ada: You have never been here before. #line:1b0002
+<<elseif $visits < 3>>
+    Ada: A handful of visits, and still no progress. #line:1b0003
+<<else>>
+    Ada: You know this room as well as I do. #line:1b0004
+<<endif>>
+<<fadeOut 2>>
+Ada: We start again from the top. #line:1b0005
+<<jump Start>>
+===

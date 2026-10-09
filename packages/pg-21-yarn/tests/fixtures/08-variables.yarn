@@ -1,0 +1,24 @@
+title: Start
+---
+/// Gold the player carries.
+<<declare $gold = 0>>
+/// Whether the gate stands open.
+<<declare $gateOpen = false>>
+/// The name the player chose.
+<<declare $playerName = "Wren">>
+<<declare $ratio = 0.25>>
+<<declare $day = 3 as number>>
+<<declare $flag = true as bool>>
+<<declare $label = "six" as STRING>>
+<<declare $odd = 7 as string>>
+<<declare $weird = 1 as banana>>
+<<declare $computed = $gold + 1>>
+<<set $gold = 5>>
+<<set $gold += 2>>
+<<set $gold -= 1>>
+<<set $gold *= 3>>
+<<set $gold /= 2>>
+<<set $gold to 9>>
+<<declare $gold = 99>>
+Ada: The arithmetic is never evaluated. #line:8a0001
+===

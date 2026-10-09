@@ -1,0 +1,12 @@
+title: Start
+---
+<<declare $gold = 12>>
+Ada: You carry {$gold} coins, and {$gold + 3} more in the purse. #line:4a0001
+Ada: [wave]Hello[/wave], traveller. #line:4a0002
+Ada: Escaped \[not markup\] here. #line:4a0003
+Ada: Count {$gold} while [bold color="red"]this[/bold] glows. #line:4a0004
+Ada: A bare [ bracket is not markup. #line:4a0005
+Ada: An unclosed [wave tag stays prose. #line:4a0006
+Ada: Plain text with nothing special. #line:4a0007
+Ada: Markup in a "quoted [wave] span" still counts. #line:4a0008
+===

@@ -1,0 +1,18 @@
+title: Start
+---
+Ada: A forward reference follows. #line:7a0001
+<<jump Middle>>
+Ada: Never reached. #line:7a0002
+===
+
+title: Middle
+---
+Ada: The middle of the loop. #line:7b0001
+<<jump Start>>
+===
+
+title: Tail
+---
+Ada: Nothing jumps here. #line:7c0001
+<<jump Missing>>
+===

@@ -1,0 +1,31 @@
+Prose before any node header.
+===
+-> An option before any node.
+===
+
+title: NoDelimiter
+Ada: These headers were never closed.
+===
+
+title: Delimiters
+---
+Ada: A well formed line. #line:15a0001
+---
+Ada: A stray header delimiter inside the body. #line:15a0002
+===
+===
+
+title: BadCommands
+---
+<<jump>>
+<<set gold = 1>>
+<<declare>>
+<<unterminated
+Ada: After an unterminated command. #line:15b0001
+===
+
+title: Hashtags
+---
+Ada: A malformed hashtag region. #line:15c0001 #ok not-a-tag
+Ada: An empty line id. #line:
+===
