@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "title": "Invented lantern test",
+  "elements": [
+    { "id": "cast-nila", "category": "cast", "name": "НИЛА" },
+    { "id": "cup", "category": "props", "name": "Copper cup & key" },
+    { "id": "cart", "category": "vehicles", "name": "Blue cart" },
+    { "id": "sparks", "category": "visual_effects", "name": "Paper sparks" }
+  ],
+  "scenes": [
+    {
+      "id": "workshop",
+      "number": "10A",
+      "int_ext": "interior",
+      "set": "Lantern workshop",
+      "time_of_day": "day",
+      "pages_eighths": 13,
+      "synopsis": "НИЛА counts two cups, then checks the invented lantern.",
+      "elements": [
+        { "element_id": "cast-nila" },
+        { "element_id": "cup", "quantity": 2 }
+      ],
+      "script_day": "Story day 1",
+      "unit": "Main",
+      "notes": "Synthetic data only.\nNo real production."
+    },
+    {
+      "id": "yard",
+      "number": "2",
+      "int_ext": "exterior",
+      "set": "Quiet yard",
+      "time_of_day": "night",
+      "pages_eighths": 4,
+      "synopsis": "The blue cart rolls past a paper star 🌟.",
+      "elements": [
+        { "element_id": "cart" },
+        { "element_id": "sparks" }
+      ]
+    },
+    {
+      "id": "doorway",
+      "number": "3",
+      "int_ext": "interior_exterior",
+      "set": "Workshop doorway",
+      "time_of_day": "dawn",
+      "pages_eighths": 0
+    }
+  ],
+  "shooting_days": [
+    {
+      "id": "shoot-day-b",
+      "label": "First supplied day",
+      "date": "2026-10-14",
+      "scenes": ["yard", "workshop"]
+    },
+    {
+      "id": "shoot-day-a",
+      "label": "Empty supplied day",
+      "date": "2026-10-13",
+      "scenes": []
+    }
+  ]
+}

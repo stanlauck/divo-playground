@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<FinalDraft DocumentType="Script" Template="No" Version="1">
+  <Content>
+    <Paragraph Type="Scene Heading" Number="10A">
+      <SceneProperties Number="10A" Length="13/8" Page="1" Title=""><Summary><Paragraph><Text>НИЛА counts two cups, then checks the invented lantern.</Text></Paragraph></Summary><SceneArcBeats/></SceneProperties>
+      <Text>INT. Lantern workshop - DAY</Text>
+    </Paragraph>
+    <Paragraph Type="Action"><Text>Synopsis: </Text><Text TagNumber="5">НИЛА counts two cups, then checks the invented lantern.</Text></Paragraph>
+    <Paragraph Type="Action"><Text>Location: </Text><Text TagNumber="6">Lantern workshop</Text></Paragraph>
+    <Paragraph Type="Action"><Text>Script day: </Text><Text TagNumber="7">Story day 1</Text></Paragraph>
+    <Paragraph Type="Action"><Text>Unit: </Text><Text TagNumber="8">Main</Text></Paragraph>
+    <Paragraph Type="Action"><Text>Notes: </Text><Text TagNumber="9">Synthetic data only.&#10;No real production.</Text></Paragraph>
+    <Paragraph Type="Action"><Text>Cast Members: </Text><Text TagNumber="1">НИЛА</Text></Paragraph>
+    <Paragraph Type="Action"><Text>Props: </Text><Text TagNumber="2">Copper cup &amp; key</Text><Text> (quantity 2)</Text></Paragraph>
+    <Paragraph Type="Scene Heading" Number="2">
+      <SceneProperties Number="2" Length="4/8" Page="2" Title=""><Summary><Paragraph><Text>The blue cart rolls past a paper star 🌟.</Text></Paragraph></Summary><SceneArcBeats/></SceneProperties>
+      <Text>EXT. Quiet yard - NIGHT</Text>
+    </Paragraph>
+    <Paragraph Type="Action"><Text>Synopsis: </Text><Text TagNumber="10">The blue cart rolls past a paper star 🌟.</Text></Paragraph>
+    <Paragraph Type="Action"><Text>Location: </Text><Text TagNumber="11">Quiet yard</Text></Paragraph>
+    <Paragraph Type="Action"><Text>Vehicles: </Text><Text TagNumber="3">Blue cart</Text></Paragraph>
+    <Paragraph Type="Action"><Text>Visual Effects: </Text><Text TagNumber="4">Paper sparks</Text></Paragraph>
+    <Paragraph Type="Scene Heading" Number="3">
+      <SceneProperties Number="3" Length="0/8" Page="3" Title=""><SceneArcBeats/></SceneProperties>
+      <Text>INT./EXT. Workshop doorway - DAWN</Text>
+    </Paragraph>
+    <Paragraph Type="Action"><Text>Location: </Text><Text TagNumber="12">Workshop doorway</Text></Paragraph>
+  </Content>
+  <TitlePage><Content><Paragraph Alignment="Center"><Text>Invented lantern test</Text></Paragraph></Content></TitlePage>
+  <TagData>
+    <TagCategories>
+      <TagCategory Id="8e5e75c2-713b-47df-a75f-f12648b98ded" Name="Synopsis" Color="#000000000000" Style="Bold" Number="1"/>
+      <TagCategory Id="01fc9642-84ff-4366-b37c-a3068dee57e8" Name="Cast Members" Color="#000000000000" Style="Bold" Number="2"/>
+      <TagCategory Id="04721a56-f54b-49c8-80ad-d53887d6b851" Name="Vehicles" Color="#000000000000" Style="Bold" Number="5"/>
+      <TagCategory Id="05c556eb-6bc1-4a3a-b09f-f8b5ba1b6afa" Name="Props" Color="#000000000000" Style="Bold" Number="6"/>
+      <TagCategory Id="12ab0932-e3b9-4b4a-bcd0-3da1b4e61d5e" Name="Visual Effects" Color="#000000000000" Style="Bold" Number="23"/>
+      <TagCategory Id="15b6f4fd-4e74-4ad8-9971-b239d88c2997" Name="Notes" Color="#000000000000" Style="Bold" Number="26"/>
+      <TagCategory Id="63c140da-ef2b-491a-b416-b46f461abb89" Name="Script Day" Color="#000000000000" Style="Bold" Number="27"/>
+      <TagCategory Id="849f1ebf-5507-4f33-bff6-3a5b4d73be14" Name="Unit" Color="#000000000000" Style="Bold" Number="28"/>
+      <TagCategory Id="c5e89e4d-f83e-4c28-950c-92a63f1b5f26" Name="Location" Color="#000000000000" Style="Bold" Number="30"/>
+    </TagCategories>
+    <TagDefinitions>
+      <TagDefinition CatId="01fc9642-84ff-4366-b37c-a3068dee57e8" Id="72319dde-5b99-515a-8aa6-899e73e5a038" Label="НИЛА" Number="1"/>
+      <TagDefinition CatId="05c556eb-6bc1-4a3a-b09f-f8b5ba1b6afa" Id="3a7350f5-2671-585e-ad84-7383aeddf323" Label="Copper cup &amp; key" Number="2"/>
+      <TagDefinition CatId="04721a56-f54b-49c8-80ad-d53887d6b851" Id="1e5e6f6c-6358-5350-b79e-7606cf3b18f8" Label="Blue cart" Number="3"/>
+      <TagDefinition CatId="12ab0932-e3b9-4b4a-bcd0-3da1b4e61d5e" Id="75ab3e12-4407-5677-b7f8-28aa81f2b96e" Label="Paper sparks" Number="4"/>
+      <TagDefinition CatId="8e5e75c2-713b-47df-a75f-f12648b98ded" Id="daeabe61-aa92-5066-a343-34ba55febaac" Label="НИЛА counts two cups, then checks the invented lantern." Number="5"/>
+      <TagDefinition CatId="c5e89e4d-f83e-4c28-950c-92a63f1b5f26" Id="46f0df4e-7248-587a-af32-559dec5b7f0c" Label="Lantern workshop" Number="6"/>
+      <TagDefinition CatId="63c140da-ef2b-491a-b416-b46f461abb89" Id="21470fad-7a5a-5d88-a462-407d3134ad1f" Label="Story day 1" Number="7"/>
+      <TagDefinition CatId="849f1ebf-5507-4f33-bff6-3a5b4d73be14" Id="0f1ababb-d94b-5d68-b5b2-e5881727b581" Label="Main" Number="8"/>
+      <TagDefinition CatId="15b6f4fd-4e74-4ad8-9971-b239d88c2997" Id="804e8289-2b16-591d-96b6-08e22ca3d3cf" Label="Synthetic data only.&#10;No real production." Number="9"/>
+      <TagDefinition CatId="8e5e75c2-713b-47df-a75f-f12648b98ded" Id="0abad9fa-3f2d-5854-9429-321ded0ecb45" Label="The blue cart rolls past a paper star 🌟." Number="10"/>
+      <TagDefinition CatId="c5e89e4d-f83e-4c28-950c-92a63f1b5f26" Id="6dab3410-1d87-5163-8cf4-466fd7cf6dbe" Label="Quiet yard" Number="11"/>
+      <TagDefinition CatId="c5e89e4d-f83e-4c28-950c-92a63f1b5f26" Id="ccd4a5ee-e914-5ce9-906f-ba3a260d419c" Label="Workshop doorway" Number="12"/>
+    </TagDefinitions>
+    <Tags>
+      <Tag Number="1"><DefId>72319dde-5b99-515a-8aa6-899e73e5a038</DefId></Tag>
+      <Tag Number="2"><DefId>3a7350f5-2671-585e-ad84-7383aeddf323</DefId></Tag>
+      <Tag Number="3"><DefId>1e5e6f6c-6358-5350-b79e-7606cf3b18f8</DefId></Tag>
+      <Tag Number="4"><DefId>75ab3e12-4407-5677-b7f8-28aa81f2b96e</DefId></Tag>
+      <Tag Number="5"><DefId>daeabe61-aa92-5066-a343-34ba55febaac</DefId></Tag>
+      <Tag Number="6"><DefId>46f0df4e-7248-587a-af32-559dec5b7f0c</DefId></Tag>
+      <Tag Number="7"><DefId>21470fad-7a5a-5d88-a462-407d3134ad1f</DefId></Tag>
+      <Tag Number="8"><DefId>0f1ababb-d94b-5d68-b5b2-e5881727b581</DefId></Tag>
+      <Tag Number="9"><DefId>804e8289-2b16-591d-96b6-08e22ca3d3cf</DefId></Tag>
+      <Tag Number="10"><DefId>0abad9fa-3f2d-5854-9429-321ded0ecb45</DefId></Tag>
+      <Tag Number="11"><DefId>6dab3410-1d87-5163-8cf4-466fd7cf6dbe</DefId></Tag>
+      <Tag Number="12"><DefId>ccd4a5ee-e914-5ce9-906f-ba3a260d419c</DefId></Tag>
+    </Tags>
+  </TagData>
+  <PageLayout><PageSize Height="11.0" Width="8.5"/></PageLayout>
+</FinalDraft>
