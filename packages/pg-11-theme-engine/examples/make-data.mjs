@@ -1,0 +1,55 @@
+// SPDX-License-Identifier: MIT OR Apache-2.0
+import { sample } from "./fixture.mjs";
+export const schema = {
+  $schema: "https://json-schema.org/draft/2020-12/schema",
+  title: "PG-11 ThemeConfig v1",
+  type: "object",
+  additionalProperties: false,
+  required: ["version", "preset", "mode", "density"],
+  properties: {
+    version: { const: 1 },
+    preset: { enum: ["paper", "slate", "forest"] },
+    mode: { enum: ["light", "dark"] },
+    density: { enum: ["compact", "comfortable", "spacious"] },
+    accent: {
+      oneOf: [
+        {
+          type: "object",
+          additionalProperties: false,
+          required: ["source"],
+          properties: { source: { enum: ["preset", "cover"] } },
+        },
+        {
+          type: "object",
+          additionalProperties: false,
+          required: ["source", "hsl"],
+          properties: {
+            source: { const: "custom" },
+            hsl: {
+              type: "object",
+              additionalProperties: false,
+              required: ["h", "s", "l"],
+              properties: {
+                h: { type: "number", minimum: 0, maximum: 360 },
+                s: { type: "number", minimum: 0, maximum: 100 },
+                l: { type: "number", minimum: 0, maximum: 100 },
+              },
+            },
+          },
+        },
+      ],
+    },
+  },
+};
+if (process.argv.includes("--write")) {
+  const { writeFile, mkdir } = await import("node:fs/promises");
+  await mkdir(new URL("../samples/", import.meta.url), { recursive: true });
+  await writeFile(
+    new URL("../schema.json", import.meta.url),
+    JSON.stringify(schema, null, 2) + "\n",
+  );
+  await writeFile(
+    new URL("../samples/custom.json", import.meta.url),
+    JSON.stringify(sample, null, 2) + "\n",
+  );
+}

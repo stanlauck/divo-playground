@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "preset": "paper",
+  "mode": "light",
+  "density": "comfortable",
+  "accent": {
+    "source": "custom",
+    "hsl": {
+      "h": 210,
+      "s": 70,
+      "l": 44
+    }
+  }
+}

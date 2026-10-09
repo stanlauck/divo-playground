@@ -1,0 +1,41 @@
+{
+  "name": "@divo-playground/pg-11-theme-engine",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Deterministic theme tokens, dominant cover accent and corrected WCAG text pairs",
+  "type": "module",
+  "license": "MIT OR Apache-2.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    },
+    "./browser": {
+      "types": "./dist/src/browser.d.ts",
+      "import": "./dist/src/browser.js"
+    },
+    "./schema": "./schema.json"
+  },
+  "files": [
+    "dist/src",
+    "schema.json",
+    "README.md",
+    "LICENSE-MIT",
+    "LICENSE-APACHE"
+  ],
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "prettier": "3.9.9",
+    "typescript": "7.0.2"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "demo:build": "node examples/build.mjs",
+    "format:check": "prettier --check src tests examples samples schema.json README.md package.json tsconfig.json"
+  }
+}
