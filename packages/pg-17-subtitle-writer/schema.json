@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/pg-17/dialogue-timing-v1.schema.json",
+  "title": "PG-17 neutral dialogue timing v1",
+  "description": "Structural constraints of the subtitle writer input. Rust additionally enforces the 8 MiB byte budget, the nesting depth budget, character budgets per field and the readability checks. Ordering, overlap, duplicate ids and empty lines are reported as violations, not schema errors. Lengths below are in Unicode scalar values.",
+  "type": "object",
+  "required": ["version", "cues"],
+  "properties": {
+    "version": { "const": 1 },
+    "title": { "anyOf": [{ "$ref": "#/$defs/text", "maxLength": 1024 }, { "type": "null" }] },
+    "language": {
+      "anyOf": [
+        { "type": "string", "pattern": "^[A-Za-z0-9-]+$", "maxLength": 64 },
+        { "type": "null" }
+      ]
+    },
+    "cues": {
+      "type": "array",
+      "maxItems": 100000,
+      "items": { "$ref": "#/$defs/cue" }
+    }
+  },
+  "$defs": {
+    "text": {
+      "type": "string",
+      "pattern": "^(?!.*-->)[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029\\ufffe\\uffff]*$"
+    },
+    "time": { "type": "integer", "minimum": 0, "maximum": 359999999 },
+    "cue": {
+      "type": "object",
+      "required": ["id", "lines", "start_ms", "end_ms"],
+      "properties": {
+        "id": { "$ref": "#/$defs/text", "minLength": 1, "maxLength": 256 },
+        "speaker": {
+          "anyOf": [{ "$ref": "#/$defs/text", "minLength": 1, "maxLength": 256 }, { "type": "null" }]
+        },
+        "lines": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "items": { "$ref": "#/$defs/text", "maxLength": 1024 }
+        },
+        "start_ms": { "$ref": "#/$defs/time" },
+        "end_ms": { "$ref": "#/$defs/time" }
+      }
+    }
+  }
+}

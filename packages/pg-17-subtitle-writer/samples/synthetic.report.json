@@ -1,0 +1,51 @@
+[
+  {
+    "cue": "c6",
+    "rule": "too_short",
+    "message": "duration 800 ms is below the minimum of 1000 ms",
+    "value": 800,
+    "limit": 1000
+  },
+  {
+    "cue": "c6",
+    "rule": "line_too_long",
+    "message": "line 0 has 43 characters, maximum is 42",
+    "value": 43,
+    "limit": 42
+  },
+  {
+    "cue": "c6",
+    "rule": "reading_speed",
+    "message": "56 characters in 800 ms is 70 characters per second, maximum is 17",
+    "value": 70.0,
+    "limit": 17
+  },
+  {
+    "cue": "c7",
+    "rule": "overlap",
+    "message": "overlaps the previous cue by 200 ms",
+    "value": 200,
+    "limit": 0
+  },
+  {
+    "cue": "c7",
+    "rule": "too_long",
+    "message": "duration 7700 ms is above the maximum of 7000 ms",
+    "value": 7700,
+    "limit": 7000
+  },
+  {
+    "cue": "c7",
+    "rule": "line_too_long",
+    "message": "line 0 has 58 characters, maximum is 42",
+    "value": 58,
+    "limit": 42
+  },
+  {
+    "cue": "c8",
+    "rule": "too_many_lines",
+    "message": "3 lines, maximum is 2",
+    "value": 3,
+    "limit": 2
+  }
+]

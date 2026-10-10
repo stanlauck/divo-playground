@@ -1,0 +1,35 @@
+1
+00:00:01,000 --> 00:00:02,800
+MIRA: Did you hear that?
+
+2
+00:00:03,000 --> 00:00:06,500
+JONAS: Only the wind.
+It always sounds like footsteps up here.
+
+3
+00:00:06,800 --> 00:00:09,000
+(A door creaks somewhere below.)
+
+4
+00:00:09,200 --> 00:00:11,500
+MIRA: Wind doesn't knock twice & wait.
+
+5
+00:00:12,000 --> 00:00:15,000
+ОЛЬГА: Тише. Я слышу шаги на лестнице.
+
+6
+00:00:15,200 --> 00:00:16,000
+JONAS: Pressure is <dropping> fast, see the gauge?
+We should go.
+
+7
+00:00:15,800 --> 00:00:23,500
+MIRA: Not before we know who else is in this lighthouse tonight.
+
+8
+01:00:00,000 --> 01:00:02,400
+ОЛЬГА: Stay.
+Listen.
+Then run.
