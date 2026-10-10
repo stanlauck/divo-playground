@@ -1,0 +1,8 @@
+<!-- SPDX-License-Identifier: MIT OR Apache-2.0 -->
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180">
+  <rect width="320" height="180" fill="#d0e7f5"/>
+  <rect y="125" width="320" height="55" fill="#70a38c"/>
+  <circle cx="245" cy="45" r="22" fill="#ffcd66"/>
+  <path d="M50 90h100l-25 30H75z" fill="#3b598c"/>
+  <text x="12" y="25" font-family="sans-serif" font-size="16">S01</text>
+</svg>

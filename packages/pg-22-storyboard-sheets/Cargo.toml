@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: MIT OR Apache-2.0
+[package]
+name = "storyboard-sheets"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+license = "MIT OR Apache-2.0"
+publish = false
+repository = "https://github.com/stanlauck/divo-playground"
+description = "Neutral shot lists and local frames to printable Typst storyboard sheets"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[[bin]]
+name = "storyboard-sheets"
+path = "src/main.rs"

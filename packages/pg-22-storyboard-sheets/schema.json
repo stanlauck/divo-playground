@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/pg-22/board-v1.schema.json",
+  "title": "Storyboard board JSON v1",
+  "description": "MIT OR Apache-2.0. Unknown fields allowed. Rust additionally checks unique IDs, portable image paths, controls, UTF-8 byte limits, total text budget and nominal rational frame rate (nearest integer must be 24/25/30).",
+  "type": "object",
+  "required": [
+    "version",
+    "shots"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "title": {
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 4096
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "frame_rate": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/rate"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "aspect": {
+      "enum": [
+        "16:9",
+        "4:3",
+        "2.39:1",
+        "1:1",
+        "9:16"
+      ],
+      "default": "16:9"
+    },
+    "shots": {
+      "type": "array",
+      "maxItems": 10000,
+      "items": {
+        "$ref": "#/$defs/shot"
+      }
+    }
+  },
+  "$defs": {
+    "rate": {
+      "anyOf": [
+        {
+          "enum": [
+            24,
+            25,
+            30
+          ]
+        },
+        {
+          "type": "object",
+          "required": [
+            "num",
+            "den"
+          ],
+          "properties": {
+            "num": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            "den": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            }
+          }
+        }
+      ]
+    },
+    "shot": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^\\S(?:[\\s\\S]*\\S)?$"
+        },
+        "duration_frames": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 18446744073709551615
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 16384
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "scene": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 16384
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 16384
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "dialogue": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 16384
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "camera": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 16384
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 16384
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "frame": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/frame"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "frame": {
+      "type": "object",
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "^(?!/)(?!.*[\\\\:\\x00-\\x1f\\x7f-\\x9f])(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*//)(?:[^/]+/)*[^/]+\\.(?:[pP][nN][gG]|[jJ][pP][gG]|[sS][vV][gG])$"
+        },
+        "alt": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 16384
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "$comment": "SPDX-License-Identifier: MIT OR Apache-2.0"
+}

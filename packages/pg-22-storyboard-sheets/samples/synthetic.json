@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "title": "Бумажная обсерватория / Paper Observatory",
+  "frame_rate": {
+    "num": 24000,
+    "den": 1001
+  },
+  "aspect": "16:9",
+  "shots": [
+    {
+      "id": "S01",
+      "name": "Эскиз 1",
+      "duration_frames": 49,
+      "scene": "EXT. INVENTED GARDEN — DAY",
+      "camera": "WS",
+      "description": "Бумажный корабль плывёт над садом.",
+      "dialogue": null,
+      "frame": {
+        "path": "frames/S01.svg",
+        "alt": "Invented blue horizon with shot S01"
+      }
+    },
+    {
+      "id": "S02",
+      "name": "Эскиз 2",
+      "duration_frames": 50,
+      "scene": "EXT. INVENTED GARDEN — DAY",
+      "camera": "MCU",
+      "description": "A blue square rolls beside an invented paper moon.",
+      "dialogue": null,
+      "frame": {
+        "path": "frames/S02.png",
+        "alt": "Synthetic blue and orange blocks"
+      }
+    },
+    {
+      "id": "S03",
+      "name": "Эскиз 3",
+      "duration_frames": 51,
+      "scene": "EXT. INVENTED GARDEN — DAY",
+      "camera": "pan left",
+      "description": "The observer opens a tiny imaginary window.",
+      "dialogue": "«Мы уже близко», — говорит Ника.",
+      "frame": null
+    },
+    {
+      "id": "S04",
+      "name": "Эскиз 4",
+      "duration_frames": 52,
+      "scene": "EXT. INVENTED GARDEN — DAY",
+      "camera": "CU",
+      "description": "A lantern draws circles on the floor.",
+      "dialogue": null,
+      "frame": null
+    },
+    {
+      "id": "S05",
+      "name": "Эскиз 5",
+      "duration_frames": 53,
+      "scene": "INT. PAPER OBSERVATORY — NIGHT",
+      "camera": "WS",
+      "description": "Бумажный корабль плывёт над садом.",
+      "dialogue": null,
+      "frame": null
+    },
+    {
+      "id": "S06",
+      "name": "Эскиз 6",
+      "duration_frames": 54,
+      "scene": "INT. PAPER OBSERVATORY — NIGHT",
+      "camera": "MCU",
+      "description": "A blue square rolls beside an invented paper moon.",
+      "dialogue": null,
+      "frame": null
+    },
+    {
+      "id": "S07",
+      "name": "Эскиз 7",
+      "duration_frames": 55,
+      "scene": "INT. PAPER OBSERVATORY — NIGHT",
+      "camera": "pan left",
+      "description": "The observer opens a tiny imaginary window.",
+      "dialogue": null,
+      "frame": null
+    },
+    {
+      "id": "S08",
+      "name": "Эскиз 8",
+      "duration_frames": 56,
+      "scene": "INT. PAPER OBSERVATORY — NIGHT",
+      "camera": "CU",
+      "description": "A lantern draws circles on the floor.",
+      "dialogue": null,
+      "frame": {
+        "path": "frames/missing.svg"
+      }
+    }
+  ]
+}
