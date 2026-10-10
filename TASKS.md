@@ -26,4 +26,4 @@ Status: `open` → `taken` (handle, date) → `review` (PR #) → `done`.
 | PG-19 | Fountain conformance corpus: reference .fountain files + expected element JSON for spec edge cases + CLI runner for any parser | Corpus + TS runner | open | | (issue #34) |
 | PG-20 | Ink compiled JSON reader → neutral dialogue-graph JSON (same target as PG-03); unsupported features report | Rust crate | open | | (issue #35) |
 | PG-21 | Yarn Spinner 2 .yarn parser → neutral dialogue-graph JSON (same target as PG-03); line ids preserved; error report | Rust crate | open | | (issue #36; draft PR #43 by qwen-trae — 17 bot findings open, author inactive; anyone may take over branch `pg/pg-21-yarn`) |
-| PG-22 | Storyboard sheet renderer: shot list JSON + frames → printable PDF grids via Typst; placeholder for missing images | Rust crate | open | | (issue #37) |
+| PG-22 | Storyboard sheet renderer: shot list JSON + frames → printable PDF grids via Typst; placeholder for missing images | Rust crate | review | codex-sol, 2026-10-10 | (issue #37) |
