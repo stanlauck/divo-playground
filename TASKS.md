@@ -10,7 +10,7 @@ Status: `open` → `taken` (handle, date) → `review` (PR #) → `done`.
 | PG-04 | Godot 4 importer add-on for neutral scene/dialogue JSON (locations, exits, items, dialogue nodes) | GDScript add-on | done | stanlauck, 2026-10-08 | #25, #26 |
 | PG-05 | Production breakdown export: neutral breakdown JSON → Movie Magic Scheduling–compatible file + CSV schedule | Rust crate | done | stanlauck, 2026-10-09 | #29 |
 | PG-06 | Editorial timeline writer: neutral shot list JSON → OpenTimelineIO → FCPXML; round-trip ids | Rust crate | done | stanlauck, 2026-10-09 | #39 |
-| PG-06a | Follow-up PG-06: empty OTIO timeline without shot_list must take frame rate from `global_start_time` (bot 🟡 on #39) | Rust crate | open | | (issue #40) |
+| PG-06a | Follow-up PG-06: empty OTIO timeline without shot_list must take frame rate from `global_start_time` (bot 🟡 on #39) | Rust crate | done | claude, 2026-10-09 | (issue #40, fixed in main) |
 | PG-07 | ComfyUI client: submit workflow, poll progress, cancel, fetch outputs, retries; mock server for tests | Rust crate | done | stanlauck, 2026-10-07 | #20 |
 | PG-08 | glTF scene mock-up writer: camera markers + placeholder props from neutral shot JSON | Rust crate | done | Droid, 2026-10-07 | #19 |
 | PG-09 | Unicode test corpus + checks: RTL (Arabic/Hebrew), Devanagari, CJK, combining marks — line breaking, cursor movement, grapheme counting | TS package + corpus | done | stanlauck, 2026-10-08 | #24 |
@@ -20,7 +20,7 @@ Status: `open` → `taken` (handle, date) → `review` (PR #) → `done`.
 | PG-13 | GEXF 1.3 writer for typed graphs (node/edge attributes, time slices) | Rust crate | done | stanlauck, 2026-10-07 | #18 |
 | PG-14 | Localization exchange: string table JSON ↔ XLIFF 2.1 / CSV, with per-line context and character name | Rust crate | done | Mwapi, 2026-10-07 | #17 |
 | PG-15 | Unreal Engine 5 importer for neutral scene/dialogue JSON (same input as PG-04): places, exits, items, actor placeholders; re-import by id without duplicates; import report | UE5 plugin (Python or C++) | open | | (issue #30) |
-| PG-16 | EDL CMX 3600 writer + reader for a neutral shot list JSON: reels, timecodes at 23.976/24/25/30, comments carry shot ids; round-trip test | Rust crate | review | stanlauck, 2026-10-09 | #42 |
+| PG-16 | EDL CMX 3600 writer + reader for a neutral shot list JSON: reels, timecodes at 23.976/24/25/30, comments carry shot ids; round-trip test | Rust crate | done | stanlauck, 2026-10-09 | #42 |
 | PG-17 | Subtitle writer: dialogue timing JSON → SRT / WebVTT / TTML with speaker labels; reading-speed (CPS), line-length and duration checks | Rust crate | open | | (issue #32) |
 | PG-18 | Screenplay length estimator: Fountain → per-scene length in eighths of a page (Courier 12, US Letter/A4); deterministic | Rust crate | open | | (issue #33) |
 | PG-19 | Fountain conformance corpus: reference .fountain files + expected element JSON for spec edge cases + CLI runner for any parser | Corpus + TS runner | open | | (issue #34) |
