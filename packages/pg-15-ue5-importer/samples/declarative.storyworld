@@ -1,0 +1,667 @@
+{
+  "version": 1,
+  "world": {
+    "locations": [
+      {
+        "id": "room",
+        "name": "Учебная комната",
+        "description": "Synthetic room.",
+        "dialogue": "0x0100000000000003",
+        "metadata": {
+          "marker": "res://this-is-data-not-a-loaded-asset"
+        }
+      },
+      {
+        "id": "yard",
+        "name": "Synthetic yard"
+      }
+    ],
+    "exits": [
+      {
+        "id": "door",
+        "from": "room",
+        "to": "yard",
+        "condition": {
+          "op": "eq",
+          "variable": {
+            "namespace": "Story",
+            "name": "visited"
+          },
+          "value": false
+        },
+        "event": {
+          "op": "emit",
+          "name": "door_opened",
+          "payload": {
+            "source": "room"
+          }
+        }
+      }
+    ],
+    "items": [
+      {
+        "id": "token",
+        "name": "Synthetic token",
+        "location": "room",
+        "event": {
+          "op": "set",
+          "variable": {
+            "namespace": "Story",
+            "name": "coins"
+          },
+          "value": 4
+        }
+      }
+    ]
+  },
+  "dialogue": {
+    "version": 1,
+    "text_mode": "literal",
+    "metadata": {
+      "Project": {
+        "Guid": "11111111-2222-4333-8444-555555555555",
+        "Name": "Synthetic crossroads",
+        "TechnicalName": "SyntheticCrossroads"
+      },
+      "ScriptMethods": [
+        {
+          "Name": "SyntheticFunction",
+          "ReturnType": "void"
+        }
+      ],
+      "Settings": {
+        "ExportVersion": "1.0",
+        "set_Localization": "False",
+        "set_TextFormatter": "BBCode",
+        "set_UseScriptSupport": "True"
+      }
+    },
+    "definitions": [
+      {
+        "Class": "DialogueFragment",
+        "InheritsFrom": "DialogueFragment",
+        "Template": {
+          "Features": [],
+          "TechnicalName": "CustomLine"
+        },
+        "Type": "CustomLine"
+      }
+    ],
+    "packages": [
+      {
+        "index": 0,
+        "name": "Synthetic flow",
+        "metadata": {
+          "Description": "Hand-authored synthetic native-export shape.",
+          "IsDefaultPackage": true,
+          "Name": "Synthetic flow"
+        },
+        "node_ids": [
+          "0x0100000000000001",
+          "0x0100000000000002",
+          "0x0100000000000003",
+          "0x0100000000000004",
+          "0x0100000000000005",
+          "0x0100000000000006",
+          "0x0100000000000007",
+          "0x0100000000000008"
+        ]
+      }
+    ],
+    "nodes": [
+      {
+        "id": "0x0100000000000001",
+        "package": 0,
+        "source_type": "FlowFragment",
+        "kind": "flow_fragment",
+        "parent": null,
+        "technical_name": "Crossroads",
+        "display_name": "Crossroads",
+        "text": "A synthetic container.",
+        "menu_text": null,
+        "speaker": null,
+        "script": null,
+        "input_pins": [],
+        "output_pins": [],
+        "properties": {
+          "DisplayName": "Crossroads",
+          "Id": "0x0100000000000001",
+          "Parent": "0x0000000000000000",
+          "TechnicalName": "Crossroads",
+          "Text": "A synthetic container."
+        },
+        "template": null,
+        "metadata": {
+          "Type": "FlowFragment"
+        }
+      },
+      {
+        "id": "0x0100000000000002",
+        "package": 0,
+        "source_type": "Entity",
+        "kind": "entity",
+        "parent": null,
+        "technical_name": "Guide",
+        "display_name": "Synthetic guide",
+        "text": null,
+        "menu_text": null,
+        "speaker": null,
+        "script": null,
+        "input_pins": [],
+        "output_pins": [],
+        "properties": {
+          "DisplayName": "Synthetic guide",
+          "Id": "0x0100000000000002",
+          "Parent": "0x0000000000000000",
+          "TechnicalName": "Guide"
+        },
+        "template": null,
+        "metadata": {
+          "Type": "Entity"
+        }
+      },
+      {
+        "id": "0x0100000000000003",
+        "package": 0,
+        "source_type": "CustomLine",
+        "kind": "dialogue_fragment",
+        "parent": "0x0100000000000001",
+        "technical_name": "Greeting",
+        "display_name": null,
+        "text": "The [b]amber[/b] path divides.",
+        "menu_text": "",
+        "speaker": "0x0100000000000002",
+        "script": null,
+        "input_pins": [
+          "0x0100000000000011"
+        ],
+        "output_pins": [
+          "0x0100000000000012"
+        ],
+        "properties": {
+          "Id": "0x0100000000000003",
+          "MenuText": "",
+          "Parent": "0x0100000000000001",
+          "Speaker": "0x0100000000000002",
+          "TechnicalName": "Greeting",
+          "Text": "The [b]amber[/b] path divides."
+        },
+        "template": {
+          "Mood": {
+            "Tone": "curious",
+            "Weight": 0.5
+          }
+        },
+        "metadata": {
+          "Type": "CustomLine"
+        }
+      },
+      {
+        "id": "0x0100000000000004",
+        "package": 0,
+        "source_type": "DialogueFragment",
+        "kind": "dialogue_fragment",
+        "parent": "0x0100000000000001",
+        "technical_name": "North",
+        "display_name": null,
+        "text": "A quiet field lies north.",
+        "menu_text": "Take the northern path",
+        "speaker": "0x0100000000000002",
+        "script": null,
+        "input_pins": [
+          "0x0100000000000021"
+        ],
+        "output_pins": [],
+        "properties": {
+          "Id": "0x0100000000000004",
+          "MenuText": "Take the northern path",
+          "Parent": "0x0100000000000001",
+          "Speaker": "0x0100000000000002",
+          "TechnicalName": "North",
+          "Text": "A quiet field lies north."
+        },
+        "template": null,
+        "metadata": {
+          "Type": "DialogueFragment"
+        }
+      },
+      {
+        "id": "0x0100000000000005",
+        "package": 0,
+        "source_type": "DialogueFragment",
+        "kind": "dialogue_fragment",
+        "parent": "0x0100000000000001",
+        "technical_name": "East",
+        "display_name": null,
+        "text": "The eastern road follows a river.",
+        "menu_text": "Follow the river",
+        "speaker": "0x0100000000000002",
+        "script": null,
+        "input_pins": [
+          "0x0100000000000031"
+        ],
+        "output_pins": [],
+        "properties": {
+          "Id": "0x0100000000000005",
+          "MenuText": "Follow the river",
+          "Parent": "0x0100000000000001",
+          "Speaker": "0x0100000000000002",
+          "TechnicalName": "East",
+          "Text": "The eastern road follows a river."
+        },
+        "template": null,
+        "metadata": {
+          "Type": "DialogueFragment"
+        }
+      },
+      {
+        "id": "0x0100000000000006",
+        "package": 0,
+        "source_type": "Condition",
+        "kind": "condition",
+        "parent": "0x0100000000000001",
+        "technical_name": null,
+        "display_name": null,
+        "text": null,
+        "menu_text": null,
+        "speaker": null,
+        "script": {
+          "language": "articy_script",
+          "role": "condition",
+          "text": "Story.visited"
+        },
+        "input_pins": [],
+        "output_pins": [],
+        "properties": {
+          "Expression": "Story.visited",
+          "Id": "0x0100000000000006",
+          "Parent": "0x0100000000000001"
+        },
+        "template": null,
+        "metadata": {
+          "Type": "Condition"
+        },
+        "condition": {
+          "op": "all",
+          "conditions": [
+            {
+              "op": "ne",
+              "variable": {
+                "namespace": "Story",
+                "name": "coins"
+              },
+              "value": 0
+            },
+            {
+              "op": "not",
+              "condition": {
+                "op": "eq",
+                "variable": {
+                  "namespace": "Story",
+                  "name": "visited"
+                },
+                "value": true
+              }
+            }
+          ]
+        },
+        "event": {
+          "op": "emit",
+          "name": "gate_checked"
+        }
+      },
+      {
+        "id": "0x0100000000000007",
+        "package": 0,
+        "source_type": "Instruction",
+        "kind": "instruction",
+        "parent": "0x0100000000000001",
+        "technical_name": null,
+        "display_name": null,
+        "text": null,
+        "menu_text": null,
+        "speaker": null,
+        "script": {
+          "language": "articy_script",
+          "role": "instruction",
+          "text": "Story.coins = Story.coins + 1;"
+        },
+        "input_pins": [],
+        "output_pins": [],
+        "properties": {
+          "Expression": "Story.coins = Story.coins + 1;",
+          "Id": "0x0100000000000007",
+          "Parent": "0x0100000000000001"
+        },
+        "template": null,
+        "metadata": {
+          "Type": "Instruction"
+        }
+      },
+      {
+        "id": "0x0100000000000008",
+        "package": 0,
+        "source_type": "Jump",
+        "kind": "jump",
+        "parent": "0x0100000000000001",
+        "technical_name": null,
+        "display_name": null,
+        "text": null,
+        "menu_text": null,
+        "speaker": null,
+        "script": null,
+        "input_pins": [],
+        "output_pins": [],
+        "properties": {
+          "Id": "0x0100000000000008",
+          "Parent": "0x0100000000000001",
+          "Target": "0x0100000000000003",
+          "TargetPin": "0x0100000000000011"
+        },
+        "template": null,
+        "metadata": {
+          "Type": "Jump"
+        }
+      }
+    ],
+    "pins": [
+      {
+        "id": "0x0100000000000011",
+        "owner": "0x0100000000000003",
+        "direction": "input",
+        "index": 0,
+        "script": null,
+        "properties": {
+          "Id": "0x0100000000000011",
+          "Owner": "0x0100000000000003",
+          "Text": ""
+        }
+      },
+      {
+        "id": "0x0100000000000012",
+        "owner": "0x0100000000000003",
+        "direction": "output",
+        "index": 0,
+        "script": {
+          "language": "articy_script",
+          "role": "instruction",
+          "text": "Story.visited = true;"
+        },
+        "properties": {
+          "Id": "0x0100000000000012",
+          "Owner": "0x0100000000000003",
+          "Text": "Story.visited = true;"
+        }
+      },
+      {
+        "id": "0x0100000000000021",
+        "owner": "0x0100000000000004",
+        "direction": "input",
+        "index": 0,
+        "script": {
+          "language": "articy_script",
+          "role": "condition",
+          "text": "Story.coins > 0"
+        },
+        "properties": {
+          "Id": "0x0100000000000021",
+          "Owner": "0x0100000000000004",
+          "Text": "Story.coins > 0"
+        }
+      },
+      {
+        "id": "0x0100000000000031",
+        "owner": "0x0100000000000005",
+        "direction": "input",
+        "index": 0,
+        "script": null,
+        "properties": {
+          "Id": "0x0100000000000031",
+          "Owner": "0x0100000000000005",
+          "Text": ""
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge-1",
+        "kind": "connection",
+        "source": "0x0100000000000003",
+        "source_pin": "0x0100000000000012",
+        "target": "0x0100000000000004",
+        "target_pin": "0x0100000000000021",
+        "index": 0,
+        "label": "North",
+        "properties": {
+          "Label": "North",
+          "Target": "0x0100000000000004",
+          "TargetPin": "0x0100000000000021"
+        }
+      },
+      {
+        "id": "edge-2",
+        "kind": "connection",
+        "source": "0x0100000000000003",
+        "source_pin": "0x0100000000000012",
+        "target": "0x0100000000000005",
+        "target_pin": "0x0100000000000031",
+        "index": 1,
+        "label": "",
+        "properties": {
+          "Label": "",
+          "Target": "0x0100000000000005",
+          "TargetPin": "0x0100000000000031"
+        }
+      },
+      {
+        "id": "edge-3",
+        "kind": "jump",
+        "source": "0x0100000000000008",
+        "source_pin": null,
+        "target": "0x0100000000000003",
+        "target_pin": "0x0100000000000011",
+        "index": 0,
+        "label": null,
+        "properties": {}
+      }
+    ],
+    "choices": [
+      {
+        "edge": "edge-1",
+        "source": "0x0100000000000003",
+        "source_pin": "0x0100000000000012",
+        "target": "0x0100000000000004",
+        "text_source": "edge_label",
+        "condition": {
+          "op": "any",
+          "conditions": [
+            {
+              "op": "eq",
+              "variable": {
+                "namespace": "Story",
+                "name": "sign"
+              },
+              "value": "Север 南"
+            },
+            {
+              "op": "eq",
+              "variable": {
+                "namespace": "Story",
+                "name": "coins"
+              },
+              "value": 3
+            }
+          ]
+        },
+        "event": {
+          "op": "set",
+          "variable": {
+            "namespace": "Story",
+            "name": "visited"
+          },
+          "value": true
+        }
+      },
+      {
+        "edge": "edge-2",
+        "source": "0x0100000000000003",
+        "source_pin": "0x0100000000000012",
+        "target": "0x0100000000000005",
+        "text_source": "target_menu_text"
+      }
+    ],
+    "variable_namespaces": [
+      {
+        "name": "Story",
+        "metadata": {
+          "Description": "Synthetic state only.",
+          "Namespace": "Story"
+        },
+        "variables": [
+          "visited",
+          "coins",
+          "pace",
+          "sign"
+        ]
+      },
+      {
+        "name": "Empty",
+        "metadata": {
+          "Namespace": "Empty"
+        },
+        "variables": []
+      }
+    ],
+    "variables": [
+      {
+        "namespace": "Story",
+        "name": "visited",
+        "source_type": "Boolean",
+        "kind": "boolean",
+        "value": false,
+        "raw_value": "False",
+        "description": "Visited the crossroads.",
+        "metadata": {
+          "Description": "Visited the crossroads.",
+          "Type": "Boolean",
+          "Variable": "visited"
+        }
+      },
+      {
+        "namespace": "Story",
+        "name": "coins",
+        "source_type": "Integer",
+        "kind": "integer",
+        "value": 3,
+        "raw_value": "3",
+        "description": "",
+        "metadata": {
+          "Description": "",
+          "Type": "Integer",
+          "Variable": "coins"
+        }
+      },
+      {
+        "namespace": "Story",
+        "name": "pace",
+        "source_type": "Float",
+        "kind": "float",
+        "value": 1.25,
+        "raw_value": "1.25",
+        "description": "",
+        "metadata": {
+          "Description": "",
+          "Type": "Float",
+          "Variable": "pace"
+        }
+      },
+      {
+        "namespace": "Story",
+        "name": "sign",
+        "source_type": "String",
+        "kind": "string",
+        "value": "Север 南",
+        "raw_value": "Север 南",
+        "description": "",
+        "metadata": {
+          "Description": "",
+          "Type": "String",
+          "Variable": "sign"
+        }
+      }
+    ],
+    "hierarchy": [
+      {
+        "id": "0x0100000000000001",
+        "parent": null,
+        "index": 0,
+        "depth": 0,
+        "properties": {
+          "Id": "0x0100000000000001",
+          "Type": "FlowFragment"
+        }
+      },
+      {
+        "id": "0x0100000000000003",
+        "parent": "0x0100000000000001",
+        "index": 0,
+        "depth": 1,
+        "properties": {
+          "Id": "0x0100000000000003",
+          "Type": "CustomLine"
+        }
+      },
+      {
+        "id": "0x0100000000000004",
+        "parent": "0x0100000000000001",
+        "index": 1,
+        "depth": 1,
+        "properties": {
+          "Id": "0x0100000000000004",
+          "Type": "DialogueFragment"
+        }
+      },
+      {
+        "id": "0x0100000000000005",
+        "parent": "0x0100000000000001",
+        "index": 2,
+        "depth": 1,
+        "properties": {
+          "Id": "0x0100000000000005",
+          "Type": "DialogueFragment"
+        }
+      },
+      {
+        "id": "0x0100000000000006",
+        "parent": "0x0100000000000001",
+        "index": 3,
+        "depth": 1,
+        "properties": {
+          "Id": "0x0100000000000006",
+          "Type": "Condition"
+        }
+      },
+      {
+        "id": "0x0100000000000007",
+        "parent": "0x0100000000000001",
+        "index": 4,
+        "depth": 1,
+        "properties": {
+          "Id": "0x0100000000000007",
+          "Type": "Instruction"
+        }
+      },
+      {
+        "id": "0x0100000000000008",
+        "parent": "0x0100000000000001",
+        "index": 5,
+        "depth": 1,
+        "properties": {
+          "Id": "0x0100000000000008",
+          "Type": "Jump"
+        }
+      }
+    ],
+    "warnings": []
+  }
+}
