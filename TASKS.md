@@ -20,10 +20,10 @@ Status: `open` → `taken` (handle, date) → `review` (PR #) → `done`.
 | PG-13 | GEXF 1.3 writer for typed graphs (node/edge attributes, time slices) | Rust crate | done | stanlauck, 2026-10-07 | #18 |
 | PG-14 | Localization exchange: string table JSON ↔ XLIFF 2.1 / CSV, with per-line context and character name | Rust crate | done | Mwapi, 2026-10-07 | #17 |
 | PG-15 | Unreal Engine 5 importer for neutral scene/dialogue JSON (same input as PG-04): places, exits, items, actor placeholders; re-import by id without duplicates; import report | UE5 plugin (Python or C++) | open | | (issue #30) |
-| PG-16 | EDL CMX 3600 writer + reader for a neutral shot list JSON: reels, timecodes at 23.976/24/25/30, comments carry shot ids; round-trip test | Rust crate | open | | (issue #31) |
+| PG-16 | EDL CMX 3600 writer + reader for a neutral shot list JSON: reels, timecodes at 23.976/24/25/30, comments carry shot ids; round-trip test | Rust crate | review | stanlauck, 2026-10-09 | #42 |
 | PG-17 | Subtitle writer: dialogue timing JSON → SRT / WebVTT / TTML with speaker labels; reading-speed (CPS), line-length and duration checks | Rust crate | open | | (issue #32) |
 | PG-18 | Screenplay length estimator: Fountain → per-scene length in eighths of a page (Courier 12, US Letter/A4); deterministic | Rust crate | open | | (issue #33) |
 | PG-19 | Fountain conformance corpus: reference .fountain files + expected element JSON for spec edge cases + CLI runner for any parser | Corpus + TS runner | open | | (issue #34) |
 | PG-20 | Ink compiled JSON reader → neutral dialogue-graph JSON (same target as PG-03); unsupported features report | Rust crate | open | | (issue #35) |
-| PG-21 | Yarn Spinner 2 .yarn parser → neutral dialogue-graph JSON (same target as PG-03); line ids preserved; error report | Rust crate | review | qwen-trae, 2026-10-10 | #43 |
+| PG-21 | Yarn Spinner 2 .yarn parser → neutral dialogue-graph JSON (same target as PG-03); line ids preserved; error report | Rust crate | review | codex-sol, 2026-10-10 | #43 |
 | PG-22 | Storyboard sheet renderer: shot list JSON + frames → printable PDF grids via Typst; placeholder for missing images | Rust crate | open | | (issue #37) |

@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/pg-16/shot-list-v1.schema.json",
+  "title": "PG-16 neutral shot list v1",
+  "description": "Structural constraints. Rust additionally enforces byte budgets, exact supported reduced rates, drop-frame labels, unique IDs, frame sums, event limits and URI syntax.",
+  "type": "object",
+  "required": ["version", "frame_rate", "shots"],
+  "properties": {
+    "version": { "const": 1 },
+    "title": { "anyOf": [{ "$ref": "#/$defs/name" }, { "type": "null" }] },
+    "frame_rate": { "$ref": "#/$defs/rate" },
+    "timecode_mode": { "enum": ["non_drop", "drop"], "default": "non_drop" },
+    "record_start": {
+      "anyOf": [
+        { "type": "string", "pattern": "^(?:[01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9][:;][0-2][0-9](?![\\s\\S])" },
+        { "type": "null" }
+      ]
+    },
+    "resolution": {
+      "anyOf": [
+        {
+          "type": "array",
+          "prefixItems": [
+            { "type": "integer", "minimum": 1, "maximum": 32768 },
+            { "type": "integer", "minimum": 1, "maximum": 32768 }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        { "type": "null" }
+      ]
+    },
+    "shots": {
+      "type": "array",
+      "maxItems": 999,
+      "items": { "$ref": "#/$defs/shot" }
+    }
+  },
+  "$defs": {
+    "name": { "type": "string", "maxLength": 4096, "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029\\ufffe\\uffff]*(?![\\s\\S])" },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^\\s\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029\\ufffe\\uffff](?:[^\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029\\ufffe\\uffff]*[^\\s\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029\\ufffe\\uffff])?(?![\\s\\S])"
+    },
+    "rate": {
+      "anyOf": [
+        { "enum": [24, 25, 30] },
+        {
+          "type": "object",
+          "required": ["num", "den"],
+          "properties": {
+            "num": { "type": "integer", "minimum": 1, "maximum": 4294967295 },
+            "den": { "type": "integer", "minimum": 1, "maximum": 4294967295 }
+          }
+        }
+      ]
+    },
+    "media": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "anyOf": [
+            { "type": "string", "maxLength": 8192, "pattern": "^(?:[Ff][Ii][Ll][Ee]|[Hh][Tt][Tt][Pp][Ss])://[!-~]+(?![\\s\\S])" },
+            { "type": "null" }
+          ]
+        },
+        "reel": {
+          "anyOf": [
+            { "allOf": [{ "$ref": "#/$defs/name" }], "minLength": 1 },
+            { "type": "null" }
+          ]
+        },
+        "source_in_frame": { "type": ["integer", "null"], "minimum": 0, "maximum": 2591999 }
+      }
+    },
+    "shot": {
+      "type": "object",
+      "required": ["id", "duration_frames"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "anyOf": [{ "$ref": "#/$defs/name" }, { "type": "null" }] },
+        "duration_frames": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2591999,
+          "description": "2591999 = 30*86400-1, the 30 fps timecode day minus one frame. Rust enforces the exact day for the chosen rate (including the shorter drop-frame day); frame-count bounds elsewhere follow the same rule."
+        },
+        "gap_before_frames": { "type": ["integer", "null"], "minimum": 0, "maximum": 2591999 },
+        "media": { "anyOf": [{ "$ref": "#/$defs/media" }, { "type": "null" }] }
+      }
+    }
+  }
+}

@@ -1,0 +1,2 @@
+/samples/*.json text eol=lf
+/samples/*.edl text eol=lf
