@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "page_size": "a4",
+  "layout": {
+    "page_size": "a4",
+    "lines_per_page": 58,
+    "action_width": 60,
+    "scene_heading_width": 60,
+    "character_width": 33,
+    "parenthetical_width": 25,
+    "dialogue_width": 35,
+    "dual_dialogue_width": 28,
+    "transition_width": 60,
+    "centered_width": 60,
+    "heading_keep_lines": 2,
+    "dialogue_split_min_lines": 2
+  },
+  "title_page": true,
+  "scenes": [
+    {
+      "index": 0,
+      "number": null,
+      "heading": null,
+      "start_page": 2,
+      "end_page": 2,
+      "line_count": 2,
+      "eighths": 1,
+      "pages": "1/8"
+    },
+    {
+      "index": 1,
+      "number": "1",
+      "heading": "EXT. HARBOUR WALL - DUSK",
+      "start_page": 2,
+      "end_page": 2,
+      "line_count": 25,
+      "eighths": 3,
+      "pages": "3/8"
+    },
+    {
+      "index": 2,
+      "number": "2",
+      "heading": "INT. CUSTOMS HOUSE - RECORDS ROOM - NIGHT",
+      "start_page": 2,
+      "end_page": 3,
+      "line_count": 89,
+      "eighths": 12,
+      "pages": "1 4/8"
+    },
+    {
+      "index": 3,
+      "number": "3",
+      "heading": "CELLAR UNDER THE FOURTH LANTERN - DAWN",
+      "start_page": 4,
+      "end_page": 4,
+      "line_count": 23,
+      "eighths": 3,
+      "pages": "3/8"
+    }
+  ],
+  "total": {
+    "pages": 4,
+    "eighths": 19,
+    "lines": 139
+  }
+}
