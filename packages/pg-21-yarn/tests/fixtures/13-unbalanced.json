@@ -1,379 +1,1098 @@
 {
   "version": 1,
-  "sources": [
-    "13-unbalanced.yarn"
-  ],
-  "start_node": "Unbalanced:1",
-  "titles": [
+  "text_mode": "literal",
+  "metadata": {
+    "files": [
+      "13-unbalanced.yarn"
+    ],
+    "generator": "pg-21-yarn 0.1.0",
+    "source_format": "yarn"
+  },
+  "definitions": [],
+  "packages": [
     {
-      "id": "Unbalanced",
-      "title": "Unbalanced",
-      "source": 0,
-      "entry": "Unbalanced:1",
-      "line": 1,
-      "col": 1
-    },
-    {
-      "id": "StrayElse",
-      "title": "StrayElse",
-      "source": 0,
-      "entry": "StrayElse:1",
-      "line": 8,
-      "col": 1
-    },
-    {
-      "id": "ElseifAfterElse",
-      "title": "ElseifAfterElse",
-      "source": 0,
-      "entry": "ElseifAfterElse:1",
-      "line": 16,
-      "col": 1
-    },
-    {
-      "id": "ElseWithCondition",
-      "title": "ElseWithCondition",
-      "source": 0,
-      "entry": "ElseWithCondition:1",
-      "line": 28,
-      "col": 1
+      "index": 0,
+      "name": "13-unbalanced",
+      "metadata": {
+        "path": "13-unbalanced.yarn"
+      },
+      "node_ids": [
+        "Unbalanced",
+        "Unbalanced:1",
+        "Unbalanced:2",
+        "Unbalanced:2:1",
+        "StrayElse",
+        "StrayElse:1",
+        "StrayElse:2",
+        "ElseifAfterElse",
+        "ElseifAfterElse:1",
+        "ElseifAfterElse:1:1",
+        "ElseifAfterElse:1:2",
+        "ElseifAfterElse:1:3",
+        "ElseifAfterElse:2",
+        "ElseWithCondition",
+        "ElseWithCondition:1",
+        "ElseWithCondition:1:1",
+        "ElseWithCondition:1:2"
+      ]
     }
   ],
   "nodes": [
     {
+      "id": "Unbalanced",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "Unbalanced",
+      "display_name": "Unbalanced",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Unbalanced#in"
+      ],
+      "output_pins": [
+        "Unbalanced#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 1
+      }
+    },
+    {
       "id": "Unbalanced:1",
-      "source": 0,
-      "title": "Unbalanced",
-      "kind": "line",
-      "speaker": "Ada",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Unbalanced",
+      "technical_name": null,
+      "display_name": null,
       "text": "Before.",
-      "line_id": "13a0001",
-      "line": 3,
-      "col": 6
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Unbalanced:1#in"
+      ],
+      "output_pins": [
+        "Unbalanced:1#out"
+      ],
+      "properties": {
+        "line_id": "13a0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 3
+      }
     },
     {
       "id": "Unbalanced:2",
-      "source": 0,
-      "title": "Unbalanced",
-      "kind": "conditional",
-      "command": {
-        "name": "if",
-        "args": "$x == 1",
-        "expression": "$x == 1",
-        "clauses": [
-          {
-            "keyword": "if",
-            "label": "if",
-            "expression": "$x == 1",
-            "body": [
-              "Unbalanced:3"
-            ],
-            "line": 4,
-            "col": 1
-          }
-        ]
+      "package": 0,
+      "source_type": "If",
+      "kind": "condition",
+      "parent": "Unbalanced",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "condition",
+        "text": "$x == 1"
       },
-      "line": 4,
-      "col": 1
+      "input_pins": [
+        "Unbalanced:2#in"
+      ],
+      "output_pins": [
+        "Unbalanced:2#out"
+      ],
+      "properties": {},
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 4
+      }
     },
     {
-      "id": "Unbalanced:3",
-      "source": 0,
-      "title": "Unbalanced",
-      "kind": "line",
-      "speaker": "Ada",
-      "text": "Inside an if with no endif.",
-      "line_id": "13a0002",
+      "id": "Unbalanced:2:1",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
       "parent": "Unbalanced:2",
-      "clause": "if",
-      "line": 5,
-      "col": 10
+      "technical_name": null,
+      "display_name": null,
+      "text": "Inside an if with no endif.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Unbalanced:2:1#in"
+      ],
+      "output_pins": [
+        "Unbalanced:2:1#out"
+      ],
+      "properties": {
+        "clause": "if",
+        "line_id": "13a0002",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 10,
+        "line": 5
+      }
+    },
+    {
+      "id": "StrayElse",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "StrayElse",
+      "display_name": "StrayElse",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "StrayElse#in"
+      ],
+      "output_pins": [
+        "StrayElse#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 8
+      }
     },
     {
       "id": "StrayElse:1",
-      "source": 0,
-      "title": "StrayElse",
-      "kind": "line",
-      "speaker": "Ada",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "StrayElse",
+      "technical_name": null,
+      "display_name": null,
       "text": "An else with no if.",
-      "line_id": "13b0001",
-      "line": 11,
-      "col": 6
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "StrayElse:1#in"
+      ],
+      "output_pins": [
+        "StrayElse:1#out"
+      ],
+      "properties": {
+        "line_id": "13b0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 11
+      }
     },
     {
       "id": "StrayElse:2",
-      "source": 0,
-      "title": "StrayElse",
-      "kind": "line",
-      "speaker": "Ada",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "StrayElse",
+      "technical_name": null,
+      "display_name": null,
       "text": "An endif with no if.",
-      "line_id": "13b0002",
-      "line": 13,
-      "col": 6
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "StrayElse:2#in"
+      ],
+      "output_pins": [
+        "StrayElse:2#out"
+      ],
+      "properties": {
+        "line_id": "13b0002",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 13
+      }
+    },
+    {
+      "id": "ElseifAfterElse",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "ElseifAfterElse",
+      "display_name": "ElseifAfterElse",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "ElseifAfterElse#in"
+      ],
+      "output_pins": [
+        "ElseifAfterElse#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 16
+      }
     },
     {
       "id": "ElseifAfterElse:1",
-      "source": 0,
-      "title": "ElseifAfterElse",
-      "kind": "conditional",
-      "command": {
-        "name": "if",
-        "args": "$y",
-        "expression": "$y",
-        "clauses": [
-          {
-            "keyword": "if",
-            "label": "if",
-            "expression": "$y",
-            "body": [
-              "ElseifAfterElse:2"
-            ],
-            "line": 18,
-            "col": 1
-          },
-          {
-            "keyword": "else",
-            "label": "else",
-            "body": [
-              "ElseifAfterElse:3",
-              "ElseifAfterElse:4"
-            ],
-            "line": 20,
-            "col": 1
-          }
-        ]
+      "package": 0,
+      "source_type": "If",
+      "kind": "condition",
+      "parent": "ElseifAfterElse",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "condition",
+        "text": "$y"
       },
-      "line": 18,
-      "col": 1
+      "input_pins": [
+        "ElseifAfterElse:1#in"
+      ],
+      "output_pins": [
+        "ElseifAfterElse:1#out"
+      ],
+      "properties": {},
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 18
+      }
+    },
+    {
+      "id": "ElseifAfterElse:1:1",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "ElseifAfterElse:1",
+      "technical_name": null,
+      "display_name": null,
+      "text": "The if body.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "ElseifAfterElse:1:1#in"
+      ],
+      "output_pins": [
+        "ElseifAfterElse:1:1#out"
+      ],
+      "properties": {
+        "clause": "if",
+        "line_id": "13c0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 10,
+        "line": 19
+      }
+    },
+    {
+      "id": "ElseifAfterElse:1:2",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "ElseifAfterElse:1",
+      "technical_name": null,
+      "display_name": null,
+      "text": "The else body.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "ElseifAfterElse:1:2#in"
+      ],
+      "output_pins": [
+        "ElseifAfterElse:1:2#out"
+      ],
+      "properties": {
+        "clause": "else",
+        "line_id": "13c0002",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 10,
+        "line": 21
+      }
+    },
+    {
+      "id": "ElseifAfterElse:1:3",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "ElseifAfterElse:1",
+      "technical_name": null,
+      "display_name": null,
+      "text": "Too late for an elseif.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "ElseifAfterElse:1:3#in"
+      ],
+      "output_pins": [
+        "ElseifAfterElse:1:3#out"
+      ],
+      "properties": {
+        "clause": "else",
+        "line_id": "13c0003",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 10,
+        "line": 23
+      }
     },
     {
       "id": "ElseifAfterElse:2",
-      "source": 0,
-      "title": "ElseifAfterElse",
-      "kind": "line",
-      "speaker": "Ada",
-      "text": "The if body.",
-      "line_id": "13c0001",
-      "parent": "ElseifAfterElse:1",
-      "clause": "if",
-      "line": 19,
-      "col": 10
-    },
-    {
-      "id": "ElseifAfterElse:3",
-      "source": 0,
-      "title": "ElseifAfterElse",
-      "kind": "line",
-      "speaker": "Ada",
-      "text": "The else body.",
-      "line_id": "13c0002",
-      "parent": "ElseifAfterElse:1",
-      "clause": "else",
-      "line": 21,
-      "col": 10
-    },
-    {
-      "id": "ElseifAfterElse:4",
-      "source": 0,
-      "title": "ElseifAfterElse",
-      "kind": "line",
-      "speaker": "Ada",
-      "text": "Too late for an elseif.",
-      "line_id": "13c0003",
-      "parent": "ElseifAfterElse:1",
-      "clause": "else",
-      "line": 23,
-      "col": 10
-    },
-    {
-      "id": "ElseifAfterElse:5",
-      "source": 0,
-      "title": "ElseifAfterElse",
-      "kind": "line",
-      "speaker": "Ada",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "ElseifAfterElse",
+      "technical_name": null,
+      "display_name": null,
       "text": "After the block.",
-      "line_id": "13c0004",
-      "line": 25,
-      "col": 6
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "ElseifAfterElse:2#in"
+      ],
+      "output_pins": [
+        "ElseifAfterElse:2#out"
+      ],
+      "properties": {
+        "line_id": "13c0004",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 25
+      }
+    },
+    {
+      "id": "ElseWithCondition",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "ElseWithCondition",
+      "display_name": "ElseWithCondition",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "ElseWithCondition#in"
+      ],
+      "output_pins": [
+        "ElseWithCondition#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 28
+      }
     },
     {
       "id": "ElseWithCondition:1",
-      "source": 0,
-      "title": "ElseWithCondition",
-      "kind": "conditional",
-      "command": {
-        "name": "if",
-        "args": "$a",
-        "expression": "$a",
-        "clauses": [
-          {
-            "keyword": "if",
-            "label": "if",
-            "expression": "$a",
-            "body": [
-              "ElseWithCondition:2"
-            ],
-            "line": 30,
-            "col": 1
-          },
-          {
-            "keyword": "else",
-            "label": "else",
-            "body": [
-              "ElseWithCondition:3"
-            ],
-            "line": 32,
-            "col": 1
-          }
-        ]
+      "package": 0,
+      "source_type": "If",
+      "kind": "condition",
+      "parent": "ElseWithCondition",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "condition",
+        "text": "$a"
       },
-      "line": 30,
-      "col": 1
+      "input_pins": [
+        "ElseWithCondition:1#in"
+      ],
+      "output_pins": [
+        "ElseWithCondition:1#out"
+      ],
+      "properties": {},
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 30
+      }
     },
     {
-      "id": "ElseWithCondition:2",
-      "source": 0,
-      "title": "ElseWithCondition",
-      "kind": "line",
-      "speaker": "Ada",
+      "id": "ElseWithCondition:1:1",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "ElseWithCondition:1",
+      "technical_name": null,
+      "display_name": null,
       "text": "Then.",
-      "line_id": "13d0001",
-      "parent": "ElseWithCondition:1",
-      "clause": "if",
-      "line": 31,
-      "col": 10
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "ElseWithCondition:1:1#in"
+      ],
+      "output_pins": [
+        "ElseWithCondition:1:1#out"
+      ],
+      "properties": {
+        "clause": "if",
+        "line_id": "13d0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 10,
+        "line": 31
+      }
     },
     {
-      "id": "ElseWithCondition:3",
-      "source": 0,
-      "title": "ElseWithCondition",
-      "kind": "line",
-      "speaker": "Ada",
-      "text": "Else takes no condition.",
-      "line_id": "13d0002",
+      "id": "ElseWithCondition:1:2",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
       "parent": "ElseWithCondition:1",
-      "clause": "else",
-      "line": 33,
-      "col": 10
+      "technical_name": null,
+      "display_name": null,
+      "text": "Else takes no condition.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "ElseWithCondition:1:2#in"
+      ],
+      "output_pins": [
+        "ElseWithCondition:1:2#out"
+      ],
+      "properties": {
+        "clause": "else",
+        "line_id": "13d0002",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 10,
+        "line": 33
+      }
+    }
+  ],
+  "pins": [
+    {
+      "id": "Unbalanced#in",
+      "owner": "Unbalanced",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Unbalanced#out",
+      "owner": "Unbalanced",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Unbalanced:1#in",
+      "owner": "Unbalanced:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Unbalanced:1#out",
+      "owner": "Unbalanced:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Unbalanced:2#in",
+      "owner": "Unbalanced:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Unbalanced:2#out",
+      "owner": "Unbalanced:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Unbalanced:2:1#in",
+      "owner": "Unbalanced:2:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Unbalanced:2:1#out",
+      "owner": "Unbalanced:2:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "StrayElse#in",
+      "owner": "StrayElse",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "StrayElse#out",
+      "owner": "StrayElse",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "StrayElse:1#in",
+      "owner": "StrayElse:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "StrayElse:1#out",
+      "owner": "StrayElse:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "StrayElse:2#in",
+      "owner": "StrayElse:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "StrayElse:2#out",
+      "owner": "StrayElse:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "ElseifAfterElse#in",
+      "owner": "ElseifAfterElse",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "ElseifAfterElse#out",
+      "owner": "ElseifAfterElse",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "ElseifAfterElse:1#in",
+      "owner": "ElseifAfterElse:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "ElseifAfterElse:1#out",
+      "owner": "ElseifAfterElse:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "ElseifAfterElse:1:1#in",
+      "owner": "ElseifAfterElse:1:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "ElseifAfterElse:1:1#out",
+      "owner": "ElseifAfterElse:1:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "ElseifAfterElse:1:2#in",
+      "owner": "ElseifAfterElse:1:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "ElseifAfterElse:1:2#out",
+      "owner": "ElseifAfterElse:1:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "ElseifAfterElse:1:3#in",
+      "owner": "ElseifAfterElse:1:3",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "ElseifAfterElse:1:3#out",
+      "owner": "ElseifAfterElse:1:3",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "ElseifAfterElse:2#in",
+      "owner": "ElseifAfterElse:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "ElseifAfterElse:2#out",
+      "owner": "ElseifAfterElse:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "ElseWithCondition#in",
+      "owner": "ElseWithCondition",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "ElseWithCondition#out",
+      "owner": "ElseWithCondition",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "ElseWithCondition:1#in",
+      "owner": "ElseWithCondition:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "ElseWithCondition:1#out",
+      "owner": "ElseWithCondition:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "ElseWithCondition:1:1#in",
+      "owner": "ElseWithCondition:1:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "ElseWithCondition:1:1#out",
+      "owner": "ElseWithCondition:1:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "ElseWithCondition:1:2#in",
+      "owner": "ElseWithCondition:1:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "ElseWithCondition:1:2#out",
+      "owner": "ElseWithCondition:1:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
     }
   ],
   "edges": [
     {
-      "id": "edge-1",
-      "kind": "flow",
+      "id": "e0",
+      "kind": "connection",
+      "source": "Unbalanced",
+      "source_pin": "Unbalanced#out",
+      "target": "Unbalanced:1",
+      "target_pin": "Unbalanced:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e1",
+      "kind": "connection",
       "source": "Unbalanced:1",
+      "source_pin": "Unbalanced:1#out",
       "target": "Unbalanced:2",
-      "index": 0
+      "target_pin": "Unbalanced:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-2",
-      "kind": "branch",
+      "id": "e2",
+      "kind": "connection",
       "source": "Unbalanced:2",
-      "target": "Unbalanced:3",
-      "index": 1,
-      "label": "if"
+      "source_pin": "Unbalanced:2#out",
+      "target": "Unbalanced:2:1",
+      "target_pin": "Unbalanced:2:1#in",
+      "index": 0,
+      "label": "if",
+      "properties": {}
     },
     {
-      "id": "edge-3",
-      "kind": "flow",
+      "id": "e3",
+      "kind": "connection",
+      "source": "StrayElse",
+      "source_pin": "StrayElse#out",
+      "target": "StrayElse:1",
+      "target_pin": "StrayElse:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e4",
+      "kind": "connection",
       "source": "StrayElse:1",
+      "source_pin": "StrayElse:1#out",
       "target": "StrayElse:2",
-      "index": 2
+      "target_pin": "StrayElse:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-4",
-      "kind": "branch",
+      "id": "e5",
+      "kind": "connection",
+      "source": "ElseifAfterElse",
+      "source_pin": "ElseifAfterElse#out",
+      "target": "ElseifAfterElse:1",
+      "target_pin": "ElseifAfterElse:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e6",
+      "kind": "connection",
       "source": "ElseifAfterElse:1",
+      "source_pin": "ElseifAfterElse:1#out",
+      "target": "ElseifAfterElse:1:1",
+      "target_pin": "ElseifAfterElse:1:1#in",
+      "index": 0,
+      "label": "if",
+      "properties": {}
+    },
+    {
+      "id": "e7",
+      "kind": "connection",
+      "source": "ElseifAfterElse:1:1",
+      "source_pin": "ElseifAfterElse:1:1#out",
       "target": "ElseifAfterElse:2",
-      "index": 3,
-      "label": "if"
+      "target_pin": "ElseifAfterElse:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-5",
-      "kind": "flow",
-      "source": "ElseifAfterElse:2",
-      "target": "ElseifAfterElse:5",
-      "index": 4
-    },
-    {
-      "id": "edge-6",
-      "kind": "branch",
+      "id": "e8",
+      "kind": "connection",
       "source": "ElseifAfterElse:1",
-      "target": "ElseifAfterElse:3",
-      "index": 5,
-      "label": "else"
+      "source_pin": "ElseifAfterElse:1#out",
+      "target": "ElseifAfterElse:1:2",
+      "target_pin": "ElseifAfterElse:1:2#in",
+      "index": 1,
+      "label": "else",
+      "properties": {}
     },
     {
-      "id": "edge-7",
-      "kind": "flow",
-      "source": "ElseifAfterElse:3",
-      "target": "ElseifAfterElse:4",
-      "index": 6
+      "id": "e9",
+      "kind": "connection",
+      "source": "ElseifAfterElse:1:2",
+      "source_pin": "ElseifAfterElse:1:2#out",
+      "target": "ElseifAfterElse:1:3",
+      "target_pin": "ElseifAfterElse:1:3#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-8",
-      "kind": "flow",
-      "source": "ElseifAfterElse:4",
-      "target": "ElseifAfterElse:5",
-      "index": 7
+      "id": "e10",
+      "kind": "connection",
+      "source": "ElseifAfterElse:1:3",
+      "source_pin": "ElseifAfterElse:1:3#out",
+      "target": "ElseifAfterElse:2",
+      "target_pin": "ElseifAfterElse:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-9",
-      "kind": "branch",
+      "id": "e11",
+      "kind": "connection",
+      "source": "ElseWithCondition",
+      "source_pin": "ElseWithCondition#out",
+      "target": "ElseWithCondition:1",
+      "target_pin": "ElseWithCondition:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e12",
+      "kind": "connection",
       "source": "ElseWithCondition:1",
-      "target": "ElseWithCondition:2",
-      "index": 8,
-      "label": "if"
+      "source_pin": "ElseWithCondition:1#out",
+      "target": "ElseWithCondition:1:1",
+      "target_pin": "ElseWithCondition:1:1#in",
+      "index": 0,
+      "label": "if",
+      "properties": {}
     },
     {
-      "id": "edge-10",
-      "kind": "branch",
+      "id": "e13",
+      "kind": "connection",
       "source": "ElseWithCondition:1",
-      "target": "ElseWithCondition:3",
-      "index": 9,
-      "label": "else"
+      "source_pin": "ElseWithCondition:1#out",
+      "target": "ElseWithCondition:1:2",
+      "target_pin": "ElseWithCondition:1:2#in",
+      "index": 1,
+      "label": "else",
+      "properties": {}
+    }
+  ],
+  "choices": [],
+  "variable_namespaces": [
+    {
+      "name": "yarn",
+      "metadata": {},
+      "variables": []
     }
   ],
   "variables": [],
-  "errors": [
+  "hierarchy": [
     {
-      "file": "13-unbalanced.yarn",
-      "line": 4,
-      "col": 1,
-      "code": "unbalanced_conditional",
-      "severity": "error",
-      "message": "`<<if>>` has no matching `<<endif>>`"
+      "id": "Unbalanced",
+      "parent": null,
+      "index": 0,
+      "depth": 0,
+      "properties": {}
     },
     {
-      "file": "13-unbalanced.yarn",
-      "line": 10,
-      "col": 1,
-      "code": "unbalanced_conditional",
-      "severity": "error",
-      "message": "`<<else>>` has no matching `<<if>>`"
+      "id": "Unbalanced:1",
+      "parent": "Unbalanced",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
     },
     {
-      "file": "13-unbalanced.yarn",
-      "line": 12,
-      "col": 1,
-      "code": "unbalanced_conditional",
-      "severity": "error",
-      "message": "`<<endif>>` has no matching `<<if>>`"
+      "id": "Unbalanced:2",
+      "parent": "Unbalanced",
+      "index": 1,
+      "depth": 1,
+      "properties": {}
     },
     {
-      "file": "13-unbalanced.yarn",
-      "line": 22,
-      "col": 1,
-      "code": "unbalanced_conditional",
-      "severity": "error",
-      "message": "`<<elseif>>` after `<<else>>`"
+      "id": "Unbalanced:2:1",
+      "parent": "Unbalanced:2",
+      "index": 0,
+      "depth": 2,
+      "properties": {}
     },
     {
-      "file": "13-unbalanced.yarn",
-      "line": 32,
-      "col": 1,
-      "code": "trailing_content_after_command",
-      "severity": "warning",
-      "message": "`<<else>>` takes no condition"
+      "id": "StrayElse",
+      "parent": null,
+      "index": 1,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "StrayElse:1",
+      "parent": "StrayElse",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "StrayElse:2",
+      "parent": "StrayElse",
+      "index": 1,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "ElseifAfterElse",
+      "parent": null,
+      "index": 2,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "ElseifAfterElse:1",
+      "parent": "ElseifAfterElse",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "ElseifAfterElse:1:1",
+      "parent": "ElseifAfterElse:1",
+      "index": 0,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "ElseifAfterElse:1:2",
+      "parent": "ElseifAfterElse:1",
+      "index": 1,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "ElseifAfterElse:1:3",
+      "parent": "ElseifAfterElse:1",
+      "index": 2,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "ElseifAfterElse:2",
+      "parent": "ElseifAfterElse",
+      "index": 1,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "ElseWithCondition",
+      "parent": null,
+      "index": 3,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "ElseWithCondition:1",
+      "parent": "ElseWithCondition",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "ElseWithCondition:1:1",
+      "parent": "ElseWithCondition:1",
+      "index": 0,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "ElseWithCondition:1:2",
+      "parent": "ElseWithCondition:1",
+      "index": 1,
+      "depth": 2,
+      "properties": {}
     }
-  ]
+  ],
+  "warnings": []
 }

@@ -267,7 +267,8 @@ pub(crate) fn has_markup(text: &str) -> bool {
             }
             b'[' => {
                 let Some(close) = markup_close(bytes, index) else {
-                    return false;
+                    index += 1;
+                    continue;
                 };
                 if markup_tag_valid(&text[index + 1..close]) {
                     return true;

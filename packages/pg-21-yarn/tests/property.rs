@@ -13,7 +13,7 @@
 
 use std::collections::{HashMap, HashSet};
 
-use pg_21_yarn::{parse, EdgeKind, NodeKind};
+use pg_21_yarn::{parse, NodeKind};
 
 const INDENT: &str = "    ";
 const SEEDS: [u64; 64] = seed_table();
@@ -116,177 +116,65 @@ impl Generator {
     }
 }
 
-/// True when `node` is `owner` or sits somewhere inside `owner`'s subtree.
-fn owns(parents: &HashMap<String, Option<String>>, owner: &str, node: &str) -> bool {
-    let mut cursor = node.to_string();
-    loop {
-        if cursor == owner {
-            return true;
-        }
-        match parents.get(&cursor).and_then(Option::as_ref) {
-            Some(parent) => cursor = parent.clone(),
-            None => return false,
-        }
-    }
-}
-
 #[test]
 fn every_generated_option_has_exactly_one_parent() {
     for seed in SEEDS {
         let mut rng = Rng(seed);
         let mut generator = Generator::new();
         let script = generator.script(&mut rng);
-        let generated = generator.options.clone();
-        let group_of = generator.group_of.clone();
-        let replies = generator.replies;
-
-        let graph = parse("generated.yarn", &script)
-            .unwrap_or_else(|error| panic!("seed {seed:#x} failed to parse: {error}"));
-
-        assert!(
-            graph.errors.is_empty(),
-            "seed {seed:#x} produced findings: {:?}",
-            graph.errors
-        );
-
-        let by_id: HashMap<&str, &pg_21_yarn::Node> = graph
+        let graph = parse("generated.yarn", &script).unwrap();
+        assert!(graph.warnings.is_empty(), "seed {seed:#x}");
+        let by_id: HashMap<_, _> = graph.nodes.iter().map(|n| (n.id.as_str(), n)).collect();
+        let options: Vec<_> = graph
             .nodes
             .iter()
-            .map(|node| (node.id.as_str(), node))
+            .filter(|n| n.source_type == "Option")
             .collect();
-        let parents: HashMap<String, Option<String>> = graph
-            .nodes
-            .iter()
-            .map(|node| (node.id.clone(), node.parent.clone()))
-            .collect();
-
-        let options: Vec<&pg_21_yarn::Node> = graph
-            .nodes
-            .iter()
-            .filter(|node| node.kind == NodeKind::Options)
-            .collect();
-        assert_eq!(
-            options.len(),
-            generated.len(),
-            "seed {seed:#x}: expected {} options, the graph holds {}\n{script}",
-            generated.len(),
-            options.len()
-        );
-
-        // Every option is entered exactly once, from exactly one place.
-        let mut incoming: HashMap<&str, Vec<&str>> = HashMap::new();
-        for edge in &graph.edges {
-            if edge.kind == EdgeKind::Option {
-                incoming
-                    .entry(edge.target.as_str())
-                    .or_default()
-                    .push(edge.source.as_str());
-            }
+        assert_eq!(options.len(), generator.options.len());
+        for option in options {
+            let parent = by_id[option.parent.as_deref().unwrap()];
+            assert_eq!(parent.kind, NodeKind::Hub);
+            let incoming: Vec<_> = graph
+                .choices
+                .iter()
+                .filter(|c| c.target == option.id)
+                .collect();
+            assert_eq!(incoming.len(), 1);
+            assert_eq!(incoming[0].source, parent.id);
         }
-        for node in &options {
-            let sources = incoming
-                .get(node.id.as_str())
-                .map(Vec::as_slice)
-                .unwrap_or(&[]);
-            assert_eq!(
-                sources.len(),
-                1,
-                "seed {seed:#x}: option {} has {} incoming option edges ({sources:?})\n{script}",
-                node.id,
-                sources.len()
-            );
-
-            // `parent` names the option that owns this one; the outermost
-            // group belongs to the node body and has no parent. The incoming
-            // edge comes from whatever statement precedes the group, which for
-            // a nested group sits inside the owner's own body — not from the
-            // owner itself.
-            let entered_from = by_id.get(sources[0]).unwrap_or_else(|| {
-                panic!("seed {seed:#x}: edge source {} does not exist", sources[0])
-            });
-            match &node.parent {
-                None => assert!(
-                    entered_from.parent.is_none(),
-                    "seed {seed:#x}: a parentless option must be entered from the node body, \
-                     not from inside {}\n{script}",
-                    sources[0]
-                ),
-                Some(parent) => {
-                    let owner = by_id
-                        .get(parent.as_str())
-                        .unwrap_or_else(|| panic!("seed {seed:#x}: {parent} does not exist"));
-                    assert_eq!(
-                        owner.kind,
-                        NodeKind::Options,
-                        "seed {seed:#x}: {parent} owns an option but is not one\n{script}"
-                    );
-                    assert!(
-                        owns(&parents, parent, &entered_from.id),
-                        "seed {seed:#x}: option {} is owned by {parent} but entered from {}, \
-                         which is not inside that owner\n{script}",
-                        node.id,
-                        sources[0]
-                    );
-                }
-            }
-        }
-
-        // Choice groups line up with the ones that were generated: siblings
-        // share a `(parent, option_group)` pair, and no two generated groups
-        // collapse onto the same pair.
-        let by_line_id: HashMap<&str, &pg_21_yarn::Node> = graph
+        let by_line_id: HashMap<_, _> = graph
             .nodes
             .iter()
-            .filter_map(|node| node.line_id.as_deref().map(|id| (id, node)))
+            .filter_map(|n| {
+                n.properties
+                    .get("line_id")
+                    .and_then(|v| v.as_str())
+                    .map(|id| (id, n))
+            })
             .collect();
-        let mut group_key: HashMap<usize, (Option<String>, usize)> = HashMap::new();
-        let mut key_group: HashMap<(Option<String>, usize), usize> = HashMap::new();
-        for (id, generated_group) in generated.iter().zip(&group_of) {
-            let node = by_line_id
-                .get(id.as_str())
-                .unwrap_or_else(|| panic!("seed {seed:#x}: option {id} is missing"));
-            let number = node
-                .option_group
-                .unwrap_or_else(|| panic!("seed {seed:#x}: option {id} has no choice group"));
-            let key = (node.parent.clone(), number);
-            if let Some(previous) = group_key.insert(*generated_group, key.clone()) {
-                assert_eq!(
-                    previous, key,
-                    "seed {seed:#x}: generated group {generated_group} was split across \
-                     {previous:?} and {key:?}\n{script}"
-                );
+        let mut group_hub = HashMap::new();
+        let mut hub_group = HashMap::new();
+        for (id, group) in generator.options.iter().zip(&generator.group_of) {
+            let hub = by_line_id[id.as_str()].parent.as_ref().unwrap();
+            if let Some(previous) = group_hub.insert(*group, hub) {
+                assert_eq!(previous, hub);
             }
-            if let Some(other) = key_group.insert(key.clone(), *generated_group) {
-                assert_eq!(
-                    other, *generated_group,
-                    "seed {seed:#x}: generated groups {other} and {generated_group} both \
-                     became {key:?}\n{script}"
-                );
+            if let Some(previous) = hub_group.insert(hub, *group) {
+                assert_eq!(previous, *group);
             }
-        }
-
-        // Nothing was dropped on the floor: every generated id survived, and the
-        // bodies generated alongside them too.
-        let ids: Vec<&str> = graph
-            .nodes
-            .iter()
-            .filter_map(|node| node.line_id.as_deref())
-            .collect();
-        assert_eq!(
-            ids.len(),
-            generated.len() + replies + 1,
-            "seed {seed:#x}\n{script}"
-        );
-        for id in &generated {
-            assert!(
-                ids.contains(&id.as_str()),
-                "seed {seed:#x}: {id} was lost\n{script}"
-            );
         }
         assert_eq!(
-            ids.iter().collect::<HashSet<_>>().len(),
-            ids.len(),
-            "seed {seed:#x}: a line id was reused\n{script}"
+            by_line_id.len(),
+            generator.options.len() + generator.replies + 1
+        );
+        assert_eq!(
+            graph
+                .nodes
+                .iter()
+                .map(|n| &n.id)
+                .collect::<HashSet<_>>()
+                .len(),
+            graph.nodes.len()
         );
     }
 }

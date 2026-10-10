@@ -1,31 +1,157 @@
 {
   "version": 1,
-  "sources": [
-    "01-minimal.yarn"
-  ],
-  "start_node": "Start:1",
-  "titles": [
+  "text_mode": "literal",
+  "metadata": {
+    "files": [
+      "01-minimal.yarn"
+    ],
+    "generator": "pg-21-yarn 0.1.0",
+    "source_format": "yarn"
+  },
+  "definitions": [],
+  "packages": [
     {
-      "id": "Start",
-      "title": "Start",
-      "source": 0,
-      "entry": "Start:1",
-      "line": 1,
-      "col": 1
+      "index": 0,
+      "name": "01-minimal",
+      "metadata": {
+        "path": "01-minimal.yarn"
+      },
+      "node_ids": [
+        "Start",
+        "Start:1"
+      ]
     }
   ],
   "nodes": [
     {
+      "id": "Start",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "Start",
+      "display_name": "Start",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start#in"
+      ],
+      "output_pins": [
+        "Start#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 1
+      }
+    },
+    {
       "id": "Start:1",
-      "source": 0,
-      "title": "Start",
-      "kind": "line",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
       "text": "The archive door is locked.",
-      "line": 3,
-      "col": 1
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start:1#in"
+      ],
+      "output_pins": [
+        "Start:1#out"
+      ],
+      "properties": {
+        "line_id": null,
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 3
+      }
     }
   ],
-  "edges": [],
+  "pins": [
+    {
+      "id": "Start#in",
+      "owner": "Start",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start#out",
+      "owner": "Start",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1#in",
+      "owner": "Start:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1#out",
+      "owner": "Start:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    }
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "kind": "connection",
+      "source": "Start",
+      "source_pin": "Start#out",
+      "target": "Start:1",
+      "target_pin": "Start:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    }
+  ],
+  "choices": [],
+  "variable_namespaces": [
+    {
+      "name": "yarn",
+      "metadata": {},
+      "variables": []
+    }
+  ],
   "variables": [],
-  "errors": []
+  "hierarchy": [
+    {
+      "id": "Start",
+      "parent": null,
+      "index": 0,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "Start:1",
+      "parent": "Start",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    }
+  ],
+  "warnings": []
 }

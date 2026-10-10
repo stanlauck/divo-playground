@@ -7,14 +7,14 @@ use std::collections::{HashMap, HashSet};
 
 use serde_json::{Map, Value};
 
+use crate::ast::{
+    Clause, ClauseKeyword, Command, Finding, FindingCode, Node, NodeKind, ParsedSourceSet, Title,
+    Variable, VariableType,
+};
 use crate::error::{Error, Result};
 use crate::lex::{
     self, char_col, indent_width, split_indent, split_lines, split_speaker, CommandFrame, RawLine,
     ScanIssue,
-};
-use crate::model::{
-    Clause, ClauseKeyword, Command, DialogueGraph, Edge, EdgeKind, Finding, FindingCode, Node,
-    NodeKind, Title, Variable, VariableType,
 };
 
 /// Bounds applied while parsing. Every field must be greater than zero.
@@ -42,7 +42,7 @@ impl Default for ParseOptions {
 }
 
 impl ParseOptions {
-    fn validate(self) -> Result<()> {
+    pub(crate) fn validate(self) -> Result<()> {
         if self.max_input_bytes > 0
             && self.max_nodes > 0
             && self.max_findings > 0
@@ -74,24 +74,58 @@ impl Source {
 }
 
 /// Parses one source with the default bounds.
-pub fn parse(name: &str, text: &str) -> Result<DialogueGraph> {
+pub fn parse(name: &str, text: &str) -> Result<crate::model::DialogueGraph> {
     parse_sources(&[Source::new(name, text)], &ParseOptions::default())
 }
 
 /// Parses several sources into one graph. Titles, line ids and variables share
 /// a single namespace across all of them, matching how a Yarn project loads
 /// every script in the project at once.
-pub fn parse_sources(sources: &[Source], options: &ParseOptions) -> Result<DialogueGraph> {
+pub fn parse_sources(
+    sources: &[Source],
+    options: &ParseOptions,
+) -> Result<crate::model::DialogueGraph> {
+    let (graph, _) = parse_sources_with_report(sources, options)?;
+    Ok(graph)
+}
+
+pub fn parse_sources_with_report(
+    sources: &[Source],
+    options: &ParseOptions,
+) -> Result<(crate::model::DialogueGraph, crate::convert::ParseReport)> {
     options.validate()?;
     if sources.is_empty() {
         return Err(Error::NoInput);
+    }
+    for source in sources {
+        if source.text.len() > options.max_input_bytes {
+            return Err(Error::TooLarge {
+                source: source.name.clone(),
+                bytes: source.text.len() as u64,
+                limit: options.max_input_bytes as u64,
+            });
+        }
     }
     let names = sources.iter().map(|source| source.name.clone()).collect();
     let mut builder = Builder::new(names, options);
     for (index, source) in sources.iter().enumerate() {
         builder.parse_source(index, source)?;
     }
-    builder.finish()
+    let legacy = builder.finish()?;
+    let (graph, report) = crate::convert::convert(legacy);
+    if graph.nodes.len() > options.max_nodes {
+        return Err(Error::TooManyNodes {
+            source: sources[sources.len() - 1].name.clone(),
+            limit: options.max_nodes,
+        });
+    }
+    if report.finding_count() > options.max_findings {
+        return Err(Error::TooManyFindings {
+            source: sources[sources.len() - 1].name.clone(),
+            limit: options.max_findings,
+        });
+    }
+    Ok((graph, report))
 }
 
 /// Commands that are part of the Yarn Spinner 2 vocabulary. Anything outside
@@ -166,7 +200,6 @@ enum Item {
 #[derive(Clone, Debug)]
 struct ChoiceOption {
     node: usize,
-    body: Vec<Item>,
 }
 
 #[derive(Clone, Debug)]
@@ -191,45 +224,24 @@ enum BlockEnd {
     EndIf,
 }
 
-#[derive(Clone, Debug)]
-struct Flow {
-    targets: Vec<usize>,
-    kind: EdgeKind,
-}
-
-const NO_FLOW: Flow = Flow {
-    targets: Vec::new(),
-    kind: EdgeKind::Flow,
-};
-
-fn link_kind(item: &Item) -> EdgeKind {
-    match item {
-        Item::Choice(_) => EdgeKind::Option,
-        Item::Node(_) | Item::Branch(_) => EdgeKind::Flow,
-    }
-}
-
 // ---------------------------------------------------------------------------
 // builder
 // ---------------------------------------------------------------------------
 
 struct Builder<'options> {
     options: &'options ParseOptions,
-    graph: DialogueGraph,
+    graph: ParsedSourceSet,
     findings: Vec<(usize, Finding)>,
     dropped_findings: Option<usize>,
-    scopes_in_order: Vec<String>,
     scope_by_title: HashMap<String, String>,
-    scope_entry: HashMap<String, usize>,
     title_counts: HashMap<String, usize>,
+    issued_ids: HashSet<String>,
     node_counters: HashMap<String, usize>,
     line_id_owner: HashMap<String, (String, u32, u32)>,
     declared: HashSet<String>,
     choice_groups: HashMap<usize, Vec<ChoiceOption>>,
     branches: HashMap<usize, Vec<ClauseBody>>,
     clause_meta: HashMap<usize, Vec<ClauseMeta>>,
-    /// Parsed bodies awaiting edge emission, in scope order.
-    bodies: Vec<Vec<Item>>,
     group_keys: usize,
     source_index: usize,
     scope: String,
@@ -240,21 +252,19 @@ struct Builder<'options> {
 impl<'options> Builder<'options> {
     fn new(sources: Vec<String>, options: &'options ParseOptions) -> Self {
         Self {
-            graph: DialogueGraph::new(sources),
+            graph: ParsedSourceSet::new(sources),
             options,
             findings: Vec::new(),
             dropped_findings: None,
-            scopes_in_order: Vec::new(),
             scope_by_title: HashMap::new(),
-            scope_entry: HashMap::new(),
             title_counts: HashMap::new(),
+            issued_ids: HashSet::new(),
             node_counters: HashMap::new(),
             line_id_owner: HashMap::new(),
             declared: HashSet::new(),
             choice_groups: HashMap::new(),
             branches: HashMap::new(),
             clause_meta: HashMap::new(),
-            bodies: Vec::new(),
             group_keys: 0,
             source_index: 0,
             scope: String::new(),
@@ -433,7 +443,7 @@ impl<'options> Builder<'options> {
                 );
                 return BodyLine::Blank;
             };
-            if !content[frame.end..].trim().is_empty() {
+            if !lex::scan_line(content[frame.end..].trim()).text.is_empty() {
                 self.finding(
                     FindingCode::TrailingContentAfterCommand,
                     raw.number,
@@ -526,6 +536,7 @@ impl<'options> Builder<'options> {
         header_at: Option<(u32, u32)>,
         body: Vec<BodyLine>,
     ) -> Result<()> {
+        self.check_node_limit()?;
         let mut title: Option<(String, u32, u32)> = None;
         let mut tags: Vec<String> = Vec::new();
         let mut meta: Map<String, Value> = Map::new();
@@ -576,54 +587,38 @@ impl<'options> Builder<'options> {
             .or(header_at)
             .unwrap_or((1, 1));
 
-        let occurrence = {
-            let count = self.title_counts.entry(written.clone()).or_insert(0);
-            *count += 1;
-            *count
-        };
-        let scope = if occurrence == 1 {
-            written.clone()
-        } else {
-            if explicit {
-                self.finding(
-                    FindingCode::DuplicateNodeTitle,
-                    at.0,
-                    at.1,
-                    format!(
-                        "node title `{written}` is already defined; this block becomes `{written}#{occurrence}`"
-                    ),
-                );
-            }
-            format!("{written}#{occurrence}")
-        };
+        let duplicate = self.title_counts.contains_key(&written);
+        self.title_counts.entry(written.clone()).or_insert(1);
+        let scope = self.issue_id(&written);
+        if explicit && (duplicate || scope != written) {
+            self.finding(
+                FindingCode::DuplicateNodeTitle,
+                at.0,
+                at.1,
+                format!("node title `{written}` is already defined; this block becomes `{scope}`"),
+            );
+        }
 
+        self.pending_doc = None;
         self.scope = scope.clone();
         self.option_group = 0;
         self.node_counters.insert(scope.clone(), 0);
-        self.scopes_in_order.push(scope.clone());
         self.scope_by_title
             .entry(written.clone())
             .or_insert_with(|| scope.clone());
-        let title_index = self.graph.titles.len();
         self.graph.titles.push(Title {
             id: scope.clone(),
             title: written,
             source: self.source_index,
             tags,
             meta,
-            entry: None,
             line: at.0,
             col: at.1,
         });
 
         let mut cursor = 0;
-        let first_index = self.graph.nodes.len();
-        let (items, _) = self.parse_block(&body, &mut cursor, 0, false, None, None, 0)?;
-        if self.graph.nodes.len() > first_index {
-            self.scope_entry.insert(scope.clone(), first_index);
-            self.graph.titles[title_index].entry = Some(format!("{scope}:1"));
-        }
-        self.bodies.push(items);
+        self.parse_block(&body, &mut cursor, 0, false, None, None, 0)?;
+        self.pending_doc = None;
         Ok(())
     }
 
@@ -728,8 +723,14 @@ impl<'options> Builder<'options> {
                     self.pending_doc = None;
                     if text.option {
                         let indent = text.indent;
-                        let item =
-                            self.parse_choice_group(lines, cursor, indent, &parent, depth)?;
+                        let item = self.parse_choice_group(
+                            lines,
+                            cursor,
+                            indent,
+                            &parent,
+                            clause.clone(),
+                            depth,
+                        )?;
                         items.push(item);
                     } else {
                         let index =
@@ -781,7 +782,7 @@ impl<'options> Builder<'options> {
             line: number,
             col,
         }];
-        let mut elseif_count = 0usize;
+
         let mut saw_else = false;
 
         loop {
@@ -846,7 +847,6 @@ impl<'options> Builder<'options> {
                             col: clause_col,
                         });
                     } else {
-                        elseif_count += 1;
                         let expression = self.command_expression(
                             &keyword_frame,
                             clause_line,
@@ -854,7 +854,7 @@ impl<'options> Builder<'options> {
                             "elseif",
                         );
                         clauses.push(ClauseBody {
-                            label: format!("elseif {elseif_count}"),
+                            label: format!("elseif:{}", expression.as_deref().unwrap_or("")),
                             body: Vec::new(),
                         });
                         meta.push(ClauseMeta {
@@ -908,18 +908,22 @@ impl<'options> Builder<'options> {
         cursor: &mut usize,
         indent: usize,
         parent: &Option<String>,
+        clause: Option<String>,
         depth: usize,
     ) -> Result<Item> {
+        self.check_node_limit()?;
+        self.group_keys += 1;
+        let key = self.group_keys;
         self.option_group += 1;
         let group = self.option_group;
         let mut options: Vec<ChoiceOption> = Vec::new();
 
-        while let BodyLine::Text(text) = &lines[*cursor] {
-            let index = self.push_text_node(text, Some(group), parent.clone(), None)?;
+        while let Some(BodyLine::Text(text)) = lines.get(*cursor) {
+            let index = self.push_text_node(text, Some(group), parent.clone(), clause.clone())?;
             let option_id = self.graph.nodes[index].id.clone();
             *cursor += 1;
             let mut inner = *cursor;
-            let (body, _) = self.parse_block(
+            self.parse_block(
                 lines,
                 &mut inner,
                 indent + 1,
@@ -929,7 +933,7 @@ impl<'options> Builder<'options> {
                 depth + 1,
             )?;
             *cursor = inner;
-            options.push(ChoiceOption { node: index, body });
+            options.push(ChoiceOption { node: index });
             if !lines
                 .get(*cursor)
                 .is_some_and(|line| line.is_option_at(indent))
@@ -938,24 +942,40 @@ impl<'options> Builder<'options> {
             }
         }
 
-        self.group_keys += 1;
-        let key = self.group_keys;
         self.choice_groups.insert(key, options);
         Ok(Item::Choice(key))
     }
 
     // -- node construction -------------------------------------------------
 
-    fn next_id(&mut self) -> Result<String> {
-        if self.graph.nodes.len() >= self.options.max_nodes {
+    fn issue_id(&mut self, base: &str) -> String {
+        let mut candidate = base.to_string();
+        let mut suffix = 2;
+        while !self.issued_ids.insert(candidate.clone()) {
+            candidate = format!("{base}~{suffix}");
+            suffix += 1;
+        }
+        candidate
+    }
+
+    fn check_node_limit(&self) -> Result<()> {
+        if self.graph.nodes.len() + self.graph.titles.len() + self.group_keys
+            >= self.options.max_nodes
+        {
             return Err(Error::TooManyNodes {
                 source: self.graph.sources[self.source_index].clone(),
                 limit: self.options.max_nodes,
             });
         }
+        Ok(())
+    }
+
+    fn next_id(&mut self) -> Result<String> {
+        self.check_node_limit()?;
         let counter = self.node_counters.entry(self.scope.clone()).or_insert(0);
         *counter += 1;
-        Ok(format!("{}:{}", self.scope, counter))
+        let candidate = format!("{}:{}", self.scope, counter);
+        Ok(self.issue_id(&candidate))
     }
 
     fn push_node(&mut self, node: Node) -> usize {
@@ -1157,7 +1177,7 @@ impl<'options> Builder<'options> {
         let Some(name) = frame.args[..start]
             .trim()
             .strip_prefix('$')
-            .filter(|name| !name.is_empty())
+            .filter(|name| valid_variable_name(name))
         else {
             self.finding(
                 FindingCode::BadCommandSyntax,
@@ -1168,6 +1188,15 @@ impl<'options> Builder<'options> {
             return;
         };
         let value = frame.args[end..].trim().to_string();
+        if value.is_empty() || (declare && operator != "=") {
+            self.finding(
+                FindingCode::BadCommandSyntax,
+                line,
+                col,
+                format!("`<<{keyword}>>` needs a value and declarations require `=`"),
+            );
+            return;
+        }
         command.variable = Some(name.to_string());
         command.operator = Some(operator.to_string());
         command.expression = Some(value.clone());
@@ -1202,6 +1231,7 @@ impl<'options> Builder<'options> {
             declared_type,
             declared_as,
             value,
+            raw_value: value_text,
             description: doc,
             source: self.source_index,
             title: self.scope.clone(),
@@ -1235,7 +1265,8 @@ impl<'options> Builder<'options> {
         let agreed = match written.as_str() {
             "bool" | "boolean" => Some(matches!(inferred, VariableType::Bool)),
             "string" => Some(matches!(inferred, VariableType::String)),
-            "number" | "int" | "integer" | "float" | "double" => {
+            "int" | "integer" => Some(matches!(inferred, VariableType::Int)),
+            "number" | "float" | "double" => {
                 Some(matches!(inferred, VariableType::Int | VariableType::Float))
             }
             _ => None,
@@ -1256,31 +1287,15 @@ impl<'options> Builder<'options> {
                 col,
                 format!("`as {written}` does not match the initial value of `${name}`"),
             );
+            return inferred;
         }
         match written.as_str() {
             "bool" | "boolean" => VariableType::Bool,
             "string" => VariableType::String,
             "int" | "integer" if !matches!(inferred, VariableType::Float) => VariableType::Int,
+            "float" | "double" if agreed => VariableType::Float,
             _ => inferred,
         }
-    }
-
-    // -- edges -------------------------------------------------------------
-
-    fn push_edge(&mut self, kind: EdgeKind, source: usize, target: usize, label: Option<String>) {
-        let index = self.graph.edges.len();
-        let (from, to) = (
-            self.graph.nodes[source].id.clone(),
-            self.graph.nodes[target].id.clone(),
-        );
-        self.graph.edges.push(Edge {
-            id: format!("edge-{}", index + 1),
-            kind,
-            source: from,
-            target: to,
-            index,
-            label,
-        });
     }
 
     fn entries(&self, item: &Item) -> Vec<usize> {
@@ -1295,121 +1310,34 @@ impl<'options> Builder<'options> {
         }
     }
 
-    fn flow_after(&self, items: &[Item], index: usize, following: &Flow) -> Flow {
-        match items.get(index + 1) {
-            Some(next) => Flow {
-                targets: self.entries(next),
-                kind: link_kind(next),
-            },
-            None => following.clone(),
-        }
-    }
-
-    fn emit_block(
-        &mut self,
-        items: &[Item],
-        incoming: &[usize],
-        incoming_kind: Option<EdgeKind>,
-        incoming_label: Option<&str>,
-        following: &Flow,
-    ) {
-        for (index, item) in items.iter().enumerate() {
-            let next = self.flow_after(items, index, following);
-            if index == 0 && !incoming.is_empty() {
-                let kind = incoming_kind.unwrap_or_else(|| link_kind(item));
-                let targets = self.entries(item);
-                for source in incoming {
-                    for target in &targets {
-                        self.push_edge(kind, *source, *target, incoming_label.map(str::to_string));
-                    }
-                }
-            }
-            match item {
-                Item::Node(node) => self.emit_statement(*node, &next),
-                Item::Choice(key) => {
-                    let options = self.choice_groups.get(key).cloned().unwrap_or_default();
-                    for option in &options {
-                        if option.body.is_empty() {
-                            for target in &next.targets {
-                                self.push_edge(next.kind, option.node, *target, None);
-                            }
-                        } else {
-                            self.emit_block(&option.body, &[option.node], None, None, &next);
-                        }
-                    }
-                }
-                Item::Branch(node) => {
-                    let clauses = self.branches.get(node).cloned().unwrap_or_default();
-                    for clause in &clauses {
-                        if clause.body.is_empty() {
-                            for target in &next.targets {
-                                self.push_edge(
-                                    EdgeKind::Branch,
-                                    *node,
-                                    *target,
-                                    Some(clause.label.clone()),
-                                );
-                            }
-                        } else {
-                            self.emit_block(
-                                &clause.body,
-                                &[*node],
-                                Some(EdgeKind::Branch),
-                                Some(&clause.label),
-                                &next,
-                            );
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    fn emit_statement(&mut self, node: usize, next: &Flow) {
-        if is_stop(&self.graph.nodes[node]) {
-            return;
-        }
-        if self.graph.nodes[node].kind != NodeKind::Jump {
-            for target in &next.targets {
-                self.push_edge(next.kind, node, *target, None);
-            }
-            return;
-        }
-        let Some(title) = self.graph.nodes[node]
-            .command
-            .as_ref()
-            .and_then(|command| command.target.clone())
-        else {
-            return;
-        };
-        let resolved = self
-            .scope_by_title
-            .get(&title)
-            .and_then(|scope| self.scope_entry.get(scope))
-            .copied();
-        match resolved {
-            Some(target) => self.push_edge(EdgeKind::Jump, node, target, None),
-            None => {
-                let source = self.graph.nodes[node].source;
-                let line = self.graph.nodes[node].line;
-                let col = self.graph.nodes[node].col;
-                self.finding_in(
-                    source,
-                    FindingCode::MissingJumpTarget,
-                    line,
-                    col,
-                    format!("`<<jump {title}>>` names a node that does not exist"),
-                );
-            }
-        }
-    }
-
     // -- assembly ----------------------------------------------------------
 
-    fn finish(mut self) -> Result<DialogueGraph> {
-        let bodies = std::mem::take(&mut self.bodies);
-        for body in &bodies {
-            self.emit_block(body, &[], None, None, &NO_FLOW);
+    fn finish(mut self) -> Result<ParsedSourceSet> {
+        let unresolved: Vec<_> = self
+            .graph
+            .nodes
+            .iter()
+            .filter(|n| n.kind == NodeKind::Jump)
+            .filter_map(|n| {
+                n.command
+                    .as_ref()
+                    .and_then(|c| c.target.as_ref())
+                    .map(|t| (n.source, n.line, n.col, t))
+            })
+            .filter(|(_, _, _, target)| {
+                !(self.scope_by_title.contains_key(*target)
+                    || target.starts_with('{') && target.ends_with('}'))
+            })
+            .map(|(source, line, col, target)| (source, line, col, target.clone()))
+            .collect();
+        for (source, line, col, target) in unresolved {
+            self.finding_in(
+                source,
+                FindingCode::MissingJumpTarget,
+                line,
+                col,
+                format!("`<<jump {target}>>` names a node that does not exist"),
+            );
         }
 
         for (node_index, clauses) in std::mem::take(&mut self.branches) {
@@ -1454,18 +1382,6 @@ impl<'options> Builder<'options> {
             .map(|(_, finding)| finding)
             .collect();
 
-        // A block titled `Start` wins, but only when it has a body; an empty
-        // `Start` should not hide the first node a runtime could actually enter.
-        let start = self
-            .graph
-            .titles
-            .iter()
-            .filter(|title| title.entry.is_some())
-            .find(|title| title.title == "Start")
-            .or_else(|| self.graph.titles.iter().find(|title| title.entry.is_some()))
-            .and_then(|title| title.entry.clone());
-        self.graph.start_node = start;
-
         if let Some(index) = self.dropped_findings {
             return Err(Error::TooManyFindings {
                 source: self.graph.sources[index].clone(),
@@ -1474,12 +1390,6 @@ impl<'options> Builder<'options> {
         }
         Ok(self.graph)
     }
-}
-
-fn is_stop(node: &Node) -> bool {
-    node.command
-        .as_ref()
-        .is_some_and(|command| command.name.eq_ignore_ascii_case("stop"))
 }
 
 fn split_header(content: &str) -> Option<(String, String)> {
@@ -1511,8 +1421,14 @@ fn find_assignment(args: &str) -> Option<(usize, usize, &'static str)> {
         match bytes[index] {
             b'"' => index = skip_quoted(bytes, index),
             b'=' => {
-                if index > 0 && matches!(bytes[index - 1], b'+' | b'-' | b'*' | b'/') {
+                if index > 0 && matches!(bytes[index - 1], b'+' | b'-' | b'*' | b'/' | b'%') {
                     return Some((index - 1, index + 1, compound(bytes[index - 1])));
+                }
+                if bytes.get(index + 1) == Some(&b'=')
+                    || (index > 0 && matches!(bytes[index - 1], b'=' | b'<' | b'>' | b'!'))
+                {
+                    index += 1;
+                    continue;
                 }
                 return Some((index, index + 1, "="));
             }
@@ -1533,6 +1449,7 @@ fn compound(byte: u8) -> &'static str {
         b'+' => "+=",
         b'-' => "-=",
         b'*' => "*=",
+        b'%' => "%=",
         _ => "/=",
     }
 }
@@ -1708,4 +1625,10 @@ fn unescape(text: &str) -> String {
         }
     }
     out
+}
+
+fn valid_variable_name(name: &str) -> bool {
+    let mut chars = name.chars();
+    matches!(chars.next(), Some(c) if c.is_ascii_alphabetic() || c == '_')
+        && chars.all(|c| c.is_ascii_alphanumeric() || c == '_')
 }

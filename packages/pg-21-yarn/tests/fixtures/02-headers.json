@@ -1,50 +1,163 @@
 {
   "version": 1,
-  "sources": [
-    "02-headers.yarn"
-  ],
-  "start_node": "Ledger:1",
-  "titles": [
+  "text_mode": "literal",
+  "metadata": {
+    "files": [
+      "02-headers.yarn"
+    ],
+    "generator": "pg-21-yarn 0.1.0",
+    "source_format": "yarn"
+  },
+  "definitions": [],
+  "packages": [
     {
-      "id": "Ledger",
-      "title": "Ledger",
-      "source": 0,
-      "tags": [
-        "night",
-        "quiet"
-      ],
-      "meta": {
-        "description": "The counting room at the back of the archive.",
-        "position": "120,-40"
+      "index": 0,
+      "name": "02-headers",
+      "metadata": {
+        "path": "02-headers.yarn"
       },
-      "entry": "Ledger:1",
-      "line": 1,
-      "col": 1
+      "node_ids": [
+        "Ledger",
+        "Ledger:1"
+      ]
     }
   ],
   "nodes": [
     {
+      "id": "Ledger",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "Ledger",
+      "display_name": "Ledger",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Ledger#in"
+      ],
+      "output_pins": [
+        "Ledger#out"
+      ],
+      "properties": {
+        "headers": {
+          "description": "The counting room at the back of the archive.",
+          "position": "120,-40"
+        },
+        "tags": [
+          "night",
+          "quiet"
+        ]
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 1
+      }
+    },
+    {
       "id": "Ledger:1",
-      "source": 0,
-      "title": "Ledger",
-      "kind": "line",
-      "speaker": "Ada",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Ledger",
+      "technical_name": null,
+      "display_name": null,
       "text": "Every column in this ledger is wrong.",
-      "line_id": "2a0001",
-      "line": 7,
-      "col": 6
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Ledger:1#in"
+      ],
+      "output_pins": [
+        "Ledger:1#out"
+      ],
+      "properties": {
+        "line_id": "2a0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 7
+      }
     }
   ],
-  "edges": [],
-  "variables": [],
-  "errors": [
+  "pins": [
     {
-      "file": "02-headers.yarn",
-      "line": 5,
-      "col": 1,
-      "code": "duplicate_header_key",
-      "severity": "warning",
-      "message": "header `position` appears more than once; the first value is kept"
+      "id": "Ledger#in",
+      "owner": "Ledger",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Ledger#out",
+      "owner": "Ledger",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Ledger:1#in",
+      "owner": "Ledger:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Ledger:1#out",
+      "owner": "Ledger:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
     }
-  ]
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "kind": "connection",
+      "source": "Ledger",
+      "source_pin": "Ledger#out",
+      "target": "Ledger:1",
+      "target_pin": "Ledger:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    }
+  ],
+  "choices": [],
+  "variable_namespaces": [
+    {
+      "name": "yarn",
+      "metadata": {},
+      "variables": []
+    }
+  ],
+  "variables": [],
+  "hierarchy": [
+    {
+      "id": "Ledger",
+      "parent": null,
+      "index": 0,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "Ledger:1",
+      "parent": "Ledger",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    }
+  ],
+  "warnings": []
 }

@@ -4,14 +4,15 @@ use std::io::Write;
 use std::path::PathBuf;
 use std::process::ExitCode;
 
-use pg_21_yarn::{read_files, DialogueGraph, ParseOptions, Severity};
+use pg_21_yarn::{read_files_with_report, ParseOptions, ParseReport, Severity};
 
 const USAGE: &str = "\
 yarn2graph - Yarn Spinner 2 .yarn to neutral dialogue-graph JSON
 
-Usage: yarn2graph <in.yarn>... [-o out.json] [--strict]
+Usage: yarn2graph <in.yarn>... [-o out.json] [--report report.json] [--strict]
 
   -o <path>   write the JSON document to <path> instead of stdout; `-o -` means stdout
+  --report <path>  write the separate source findings JSON
   --strict    treat warnings as failures too
   -h, --help  show this text
 
@@ -30,6 +31,7 @@ const EXIT_FATAL: u8 = 2;
 struct Args {
     inputs: Vec<PathBuf>,
     output: Option<PathBuf>,
+    report: Option<PathBuf>,
     strict: bool,
 }
 
@@ -55,14 +57,19 @@ fn main() -> ExitCode {
 }
 
 fn run(args: &Args) -> Result<ExitCode, String> {
-    let graph = read_files(&args.inputs, &ParseOptions::default()).map_err(|e| e.to_string())?;
+    let (graph, findings) = read_files_with_report(&args.inputs, &ParseOptions::default())
+        .map_err(|e| e.to_string())?;
     let json = pg_21_yarn::to_json(&graph).map_err(|e| e.to_string())?;
-    report(&graph, args.strict);
+    report(&findings, args.strict);
+    if let Some(path) = &args.report {
+        let json = pg_21_yarn::report_to_json(&findings).map_err(|e| e.to_string())?;
+        std::fs::write(path, json).map_err(|_| "cannot write report file".to_string())?;
+    }
     write_output(args, json.as_bytes())?;
-    Ok(exit_code(&graph, args.strict))
+    Ok(exit_code(&findings, args.strict))
 }
 
-fn exit_code(graph: &DialogueGraph, strict: bool) -> ExitCode {
+fn exit_code(graph: &ParseReport, strict: bool) -> ExitCode {
     if failed(graph, strict) {
         ExitCode::from(EXIT_FINDINGS)
     } else {
@@ -70,7 +77,7 @@ fn exit_code(graph: &DialogueGraph, strict: bool) -> ExitCode {
     }
 }
 
-fn failed(graph: &DialogueGraph, strict: bool) -> bool {
+fn failed(graph: &ParseReport, strict: bool) -> bool {
     let failures = if strict {
         graph.finding_count()
     } else {
@@ -79,9 +86,9 @@ fn failed(graph: &DialogueGraph, strict: bool) -> bool {
     failures > 0
 }
 
-fn report(graph: &DialogueGraph, strict: bool) {
+fn report(graph: &ParseReport, strict: bool) {
     let mut stderr = std::io::stderr().lock();
-    for finding in &graph.errors {
+    for finding in &graph.findings {
         let severity = match finding.severity {
             Severity::Error => "error",
             Severity::Warning => "warning",
@@ -93,7 +100,7 @@ fn report(graph: &DialogueGraph, strict: bool) {
             finding.file, finding.line, finding.col, finding.message
         );
     }
-    if graph.errors.is_empty() {
+    if graph.findings.is_empty() {
         return;
     }
     let errors = graph.error_count();
@@ -135,6 +142,7 @@ fn parse_args<I: Iterator<Item = T>, T: Into<std::ffi::OsString>>(
     let mut args = Args {
         inputs: Vec::new(),
         output: None,
+        report: None,
         strict: false,
     };
     let mut raw = arguments.map(|arg| PathBuf::from(arg.into()));
@@ -143,6 +151,12 @@ fn parse_args<I: Iterator<Item = T>, T: Into<std::ffi::OsString>>(
         match text.as_ref() {
             "-h" | "--help" => return Ok(None),
             "--strict" => args.strict = true,
+            "--report" => {
+                args.report = Some(
+                    raw.next()
+                        .ok_or_else(|| "--report needs a path".to_string())?,
+                );
+            }
             "-o" => {
                 let value = raw
                     .next()

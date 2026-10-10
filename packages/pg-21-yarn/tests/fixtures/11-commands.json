@@ -1,345 +1,1186 @@
 {
   "version": 1,
-  "sources": [
-    "11-commands.yarn"
-  ],
-  "start_node": "Builtins:1",
-  "titles": [
+  "text_mode": "literal",
+  "metadata": {
+    "files": [
+      "11-commands.yarn"
+    ],
+    "generator": "pg-21-yarn 0.1.0",
+    "source_format": "yarn"
+  },
+  "definitions": [],
+  "packages": [
     {
-      "id": "Builtins",
-      "title": "Builtins",
-      "source": 0,
-      "entry": "Builtins:1",
-      "line": 1,
-      "col": 1
-    },
-    {
-      "id": "CaseVariants",
-      "title": "CaseVariants",
-      "source": 0,
-      "entry": "CaseVariants:1",
-      "line": 9,
-      "col": 1
-    },
-    {
-      "id": "JumpCase",
-      "title": "JumpCase",
-      "source": 0,
-      "entry": "JumpCase:1",
-      "line": 14,
-      "col": 1
-    },
-    {
-      "id": "SetCase",
-      "title": "SetCase",
-      "source": 0,
-      "entry": "SetCase:1",
-      "line": 19,
-      "col": 1
-    },
-    {
-      "id": "Customs",
-      "title": "Customs",
-      "source": 0,
-      "entry": "Customs:1",
-      "line": 25,
-      "col": 1
+      "index": 0,
+      "name": "11-commands",
+      "metadata": {
+        "path": "11-commands.yarn"
+      },
+      "node_ids": [
+        "Builtins",
+        "Builtins:1",
+        "Builtins:2",
+        "Builtins:3",
+        "Builtins:4",
+        "CaseVariants",
+        "CaseVariants:1",
+        "JumpCase",
+        "JumpCase:1",
+        "SetCase",
+        "SetCase:1",
+        "Customs",
+        "Customs:1",
+        "Customs:2",
+        "Customs:3",
+        "Customs:4",
+        "Customs:4:1",
+        "Customs:5"
+      ]
     }
   ],
   "nodes": [
     {
-      "id": "Builtins:1",
-      "source": 0,
-      "title": "Builtins",
-      "kind": "command",
-      "command": {
-        "name": "wait",
-        "args": "2"
+      "id": "Builtins",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "Builtins",
+      "display_name": "Builtins",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Builtins#in"
+      ],
+      "output_pins": [
+        "Builtins#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
       },
-      "line": 3,
-      "col": 1
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 1
+      }
+    },
+    {
+      "id": "Builtins:1",
+      "package": 0,
+      "source_type": "Command",
+      "kind": "instruction",
+      "parent": "Builtins",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "instruction",
+        "text": "wait 2"
+      },
+      "input_pins": [
+        "Builtins:1#in"
+      ],
+      "output_pins": [
+        "Builtins:1#out"
+      ],
+      "properties": {
+        "args": "2",
+        "command": "wait"
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 3
+      }
     },
     {
       "id": "Builtins:2",
-      "source": 0,
-      "title": "Builtins",
-      "kind": "line",
-      "speaker": "Ada",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Builtins",
+      "technical_name": null,
+      "display_name": null,
       "text": "After a wait.",
-      "line_id": "11a0001",
-      "line": 4,
-      "col": 6
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Builtins:2#in"
+      ],
+      "output_pins": [
+        "Builtins:2#out"
+      ],
+      "properties": {
+        "line_id": "11a0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 4
+      }
     },
     {
       "id": "Builtins:3",
-      "source": 0,
-      "title": "Builtins",
-      "kind": "command",
-      "command": {
-        "name": "stop"
+      "package": 0,
+      "source_type": "Stop",
+      "kind": "jump",
+      "parent": "Builtins",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Builtins:3#in"
+      ],
+      "output_pins": [
+        "Builtins:3#out"
+      ],
+      "properties": {
+        "target": "stop"
       },
-      "line": 5,
-      "col": 1
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 5
+      }
     },
     {
       "id": "Builtins:4",
-      "source": 0,
-      "title": "Builtins",
-      "kind": "line",
-      "speaker": "Ada",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Builtins",
+      "technical_name": null,
+      "display_name": null,
       "text": "After a stop, so never reached.",
-      "line_id": "11a0002",
-      "line": 6,
-      "col": 6
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Builtins:4#in"
+      ],
+      "output_pins": [
+        "Builtins:4#out"
+      ],
+      "properties": {
+        "line_id": "11a0002",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 6
+      }
+    },
+    {
+      "id": "CaseVariants",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "CaseVariants",
+      "display_name": "CaseVariants",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "CaseVariants#in"
+      ],
+      "output_pins": [
+        "CaseVariants#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 9
+      }
     },
     {
       "id": "CaseVariants:1",
-      "source": 0,
-      "title": "CaseVariants",
-      "kind": "command",
-      "command": {
-        "name": "STOP"
+      "package": 0,
+      "source_type": "Stop",
+      "kind": "jump",
+      "parent": "CaseVariants",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "CaseVariants:1#in"
+      ],
+      "output_pins": [
+        "CaseVariants:1#out"
+      ],
+      "properties": {
+        "target": "stop"
       },
-      "line": 11,
-      "col": 1
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 11
+      }
+    },
+    {
+      "id": "JumpCase",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "JumpCase",
+      "display_name": "JumpCase",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "JumpCase#in"
+      ],
+      "output_pins": [
+        "JumpCase#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 14
+      }
     },
     {
       "id": "JumpCase:1",
-      "source": 0,
-      "title": "JumpCase",
+      "package": 0,
+      "source_type": "Jump",
       "kind": "jump",
-      "command": {
-        "name": "Jump",
-        "args": "CaseVariants",
+      "parent": "JumpCase",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "JumpCase:1#in"
+      ],
+      "output_pins": [
+        "JumpCase:1#out"
+      ],
+      "properties": {
         "target": "CaseVariants"
       },
-      "line": 16,
-      "col": 1
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 16
+      }
+    },
+    {
+      "id": "SetCase",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "SetCase",
+      "display_name": "SetCase",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "SetCase#in"
+      ],
+      "output_pins": [
+        "SetCase#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 19
+      }
     },
     {
       "id": "SetCase:1",
-      "source": 0,
-      "title": "SetCase",
-      "kind": "command",
-      "command": {
-        "name": "Set",
-        "args": "$count = 1",
-        "variable": "count",
-        "operator": "=",
-        "expression": "1"
+      "package": 0,
+      "source_type": "Set",
+      "kind": "instruction",
+      "parent": "SetCase",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "instruction",
+        "text": "Set $count = 1"
       },
-      "line": 21,
-      "col": 1
+      "input_pins": [
+        "SetCase:1#in"
+      ],
+      "output_pins": [
+        "SetCase:1#out"
+      ],
+      "properties": {
+        "args": "$count = 1",
+        "command": "Set",
+        "expression": "1",
+        "operator": "=",
+        "variable": "count"
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 21
+      }
     },
     {
-      "id": "SetCase:2",
-      "source": 0,
-      "title": "SetCase",
-      "kind": "command",
-      "command": {
-        "name": "DECLARE",
-        "args": "$count = 2",
-        "variable": "count",
-        "operator": "=",
-        "expression": "2"
+      "id": "Customs",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "Customs",
+      "display_name": "Customs",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Customs#in"
+      ],
+      "output_pins": [
+        "Customs#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
       },
-      "line": 22,
-      "col": 1
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 25
+      }
     },
     {
       "id": "Customs:1",
-      "source": 0,
-      "title": "Customs",
-      "kind": "command",
-      "command": {
-        "name": "fadeIn",
-        "args": "1.5"
+      "package": 0,
+      "source_type": "Command",
+      "kind": "instruction",
+      "parent": "Customs",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "instruction",
+        "text": "fadeIn 1.5"
       },
-      "line": 27,
-      "col": 1
+      "input_pins": [
+        "Customs:1#in"
+      ],
+      "output_pins": [
+        "Customs:1#out"
+      ],
+      "properties": {
+        "args": "1.5",
+        "command": "fadeIn"
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 27
+      }
     },
     {
       "id": "Customs:2",
-      "source": 0,
-      "title": "Customs",
-      "kind": "command",
-      "command": {
-        "name": "playMusic",
-        "args": "\"night theme\" loop"
+      "package": 0,
+      "source_type": "Command",
+      "kind": "instruction",
+      "parent": "Customs",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "instruction",
+        "text": "playMusic \"night theme\" loop"
       },
-      "line": 28,
-      "col": 1
+      "input_pins": [
+        "Customs:2#in"
+      ],
+      "output_pins": [
+        "Customs:2#out"
+      ],
+      "properties": {
+        "args": "\"night theme\" loop",
+        "command": "playMusic"
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 28
+      }
     },
     {
       "id": "Customs:3",
-      "source": 0,
-      "title": "Customs",
-      "kind": "command",
-      "command": {
-        "name": "customWithoutArguments"
+      "package": 0,
+      "source_type": "Command",
+      "kind": "instruction",
+      "parent": "Customs",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "instruction",
+        "text": "customWithoutArguments"
       },
-      "line": 29,
-      "col": 1
+      "input_pins": [
+        "Customs:3#in"
+      ],
+      "output_pins": [
+        "Customs:3#out"
+      ],
+      "properties": {
+        "args": null,
+        "command": "customWithoutArguments"
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 29
+      }
     },
     {
       "id": "Customs:4",
-      "source": 0,
-      "title": "Customs",
-      "kind": "conditional",
-      "command": {
-        "name": "if",
-        "args": "true",
-        "expression": "true",
-        "clauses": [
-          {
-            "keyword": "if",
-            "label": "if",
-            "expression": "true",
-            "body": [
-              "Customs:5"
-            ],
-            "line": 30,
-            "col": 1
-          }
-        ]
+      "package": 0,
+      "source_type": "If",
+      "kind": "condition",
+      "parent": "Customs",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "condition",
+        "text": "true"
       },
-      "line": 30,
-      "col": 1
+      "input_pins": [
+        "Customs:4#in"
+      ],
+      "output_pins": [
+        "Customs:4#out"
+      ],
+      "properties": {},
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 30
+      }
+    },
+    {
+      "id": "Customs:4:1",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Customs:4",
+      "technical_name": null,
+      "display_name": null,
+      "text": "Inside a bare conditional.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Customs:4:1#in"
+      ],
+      "output_pins": [
+        "Customs:4:1#out"
+      ],
+      "properties": {
+        "clause": "if",
+        "line_id": "11b0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 10,
+        "line": 31
+      }
     },
     {
       "id": "Customs:5",
-      "source": 0,
-      "title": "Customs",
-      "kind": "line",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Customs",
+      "technical_name": null,
+      "display_name": null,
+      "text": "A stray else outside any conditional.",
+      "menu_text": null,
       "speaker": "Ada",
-      "text": "Inside a bare conditional.",
-      "line_id": "11b0001",
-      "parent": "Customs:4",
-      "clause": "if",
-      "line": 31,
-      "col": 10
+      "script": null,
+      "input_pins": [
+        "Customs:5#in"
+      ],
+      "output_pins": [
+        "Customs:5#out"
+      ],
+      "properties": {
+        "line_id": "11b0002",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 34
+      }
+    }
+  ],
+  "pins": [
+    {
+      "id": "Builtins#in",
+      "owner": "Builtins",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
     },
     {
-      "id": "Customs:6",
-      "source": 0,
-      "title": "Customs",
-      "kind": "line",
-      "speaker": "Ada",
-      "text": "A stray else outside any conditional.",
-      "line_id": "11b0002",
-      "line": 34,
-      "col": 6
+      "id": "Builtins#out",
+      "owner": "Builtins",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Builtins:1#in",
+      "owner": "Builtins:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Builtins:1#out",
+      "owner": "Builtins:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Builtins:2#in",
+      "owner": "Builtins:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Builtins:2#out",
+      "owner": "Builtins:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Builtins:3#in",
+      "owner": "Builtins:3",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Builtins:3#out",
+      "owner": "Builtins:3",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Builtins:4#in",
+      "owner": "Builtins:4",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Builtins:4#out",
+      "owner": "Builtins:4",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "CaseVariants#in",
+      "owner": "CaseVariants",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "CaseVariants#out",
+      "owner": "CaseVariants",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "CaseVariants:1#in",
+      "owner": "CaseVariants:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "CaseVariants:1#out",
+      "owner": "CaseVariants:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "JumpCase#in",
+      "owner": "JumpCase",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "JumpCase#out",
+      "owner": "JumpCase",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "JumpCase:1#in",
+      "owner": "JumpCase:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "JumpCase:1#out",
+      "owner": "JumpCase:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "SetCase#in",
+      "owner": "SetCase",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "SetCase#out",
+      "owner": "SetCase",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "SetCase:1#in",
+      "owner": "SetCase:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "SetCase:1#out",
+      "owner": "SetCase:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Customs#in",
+      "owner": "Customs",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Customs#out",
+      "owner": "Customs",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Customs:1#in",
+      "owner": "Customs:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Customs:1#out",
+      "owner": "Customs:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Customs:2#in",
+      "owner": "Customs:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Customs:2#out",
+      "owner": "Customs:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Customs:3#in",
+      "owner": "Customs:3",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Customs:3#out",
+      "owner": "Customs:3",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Customs:4#in",
+      "owner": "Customs:4",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Customs:4#out",
+      "owner": "Customs:4",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Customs:4:1#in",
+      "owner": "Customs:4:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Customs:4:1#out",
+      "owner": "Customs:4:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Customs:5#in",
+      "owner": "Customs:5",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Customs:5#out",
+      "owner": "Customs:5",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
     }
   ],
   "edges": [
     {
-      "id": "edge-1",
-      "kind": "flow",
+      "id": "e0",
+      "kind": "connection",
+      "source": "Builtins",
+      "source_pin": "Builtins#out",
+      "target": "Builtins:1",
+      "target_pin": "Builtins:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e1",
+      "kind": "connection",
       "source": "Builtins:1",
+      "source_pin": "Builtins:1#out",
       "target": "Builtins:2",
-      "index": 0
+      "target_pin": "Builtins:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-2",
-      "kind": "flow",
+      "id": "e2",
+      "kind": "connection",
       "source": "Builtins:2",
+      "source_pin": "Builtins:2#out",
       "target": "Builtins:3",
-      "index": 1
+      "target_pin": "Builtins:3#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-3",
+      "id": "e3",
+      "kind": "connection",
+      "source": "CaseVariants",
+      "source_pin": "CaseVariants#out",
+      "target": "CaseVariants:1",
+      "target_pin": "CaseVariants:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e4",
+      "kind": "connection",
+      "source": "JumpCase",
+      "source_pin": "JumpCase#out",
+      "target": "JumpCase:1",
+      "target_pin": "JumpCase:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e5",
       "kind": "jump",
       "source": "JumpCase:1",
-      "target": "CaseVariants:1",
-      "index": 2
+      "source_pin": "JumpCase:1#out",
+      "target": "CaseVariants",
+      "target_pin": "CaseVariants#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-4",
-      "kind": "flow",
-      "source": "SetCase:1",
-      "target": "SetCase:2",
-      "index": 3
+      "id": "e6",
+      "kind": "connection",
+      "source": "SetCase",
+      "source_pin": "SetCase#out",
+      "target": "SetCase:1",
+      "target_pin": "SetCase:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-5",
-      "kind": "flow",
+      "id": "e7",
+      "kind": "connection",
+      "source": "Customs",
+      "source_pin": "Customs#out",
+      "target": "Customs:1",
+      "target_pin": "Customs:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e8",
+      "kind": "connection",
       "source": "Customs:1",
+      "source_pin": "Customs:1#out",
       "target": "Customs:2",
-      "index": 4
+      "target_pin": "Customs:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-6",
-      "kind": "flow",
+      "id": "e9",
+      "kind": "connection",
       "source": "Customs:2",
+      "source_pin": "Customs:2#out",
       "target": "Customs:3",
-      "index": 5
+      "target_pin": "Customs:3#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-7",
-      "kind": "flow",
+      "id": "e10",
+      "kind": "connection",
       "source": "Customs:3",
+      "source_pin": "Customs:3#out",
       "target": "Customs:4",
-      "index": 6
+      "target_pin": "Customs:4#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-8",
-      "kind": "branch",
+      "id": "e11",
+      "kind": "connection",
       "source": "Customs:4",
-      "target": "Customs:5",
-      "index": 7,
-      "label": "if"
+      "source_pin": "Customs:4#out",
+      "target": "Customs:4:1",
+      "target_pin": "Customs:4:1#in",
+      "index": 0,
+      "label": "if",
+      "properties": {}
     },
     {
-      "id": "edge-9",
-      "kind": "flow",
-      "source": "Customs:5",
-      "target": "Customs:6",
-      "index": 8
+      "id": "e12",
+      "kind": "connection",
+      "source": "Customs:4:1",
+      "source_pin": "Customs:4:1#out",
+      "target": "Customs:5",
+      "target_pin": "Customs:5#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e13",
+      "kind": "connection",
+      "source": "Customs:4",
+      "source_pin": "Customs:4#out",
+      "target": "Customs:5",
+      "target_pin": "Customs:5#in",
+      "index": 1,
+      "label": "else",
+      "properties": {}
+    }
+  ],
+  "choices": [],
+  "variable_namespaces": [
+    {
+      "name": "yarn",
+      "metadata": {},
+      "variables": [
+        "count"
+      ]
     }
   ],
   "variables": [
     {
+      "namespace": "yarn",
       "name": "count",
-      "type": "int",
+      "source_type": "declare",
+      "kind": "integer",
       "value": 2,
-      "source": 0,
-      "title": "SetCase",
-      "line": 22,
-      "col": 1
+      "raw_value": "2",
+      "description": null,
+      "metadata": {}
     }
   ],
-  "errors": [
+  "hierarchy": [
     {
-      "file": "11-commands.yarn",
-      "line": 27,
-      "col": 1,
-      "code": "unknown_command",
-      "severity": "warning",
-      "message": "`<<fadeIn>>` is not a Yarn Spinner 2 command; kept as a generic command node"
+      "id": "Builtins",
+      "parent": null,
+      "index": 0,
+      "depth": 0,
+      "properties": {}
     },
     {
-      "file": "11-commands.yarn",
-      "line": 28,
-      "col": 1,
-      "code": "unknown_command",
-      "severity": "warning",
-      "message": "`<<playMusic>>` is not a Yarn Spinner 2 command; kept as a generic command node"
+      "id": "Builtins:1",
+      "parent": "Builtins",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
     },
     {
-      "file": "11-commands.yarn",
-      "line": 29,
-      "col": 1,
-      "code": "unknown_command",
-      "severity": "warning",
-      "message": "`<<customWithoutArguments>>` is not a Yarn Spinner 2 command; kept as a generic command node"
+      "id": "Builtins:2",
+      "parent": "Builtins",
+      "index": 1,
+      "depth": 1,
+      "properties": {}
     },
     {
-      "file": "11-commands.yarn",
-      "line": 33,
-      "col": 1,
-      "code": "unbalanced_conditional",
-      "severity": "error",
-      "message": "`<<else>>` has no matching `<<if>>`"
+      "id": "Builtins:3",
+      "parent": "Builtins",
+      "index": 2,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Builtins:4",
+      "parent": "Builtins",
+      "index": 3,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "CaseVariants",
+      "parent": null,
+      "index": 1,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "CaseVariants:1",
+      "parent": "CaseVariants",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "JumpCase",
+      "parent": null,
+      "index": 2,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "JumpCase:1",
+      "parent": "JumpCase",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "SetCase",
+      "parent": null,
+      "index": 3,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "SetCase:1",
+      "parent": "SetCase",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Customs",
+      "parent": null,
+      "index": 4,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "Customs:1",
+      "parent": "Customs",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Customs:2",
+      "parent": "Customs",
+      "index": 1,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Customs:3",
+      "parent": "Customs",
+      "index": 2,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Customs:4",
+      "parent": "Customs",
+      "index": 3,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Customs:4:1",
+      "parent": "Customs:4",
+      "index": 0,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "Customs:5",
+      "parent": "Customs",
+      "index": 4,
+      "depth": 1,
+      "properties": {}
+    }
+  ],
+  "warnings": [
+    {
+      "kind": "unknown_type",
+      "source": "11-commands.yarn",
+      "reference": null
+    },
+    {
+      "kind": "unknown_type",
+      "source": "11-commands.yarn",
+      "reference": null
+    },
+    {
+      "kind": "unknown_type",
+      "source": "11-commands.yarn",
+      "reference": null
     }
   ]
 }

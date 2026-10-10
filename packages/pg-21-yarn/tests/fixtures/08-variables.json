@@ -1,540 +1,705 @@
 {
   "version": 1,
-  "sources": [
-    "08-variables.yarn"
-  ],
-  "start_node": "Start:1",
-  "titles": [
+  "text_mode": "literal",
+  "metadata": {
+    "files": [
+      "08-variables.yarn"
+    ],
+    "generator": "pg-21-yarn 0.1.0",
+    "source_format": "yarn"
+  },
+  "definitions": [],
+  "packages": [
     {
-      "id": "Start",
-      "title": "Start",
-      "source": 0,
-      "entry": "Start:1",
-      "line": 1,
-      "col": 1
+      "index": 0,
+      "name": "08-variables",
+      "metadata": {
+        "path": "08-variables.yarn"
+      },
+      "node_ids": [
+        "Start",
+        "Start:1",
+        "Start:2",
+        "Start:3",
+        "Start:4",
+        "Start:5",
+        "Start:6",
+        "Start:7"
+      ]
     }
   ],
   "nodes": [
     {
-      "id": "Start:1",
-      "source": 0,
-      "title": "Start",
-      "kind": "command",
-      "command": {
-        "name": "declare",
-        "args": "$gold = 0",
-        "variable": "gold",
-        "operator": "=",
-        "expression": "0"
+      "id": "Start",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "Start",
+      "display_name": "Start",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start#in"
+      ],
+      "output_pins": [
+        "Start#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
       },
-      "line": 4,
-      "col": 1
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 1
+      }
+    },
+    {
+      "id": "Start:1",
+      "package": 0,
+      "source_type": "Set",
+      "kind": "instruction",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "instruction",
+        "text": "set $gold = 5"
+      },
+      "input_pins": [
+        "Start:1#in"
+      ],
+      "output_pins": [
+        "Start:1#out"
+      ],
+      "properties": {
+        "args": "$gold = 5",
+        "command": "set",
+        "expression": "5",
+        "operator": "=",
+        "variable": "gold"
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 16
+      }
     },
     {
       "id": "Start:2",
-      "source": 0,
-      "title": "Start",
-      "kind": "command",
-      "command": {
-        "name": "declare",
-        "args": "$gateOpen = false",
-        "variable": "gateOpen",
-        "operator": "=",
-        "expression": "false"
+      "package": 0,
+      "source_type": "Set",
+      "kind": "instruction",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "instruction",
+        "text": "set $gold += 2"
       },
-      "line": 6,
-      "col": 1
+      "input_pins": [
+        "Start:2#in"
+      ],
+      "output_pins": [
+        "Start:2#out"
+      ],
+      "properties": {
+        "args": "$gold += 2",
+        "command": "set",
+        "expression": "2",
+        "operator": "+=",
+        "variable": "gold"
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 17
+      }
     },
     {
       "id": "Start:3",
-      "source": 0,
-      "title": "Start",
-      "kind": "command",
-      "command": {
-        "name": "declare",
-        "args": "$playerName = \"Wren\"",
-        "variable": "playerName",
-        "operator": "=",
-        "expression": "\"Wren\""
+      "package": 0,
+      "source_type": "Set",
+      "kind": "instruction",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "instruction",
+        "text": "set $gold -= 1"
       },
-      "line": 8,
-      "col": 1
+      "input_pins": [
+        "Start:3#in"
+      ],
+      "output_pins": [
+        "Start:3#out"
+      ],
+      "properties": {
+        "args": "$gold -= 1",
+        "command": "set",
+        "expression": "1",
+        "operator": "-=",
+        "variable": "gold"
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 18
+      }
     },
     {
       "id": "Start:4",
-      "source": 0,
-      "title": "Start",
-      "kind": "command",
-      "command": {
-        "name": "declare",
-        "args": "$ratio = 0.25",
-        "variable": "ratio",
-        "operator": "=",
-        "expression": "0.25"
+      "package": 0,
+      "source_type": "Set",
+      "kind": "instruction",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "instruction",
+        "text": "set $gold *= 3"
       },
-      "line": 9,
-      "col": 1
+      "input_pins": [
+        "Start:4#in"
+      ],
+      "output_pins": [
+        "Start:4#out"
+      ],
+      "properties": {
+        "args": "$gold *= 3",
+        "command": "set",
+        "expression": "3",
+        "operator": "*=",
+        "variable": "gold"
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 19
+      }
     },
     {
       "id": "Start:5",
-      "source": 0,
-      "title": "Start",
-      "kind": "command",
-      "command": {
-        "name": "declare",
-        "args": "$day = 3 as number",
-        "variable": "day",
-        "operator": "=",
-        "expression": "3 as number"
+      "package": 0,
+      "source_type": "Set",
+      "kind": "instruction",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "instruction",
+        "text": "set $gold /= 2"
       },
-      "line": 10,
-      "col": 1
+      "input_pins": [
+        "Start:5#in"
+      ],
+      "output_pins": [
+        "Start:5#out"
+      ],
+      "properties": {
+        "args": "$gold /= 2",
+        "command": "set",
+        "expression": "2",
+        "operator": "/=",
+        "variable": "gold"
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 20
+      }
     },
     {
       "id": "Start:6",
-      "source": 0,
-      "title": "Start",
-      "kind": "command",
-      "command": {
-        "name": "declare",
-        "args": "$flag = true as bool",
-        "variable": "flag",
-        "operator": "=",
-        "expression": "true as bool"
+      "package": 0,
+      "source_type": "Set",
+      "kind": "instruction",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "instruction",
+        "text": "set $gold to 9"
       },
-      "line": 11,
-      "col": 1
+      "input_pins": [
+        "Start:6#in"
+      ],
+      "output_pins": [
+        "Start:6#out"
+      ],
+      "properties": {
+        "args": "$gold to 9",
+        "command": "set",
+        "expression": "9",
+        "operator": "to",
+        "variable": "gold"
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 21
+      }
     },
     {
       "id": "Start:7",
-      "source": 0,
-      "title": "Start",
-      "kind": "command",
-      "command": {
-        "name": "declare",
-        "args": "$label = \"six\" as STRING",
-        "variable": "label",
-        "operator": "=",
-        "expression": "\"six\" as STRING"
-      },
-      "line": 12,
-      "col": 1
-    },
-    {
-      "id": "Start:8",
-      "source": 0,
-      "title": "Start",
-      "kind": "command",
-      "command": {
-        "name": "declare",
-        "args": "$odd = 7 as string",
-        "variable": "odd",
-        "operator": "=",
-        "expression": "7 as string"
-      },
-      "line": 13,
-      "col": 1
-    },
-    {
-      "id": "Start:9",
-      "source": 0,
-      "title": "Start",
-      "kind": "command",
-      "command": {
-        "name": "declare",
-        "args": "$weird = 1 as banana",
-        "variable": "weird",
-        "operator": "=",
-        "expression": "1 as banana"
-      },
-      "line": 14,
-      "col": 1
-    },
-    {
-      "id": "Start:10",
-      "source": 0,
-      "title": "Start",
-      "kind": "command",
-      "command": {
-        "name": "declare",
-        "args": "$computed = $gold + 1",
-        "variable": "computed",
-        "operator": "=",
-        "expression": "$gold + 1"
-      },
-      "line": 15,
-      "col": 1
-    },
-    {
-      "id": "Start:11",
-      "source": 0,
-      "title": "Start",
-      "kind": "command",
-      "command": {
-        "name": "set",
-        "args": "$gold = 5",
-        "variable": "gold",
-        "operator": "=",
-        "expression": "5"
-      },
-      "line": 16,
-      "col": 1
-    },
-    {
-      "id": "Start:12",
-      "source": 0,
-      "title": "Start",
-      "kind": "command",
-      "command": {
-        "name": "set",
-        "args": "$gold += 2",
-        "variable": "gold",
-        "operator": "+=",
-        "expression": "2"
-      },
-      "line": 17,
-      "col": 1
-    },
-    {
-      "id": "Start:13",
-      "source": 0,
-      "title": "Start",
-      "kind": "command",
-      "command": {
-        "name": "set",
-        "args": "$gold -= 1",
-        "variable": "gold",
-        "operator": "-=",
-        "expression": "1"
-      },
-      "line": 18,
-      "col": 1
-    },
-    {
-      "id": "Start:14",
-      "source": 0,
-      "title": "Start",
-      "kind": "command",
-      "command": {
-        "name": "set",
-        "args": "$gold *= 3",
-        "variable": "gold",
-        "operator": "*=",
-        "expression": "3"
-      },
-      "line": 19,
-      "col": 1
-    },
-    {
-      "id": "Start:15",
-      "source": 0,
-      "title": "Start",
-      "kind": "command",
-      "command": {
-        "name": "set",
-        "args": "$gold /= 2",
-        "variable": "gold",
-        "operator": "/=",
-        "expression": "2"
-      },
-      "line": 20,
-      "col": 1
-    },
-    {
-      "id": "Start:16",
-      "source": 0,
-      "title": "Start",
-      "kind": "command",
-      "command": {
-        "name": "set",
-        "args": "$gold to 9",
-        "variable": "gold",
-        "operator": "to",
-        "expression": "9"
-      },
-      "line": 21,
-      "col": 1
-    },
-    {
-      "id": "Start:17",
-      "source": 0,
-      "title": "Start",
-      "kind": "command",
-      "command": {
-        "name": "declare",
-        "args": "$gold = 99",
-        "variable": "gold",
-        "operator": "=",
-        "expression": "99"
-      },
-      "line": 22,
-      "col": 1
-    },
-    {
-      "id": "Start:18",
-      "source": 0,
-      "title": "Start",
-      "kind": "line",
-      "speaker": "Ada",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
       "text": "The arithmetic is never evaluated.",
-      "line_id": "8a0001",
-      "line": 23,
-      "col": 6
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Start:7#in"
+      ],
+      "output_pins": [
+        "Start:7#out"
+      ],
+      "properties": {
+        "line_id": "8a0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 23
+      }
+    }
+  ],
+  "pins": [
+    {
+      "id": "Start#in",
+      "owner": "Start",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start#out",
+      "owner": "Start",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1#in",
+      "owner": "Start:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1#out",
+      "owner": "Start:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2#in",
+      "owner": "Start:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2#out",
+      "owner": "Start:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:3#in",
+      "owner": "Start:3",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:3#out",
+      "owner": "Start:3",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:4#in",
+      "owner": "Start:4",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:4#out",
+      "owner": "Start:4",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:5#in",
+      "owner": "Start:5",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:5#out",
+      "owner": "Start:5",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:6#in",
+      "owner": "Start:6",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:6#out",
+      "owner": "Start:6",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:7#in",
+      "owner": "Start:7",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:7#out",
+      "owner": "Start:7",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
     }
   ],
   "edges": [
     {
-      "id": "edge-1",
-      "kind": "flow",
+      "id": "e0",
+      "kind": "connection",
+      "source": "Start",
+      "source_pin": "Start#out",
+      "target": "Start:1",
+      "target_pin": "Start:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e1",
+      "kind": "connection",
       "source": "Start:1",
+      "source_pin": "Start:1#out",
       "target": "Start:2",
-      "index": 0
+      "target_pin": "Start:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-2",
-      "kind": "flow",
+      "id": "e2",
+      "kind": "connection",
       "source": "Start:2",
+      "source_pin": "Start:2#out",
       "target": "Start:3",
-      "index": 1
+      "target_pin": "Start:3#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-3",
-      "kind": "flow",
+      "id": "e3",
+      "kind": "connection",
       "source": "Start:3",
+      "source_pin": "Start:3#out",
       "target": "Start:4",
-      "index": 2
+      "target_pin": "Start:4#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-4",
-      "kind": "flow",
+      "id": "e4",
+      "kind": "connection",
       "source": "Start:4",
+      "source_pin": "Start:4#out",
       "target": "Start:5",
-      "index": 3
+      "target_pin": "Start:5#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-5",
-      "kind": "flow",
+      "id": "e5",
+      "kind": "connection",
       "source": "Start:5",
+      "source_pin": "Start:5#out",
       "target": "Start:6",
-      "index": 4
+      "target_pin": "Start:6#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-6",
-      "kind": "flow",
+      "id": "e6",
+      "kind": "connection",
       "source": "Start:6",
+      "source_pin": "Start:6#out",
       "target": "Start:7",
-      "index": 5
-    },
+      "target_pin": "Start:7#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    }
+  ],
+  "choices": [],
+  "variable_namespaces": [
     {
-      "id": "edge-7",
-      "kind": "flow",
-      "source": "Start:7",
-      "target": "Start:8",
-      "index": 6
-    },
-    {
-      "id": "edge-8",
-      "kind": "flow",
-      "source": "Start:8",
-      "target": "Start:9",
-      "index": 7
-    },
-    {
-      "id": "edge-9",
-      "kind": "flow",
-      "source": "Start:9",
-      "target": "Start:10",
-      "index": 8
-    },
-    {
-      "id": "edge-10",
-      "kind": "flow",
-      "source": "Start:10",
-      "target": "Start:11",
-      "index": 9
-    },
-    {
-      "id": "edge-11",
-      "kind": "flow",
-      "source": "Start:11",
-      "target": "Start:12",
-      "index": 10
-    },
-    {
-      "id": "edge-12",
-      "kind": "flow",
-      "source": "Start:12",
-      "target": "Start:13",
-      "index": 11
-    },
-    {
-      "id": "edge-13",
-      "kind": "flow",
-      "source": "Start:13",
-      "target": "Start:14",
-      "index": 12
-    },
-    {
-      "id": "edge-14",
-      "kind": "flow",
-      "source": "Start:14",
-      "target": "Start:15",
-      "index": 13
-    },
-    {
-      "id": "edge-15",
-      "kind": "flow",
-      "source": "Start:15",
-      "target": "Start:16",
-      "index": 14
-    },
-    {
-      "id": "edge-16",
-      "kind": "flow",
-      "source": "Start:16",
-      "target": "Start:17",
-      "index": 15
-    },
-    {
-      "id": "edge-17",
-      "kind": "flow",
-      "source": "Start:17",
-      "target": "Start:18",
-      "index": 16
+      "name": "yarn",
+      "metadata": {},
+      "variables": [
+        "gold",
+        "gateOpen",
+        "playerName",
+        "ratio",
+        "day",
+        "flag",
+        "label",
+        "odd",
+        "weird",
+        "computed"
+      ]
     }
   ],
   "variables": [
     {
+      "namespace": "yarn",
       "name": "gold",
-      "type": "int",
+      "source_type": "declare",
+      "kind": "integer",
       "value": 0,
+      "raw_value": "0",
       "description": "Gold the player carries.",
-      "source": 0,
-      "title": "Start",
-      "line": 4,
-      "col": 1
+      "metadata": {}
     },
     {
+      "namespace": "yarn",
       "name": "gateOpen",
-      "type": "bool",
+      "source_type": "declare",
+      "kind": "boolean",
       "value": false,
+      "raw_value": "false",
       "description": "Whether the gate stands open.",
-      "source": 0,
-      "title": "Start",
-      "line": 6,
-      "col": 1
+      "metadata": {}
     },
     {
+      "namespace": "yarn",
       "name": "playerName",
-      "type": "string",
+      "source_type": "declare",
+      "kind": "string",
       "value": "Wren",
+      "raw_value": "\"Wren\"",
       "description": "The name the player chose.",
-      "source": 0,
-      "title": "Start",
-      "line": 8,
-      "col": 1
+      "metadata": {}
     },
     {
+      "namespace": "yarn",
       "name": "ratio",
-      "type": "float",
+      "source_type": "declare",
+      "kind": "float",
       "value": 0.25,
-      "source": 0,
-      "title": "Start",
-      "line": 9,
-      "col": 1
+      "raw_value": "0.25",
+      "description": null,
+      "metadata": {}
     },
     {
+      "namespace": "yarn",
       "name": "day",
-      "type": "int",
-      "declared_as": "number",
+      "source_type": "declare",
+      "kind": "integer",
       "value": 3,
-      "source": 0,
-      "title": "Start",
-      "line": 10,
-      "col": 1
+      "raw_value": "3",
+      "description": null,
+      "metadata": {}
     },
     {
+      "namespace": "yarn",
       "name": "flag",
-      "type": "bool",
-      "declared_as": "bool",
+      "source_type": "declare",
+      "kind": "boolean",
       "value": true,
-      "source": 0,
-      "title": "Start",
-      "line": 11,
-      "col": 1
+      "raw_value": "true",
+      "description": null,
+      "metadata": {}
     },
     {
+      "namespace": "yarn",
       "name": "label",
-      "type": "string",
-      "declared_as": "STRING",
+      "source_type": "declare",
+      "kind": "string",
       "value": "six",
-      "source": 0,
-      "title": "Start",
-      "line": 12,
-      "col": 1
+      "raw_value": "\"six\"",
+      "description": null,
+      "metadata": {}
     },
     {
+      "namespace": "yarn",
       "name": "odd",
-      "type": "string",
-      "declared_as": "string",
+      "source_type": "declare",
+      "kind": "integer",
       "value": 7,
-      "source": 0,
-      "title": "Start",
-      "line": 13,
-      "col": 1
+      "raw_value": "7",
+      "description": null,
+      "metadata": {}
     },
     {
+      "namespace": "yarn",
       "name": "weird",
-      "type": "int",
-      "declared_as": "banana",
+      "source_type": "declare",
+      "kind": "integer",
       "value": 1,
-      "source": 0,
-      "title": "Start",
-      "line": 14,
-      "col": 1
+      "raw_value": "1",
+      "description": null,
+      "metadata": {}
     },
     {
+      "namespace": "yarn",
       "name": "computed",
-      "type": "unknown",
+      "source_type": "declare",
+      "kind": "other",
       "value": "$gold + 1",
-      "source": 0,
-      "title": "Start",
-      "line": 15,
-      "col": 1
+      "raw_value": "$gold + 1",
+      "description": null,
+      "metadata": {}
     }
   ],
-  "errors": [
+  "hierarchy": [
     {
-      "file": "08-variables.yarn",
-      "line": 13,
-      "col": 1,
-      "code": "invalid_variable_type",
-      "severity": "warning",
-      "message": "`as string` does not match the initial value of `$odd`"
+      "id": "Start",
+      "parent": null,
+      "index": 0,
+      "depth": 0,
+      "properties": {}
     },
     {
-      "file": "08-variables.yarn",
-      "line": 14,
-      "col": 1,
-      "code": "invalid_variable_type",
-      "severity": "warning",
-      "message": "`as banana` is not `bool`, `string`, `int`, `float` or `number`"
+      "id": "Start:1",
+      "parent": "Start",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
     },
     {
-      "file": "08-variables.yarn",
-      "line": 15,
-      "col": 1,
-      "code": "invalid_variable_type",
-      "severity": "warning",
-      "message": "the initial value of `$computed` is not a literal"
+      "id": "Start:2",
+      "parent": "Start",
+      "index": 1,
+      "depth": 1,
+      "properties": {}
     },
     {
-      "file": "08-variables.yarn",
-      "line": 22,
-      "col": 1,
-      "code": "duplicate_variable",
-      "severity": "error",
-      "message": "`$gold` is declared more than once; the first declaration is kept"
+      "id": "Start:3",
+      "parent": "Start",
+      "index": 2,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:4",
+      "parent": "Start",
+      "index": 3,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:5",
+      "parent": "Start",
+      "index": 4,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:6",
+      "parent": "Start",
+      "index": 5,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:7",
+      "parent": "Start",
+      "index": 6,
+      "depth": 1,
+      "properties": {}
+    }
+  ],
+  "warnings": [
+    {
+      "kind": "unknown_variable_type",
+      "source": "08-variables.yarn",
+      "reference": null
+    },
+    {
+      "kind": "unknown_variable_type",
+      "source": "08-variables.yarn",
+      "reference": null
+    },
+    {
+      "kind": "unknown_variable_type",
+      "source": "08-variables.yarn",
+      "reference": null
     }
   ]
 }

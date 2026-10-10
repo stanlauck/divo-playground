@@ -1,0 +1,15 @@
+{
+  "sources": [
+    "02-headers.yarn"
+  ],
+  "findings": [
+    {
+      "file": "02-headers.yarn",
+      "line": 5,
+      "col": 1,
+      "code": "duplicate_header_key",
+      "severity": "warning",
+      "message": "header `position` appears more than once; the first value is kept"
+    }
+  ]
+}

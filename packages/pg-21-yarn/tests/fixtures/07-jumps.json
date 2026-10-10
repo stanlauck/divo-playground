@@ -1,166 +1,656 @@
 {
   "version": 1,
-  "sources": [
-    "07-jumps.yarn"
-  ],
-  "start_node": "Start:1",
-  "titles": [
+  "text_mode": "literal",
+  "metadata": {
+    "files": [
+      "07-jumps.yarn"
+    ],
+    "generator": "pg-21-yarn 0.1.0",
+    "source_format": "yarn"
+  },
+  "definitions": [],
+  "packages": [
     {
-      "id": "Start",
-      "title": "Start",
-      "source": 0,
-      "entry": "Start:1",
-      "line": 1,
-      "col": 1
-    },
-    {
-      "id": "Middle",
-      "title": "Middle",
-      "source": 0,
-      "entry": "Middle:1",
-      "line": 8,
-      "col": 1
-    },
-    {
-      "id": "Tail",
-      "title": "Tail",
-      "source": 0,
-      "entry": "Tail:1",
-      "line": 14,
-      "col": 1
+      "index": 0,
+      "name": "07-jumps",
+      "metadata": {
+        "path": "07-jumps.yarn"
+      },
+      "node_ids": [
+        "Start",
+        "Start:1",
+        "Start:2",
+        "Start:3",
+        "Middle",
+        "Middle:1",
+        "Middle:2",
+        "Tail",
+        "Tail:1",
+        "Tail:2"
+      ]
     }
   ],
   "nodes": [
     {
+      "id": "Start",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "Start",
+      "display_name": "Start",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start#in"
+      ],
+      "output_pins": [
+        "Start#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 1
+      }
+    },
+    {
       "id": "Start:1",
-      "source": 0,
-      "title": "Start",
-      "kind": "line",
-      "speaker": "Ada",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
       "text": "A forward reference follows.",
-      "line_id": "7a0001",
-      "line": 3,
-      "col": 6
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Start:1#in"
+      ],
+      "output_pins": [
+        "Start:1#out"
+      ],
+      "properties": {
+        "line_id": "7a0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 3
+      }
     },
     {
       "id": "Start:2",
-      "source": 0,
-      "title": "Start",
+      "package": 0,
+      "source_type": "Jump",
       "kind": "jump",
-      "command": {
-        "name": "jump",
-        "args": "Middle",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start:2#in"
+      ],
+      "output_pins": [
+        "Start:2#out"
+      ],
+      "properties": {
         "target": "Middle"
       },
-      "line": 4,
-      "col": 1
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 4
+      }
     },
     {
       "id": "Start:3",
-      "source": 0,
-      "title": "Start",
-      "kind": "line",
-      "speaker": "Ada",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
       "text": "Never reached.",
-      "line_id": "7a0002",
-      "line": 5,
-      "col": 6
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Start:3#in"
+      ],
+      "output_pins": [
+        "Start:3#out"
+      ],
+      "properties": {
+        "line_id": "7a0002",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 5
+      }
+    },
+    {
+      "id": "Middle",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "Middle",
+      "display_name": "Middle",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Middle#in"
+      ],
+      "output_pins": [
+        "Middle#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 8
+      }
     },
     {
       "id": "Middle:1",
-      "source": 0,
-      "title": "Middle",
-      "kind": "line",
-      "speaker": "Ada",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Middle",
+      "technical_name": null,
+      "display_name": null,
       "text": "The middle of the loop.",
-      "line_id": "7b0001",
-      "line": 10,
-      "col": 6
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Middle:1#in"
+      ],
+      "output_pins": [
+        "Middle:1#out"
+      ],
+      "properties": {
+        "line_id": "7b0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 10
+      }
     },
     {
       "id": "Middle:2",
-      "source": 0,
-      "title": "Middle",
+      "package": 0,
+      "source_type": "Jump",
       "kind": "jump",
-      "command": {
-        "name": "jump",
-        "args": "Start",
+      "parent": "Middle",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Middle:2#in"
+      ],
+      "output_pins": [
+        "Middle:2#out"
+      ],
+      "properties": {
         "target": "Start"
       },
-      "line": 11,
-      "col": 1
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 11
+      }
+    },
+    {
+      "id": "Tail",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "Tail",
+      "display_name": "Tail",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Tail#in"
+      ],
+      "output_pins": [
+        "Tail#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 14
+      }
     },
     {
       "id": "Tail:1",
-      "source": 0,
-      "title": "Tail",
-      "kind": "line",
-      "speaker": "Ada",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Tail",
+      "technical_name": null,
+      "display_name": null,
       "text": "Nothing jumps here.",
-      "line_id": "7c0001",
-      "line": 16,
-      "col": 6
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Tail:1#in"
+      ],
+      "output_pins": [
+        "Tail:1#out"
+      ],
+      "properties": {
+        "line_id": "7c0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 16
+      }
     },
     {
       "id": "Tail:2",
-      "source": 0,
-      "title": "Tail",
+      "package": 0,
+      "source_type": "Jump",
       "kind": "jump",
-      "command": {
-        "name": "jump",
-        "args": "Missing",
+      "parent": "Tail",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Tail:2#in"
+      ],
+      "output_pins": [
+        "Tail:2#out"
+      ],
+      "properties": {
         "target": "Missing"
       },
-      "line": 17,
-      "col": 1
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 17
+      }
+    }
+  ],
+  "pins": [
+    {
+      "id": "Start#in",
+      "owner": "Start",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start#out",
+      "owner": "Start",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1#in",
+      "owner": "Start:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1#out",
+      "owner": "Start:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2#in",
+      "owner": "Start:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2#out",
+      "owner": "Start:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:3#in",
+      "owner": "Start:3",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:3#out",
+      "owner": "Start:3",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Middle#in",
+      "owner": "Middle",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Middle#out",
+      "owner": "Middle",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Middle:1#in",
+      "owner": "Middle:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Middle:1#out",
+      "owner": "Middle:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Middle:2#in",
+      "owner": "Middle:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Middle:2#out",
+      "owner": "Middle:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Tail#in",
+      "owner": "Tail",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Tail#out",
+      "owner": "Tail",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Tail:1#in",
+      "owner": "Tail:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Tail:1#out",
+      "owner": "Tail:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Tail:2#in",
+      "owner": "Tail:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Tail:2#out",
+      "owner": "Tail:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
     }
   ],
   "edges": [
     {
-      "id": "edge-1",
-      "kind": "flow",
-      "source": "Start:1",
-      "target": "Start:2",
-      "index": 0
+      "id": "e0",
+      "kind": "connection",
+      "source": "Start",
+      "source_pin": "Start#out",
+      "target": "Start:1",
+      "target_pin": "Start:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-2",
+      "id": "e1",
+      "kind": "connection",
+      "source": "Start:1",
+      "source_pin": "Start:1#out",
+      "target": "Start:2",
+      "target_pin": "Start:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e2",
       "kind": "jump",
       "source": "Start:2",
+      "source_pin": "Start:2#out",
+      "target": "Middle",
+      "target_pin": "Middle#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e3",
+      "kind": "connection",
+      "source": "Middle",
+      "source_pin": "Middle#out",
       "target": "Middle:1",
-      "index": 1
+      "target_pin": "Middle:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-3",
-      "kind": "flow",
+      "id": "e4",
+      "kind": "connection",
       "source": "Middle:1",
+      "source_pin": "Middle:1#out",
       "target": "Middle:2",
-      "index": 2
+      "target_pin": "Middle:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-4",
+      "id": "e5",
       "kind": "jump",
       "source": "Middle:2",
-      "target": "Start:1",
-      "index": 3
+      "source_pin": "Middle:2#out",
+      "target": "Start",
+      "target_pin": "Start#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-5",
-      "kind": "flow",
+      "id": "e6",
+      "kind": "connection",
+      "source": "Tail",
+      "source_pin": "Tail#out",
+      "target": "Tail:1",
+      "target_pin": "Tail:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e7",
+      "kind": "connection",
       "source": "Tail:1",
+      "source_pin": "Tail:1#out",
       "target": "Tail:2",
-      "index": 4
+      "target_pin": "Tail:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    }
+  ],
+  "choices": [],
+  "variable_namespaces": [
+    {
+      "name": "yarn",
+      "metadata": {},
+      "variables": []
     }
   ],
   "variables": [],
-  "errors": [
+  "hierarchy": [
     {
-      "file": "07-jumps.yarn",
-      "line": 17,
-      "col": 1,
-      "code": "missing_jump_target",
-      "severity": "error",
-      "message": "`<<jump Missing>>` names a node that does not exist"
+      "id": "Start",
+      "parent": null,
+      "index": 0,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "Start:1",
+      "parent": "Start",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:2",
+      "parent": "Start",
+      "index": 1,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:3",
+      "parent": "Start",
+      "index": 2,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Middle",
+      "parent": null,
+      "index": 1,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "Middle:1",
+      "parent": "Middle",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Middle:2",
+      "parent": "Middle",
+      "index": 1,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Tail",
+      "parent": null,
+      "index": 2,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "Tail:1",
+      "parent": "Tail",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Tail:2",
+      "parent": "Tail",
+      "index": 1,
+      "depth": 1,
+      "properties": {}
+    }
+  ],
+  "warnings": [
+    {
+      "kind": "missing_node",
+      "source": "Tail:2",
+      "reference": "Missing"
     }
   ]
 }

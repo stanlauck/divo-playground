@@ -1,91 +1,433 @@
 {
   "version": 1,
-  "sources": [
-    "12-empty-untitled.yarn"
-  ],
-  "start_node": "Start:1",
-  "titles": [
+  "text_mode": "literal",
+  "metadata": {
+    "files": [
+      "12-empty-untitled.yarn"
+    ],
+    "generator": "pg-21-yarn 0.1.0",
+    "source_format": "yarn"
+  },
+  "definitions": [],
+  "packages": [
     {
-      "id": "Empty",
-      "title": "Empty",
-      "source": 0,
-      "tags": [
-        "placeholder"
-      ],
-      "entry": null,
-      "line": 1,
-      "col": 1
-    },
-    {
-      "id": "OnlyComments",
-      "title": "OnlyComments",
-      "source": 0,
-      "entry": null,
-      "line": 6,
-      "col": 1
-    },
-    {
-      "id": "untitled",
-      "title": "untitled",
-      "source": 0,
-      "tags": [
-        "orphan"
-      ],
-      "entry": "untitled:1",
-      "line": 12,
-      "col": 1
-    },
-    {
-      "id": "BlankBody",
-      "title": "BlankBody",
-      "source": 0,
-      "entry": null,
-      "line": 17,
-      "col": 1
-    },
-    {
-      "id": "Start",
-      "title": "Start",
-      "source": 0,
-      "entry": "Start:1",
-      "line": 22,
-      "col": 1
+      "index": 0,
+      "name": "12-empty-untitled",
+      "metadata": {
+        "path": "12-empty-untitled.yarn"
+      },
+      "node_ids": [
+        "Empty",
+        "OnlyComments",
+        "untitled",
+        "untitled:1",
+        "BlankBody",
+        "Start",
+        "Start:1"
+      ]
     }
   ],
   "nodes": [
     {
+      "id": "Empty",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "Empty",
+      "display_name": "Empty",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Empty#in"
+      ],
+      "output_pins": [
+        "Empty#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": [
+          "placeholder"
+        ]
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 1
+      }
+    },
+    {
+      "id": "OnlyComments",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "OnlyComments",
+      "display_name": "OnlyComments",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "OnlyComments#in"
+      ],
+      "output_pins": [
+        "OnlyComments#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 6
+      }
+    },
+    {
+      "id": "untitled",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "untitled",
+      "display_name": "untitled",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "untitled#in"
+      ],
+      "output_pins": [
+        "untitled#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": [
+          "orphan"
+        ]
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 12
+      }
+    },
+    {
       "id": "untitled:1",
-      "source": 0,
-      "title": "untitled",
-      "kind": "line",
-      "speaker": "Ada",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "untitled",
+      "technical_name": null,
+      "display_name": null,
       "text": "This block never declared a title.",
-      "line_id": "12a0001",
-      "line": 14,
-      "col": 6
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "untitled:1#in"
+      ],
+      "output_pins": [
+        "untitled:1#out"
+      ],
+      "properties": {
+        "line_id": "12a0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 14
+      }
+    },
+    {
+      "id": "BlankBody",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "BlankBody",
+      "display_name": "BlankBody",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "BlankBody#in"
+      ],
+      "output_pins": [
+        "BlankBody#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 17
+      }
+    },
+    {
+      "id": "Start",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "Start",
+      "display_name": "Start",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start#in"
+      ],
+      "output_pins": [
+        "Start#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 22
+      }
     },
     {
       "id": "Start:1",
-      "source": 0,
-      "title": "Start",
-      "kind": "line",
-      "speaker": "Ada",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
       "text": "The real start.",
-      "line_id": "12a0002",
-      "line": 24,
-      "col": 6
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Start:1#in"
+      ],
+      "output_pins": [
+        "Start:1#out"
+      ],
+      "properties": {
+        "line_id": "12a0002",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 24
+      }
     }
   ],
-  "edges": [],
-  "variables": [],
-  "errors": [
+  "pins": [
     {
-      "file": "12-empty-untitled.yarn",
-      "line": 12,
-      "col": 1,
-      "code": "missing_node_title",
-      "severity": "error",
-      "message": "node has no usable `title:` header; an `untitled` scope was assigned"
+      "id": "Empty#in",
+      "owner": "Empty",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Empty#out",
+      "owner": "Empty",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "OnlyComments#in",
+      "owner": "OnlyComments",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "OnlyComments#out",
+      "owner": "OnlyComments",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "untitled#in",
+      "owner": "untitled",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "untitled#out",
+      "owner": "untitled",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "untitled:1#in",
+      "owner": "untitled:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "untitled:1#out",
+      "owner": "untitled:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "BlankBody#in",
+      "owner": "BlankBody",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "BlankBody#out",
+      "owner": "BlankBody",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start#in",
+      "owner": "Start",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start#out",
+      "owner": "Start",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1#in",
+      "owner": "Start:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1#out",
+      "owner": "Start:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
     }
-  ]
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "kind": "connection",
+      "source": "untitled",
+      "source_pin": "untitled#out",
+      "target": "untitled:1",
+      "target_pin": "untitled:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e1",
+      "kind": "connection",
+      "source": "Start",
+      "source_pin": "Start#out",
+      "target": "Start:1",
+      "target_pin": "Start:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    }
+  ],
+  "choices": [],
+  "variable_namespaces": [
+    {
+      "name": "yarn",
+      "metadata": {},
+      "variables": []
+    }
+  ],
+  "variables": [],
+  "hierarchy": [
+    {
+      "id": "Empty",
+      "parent": null,
+      "index": 0,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "OnlyComments",
+      "parent": null,
+      "index": 1,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "untitled",
+      "parent": null,
+      "index": 2,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "untitled:1",
+      "parent": "untitled",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "BlankBody",
+      "parent": null,
+      "index": 3,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "Start",
+      "parent": null,
+      "index": 4,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "Start:1",
+      "parent": "Start",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    }
+  ],
+  "warnings": []
 }

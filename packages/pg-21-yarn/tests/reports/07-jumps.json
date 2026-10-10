@@ -1,0 +1,15 @@
+{
+  "sources": [
+    "07-jumps.yarn"
+  ],
+  "findings": [
+    {
+      "file": "07-jumps.yarn",
+      "line": 17,
+      "col": 1,
+      "code": "missing_jump_target",
+      "severity": "error",
+      "message": "`<<jump Missing>>` names a node that does not exist"
+    }
+  ]
+}

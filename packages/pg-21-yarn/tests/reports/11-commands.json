@@ -1,0 +1,39 @@
+{
+  "sources": [
+    "11-commands.yarn"
+  ],
+  "findings": [
+    {
+      "file": "11-commands.yarn",
+      "line": 27,
+      "col": 1,
+      "code": "unknown_command",
+      "severity": "warning",
+      "message": "`<<fadeIn>>` is not a Yarn Spinner 2 command; kept as a generic command node"
+    },
+    {
+      "file": "11-commands.yarn",
+      "line": 28,
+      "col": 1,
+      "code": "unknown_command",
+      "severity": "warning",
+      "message": "`<<playMusic>>` is not a Yarn Spinner 2 command; kept as a generic command node"
+    },
+    {
+      "file": "11-commands.yarn",
+      "line": 29,
+      "col": 1,
+      "code": "unknown_command",
+      "severity": "warning",
+      "message": "`<<customWithoutArguments>>` is not a Yarn Spinner 2 command; kept as a generic command node"
+    },
+    {
+      "file": "11-commands.yarn",
+      "line": 33,
+      "col": 1,
+      "code": "unbalanced_conditional",
+      "severity": "error",
+      "message": "`<<else>>` has no matching `<<if>>`"
+    }
+  ]
+}

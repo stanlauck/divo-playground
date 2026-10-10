@@ -1,0 +1,111 @@
+{
+  "sources": [
+    "15-structure-errors.yarn"
+  ],
+  "findings": [
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 1,
+      "col": 1,
+      "code": "content_outside_node",
+      "severity": "error",
+      "message": "content outside a node body; expected a `key: value` header or `---`"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 2,
+      "col": 1,
+      "code": "unexpected_node_end",
+      "severity": "error",
+      "message": "`===` with no open node"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 3,
+      "col": 1,
+      "code": "option_after_node_end",
+      "severity": "error",
+      "message": "option outside a node body; `===` already closed the node"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 4,
+      "col": 1,
+      "code": "unexpected_node_end",
+      "severity": "error",
+      "message": "`===` with no open node"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 6,
+      "col": 1,
+      "code": "missing_header_delimiter",
+      "severity": "error",
+      "message": "node headers are not followed by `---`"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 13,
+      "col": 1,
+      "code": "unexpected_header_delimiter",
+      "severity": "error",
+      "message": "`---` inside a node body; headers must come before the body"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 16,
+      "col": 1,
+      "code": "unexpected_node_end",
+      "severity": "error",
+      "message": "`===` with no open node"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 20,
+      "col": 1,
+      "code": "bad_command_syntax",
+      "severity": "error",
+      "message": "`<<jump>>` has no target node"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 21,
+      "col": 1,
+      "code": "bad_command_syntax",
+      "severity": "error",
+      "message": "`<<set>>` target is not a `$variable`"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 22,
+      "col": 1,
+      "code": "bad_command_syntax",
+      "severity": "error",
+      "message": "`<<declare>>` has no assignment operator"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 23,
+      "col": 1,
+      "code": "unterminated_command",
+      "severity": "error",
+      "message": "`<<` has no matching `>>`"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 29,
+      "col": 52,
+      "code": "malformed_hashtag",
+      "severity": "error",
+      "message": "hashtag region holds a token that does not start with `#`"
+    },
+    {
+      "file": "15-structure-errors.yarn",
+      "line": 30,
+      "col": 24,
+      "code": "empty_line_id",
+      "severity": "error",
+      "message": "`#line:` has no id"
+    }
+  ]
+}

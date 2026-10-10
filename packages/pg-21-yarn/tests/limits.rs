@@ -6,8 +6,8 @@
 use std::path::Path;
 
 use pg_21_yarn::{
-    parse, parse_sources, read_files, to_json, Error, FindingCode, NodeKind, ParseOptions,
-    Severity, Source,
+    parse, parse_sources, parse_sources_with_report, read_files, to_json, Error, FindingCode,
+    NodeKind, ParseOptions, Severity, Source,
 };
 
 fn one(text: &str) -> pg_21_yarn::DialogueGraph {
@@ -17,9 +17,9 @@ fn one(text: &str) -> pg_21_yarn::DialogueGraph {
 #[test]
 fn a_byte_order_mark_is_ignored() {
     let graph = one("\u{feff}title: Start\n---\nAda: Hello. #line:bom1\n");
-    assert_eq!(graph.titles[0].title, "Start");
-    assert_eq!(graph.titles[0].line, 1);
-    assert_eq!(graph.errors, []);
+    assert_eq!(graph.nodes[0].technical_name.as_deref(), Some("Start"));
+    assert_eq!(graph.nodes[0].metadata["line"], 1);
+    assert_eq!(graph.warnings, []);
 }
 
 #[test]
@@ -43,22 +43,26 @@ fn output_uses_lf_and_ends_with_a_newline() {
 #[test]
 fn an_unterminated_node_is_closed_at_end_of_file() {
     let graph = one("title: Start\n---\nAda: No closing delimiter.");
-    assert_eq!(graph.nodes.len(), 1);
-    assert_eq!(graph.errors, []);
+    assert_eq!(graph.nodes.len(), 2);
+    assert_eq!(graph.warnings, []);
 }
 
 #[test]
 fn a_script_with_no_nodes_yields_no_start_node() {
     let graph = one("// nothing but a comment\n");
-    assert_eq!(graph.start_node, None);
-    assert!(graph.titles.is_empty());
+    assert!(graph.hierarchy.is_empty());
     assert!(graph.nodes.is_empty());
 }
 
 #[test]
-fn start_prefers_a_start_title_that_has_a_body() {
+fn empty_containers_are_retained_with_named_entries() {
     let graph = one("title: Start\n---\n===\n\ntitle: Fallback\n---\nAda: Here.\n");
-    assert_eq!(graph.start_node.as_deref(), Some("Fallback:1"));
+    assert_eq!(graph.nodes[0].id, "Start");
+    assert!(!graph.edges.iter().any(|e| e.source == "Start"));
+    assert!(graph
+        .edges
+        .iter()
+        .any(|e| e.source == "Fallback" && e.target == "Fallback:1"));
 }
 
 #[test]
@@ -66,7 +70,10 @@ fn source_names_are_recorded_exactly_as_given() {
     let options = ParseOptions::default();
     let graph = read_files(&[Path::new("tests/fixtures/01-minimal.yarn")], &options)
         .expect("the fixture must be readable");
-    assert_eq!(graph.sources, ["tests/fixtures/01-minimal.yarn"]);
+    assert_eq!(
+        graph.packages[0].metadata["path"],
+        "tests/fixtures/01-minimal.yarn"
+    );
 }
 
 #[test]
@@ -137,7 +144,7 @@ fn the_nesting_cap_reports_and_stops_instead_of_overflowing() {
         max_block_depth: 8,
         ..ParseOptions::default()
     };
-    let graph = parse_sources(
+    let (graph, report) = parse_sources_with_report(
         &[Source {
             name: "deep.yarn".to_string(),
             text: script,
@@ -146,12 +153,12 @@ fn the_nesting_cap_reports_and_stops_instead_of_overflowing() {
     )
     .expect("the depth cap must be reported, not fatal");
     assert!(
-        graph
-            .errors
+        report
+            .findings
             .iter()
             .any(|finding| finding.code == FindingCode::NestingTooDeep),
         "expected a nesting_too_deep finding, got {:?}",
-        graph.errors
+        report.findings
     );
     assert!(graph.nodes.len() < 40, "parsing must stop at the cap");
 }
@@ -175,19 +182,26 @@ fn zero_limits_are_rejected() {
 
 #[test]
 fn severity_counts_split_errors_from_warnings() {
-    let graph = one("title: A\n---\n<<custom>>\n<<jump Nowhere>>\n");
-    assert_eq!(graph.error_count(), 1);
-    assert_eq!(graph.finding_count(), 2);
-    assert_eq!(graph.errors[0].severity, Severity::Warning);
-    assert_eq!(graph.errors[0].code, FindingCode::UnknownCommand);
-    assert_eq!(graph.errors[1].severity, Severity::Error);
-    assert_eq!(graph.errors[1].code, FindingCode::MissingJumpTarget);
+    let (_, report) = parse_sources_with_report(
+        &[Source::new(
+            "memory.yarn",
+            "title: A\n---\n<<custom>>\n<<jump Nowhere>>\n",
+        )],
+        &ParseOptions::default(),
+    )
+    .unwrap();
+    assert_eq!(report.error_count(), 1);
+    assert_eq!(report.finding_count(), 2);
+    assert_eq!(report.findings[0].severity, Severity::Warning);
+    assert_eq!(report.findings[0].code, FindingCode::UnknownCommand);
+    assert_eq!(report.findings[1].severity, Severity::Error);
+    assert_eq!(report.findings[1].code, FindingCode::MissingJumpTarget);
 }
 
 #[test]
 fn a_stop_command_ends_the_branch() {
     let graph = one("title: A\n---\n<<stop>>\nAda: Never reached.\n");
-    assert_eq!(graph.nodes.len(), 2);
+    assert_eq!(graph.nodes.len(), 3);
     assert!(
         !graph.edges.iter().any(|edge| edge.source == "A:1"),
         "`<<stop>>` must not flow onwards"
@@ -205,14 +219,21 @@ fn option_nesting_follows_indentation() {
     assert_eq!(
         parents,
         [
-            ("A:1".to_string(), None),
-            ("A:2".to_string(), Some("A:1".to_string())),
-            ("A:3".to_string(), Some("A:2".to_string())),
-            ("A:4".to_string(), None),
+            ("A".into(), None),
+            ("A:1".into(), Some("A".into())),
+            ("A:1:1".into(), Some("A:1".into())),
+            ("A:1:1:1".into(), Some("A:1:1".into())),
+            ("A:1:1:1:1".into(), Some("A:1:1:1".into())),
+            ("A:1:1:1:1:1".into(), Some("A:1:1:1:1".into())),
+            ("A:1:2".into(), Some("A:1".into())),
         ]
     );
-    assert!(graph
-        .nodes
-        .iter()
-        .all(|node| node.kind == NodeKind::Options || node.kind == NodeKind::Line));
+    assert_eq!(
+        graph
+            .nodes
+            .iter()
+            .filter(|n| n.kind == NodeKind::Hub)
+            .count(),
+        2
+    );
 }

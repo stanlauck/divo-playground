@@ -1,0 +1,39 @@
+{
+  "sources": [
+    "08-variables.yarn"
+  ],
+  "findings": [
+    {
+      "file": "08-variables.yarn",
+      "line": 13,
+      "col": 1,
+      "code": "invalid_variable_type",
+      "severity": "warning",
+      "message": "`as string` does not match the initial value of `$odd`"
+    },
+    {
+      "file": "08-variables.yarn",
+      "line": 14,
+      "col": 1,
+      "code": "invalid_variable_type",
+      "severity": "warning",
+      "message": "`as banana` is not `bool`, `string`, `int`, `float` or `number`"
+    },
+    {
+      "file": "08-variables.yarn",
+      "line": 15,
+      "col": 1,
+      "code": "invalid_variable_type",
+      "severity": "warning",
+      "message": "the initial value of `$computed` is not a literal"
+    },
+    {
+      "file": "08-variables.yarn",
+      "line": 22,
+      "col": 1,
+      "code": "duplicate_variable",
+      "severity": "error",
+      "message": "`$gold` is declared more than once; the first declaration is kept"
+    }
+  ]
+}

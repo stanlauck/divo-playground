@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
 //! Failure modes that abort a run entirely, as opposed to per-line findings
-//! that are reported inside [`crate::DialogueGraph::errors`].
+//! that are returned separately in [`crate::ParseReport`].
 
 use std::fmt;
 

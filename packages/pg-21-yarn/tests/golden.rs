@@ -14,7 +14,9 @@
 use std::fs;
 use std::path::{Path, PathBuf};
 
-use pg_21_yarn::{parse_sources, to_json, ParseOptions, Source};
+use pg_21_yarn::{
+    parse_sources, parse_sources_with_report, report_to_json, to_json, ParseOptions, Source,
+};
 
 const FIXTURES: &str = "tests/fixtures";
 
@@ -90,12 +92,19 @@ fn every_fixture_matches_its_golden() {
             })
             .collect();
 
-        let graph = parse_sources(&sources, &options)
+        let (graph, report) = parse_sources_with_report(&sources, &options)
             .unwrap_or_else(|error| panic!("{golden}: parsing failed: {error}"));
         let actual = to_json(&graph).expect("the graph must serialize");
         let expected = fs::read_to_string(fixture_dir().join(&golden))
             .unwrap_or_else(|error| panic!("cannot read {golden}: {error}"));
 
+        let expected_report = fs::read_to_string(Path::new("tests/reports").join(&golden))
+            .expect("report golden exists");
+        assert_eq!(
+            report_to_json(&report).unwrap(),
+            expected_report,
+            "{golden}: report differs"
+        );
         checked += 1;
         if actual != expected {
             failures.push(format!(

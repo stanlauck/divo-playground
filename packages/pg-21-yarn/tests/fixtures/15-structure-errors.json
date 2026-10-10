@@ -1,274 +1,691 @@
 {
   "version": 1,
-  "sources": [
-    "15-structure-errors.yarn"
-  ],
-  "start_node": "Delimiters:1",
-  "titles": [
+  "text_mode": "literal",
+  "metadata": {
+    "files": [
+      "15-structure-errors.yarn"
+    ],
+    "generator": "pg-21-yarn 0.1.0",
+    "source_format": "yarn"
+  },
+  "definitions": [],
+  "packages": [
     {
-      "id": "NoDelimiter",
-      "title": "NoDelimiter",
-      "source": 0,
-      "meta": {
-        "Ada": "These headers were never closed."
+      "index": 0,
+      "name": "15-structure-errors",
+      "metadata": {
+        "path": "15-structure-errors.yarn"
       },
-      "entry": null,
-      "line": 6,
-      "col": 1
-    },
-    {
-      "id": "Delimiters",
-      "title": "Delimiters",
-      "source": 0,
-      "entry": "Delimiters:1",
-      "line": 10,
-      "col": 1
-    },
-    {
-      "id": "BadCommands",
-      "title": "BadCommands",
-      "source": 0,
-      "entry": "BadCommands:1",
-      "line": 18,
-      "col": 1
-    },
-    {
-      "id": "Hashtags",
-      "title": "Hashtags",
-      "source": 0,
-      "entry": "Hashtags:1",
-      "line": 27,
-      "col": 1
+      "node_ids": [
+        "NoDelimiter",
+        "Delimiters",
+        "Delimiters:1",
+        "Delimiters:2",
+        "BadCommands",
+        "BadCommands:1",
+        "BadCommands:2",
+        "BadCommands:3",
+        "Hashtags",
+        "Hashtags:1",
+        "Hashtags:2"
+      ]
     }
   ],
   "nodes": [
     {
+      "id": "NoDelimiter",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "NoDelimiter",
+      "display_name": "NoDelimiter",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "NoDelimiter#in"
+      ],
+      "output_pins": [
+        "NoDelimiter#out"
+      ],
+      "properties": {
+        "headers": {
+          "Ada": "These headers were never closed."
+        },
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 6
+      }
+    },
+    {
+      "id": "Delimiters",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "Delimiters",
+      "display_name": "Delimiters",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Delimiters#in"
+      ],
+      "output_pins": [
+        "Delimiters#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 10
+      }
+    },
+    {
       "id": "Delimiters:1",
-      "source": 0,
-      "title": "Delimiters",
-      "kind": "line",
-      "speaker": "Ada",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Delimiters",
+      "technical_name": null,
+      "display_name": null,
       "text": "A well formed line.",
-      "line_id": "15a0001",
-      "line": 12,
-      "col": 6
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Delimiters:1#in"
+      ],
+      "output_pins": [
+        "Delimiters:1#out"
+      ],
+      "properties": {
+        "line_id": "15a0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 12
+      }
     },
     {
       "id": "Delimiters:2",
-      "source": 0,
-      "title": "Delimiters",
-      "kind": "line",
-      "speaker": "Ada",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Delimiters",
+      "technical_name": null,
+      "display_name": null,
       "text": "A stray header delimiter inside the body.",
-      "line_id": "15a0002",
-      "line": 14,
-      "col": 6
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Delimiters:2#in"
+      ],
+      "output_pins": [
+        "Delimiters:2#out"
+      ],
+      "properties": {
+        "line_id": "15a0002",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 14
+      }
+    },
+    {
+      "id": "BadCommands",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "BadCommands",
+      "display_name": "BadCommands",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "BadCommands#in"
+      ],
+      "output_pins": [
+        "BadCommands#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 18
+      }
     },
     {
       "id": "BadCommands:1",
-      "source": 0,
-      "title": "BadCommands",
+      "package": 0,
+      "source_type": "Jump",
       "kind": "jump",
-      "command": {
-        "name": "jump"
+      "parent": "BadCommands",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "BadCommands:1#in"
+      ],
+      "output_pins": [
+        "BadCommands:1#out"
+      ],
+      "properties": {
+        "target": ""
       },
-      "line": 20,
-      "col": 1
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 20
+      }
     },
     {
       "id": "BadCommands:2",
-      "source": 0,
-      "title": "BadCommands",
-      "kind": "command",
-      "command": {
-        "name": "set",
-        "args": "gold = 1"
+      "package": 0,
+      "source_type": "Set",
+      "kind": "instruction",
+      "parent": "BadCommands",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "instruction",
+        "text": "set gold = 1"
       },
-      "line": 21,
-      "col": 1
+      "input_pins": [
+        "BadCommands:2#in"
+      ],
+      "output_pins": [
+        "BadCommands:2#out"
+      ],
+      "properties": {
+        "args": "gold = 1",
+        "command": "set"
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 21
+      }
     },
     {
       "id": "BadCommands:3",
-      "source": 0,
-      "title": "BadCommands",
-      "kind": "command",
-      "command": {
-        "name": "declare"
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "BadCommands",
+      "technical_name": null,
+      "display_name": null,
+      "text": "After an unterminated command.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "BadCommands:3#in"
+      ],
+      "output_pins": [
+        "BadCommands:3#out"
+      ],
+      "properties": {
+        "line_id": "15b0001",
+        "markup": false,
+        "tags": []
       },
-      "line": 22,
-      "col": 1
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 24
+      }
     },
     {
-      "id": "BadCommands:4",
-      "source": 0,
-      "title": "BadCommands",
-      "kind": "line",
-      "speaker": "Ada",
-      "text": "After an unterminated command.",
-      "line_id": "15b0001",
-      "line": 24,
-      "col": 6
+      "id": "Hashtags",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "Hashtags",
+      "display_name": "Hashtags",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Hashtags#in"
+      ],
+      "output_pins": [
+        "Hashtags#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 27
+      }
     },
     {
       "id": "Hashtags:1",
-      "source": 0,
-      "title": "Hashtags",
-      "kind": "line",
-      "speaker": "Ada",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Hashtags",
+      "technical_name": null,
+      "display_name": null,
       "text": "A malformed hashtag region.",
-      "line_id": "15c0001",
-      "tags": [
-        "ok"
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Hashtags:1#in"
       ],
-      "line": 29,
-      "col": 6
+      "output_pins": [
+        "Hashtags:1#out"
+      ],
+      "properties": {
+        "line_id": "15c0001",
+        "markup": false,
+        "tags": [
+          "ok"
+        ]
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 29
+      }
     },
     {
       "id": "Hashtags:2",
-      "source": 0,
-      "title": "Hashtags",
-      "kind": "line",
-      "speaker": "Ada",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Hashtags",
+      "technical_name": null,
+      "display_name": null,
       "text": "An empty line id.",
-      "line": 30,
-      "col": 6
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Hashtags:2#in"
+      ],
+      "output_pins": [
+        "Hashtags:2#out"
+      ],
+      "properties": {
+        "line_id": null,
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 30
+      }
+    }
+  ],
+  "pins": [
+    {
+      "id": "NoDelimiter#in",
+      "owner": "NoDelimiter",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "NoDelimiter#out",
+      "owner": "NoDelimiter",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Delimiters#in",
+      "owner": "Delimiters",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Delimiters#out",
+      "owner": "Delimiters",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Delimiters:1#in",
+      "owner": "Delimiters:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Delimiters:1#out",
+      "owner": "Delimiters:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Delimiters:2#in",
+      "owner": "Delimiters:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Delimiters:2#out",
+      "owner": "Delimiters:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "BadCommands#in",
+      "owner": "BadCommands",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "BadCommands#out",
+      "owner": "BadCommands",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "BadCommands:1#in",
+      "owner": "BadCommands:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "BadCommands:1#out",
+      "owner": "BadCommands:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "BadCommands:2#in",
+      "owner": "BadCommands:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "BadCommands:2#out",
+      "owner": "BadCommands:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "BadCommands:3#in",
+      "owner": "BadCommands:3",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "BadCommands:3#out",
+      "owner": "BadCommands:3",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Hashtags#in",
+      "owner": "Hashtags",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Hashtags#out",
+      "owner": "Hashtags",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Hashtags:1#in",
+      "owner": "Hashtags:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Hashtags:1#out",
+      "owner": "Hashtags:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Hashtags:2#in",
+      "owner": "Hashtags:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Hashtags:2#out",
+      "owner": "Hashtags:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
     }
   ],
   "edges": [
     {
-      "id": "edge-1",
-      "kind": "flow",
+      "id": "e0",
+      "kind": "connection",
+      "source": "Delimiters",
+      "source_pin": "Delimiters#out",
+      "target": "Delimiters:1",
+      "target_pin": "Delimiters:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e1",
+      "kind": "connection",
       "source": "Delimiters:1",
+      "source_pin": "Delimiters:1#out",
       "target": "Delimiters:2",
-      "index": 0
+      "target_pin": "Delimiters:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-2",
-      "kind": "flow",
+      "id": "e2",
+      "kind": "connection",
+      "source": "BadCommands",
+      "source_pin": "BadCommands#out",
+      "target": "BadCommands:1",
+      "target_pin": "BadCommands:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e3",
+      "kind": "connection",
       "source": "BadCommands:2",
+      "source_pin": "BadCommands:2#out",
       "target": "BadCommands:3",
-      "index": 1
+      "target_pin": "BadCommands:3#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-3",
-      "kind": "flow",
-      "source": "BadCommands:3",
-      "target": "BadCommands:4",
-      "index": 2
+      "id": "e4",
+      "kind": "connection",
+      "source": "Hashtags",
+      "source_pin": "Hashtags#out",
+      "target": "Hashtags:1",
+      "target_pin": "Hashtags:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
     },
     {
-      "id": "edge-4",
-      "kind": "flow",
+      "id": "e5",
+      "kind": "connection",
       "source": "Hashtags:1",
+      "source_pin": "Hashtags:1#out",
       "target": "Hashtags:2",
-      "index": 3
+      "target_pin": "Hashtags:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    }
+  ],
+  "choices": [],
+  "variable_namespaces": [
+    {
+      "name": "yarn",
+      "metadata": {},
+      "variables": []
     }
   ],
   "variables": [],
-  "errors": [
+  "hierarchy": [
     {
-      "file": "15-structure-errors.yarn",
-      "line": 1,
-      "col": 1,
-      "code": "content_outside_node",
-      "severity": "error",
-      "message": "content outside a node body; expected a `key: value` header or `---`"
+      "id": "NoDelimiter",
+      "parent": null,
+      "index": 0,
+      "depth": 0,
+      "properties": {}
     },
     {
-      "file": "15-structure-errors.yarn",
-      "line": 2,
-      "col": 1,
-      "code": "unexpected_node_end",
-      "severity": "error",
-      "message": "`===` with no open node"
+      "id": "Delimiters",
+      "parent": null,
+      "index": 1,
+      "depth": 0,
+      "properties": {}
     },
     {
-      "file": "15-structure-errors.yarn",
-      "line": 3,
-      "col": 1,
-      "code": "option_after_node_end",
-      "severity": "error",
-      "message": "option outside a node body; `===` already closed the node"
+      "id": "Delimiters:1",
+      "parent": "Delimiters",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
     },
     {
-      "file": "15-structure-errors.yarn",
-      "line": 4,
-      "col": 1,
-      "code": "unexpected_node_end",
-      "severity": "error",
-      "message": "`===` with no open node"
+      "id": "Delimiters:2",
+      "parent": "Delimiters",
+      "index": 1,
+      "depth": 1,
+      "properties": {}
     },
     {
-      "file": "15-structure-errors.yarn",
-      "line": 6,
-      "col": 1,
-      "code": "missing_header_delimiter",
-      "severity": "error",
-      "message": "node headers are not followed by `---`"
+      "id": "BadCommands",
+      "parent": null,
+      "index": 2,
+      "depth": 0,
+      "properties": {}
     },
     {
-      "file": "15-structure-errors.yarn",
-      "line": 13,
-      "col": 1,
-      "code": "unexpected_header_delimiter",
-      "severity": "error",
-      "message": "`---` inside a node body; headers must come before the body"
+      "id": "BadCommands:1",
+      "parent": "BadCommands",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
     },
     {
-      "file": "15-structure-errors.yarn",
-      "line": 16,
-      "col": 1,
-      "code": "unexpected_node_end",
-      "severity": "error",
-      "message": "`===` with no open node"
+      "id": "BadCommands:2",
+      "parent": "BadCommands",
+      "index": 1,
+      "depth": 1,
+      "properties": {}
     },
     {
-      "file": "15-structure-errors.yarn",
-      "line": 20,
-      "col": 1,
-      "code": "bad_command_syntax",
-      "severity": "error",
-      "message": "`<<jump>>` has no target node"
+      "id": "BadCommands:3",
+      "parent": "BadCommands",
+      "index": 2,
+      "depth": 1,
+      "properties": {}
     },
     {
-      "file": "15-structure-errors.yarn",
-      "line": 21,
-      "col": 1,
-      "code": "bad_command_syntax",
-      "severity": "error",
-      "message": "`<<set>>` target is not a `$variable`"
+      "id": "Hashtags",
+      "parent": null,
+      "index": 3,
+      "depth": 0,
+      "properties": {}
     },
     {
-      "file": "15-structure-errors.yarn",
-      "line": 22,
-      "col": 1,
-      "code": "bad_command_syntax",
-      "severity": "error",
-      "message": "`<<declare>>` has no assignment operator"
+      "id": "Hashtags:1",
+      "parent": "Hashtags",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
     },
     {
-      "file": "15-structure-errors.yarn",
-      "line": 23,
-      "col": 1,
-      "code": "unterminated_command",
-      "severity": "error",
-      "message": "`<<` has no matching `>>`"
-    },
-    {
-      "file": "15-structure-errors.yarn",
-      "line": 29,
-      "col": 52,
-      "code": "malformed_hashtag",
-      "severity": "error",
-      "message": "hashtag region holds a token that does not start with `#`"
-    },
-    {
-      "file": "15-structure-errors.yarn",
-      "line": 30,
-      "col": 24,
-      "code": "empty_line_id",
-      "severity": "error",
-      "message": "`#line:` has no id"
+      "id": "Hashtags:2",
+      "parent": "Hashtags",
+      "index": 1,
+      "depth": 1,
+      "properties": {}
     }
-  ]
+  ],
+  "warnings": []
 }
