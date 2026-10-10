@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "ink_version": 21,
+  "unsupported": [],
+  "warnings": [],
+  "stats": {
+    "knots": 2,
+    "stitches": 1,
+    "lines": 5,
+    "choices": 2,
+    "diverts": 7,
+    "variables": 1
+  }
+}

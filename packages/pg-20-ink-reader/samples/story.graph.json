@@ -1,0 +1,1287 @@
+{
+  "version": 1,
+  "text_mode": "literal",
+  "metadata": {
+    "generator": "ink-reader 0.1.0",
+    "ink_version": 21,
+    "source_format": "ink"
+  },
+  "definitions": [],
+  "packages": [
+    {
+      "index": 0,
+      "name": "story.ink",
+      "metadata": {
+        "path": "story.ink"
+      },
+      "node_ids": [
+        "Root",
+        "Root:1",
+        "Root:2",
+        "Root:3",
+        "north",
+        "north:1",
+        "north.entry",
+        "north.entry:1",
+        "north.entry:2",
+        "north.entry:2:1",
+        "north.entry:2:2",
+        "north.entry:3",
+        "north.entry:4",
+        "start",
+        "start:1",
+        "start:2",
+        "start:2:1",
+        "start:2:1:1",
+        "start:2:2",
+        "start:2:2:1",
+        "start:2:2:2"
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "Root",
+      "package": 0,
+      "source_type": "Root",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Root#in"
+      ],
+      "output_pins": [
+        "Root#out"
+      ],
+      "properties": {},
+      "template": null,
+      "metadata": {}
+    },
+    {
+      "id": "Root:1",
+      "package": 0,
+      "source_type": "Divert",
+      "kind": "jump",
+      "parent": "Root",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Root:1#in"
+      ],
+      "output_pins": [
+        "Root:1#out"
+      ],
+      "properties": {
+        "target": "start"
+      },
+      "template": null,
+      "metadata": {}
+    },
+    {
+      "id": "Root:2",
+      "package": 0,
+      "source_type": "Divert",
+      "kind": "jump",
+      "parent": "Root",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Root:2#in"
+      ],
+      "output_pins": [
+        "Root:2#out"
+      ],
+      "properties": {
+        "target": "DONE"
+      },
+      "template": null,
+      "metadata": {}
+    },
+    {
+      "id": "Root:3",
+      "package": 0,
+      "source_type": "Divert",
+      "kind": "jump",
+      "parent": "Root",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Root:3#in"
+      ],
+      "output_pins": [
+        "Root:3#out"
+      ],
+      "properties": {
+        "target": "DONE"
+      },
+      "template": null,
+      "metadata": {}
+    },
+    {
+      "id": "north",
+      "package": 0,
+      "source_type": "Knot",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "north",
+      "display_name": "north",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "north#in"
+      ],
+      "output_pins": [
+        "north#out"
+      ],
+      "properties": {},
+      "template": null,
+      "metadata": {}
+    },
+    {
+      "id": "north:1",
+      "package": 0,
+      "source_type": "Divert",
+      "kind": "jump",
+      "parent": "north",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "north:1#in"
+      ],
+      "output_pins": [
+        "north:1#out"
+      ],
+      "properties": {
+        "target": ".^.entry"
+      },
+      "template": null,
+      "metadata": {}
+    },
+    {
+      "id": "north.entry",
+      "package": 0,
+      "source_type": "Stitch",
+      "kind": "flow_fragment",
+      "parent": "north",
+      "technical_name": "north.entry",
+      "display_name": "north.entry",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "north.entry#in"
+      ],
+      "output_pins": [
+        "north.entry#out"
+      ],
+      "properties": {},
+      "template": null,
+      "metadata": {}
+    },
+    {
+      "id": "north.entry:1",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "north.entry",
+      "technical_name": null,
+      "display_name": null,
+      "text": "You are north. ",
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "north.entry:1#in"
+      ],
+      "output_pins": [
+        "north.entry:1#out"
+      ],
+      "properties": {},
+      "template": null,
+      "metadata": {}
+    },
+    {
+      "id": "north.entry:2",
+      "package": 0,
+      "source_type": "Condition",
+      "kind": "condition",
+      "parent": "north.entry",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "ink",
+        "role": "condition",
+        "text": "score > 0"
+      },
+      "input_pins": [
+        "north.entry:2#in"
+      ],
+      "output_pins": [
+        "north.entry:2#out"
+      ],
+      "properties": {},
+      "template": null,
+      "metadata": {}
+    },
+    {
+      "id": "north.entry:2:1",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "north.entry:2",
+      "technical_name": null,
+      "display_name": null,
+      "text": "You win.",
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "north.entry:2:1#in"
+      ],
+      "output_pins": [
+        "north.entry:2:1#out"
+      ],
+      "properties": {
+        "clause": "true"
+      },
+      "template": null,
+      "metadata": {}
+    },
+    {
+      "id": "north.entry:2:2",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "north.entry:2",
+      "technical_name": null,
+      "display_name": null,
+      "text": "Keep going.",
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "north.entry:2:2#in"
+      ],
+      "output_pins": [
+        "north.entry:2:2#out"
+      ],
+      "properties": {
+        "clause": "false"
+      },
+      "template": null,
+      "metadata": {}
+    },
+    {
+      "id": "north.entry:3",
+      "package": 0,
+      "source_type": "Set",
+      "kind": "instruction",
+      "parent": "north.entry",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "ink",
+        "role": "instruction",
+        "text": "score = score + 1"
+      },
+      "input_pins": [
+        "north.entry:3#in"
+      ],
+      "output_pins": [
+        "north.entry:3#out"
+      ],
+      "properties": {
+        "reassignment": true
+      },
+      "template": null,
+      "metadata": {}
+    },
+    {
+      "id": "north.entry:4",
+      "package": 0,
+      "source_type": "Divert",
+      "kind": "jump",
+      "parent": "north.entry",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "north.entry:4#in"
+      ],
+      "output_pins": [
+        "north.entry:4#out"
+      ],
+      "properties": {
+        "target": "DONE"
+      },
+      "template": null,
+      "metadata": {}
+    },
+    {
+      "id": "start",
+      "package": 0,
+      "source_type": "Knot",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "start",
+      "display_name": "start",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "start#in"
+      ],
+      "output_pins": [
+        "start#out"
+      ],
+      "properties": {},
+      "template": null,
+      "metadata": {}
+    },
+    {
+      "id": "start:1",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "start",
+      "technical_name": null,
+      "display_name": null,
+      "text": "Hello there.",
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "start:1#in"
+      ],
+      "output_pins": [
+        "start:1#out"
+      ],
+      "properties": {
+        "tags": [
+          "greeting"
+        ]
+      },
+      "template": null,
+      "metadata": {}
+    },
+    {
+      "id": "start:2",
+      "package": 0,
+      "source_type": "ChoicePoint",
+      "kind": "hub",
+      "parent": "start",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "start:2#in"
+      ],
+      "output_pins": [
+        "start:2#out"
+      ],
+      "properties": {
+        "index": 1
+      },
+      "template": null,
+      "metadata": {}
+    },
+    {
+      "id": "start:2:1",
+      "package": 0,
+      "source_type": "Option",
+      "kind": "dialogue_fragment",
+      "parent": "start:2",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": "Go north",
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "start:2:1#in"
+      ],
+      "output_pins": [
+        "start:2:1#out"
+      ],
+      "properties": {
+        "flags": [
+          "has_start_content",
+          "once_only"
+        ],
+        "target": ".^.^.c-0"
+      },
+      "template": null,
+      "metadata": {}
+    },
+    {
+      "id": "start:2:1:1",
+      "package": 0,
+      "source_type": "Divert",
+      "kind": "jump",
+      "parent": "start:2:1",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "start:2:1:1#in"
+      ],
+      "output_pins": [
+        "start:2:1:1#out"
+      ],
+      "properties": {
+        "target": "north"
+      },
+      "template": null,
+      "metadata": {}
+    },
+    {
+      "id": "start:2:2",
+      "package": 0,
+      "source_type": "Option",
+      "kind": "dialogue_fragment",
+      "parent": "start:2",
+      "technical_name": null,
+      "display_name": null,
+      "text": "You went south.",
+      "menu_text": "Go south",
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "start:2:2#in"
+      ],
+      "output_pins": [
+        "start:2:2#out"
+      ],
+      "properties": {
+        "flags": [
+          "has_start_content"
+        ],
+        "target": ".^.^.c-1"
+      },
+      "template": null,
+      "metadata": {}
+    },
+    {
+      "id": "start:2:2:1",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "start:2:2",
+      "technical_name": null,
+      "display_name": null,
+      "text": "You went south.",
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "start:2:2:1#in"
+      ],
+      "output_pins": [
+        "start:2:2:1#out"
+      ],
+      "properties": {},
+      "template": null,
+      "metadata": {}
+    },
+    {
+      "id": "start:2:2:2",
+      "package": 0,
+      "source_type": "Divert",
+      "kind": "jump",
+      "parent": "start:2:2",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "start:2:2:2#in"
+      ],
+      "output_pins": [
+        "start:2:2:2#out"
+      ],
+      "properties": {
+        "target": "END"
+      },
+      "template": null,
+      "metadata": {}
+    }
+  ],
+  "pins": [
+    {
+      "id": "Root#in",
+      "owner": "Root",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Root#out",
+      "owner": "Root",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Root:1#in",
+      "owner": "Root:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Root:1#out",
+      "owner": "Root:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Root:2#in",
+      "owner": "Root:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Root:2#out",
+      "owner": "Root:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Root:3#in",
+      "owner": "Root:3",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Root:3#out",
+      "owner": "Root:3",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "north#in",
+      "owner": "north",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "north#out",
+      "owner": "north",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "north:1#in",
+      "owner": "north:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "north:1#out",
+      "owner": "north:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "north.entry#in",
+      "owner": "north.entry",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "north.entry#out",
+      "owner": "north.entry",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "north.entry:1#in",
+      "owner": "north.entry:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "north.entry:1#out",
+      "owner": "north.entry:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "north.entry:2#in",
+      "owner": "north.entry:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "north.entry:2#out",
+      "owner": "north.entry:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "north.entry:2:1#in",
+      "owner": "north.entry:2:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "north.entry:2:1#out",
+      "owner": "north.entry:2:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "north.entry:2:2#in",
+      "owner": "north.entry:2:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "north.entry:2:2#out",
+      "owner": "north.entry:2:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "north.entry:3#in",
+      "owner": "north.entry:3",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "north.entry:3#out",
+      "owner": "north.entry:3",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "north.entry:4#in",
+      "owner": "north.entry:4",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "north.entry:4#out",
+      "owner": "north.entry:4",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "start#in",
+      "owner": "start",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "start#out",
+      "owner": "start",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "start:1#in",
+      "owner": "start:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "start:1#out",
+      "owner": "start:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "start:2#in",
+      "owner": "start:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "start:2#out",
+      "owner": "start:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "start:2:1#in",
+      "owner": "start:2:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "start:2:1#out",
+      "owner": "start:2:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "start:2:1:1#in",
+      "owner": "start:2:1:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "start:2:1:1#out",
+      "owner": "start:2:1:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "start:2:2#in",
+      "owner": "start:2:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "start:2:2#out",
+      "owner": "start:2:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "start:2:2:1#in",
+      "owner": "start:2:2:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "start:2:2:1#out",
+      "owner": "start:2:2:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "start:2:2:2#in",
+      "owner": "start:2:2:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "start:2:2:2#out",
+      "owner": "start:2:2:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    }
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "kind": "connection",
+      "source": "Root",
+      "source_pin": "Root#out",
+      "target": "Root:1",
+      "target_pin": "Root:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e1",
+      "kind": "connection",
+      "source": "north",
+      "source_pin": "north#out",
+      "target": "north:1",
+      "target_pin": "north:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e2",
+      "kind": "connection",
+      "source": "north.entry:2",
+      "source_pin": "north.entry:2#out",
+      "target": "north.entry:2:1",
+      "target_pin": "north.entry:2:1#in",
+      "index": 0,
+      "label": "true",
+      "properties": {}
+    },
+    {
+      "id": "e3",
+      "kind": "connection",
+      "source": "north.entry:2",
+      "source_pin": "north.entry:2#out",
+      "target": "north.entry:2:2",
+      "target_pin": "north.entry:2:2#in",
+      "index": 1,
+      "label": "false",
+      "properties": {}
+    },
+    {
+      "id": "e4",
+      "kind": "connection",
+      "source": "north.entry:1",
+      "source_pin": "north.entry:1#out",
+      "target": "north.entry:2",
+      "target_pin": "north.entry:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e5",
+      "kind": "connection",
+      "source": "north.entry:2:1",
+      "source_pin": "north.entry:2:1#out",
+      "target": "north.entry:3",
+      "target_pin": "north.entry:3#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e6",
+      "kind": "connection",
+      "source": "north.entry:2:2",
+      "source_pin": "north.entry:2:2#out",
+      "target": "north.entry:3",
+      "target_pin": "north.entry:3#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e7",
+      "kind": "connection",
+      "source": "north.entry:3",
+      "source_pin": "north.entry:3#out",
+      "target": "north.entry:4",
+      "target_pin": "north.entry:4#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e8",
+      "kind": "connection",
+      "source": "north.entry",
+      "source_pin": "north.entry#out",
+      "target": "north.entry:1",
+      "target_pin": "north.entry:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e9",
+      "kind": "connection",
+      "source": "start:2",
+      "source_pin": "start:2#out",
+      "target": "start:2:1",
+      "target_pin": "start:2:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e10",
+      "kind": "connection",
+      "source": "start:2:1",
+      "source_pin": "start:2:1#out",
+      "target": "start:2:1:1",
+      "target_pin": "start:2:1:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e11",
+      "kind": "connection",
+      "source": "start:2",
+      "source_pin": "start:2#out",
+      "target": "start:2:2",
+      "target_pin": "start:2:2#in",
+      "index": 1,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e12",
+      "kind": "connection",
+      "source": "start:2:2:1",
+      "source_pin": "start:2:2:1#out",
+      "target": "start:2:2:2",
+      "target_pin": "start:2:2:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e13",
+      "kind": "connection",
+      "source": "start:2:2",
+      "source_pin": "start:2:2#out",
+      "target": "start:2:2:1",
+      "target_pin": "start:2:2:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e14",
+      "kind": "connection",
+      "source": "start:1",
+      "source_pin": "start:1#out",
+      "target": "start:2",
+      "target_pin": "start:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e15",
+      "kind": "connection",
+      "source": "start",
+      "source_pin": "start#out",
+      "target": "start:1",
+      "target_pin": "start:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e16",
+      "kind": "jump",
+      "source": "Root:1",
+      "source_pin": "Root:1#out",
+      "target": "start",
+      "target_pin": "start#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e17",
+      "kind": "jump",
+      "source": "north:1",
+      "source_pin": "north:1#out",
+      "target": "north.entry",
+      "target_pin": "north.entry#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e18",
+      "kind": "jump",
+      "source": "start:2:1:1",
+      "source_pin": "start:2:1:1#out",
+      "target": "north",
+      "target_pin": "north#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    }
+  ],
+  "choices": [
+    {
+      "edge": "e9",
+      "source": "start:2",
+      "source_pin": "start:2#out",
+      "target": "start:2:1",
+      "text_source": "target_menu_text"
+    },
+    {
+      "edge": "e11",
+      "source": "start:2",
+      "source_pin": "start:2#out",
+      "target": "start:2:2",
+      "text_source": "target_menu_text"
+    }
+  ],
+  "variable_namespaces": [
+    {
+      "name": "ink",
+      "metadata": {},
+      "variables": [
+        "score"
+      ]
+    }
+  ],
+  "variables": [
+    {
+      "namespace": "ink",
+      "name": "score",
+      "source_type": "VAR",
+      "kind": "integer",
+      "value": 0,
+      "raw_value": 0,
+      "description": null,
+      "metadata": {}
+    }
+  ],
+  "hierarchy": [
+    {
+      "id": "Root",
+      "parent": null,
+      "index": 0,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "Root:1",
+      "parent": "Root",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Root:2",
+      "parent": "Root",
+      "index": 1,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Root:3",
+      "parent": "Root",
+      "index": 2,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "north",
+      "parent": null,
+      "index": 1,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "north:1",
+      "parent": "north",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "north.entry",
+      "parent": "north",
+      "index": 1,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "north.entry:1",
+      "parent": "north.entry",
+      "index": 0,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "north.entry:2",
+      "parent": "north.entry",
+      "index": 1,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "north.entry:2:1",
+      "parent": "north.entry:2",
+      "index": 0,
+      "depth": 3,
+      "properties": {}
+    },
+    {
+      "id": "north.entry:2:2",
+      "parent": "north.entry:2",
+      "index": 1,
+      "depth": 3,
+      "properties": {}
+    },
+    {
+      "id": "north.entry:3",
+      "parent": "north.entry",
+      "index": 2,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "north.entry:4",
+      "parent": "north.entry",
+      "index": 3,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "start",
+      "parent": null,
+      "index": 2,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "start:1",
+      "parent": "start",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "start:2",
+      "parent": "start",
+      "index": 1,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "start:2:1",
+      "parent": "start:2",
+      "index": 0,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "start:2:1:1",
+      "parent": "start:2:1",
+      "index": 0,
+      "depth": 3,
+      "properties": {}
+    },
+    {
+      "id": "start:2:2",
+      "parent": "start:2",
+      "index": 1,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "start:2:2:1",
+      "parent": "start:2:2",
+      "index": 0,
+      "depth": 3,
+      "properties": {}
+    },
+    {
+      "id": "start:2:2:2",
+      "parent": "start:2:2",
+      "index": 1,
+      "depth": 3,
+      "properties": {}
+    }
+  ],
+  "warnings": []
+}
