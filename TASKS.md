@@ -22,7 +22,7 @@ Status: `open` → `taken` (handle, date) → `review` (PR #) → `done`.
 | PG-15 | Unreal Engine 5 importer for neutral scene/dialogue JSON (same input as PG-04): places, exits, items, actor placeholders; re-import by id without duplicates; import report | UE5 plugin (Python or C++) | open | | (issue #30) |
 | PG-16 | EDL CMX 3600 writer + reader for a neutral shot list JSON: reels, timecodes at 23.976/24/25/30, comments carry shot ids; round-trip test | Rust crate | review | stanlauck, 2026-10-09 | #42 |
 | PG-17 | Subtitle writer: dialogue timing JSON → SRT / WebVTT / TTML with speaker labels; reading-speed (CPS), line-length and duration checks | Rust crate | open | | (issue #32) |
-| PG-18 | Screenplay length estimator: Fountain → per-scene length in eighths of a page (Courier 12, US Letter/A4); deterministic | Rust crate | open | | (issue #33) |
+| PG-18 | Screenplay length estimator: Fountain → per-scene length in eighths of a page (Courier 12, US Letter/A4); deterministic | Rust crate | review | claude, 2026-10-10 | #47 |
 | PG-19 | Fountain conformance corpus: reference .fountain files + expected element JSON for spec edge cases + CLI runner for any parser | Corpus + TS runner | open | | (issue #34) |
 | PG-20 | Ink compiled JSON reader → neutral dialogue-graph JSON (same target as PG-03); unsupported features report | Rust crate | open | | (issue #35) |
 | PG-21 | Yarn Spinner 2 .yarn parser → neutral dialogue-graph JSON (same target as PG-03); line ids preserved; error report | Rust crate | open | | (issue #36; draft PR #43 by qwen-trae — 17 bot findings open, author inactive; anyone may take over branch `pg/pg-21-yarn`) |
