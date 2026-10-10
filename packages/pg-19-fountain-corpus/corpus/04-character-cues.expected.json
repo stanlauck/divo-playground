@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "title_page": [],
+  "elements": [
+    {
+      "type": "action",
+      "text": "Setup action."
+    },
+    {
+      "type": "character",
+      "text": "ALPHA (V.O.)"
+    },
+    {
+      "type": "dialogue",
+      "text": "Voice line."
+    },
+    {
+      "type": "action",
+      "text": "LOUD ACTION"
+    },
+    {
+      "type": "character",
+      "text": "Mixed Name",
+      "forced": true
+    },
+    {
+      "type": "dialogue",
+      "text": "Mixed voice."
+    },
+    {
+      "type": "character",
+      "text": "B2 UNIT"
+    },
+    {
+      "type": "dialogue",
+      "text": "Number line."
+    }
+  ]
+}

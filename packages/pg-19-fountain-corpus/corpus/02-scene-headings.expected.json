@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "title_page": [],
+  "elements": [
+    {
+      "type": "scene_heading",
+      "text": "INT. HALL - DAY"
+    },
+    {
+      "type": "scene_heading",
+      "text": "EXT. YARD - NIGHT"
+    },
+    {
+      "type": "scene_heading",
+      "text": "EST. RIDGE - MORNING"
+    },
+    {
+      "type": "scene_heading",
+      "text": "INT./EXT. BUS - DAY"
+    },
+    {
+      "type": "scene_heading",
+      "text": "I/E. CROSSING - DUSK"
+    },
+    {
+      "type": "scene_heading",
+      "text": "int. lowercase room"
+    },
+    {
+      "type": "scene_heading",
+      "text": "heading",
+      "forced": true
+    },
+    {
+      "type": "action",
+      "text": "...not a heading"
+    },
+    {
+      "type": "scene_heading",
+      "text": "INT. NUMBERED - DAY",
+      "scene_number": "1A"
+    }
+  ]
+}

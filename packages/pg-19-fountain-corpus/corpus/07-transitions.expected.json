@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "title_page": [],
+  "elements": [
+    {
+      "type": "action",
+      "text": "Setup action."
+    },
+    {
+      "type": "transition",
+      "text": "CUT TO:"
+    },
+    {
+      "type": "transition",
+      "text": "FADE OUT.",
+      "forced": true
+    },
+    {
+      "type": "transition",
+      "text": "SMASH TO:"
+    }
+  ]
+}

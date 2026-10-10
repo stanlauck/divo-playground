@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "title_page": [
+    {
+      "key": "Title",
+      "value": ""
+    },
+    {
+      "key": "Subtitle",
+      "value": "First line\nSecond line"
+    },
+    {
+      "key": "Display Name",
+      "value": "Test Writer"
+    }
+  ],
+  "elements": []
+}

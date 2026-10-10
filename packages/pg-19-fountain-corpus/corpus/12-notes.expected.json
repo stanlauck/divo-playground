@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "title_page": [],
+  "elements": [
+    {
+      "type": "action",
+      "text": "Action before  after."
+    },
+    {
+      "type": "note",
+      "text": "inline note"
+    },
+    {
+      "type": "note",
+      "text": "line one\nline two"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "title_page": [],
+  "elements": [
+    {
+      "type": "lyric",
+      "text": "First lyric"
+    },
+    {
+      "type": "lyric",
+      "text": "Second lyric"
+    }
+  ]
+}

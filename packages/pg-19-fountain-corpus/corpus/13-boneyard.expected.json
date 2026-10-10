@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "title_page": [],
+  "elements": [
+    {
+      "type": "action",
+      "text": "Visible before  visible after."
+    },
+    {
+      "type": "boneyard",
+      "text": " hidden bit "
+    },
+    {
+      "type": "boneyard",
+      "text": "\nHidden line one\nHidden line two\n"
+    }
+  ]
+}

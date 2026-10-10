@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "title_page": [],
+  "elements": [
+    {
+      "type": "centered",
+      "text": "centered words"
+    }
+  ]
+}

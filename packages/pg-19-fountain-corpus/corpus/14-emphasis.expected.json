@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "title_page": [],
+  "elements": [
+    {
+      "type": "action",
+      "text": "*italic* **bold** ***bold italic*** _underline_ \\*literal star\\*"
+    }
+  ]
+}
