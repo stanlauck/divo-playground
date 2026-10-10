@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "title_page": [],
+  "elements": [
+    {
+      "type": "character",
+      "text": "CHARLIE"
+    },
+    {
+      "type": "parenthetical",
+      "text": "(quietly)"
+    },
+    {
+      "type": "dialogue",
+      "text": "First paragraph.\n  \nSecond paragraph."
+    }
+  ]
+}

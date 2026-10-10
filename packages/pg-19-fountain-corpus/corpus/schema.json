@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Neutral element JSON v1",
+  "type": "object",
+  "required": ["version", "title_page", "elements"],
+  "properties": {
+    "version": {"const": 1},
+    "title_page": {"type": "array", "items": {"type": "object", "required": ["key", "value"], "properties": {"key": {"type": "string"}, "value": {"type": "string"}}, "additionalProperties": false}},
+    "elements": {"type": "array", "items": {"type": "object", "required": ["type", "text"], "properties": {"type": {"enum": ["scene_heading", "action", "character", "parenthetical", "dialogue", "dual_dialogue_begin", "dual_dialogue_end", "transition", "centered", "lyric", "page_break", "section", "synopsis", "note", "boneyard"]}, "text": {"type": "string"}, "scene_number": {"type": "string"}, "depth": {"type": "integer", "minimum": 1}, "dual": {"type": "boolean"}, "forced": {"type": "boolean"}}, "additionalProperties": true}}
+  },
+  "additionalProperties": false
+}

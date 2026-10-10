@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "title_page": [],
+  "elements": [
+    {
+      "type": "section",
+      "text": "Act",
+      "depth": 1
+    },
+    {
+      "type": "section",
+      "text": "Sequence",
+      "depth": 2
+    },
+    {
+      "type": "section",
+      "text": "Beat",
+      "depth": 3
+    },
+    {
+      "type": "synopsis",
+      "text": "A compact summary"
+    }
+  ]
+}

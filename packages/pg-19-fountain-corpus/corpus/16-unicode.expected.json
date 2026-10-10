@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "title_page": [],
+  "elements": [
+    {
+      "type": "character",
+      "text": "КИРА"
+    },
+    {
+      "type": "dialogue",
+      "text": "Привет, мир."
+    },
+    {
+      "type": "action",
+      "text": "東京の灯り。"
+    },
+    {
+      "type": "action",
+      "text": "Café"
+    }
+  ]
+}

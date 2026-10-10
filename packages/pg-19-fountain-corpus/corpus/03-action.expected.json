@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "title_page": [],
+  "elements": [
+    {
+      "type": "action",
+      "text": "An ordinary action line."
+    },
+    {
+      "type": "action",
+      "text": "Forced action",
+      "forced": true
+    },
+    {
+      "type": "action",
+      "text": "  Indented action"
+    },
+    {
+      "type": "action",
+      "text": "Line one\nLine two\n  \nLine after"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+Visible before /* hidden bit */ visible after.
+
+/*
+Hidden line one
+Hidden line two
+*/

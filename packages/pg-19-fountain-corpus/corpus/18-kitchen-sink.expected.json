@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "title_page": [
+    {
+      "key": "Title",
+      "value": "Kitchen Test"
+    },
+    {
+      "key": "Author",
+      "value": "Synthetic Writer"
+    }
+  ],
+  "elements": [
+    {
+      "type": "section",
+      "text": "Opening",
+      "depth": 1
+    },
+    {
+      "type": "synopsis",
+      "text": "A short overview"
+    },
+    {
+      "type": "scene_heading",
+      "text": "INT. LAB - NIGHT",
+      "scene_number": "7B"
+    },
+    {
+      "type": "action",
+      "text": "A visible action with "
+    },
+    {
+      "type": "note",
+      "text": "a note"
+    },
+    {
+      "type": "action",
+      "text": "."
+    },
+    {
+      "type": "action",
+      "text": "Forced action.",
+      "forced": true
+    },
+    {
+      "type": "character",
+      "text": "ALPHA"
+    },
+    {
+      "type": "parenthetical",
+      "text": "(whispering)"
+    },
+    {
+      "type": "dialogue",
+      "text": "First line.\n  \nSecond line."
+    },
+    {
+      "type": "character",
+      "text": "BETA",
+      "dual": true
+    },
+    {
+      "type": "dialogue",
+      "text": "Second voice."
+    },
+    {
+      "type": "centered",
+      "text": "centered marker"
+    },
+    {
+      "type": "lyric",
+      "text": "A small lyric"
+    },
+    {
+      "type": "page_break",
+      "text": ""
+    },
+    {
+      "type": "boneyard",
+      "text": " hidden section "
+    },
+    {
+      "type": "section",
+      "text": "Beat",
+      "depth": 2
+    },
+    {
+      "type": "synopsis",
+      "text": "Beat summary"
+    },
+    {
+      "type": "transition",
+      "text": "FADE OUT.",
+      "forced": true
+    }
+  ]
+}
