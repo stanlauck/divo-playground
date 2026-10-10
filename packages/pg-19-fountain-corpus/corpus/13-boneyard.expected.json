@@ -4,15 +4,11 @@
   "elements": [
     {
       "type": "action",
-      "text": "Visible before "
+      "text": "Visible before  visible after."
     },
     {
       "type": "boneyard",
       "text": " hidden bit "
-    },
-    {
-      "type": "action",
-      "text": " visible after."
     },
     {
       "type": "boneyard",

@@ -4,15 +4,11 @@
   "elements": [
     {
       "type": "action",
-      "text": "Action before "
+      "text": "Action before  after."
     },
     {
       "type": "note",
       "text": "inline note"
-    },
-    {
-      "type": "action",
-      "text": " after."
     },
     {
       "type": "note",

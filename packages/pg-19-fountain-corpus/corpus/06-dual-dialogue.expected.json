@@ -3,6 +3,10 @@
   "title_page": [],
   "elements": [
     {
+      "type": "action",
+      "text": "Setup action."
+    },
+    {
       "type": "dual_dialogue_begin",
       "text": ""
     },

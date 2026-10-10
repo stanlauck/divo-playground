@@ -17,7 +17,11 @@
     },
     {
       "type": "action",
-      "text": "Line one\nLine two\n  \nLine after"
+      "text": "Line one\nLine two"
+    },
+    {
+      "type": "action",
+      "text": "Line after"
     }
   ]
 }

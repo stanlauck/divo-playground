@@ -27,7 +27,7 @@
     },
     {
       "type": "action",
-      "text": "A visible action with "
+      "text": "A visible action with *emphasis* and ."
     },
     {
       "type": "note",
@@ -35,12 +35,12 @@
     },
     {
       "type": "action",
-      "text": "."
-    },
-    {
-      "type": "action",
       "text": "Forced action.",
       "forced": true
+    },
+    {
+      "type": "dual_dialogue_begin",
+      "text": ""
     },
     {
       "type": "character",
@@ -62,6 +62,10 @@
     {
       "type": "dialogue",
       "text": "Second voice."
+    },
+    {
+      "type": "dual_dialogue_end",
+      "text": ""
     },
     {
       "type": "centered",
