@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tt xmlns="http://www.w3.org/ns/ttml" xmlns:ttm="http://www.w3.org/ns/ttml#metadata" xmlns:ttp="http://www.w3.org/ns/ttml#parameter" xml:lang="en" ttp:timeBase="media">
+  <head>
+    <metadata>
+      <ttm:title>Lighthouse (synthetic sample)</ttm:title>
+      <ttm:agent type="person" xml:id="agent1"><ttm:name type="full">MIRA</ttm:name></ttm:agent>
+      <ttm:agent type="person" xml:id="agent2"><ttm:name type="full">JONAS</ttm:name></ttm:agent>
+      <ttm:agent type="person" xml:id="agent3"><ttm:name type="full">ОЛЬГА</ttm:name></ttm:agent>
+    </metadata>
+  </head>
+  <body>
+    <div>
+      <p xml:id="c1" begin="00:00:01.000" end="00:00:02.800" ttm:agent="agent1">Did you hear that?</p>
+      <p xml:id="c2" begin="00:00:03.000" end="00:00:06.500" ttm:agent="agent2">Only the wind.<br/>It always sounds like footsteps up here.</p>
+      <p xml:id="c3" begin="00:00:06.800" end="00:00:09.000">(A door creaks somewhere below.)</p>
+      <p xml:id="c4" begin="00:00:09.200" end="00:00:11.500" ttm:agent="agent1">Wind doesn't knock twice &amp; wait.</p>
+      <p xml:id="c5" begin="00:00:12.000" end="00:00:15.000" ttm:agent="agent3">Тише. Я слышу шаги на лестнице.</p>
+      <p xml:id="c6" begin="00:00:15.200" end="00:00:16.000" ttm:agent="agent2">Pressure is &lt;dropping&gt; fast, see the gauge?<br/>We should go.</p>
+      <p xml:id="c7" begin="00:00:15.800" end="00:00:23.500" ttm:agent="agent1">Not before we know who else is in this lighthouse tonight.</p>
+      <p xml:id="c8" begin="01:00:00.000" end="01:00:02.400" ttm:agent="agent3">Stay.<br/>Listen.<br/>Then run.</p>
+    </div>
+  </body>
+</tt>

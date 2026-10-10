@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "title": "Lighthouse (synthetic sample)",
+  "language": "en",
+  "cues": [
+    {
+      "id": "c1",
+      "speaker": "MIRA",
+      "lines": ["Did you hear that?"],
+      "start_ms": 1000,
+      "end_ms": 2800
+    },
+    {
+      "id": "c2",
+      "speaker": "JONAS",
+      "lines": ["Only the wind.", "It always sounds like footsteps up here."],
+      "start_ms": 3000,
+      "end_ms": 6500
+    },
+    {
+      "id": "c3",
+      "speaker": null,
+      "lines": ["(A door creaks somewhere below.)"],
+      "start_ms": 6800,
+      "end_ms": 9000
+    },
+    {
+      "id": "c4",
+      "speaker": "MIRA",
+      "lines": ["Wind doesn't knock twice & wait."],
+      "start_ms": 9200,
+      "end_ms": 11500
+    },
+    {
+      "id": "c5",
+      "speaker": "ОЛЬГА",
+      "lines": ["Тише. Я слышу шаги на лестнице."],
+      "start_ms": 12000,
+      "end_ms": 15000
+    },
+    {
+      "id": "c6",
+      "speaker": "JONAS",
+      "lines": ["Pressure is <dropping> fast, see the gauge?", "We should go."],
+      "start_ms": 15200,
+      "end_ms": 16000
+    },
+    {
+      "id": "c7",
+      "speaker": "MIRA",
+      "lines": ["Not before we know who else is in this lighthouse tonight."],
+      "start_ms": 15800,
+      "end_ms": 23500
+    },
+    {
+      "id": "c8",
+      "speaker": "ОЛЬГА",
+      "lines": ["Stay.", "Listen.", "Then run."],
+      "start_ms": 3600000,
+      "end_ms": 3602400
+    }
+  ]
+}
