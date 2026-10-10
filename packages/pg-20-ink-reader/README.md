@@ -26,6 +26,13 @@ The reader uses the public [Ink runtime JSON format](https://raw.githubuserconte
 | `VAR=` / `temp=` | Set/Temp instruction with rendered expression |
 | `#` tags | Adjacent line `properties.tags` |
 
+The reader recognizes the standard inklecate choice weave (`s` label
+containers plus `c-N` choice containers). Its temporary `$r` return pointers,
+`temp` prologue, and numeric branch rejoin pointers are compiler bookkeeping and
+are folded into the hub/option/branch structure. Relative `.^` paths are
+resolved against numeric and named containers; stitch ids use the stable
+`knot.stitch` form.
+
 Every node has one input and output pin, and sequential/container-entry edges use the PG-03 pin conventions. IDs are deterministic source paths with collision suffixes. Global declarations become namespace `ink` variables when an initial value is statically available.
 
 ## Report

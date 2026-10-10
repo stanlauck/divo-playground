@@ -77,11 +77,11 @@ pub fn read_compiled<R: Read>(
         }
     }
     let public = b.public.clone();
-    for (path, parent_path, ty) in public {
-        let id = b.reserved[&path].clone();
+    for (path, canonical, parent_path, ty) in public {
+        let id = b.reserved[&canonical].clone();
         let parent = parent_path.as_ref().map(|p| b.reserved[p].clone());
         b.node_reserved(&id, parent.as_deref(), NodeKind::FlowFragment, ty);
-        b.set_name(&id, &path);
+        b.set_name(&id, &canonical);
         if ty == "Knot" {
             b.report.stats.knots += 1;
         } else {
@@ -169,6 +169,16 @@ fn register<'a>(
         if let Some(sub) = v.as_array() {
             register(sub, &child_path(path, &i.to_string()), map)?;
         }
+        if let Some(obj) = v.as_object() {
+            for (key, sub) in obj {
+                if key.starts_with('#') || key == "*" || key == "flg" {
+                    continue;
+                }
+                if let Some(sub) = sub.as_array() {
+                    register(sub, &child_path(path, key), map)?;
+                }
+            }
+        }
     }
     if let Some(m) = trailer(a) {
         for (key, v) in m {
@@ -205,6 +215,39 @@ fn resolve_path(current: &str, raw: &str) -> String {
     }
     parts.join(".")
 }
+
+fn path_candidates(current: &str, raw: &str) -> Vec<String> {
+    let mut out = vec![resolve_path(current, raw)];
+    if let Some(stripped) = raw.strip_prefix('.') {
+        let mut base: Vec<&str> = current.split('.').filter(|s| !s.is_empty()).collect();
+        let pieces: Vec<&str> = stripped.split('.').filter(|s| !s.is_empty()).collect();
+        let ups = pieces.iter().take_while(|s| **s == "^").count();
+        let suffix = pieces[ups..].join(".");
+        while base.last().is_some_and(|s| s.parse::<usize>().is_ok()) {
+            base.pop();
+        }
+        for _ in 0..ups.saturating_sub(1) {
+            base.pop();
+        }
+        if !suffix.is_empty() {
+            let mut candidate = base.join(".");
+            if !candidate.is_empty() {
+                candidate.push('.');
+            }
+            candidate.push_str(&suffix);
+            out.push(candidate);
+        }
+        if let Some(last) = pieces.last() {
+            let mut candidate = current.to_owned();
+            if !candidate.is_empty() {
+                candidate.push('.');
+            }
+            candidate.push_str(last);
+            out.push(candidate);
+        }
+    }
+    out
+}
 #[derive(Default)]
 struct Flow {
     first: Option<String>,
@@ -216,7 +259,7 @@ struct Builder<'a> {
     report: Report,
     ids: HashSet<String>,
     reserved: BTreeMap<String, String>,
-    public: Vec<(String, Option<String>, &'static str)>,
+    public: Vec<(String, String, Option<String>, &'static str)>,
     targets: BTreeMap<String, String>,
     positions: HashMap<String, usize>,
     statements: HashMap<String, usize>,
@@ -255,36 +298,48 @@ impl<'a> Builder<'a> {
                 {
                     continue;
                 }
-                self.public.push((name.clone(), None, "Knot"));
+                self.public.push((name.clone(), name.clone(), None, "Knot"));
                 self.public_children(name, &helpers);
             }
         }
-        for (path, _, _) in self.public.clone() {
-            let id = self.issue(&path, &path);
+        for (path, canonical, _, _) in self.public.clone() {
+            let id = self.issue(&canonical, &path);
             self.targets.insert(path.clone(), id.clone());
-            self.reserved.insert(path, id);
+            self.targets.insert(canonical.clone(), id.clone());
+            self.reserved.insert(canonical, id);
         }
     }
     fn public_children(&mut self, parent: &str, helpers: &HashSet<String>) {
-        let a = self.registry[parent];
-        if let Some(m) = trailer(a) {
-            for (name, v) in m {
-                let path = child_path(parent, name);
-                if name.starts_with('#')
-                    || !v.is_array()
-                    || helpers.contains(&path)
-                    || name == "s"
-                    || name.starts_with("c-")
-                    || name == "c"
-                    || name == "b"
-                    || name.starts_with("b-")
-                {
-                    continue;
-                }
-                self.public
-                    .push((path.clone(), Some(parent.into()), "Stitch"));
-                self.public_children(&path, helpers);
+        let knot = parent.split('.').next().unwrap_or(parent).to_owned();
+        let prefix = format!("{parent}.");
+        let paths: Vec<String> = self
+            .registry
+            .keys()
+            .filter(|p| p.starts_with(&prefix))
+            .cloned()
+            .collect();
+        for path in paths {
+            let Some(name) = path.rsplit('.').next() else {
+                continue;
+            };
+            if name.parse::<usize>().is_ok()
+                || name.starts_with('#')
+                || name == "s"
+                || name == "b"
+                || name == "c"
+                || name.starts_with("c-")
+                || name.starts_with("b-")
+                || helpers.contains(&path)
+                || path.matches('.').count() <= parent.matches('.').count()
+            {
+                continue;
             }
+            let canonical = format!("{knot}.{name}");
+            if self.public.iter().any(|(_, c, _, _)| c == &canonical) {
+                continue;
+            }
+            self.public
+                .push((path, canonical.clone(), Some(parent.into()), "Stitch"));
         }
     }
     fn issue(&mut self, preferred: &str, path: &str) -> String {
@@ -309,6 +364,12 @@ impl<'a> Builder<'a> {
         self.ids.insert(format!("{id}#in"));
         self.ids.insert(format!("{id}#out"));
         id
+    }
+    fn resolve_existing(&self, current: &str, raw: &str) -> String {
+        path_candidates(current, raw)
+            .into_iter()
+            .find(|p| self.registry.contains_key(p) || self.targets.contains_key(p))
+            .unwrap_or_else(|| resolve_path(current, raw))
     }
     fn node(&mut self, preferred: &str, parent: Option<&str>, kind: NodeKind, ty: &str) -> String {
         let id = self.issue(preferred, preferred);
@@ -412,6 +473,12 @@ impl<'a> Builder<'a> {
         label: Option<String>,
     ) -> String {
         let id = format!("e{}", self.graph.edges.len());
+        let index = self
+            .graph
+            .edges
+            .iter()
+            .filter(|e| e.source == source)
+            .count();
         self.graph.edges.push(Edge {
             id: id.clone(),
             kind,
@@ -419,7 +486,7 @@ impl<'a> Builder<'a> {
             source_pin: Some(format!("{source}#out")),
             target: target.into(),
             target_pin: Some(format!("{target}#in")),
-            index: 0,
+            index,
             label,
             properties: Map::new(),
         });
@@ -511,7 +578,21 @@ impl<'a> Builder<'a> {
             return Flow::default();
         };
         self.active.insert(path.into());
-        let flow = self.statements(path, parent, body(a));
+        let mut values = body(a);
+        // Ink emits a generated return trampoline before the real contents of
+        // each choice target. It is runtime bookkeeping, so expose only the
+        // authored statements after its newline delimiter.
+        if path.rsplit('.').next().is_some_and(|s| s.starts_with("c-"))
+            && !values
+                .first()
+                .and_then(Value::as_str)
+                .is_some_and(|s| s.starts_with('^'))
+        {
+            if let Some(n) = values.iter().position(|v| v.as_str() == Some("\n")) {
+                values = &values[n + 1..];
+            }
+        }
+        let flow = self.statements(path, parent, values);
         self.active.remove(path);
         flow
     }
@@ -545,7 +626,12 @@ impl<'a> Builder<'a> {
                         let mut parts = Vec::new();
                         for item in body(a) {
                             if let Some(raw) = item.get("*") {
-                                let menu = parts.join("");
+                                let mut menu = parts.join("");
+                                if menu.is_empty() {
+                                    menu = self
+                                        .static_text(&format!("{wrapper}.s"), &mut HashSet::new())
+                                        .unwrap_or_default();
+                                }
                                 specs.push((wrapper.clone(), item.clone(), menu));
                                 parts.clear();
                                 let _ = raw;
@@ -554,7 +640,7 @@ impl<'a> Builder<'a> {
                                 parts.push(st.to_string());
                             } else if let Some(target) = item.get("f()").and_then(Value::as_str) {
                                 // The documented reusable choice start-content helper is static text.
-                                let resolved = resolve_path(&wrapper, target);
+                                let resolved = self.resolve_existing(&wrapper, target);
                                 if let Some(t) = self.static_text(&resolved, &mut HashSet::new()) {
                                     parts.push(t);
                                 } else {
@@ -576,7 +662,7 @@ impl<'a> Builder<'a> {
                 let mut exits = Vec::new();
                 for (current, raw, menu) in specs {
                     let raw_target = raw.get("*").and_then(Value::as_str).unwrap_or("?");
-                    let target = resolve_path(&current, raw_target);
+                    let target = self.resolve_existing(&current, raw_target);
                     let output = self.static_text(&target, &mut HashSet::new());
                     let menu = if menu.is_empty() {
                         output.clone().unwrap_or_else(|| raw_target.into())
@@ -653,7 +739,7 @@ impl<'a> Builder<'a> {
                                 } else if let Some(target) = item.get("f()").and_then(Value::as_str)
                                 {
                                     if let Some(t) = self.static_text(
-                                        &resolve_path(path, target),
+                                        &self.resolve_existing(path, target),
                                         &mut HashSet::new(),
                                     ) {
                                         part.push_str(&t)
@@ -710,14 +796,34 @@ impl<'a> Builder<'a> {
                 self.script(&id, ScriptRole::Condition, expression(&eval));
                 eval.clear();
                 let raw = v.get("->").and_then(Value::as_str).unwrap_or("?");
-                let target = resolve_path(path, raw);
+                let target = self.resolve_existing(path, raw);
                 let mut branches = vec![(target.clone(), "true")];
+                // Ink's inline true branch is named `b`; the following
+                // anonymous container is its false branch.
+                if values
+                    .get(i + 1)
+                    .and_then(Value::as_object)
+                    .and_then(|o| o.get("b"))
+                    .is_some_and(Value::is_array)
+                {
+                    branches[0].0 = child_path(path, "b");
+                    i += 1;
+                    if values.get(i + 1).is_some_and(Value::is_array) {
+                        branches.push((child_path(path, &(i + 1).to_string()), "false"));
+                        i += 1;
+                    }
+                // Ink's inline else branch is the following anonymous container.
+                } else if values.get(i + 1).is_some_and(Value::is_array) {
+                    branches.push((child_path(path, &(i + 1).to_string()), "false"));
+                    i += 1;
                 // Common compiled two-way form: conditional branch divert followed by an unconditional else divert.
-                if let Some(next) = values.get(i + 1).filter(|v| {
+                } else if let Some(next) = values.get(i + 1).filter(|v| {
                     v.get("->").is_some() && v.get("c").and_then(Value::as_bool) != Some(true)
                 }) {
-                    let other =
-                        resolve_path(path, next.get("->").and_then(Value::as_str).unwrap_or("?"));
+                    let other = self.resolve_existing(
+                        path,
+                        next.get("->").and_then(Value::as_str).unwrap_or("?"),
+                    );
                     if self.registry.contains_key(&other) && other != target {
                         branches.push((other, "false"));
                         i += 1;
@@ -778,8 +884,8 @@ impl<'a> Builder<'a> {
                 // Choice start-content helpers are the sole statically expanded function-call pattern.
                 if feature == "functions" && parent.contains(':') {
                     if let Some(target) = v.get("f()").and_then(Value::as_str) {
-                        if let Some(t) =
-                            self.static_text(&resolve_path(path, target), &mut HashSet::new())
+                        if let Some(t) = self
+                            .static_text(&self.resolve_existing(path, target), &mut HashSet::new())
                         {
                             text.push_str(&t);
                             i += 1;
@@ -843,6 +949,16 @@ impl<'a> Builder<'a> {
                 if let Some(tag) = o.get("#").and_then(Value::as_str) {
                     tags.push(tag.into());
                 } else if let Some(target) = o.get("->").and_then(Value::as_str) {
+                    if target.starts_with('.')
+                        && target
+                            .rsplit('.')
+                            .next()
+                            .is_some_and(|s| s.parse::<usize>().is_ok())
+                    {
+                        // Compiler-generated branch rejoin pointer.
+                        i += 1;
+                        continue;
+                    }
                     self.flush(parent, &mut text, &mut tags, &mut flow, &mut last);
                     if o.get("var").and_then(Value::as_bool) == Some(true) {
                         let id = self.unsupported(parent, path, "variable_diverts", v);
@@ -874,7 +990,29 @@ impl<'a> Builder<'a> {
             } else if let Some(_a) = v.as_array() {
                 self.flush(parent, &mut text, &mut tags, &mut flow, &mut last);
                 let nested = child_path(path, &i.to_string());
-                let cf = self.content(&nested, parent, &HashSet::new());
+                let mut cf = self.content(&nested, parent, &HashSet::new());
+                // Inline conditionals keep their false container as the next
+                // sibling of the condition container in the parent flow.
+                if let Some(condition) = cf
+                    .first
+                    .clone()
+                    .filter(|id| self.get(id).source_type == "Condition")
+                {
+                    if values.get(i + 1).is_some_and(Value::is_array) {
+                        let false_path = child_path(path, &(i + 1).to_string());
+                        let begin = self.graph.nodes.len();
+                        let ff = self.content(&false_path, &condition, &HashSet::new());
+                        for n in &mut self.graph.nodes[begin..] {
+                            if n.parent.as_deref() == Some(&condition) {
+                                n.properties.insert("clause".into(), json!("false"));
+                            }
+                        }
+                        self.enter(&condition, ff.first.as_deref(), Some("false".into()));
+                        cf.exits.retain(|(exit, _)| exit != &condition);
+                        cf.exits.extend(ff.exits);
+                        i += 1;
+                    }
+                }
                 self.append(&mut flow, cf);
             } else if v.is_number() || v.is_boolean() {
                 eval.push(v.clone());
@@ -898,13 +1036,27 @@ impl<'a> Builder<'a> {
         }
         let a = self.registry.get(target)?;
         let mut text = String::new();
-        for v in body(a) {
+        let mut values = body(a);
+        if target
+            .rsplit('.')
+            .next()
+            .is_some_and(|s| s.starts_with("c-"))
+            && !values
+                .first()
+                .and_then(Value::as_str)
+                .is_some_and(|s| s.starts_with('^'))
+        {
+            if let Some(n) = values.iter().position(|v| v.as_str() == Some("\n")) {
+                values = &values[n + 1..];
+            }
+        }
+        for v in values {
             if let Some(t) = v.as_str().and_then(|s| s.strip_prefix('^')) {
                 text.push_str(t);
             } else if v.as_str() == Some("\n") {
                 break;
             } else if let Some(raw) = v.get("f()").and_then(Value::as_str) {
-                text.push_str(&self.static_text(&resolve_path(target, raw), seen)?);
+                text.push_str(&self.static_text(&self.resolve_existing(target, raw), seen)?);
             } else if !v
                 .as_str()
                 .is_some_and(|s| matches!(s, "<>" | "nop" | "str" | "/str" | "ev" | "/ev"))
@@ -970,7 +1122,7 @@ impl<'a> Builder<'a> {
     }
     fn resolve_jumps(&mut self) {
         for (id, current, target) in std::mem::take(&mut self.jumps) {
-            let resolved = resolve_path(&current, &target);
+            let resolved = self.resolve_existing(&current, &target);
             if let Some(t) = self
                 .targets
                 .get(&resolved)
@@ -1077,22 +1229,43 @@ fn hierarchy_depth(
     depth
 }
 fn expression(ops: &[Value]) -> String {
-    let mut out = Vec::new();
+    let mut stack: Vec<String> = Vec::new();
+    let infix = [
+        "+", "-", "*", "/", "%", "==", "!=", ">", "<", ">=", "<=", "&&", "||",
+    ];
     for v in ops {
-        match v {
-            Value::String(s) if s.starts_with('^') => out.push(s[1..].into()),
-            Value::String(s) => out.push(s.clone()),
-            Value::Number(n) => out.push(n.to_string()),
-            Value::Bool(b) => out.push(b.to_string()),
-            Value::Object(o) => {
-                if let Some(s) = o.get("VAR?").and_then(Value::as_str) {
-                    out.push(s.into())
-                } else {
-                    out.push(serde_json::to_string(v).unwrap())
-                }
+        if let Value::String(op) = v {
+            if infix.contains(&op.as_str()) && stack.len() >= 2 {
+                let right = stack.pop().unwrap();
+                let left = stack.pop().unwrap();
+                stack.push(format!("{left} {op} {right}"));
+                continue;
             }
-            _ => out.push(v.to_string()),
+            if op == "!" && !stack.is_empty() {
+                let value = stack.pop().unwrap();
+                stack.push(format!("!{value}"));
+                continue;
+            }
         }
+        stack.push(expression_atom(v));
     }
-    out.join(" ")
+    if !stack.is_empty() {
+        return stack.join(" ");
+    }
+    String::new()
+}
+
+fn expression_atom(v: &Value) -> String {
+    match v {
+        Value::String(s) if s.starts_with('^') => s[1..].to_owned(),
+        Value::String(s) => s.clone(),
+        Value::Number(n) => n.to_string(),
+        Value::Bool(b) => b.to_string(),
+        Value::Object(o) => o
+            .get("VAR?")
+            .and_then(Value::as_str)
+            .map(str::to_owned)
+            .unwrap_or_else(|| serde_json::to_string(v).unwrap()),
+        _ => v.to_string(),
+    }
 }
