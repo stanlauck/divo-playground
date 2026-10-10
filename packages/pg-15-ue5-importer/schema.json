@@ -1,0 +1,1002 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PG-04 Storyworld v1, embedding PG-03 DialogueGraph v1",
+  "description": "Shape validation only. The importer additionally checks strict JSON/UTF-8, numeric representability, byte/depth budgets, IDs, references, ownership, hierarchy and typed variable expressions. Raw JSON fields remain data only.",
+  "type": "object",
+  "required": [
+    "version",
+    "world",
+    "dialogue"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "const": 1
+    },
+    "world": {
+      "$ref": "#/$defs/world"
+    },
+    "dialogue": {
+      "$ref": "#/$defs/dialogue"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^(?!\\s)(?!.*[\\u0000-\\u001f\\u007f-\\u009f]).*?(?<!\\s)$",
+      "description": "Trimmed, control-free, at most 128 UTF-8 bytes (runtime enforces bytes)."
+    },
+    "nonzeroId": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/id"
+        },
+        {
+          "not": {
+            "pattern": "^0[xX]0+$"
+          }
+        }
+      ]
+    },
+    "variableReference": {
+      "type": "object",
+      "required": [
+        "namespace",
+        "name"
+      ],
+      "properties": {
+        "namespace": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "$ref": "#/$defs/id"
+        }
+      },
+      "additionalProperties": false
+    },
+    "condition": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "op",
+            "variable",
+            "value"
+          ],
+          "properties": {
+            "op": {
+              "enum": [
+                "eq",
+                "ne"
+              ]
+            },
+            "variable": {
+              "$ref": "#/$defs/variableReference"
+            },
+            "value": {}
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "op",
+            "conditions"
+          ],
+          "properties": {
+            "op": {
+              "enum": [
+                "all",
+                "any"
+              ]
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/condition"
+              },
+              "maxItems": 50000,
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "op",
+            "condition"
+          ],
+          "properties": {
+            "op": {
+              "const": "not"
+            },
+            "condition": {
+              "$ref": "#/$defs/condition"
+            }
+          },
+          "additionalProperties": false
+        }
+      ],
+      "description": "Declarative data only. Runtime checks depth, variable existence and value type."
+    },
+    "event": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "op",
+            "variable",
+            "value"
+          ],
+          "properties": {
+            "op": {
+              "const": "set"
+            },
+            "variable": {
+              "$ref": "#/$defs/variableReference"
+            },
+            "value": {}
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "op",
+            "name"
+          ],
+          "properties": {
+            "op": {
+              "const": "emit"
+            },
+            "name": {
+              "$ref": "#/$defs/id"
+            },
+            "payload": {}
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "location": {
+      "type": "object",
+      "required": [
+        "id",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "dialogue": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/nonzeroId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "condition": {
+          "$ref": "#/$defs/condition"
+        },
+        "event": {
+          "$ref": "#/$defs/event"
+        }
+      },
+      "additionalProperties": false
+    },
+    "exit": {
+      "type": "object",
+      "required": [
+        "id",
+        "from",
+        "to"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "from": {
+          "$ref": "#/$defs/id"
+        },
+        "to": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "condition": {
+          "$ref": "#/$defs/condition"
+        },
+        "event": {
+          "$ref": "#/$defs/event"
+        }
+      },
+      "additionalProperties": false
+    },
+    "item": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "location"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "type": "string"
+        },
+        "location": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "dialogue": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/nonzeroId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "condition": {
+          "$ref": "#/$defs/condition"
+        },
+        "event": {
+          "$ref": "#/$defs/event"
+        }
+      },
+      "additionalProperties": false
+    },
+    "world": {
+      "type": "object",
+      "required": [
+        "locations",
+        "exits",
+        "items"
+      ],
+      "properties": {
+        "locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/location"
+          },
+          "maxItems": 50000
+        },
+        "exits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/exit"
+          },
+          "maxItems": 50000
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/item"
+          },
+          "maxItems": 50000
+        }
+      },
+      "additionalProperties": false
+    },
+    "script": {
+      "type": "object",
+      "required": [
+        "language",
+        "role",
+        "text"
+      ],
+      "properties": {
+        "language": {
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "condition",
+            "instruction"
+          ]
+        },
+        "text": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "package": {
+      "type": "object",
+      "required": [
+        "index",
+        "name",
+        "metadata",
+        "node_ids"
+      ],
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854775807
+        },
+        "name": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "node_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nonzeroId"
+          },
+          "maxItems": 50000,
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "node": {
+      "type": "object",
+      "required": [
+        "id",
+        "package",
+        "source_type",
+        "kind",
+        "parent",
+        "technical_name",
+        "display_name",
+        "text",
+        "menu_text",
+        "speaker",
+        "script",
+        "input_pins",
+        "output_pins",
+        "properties",
+        "template",
+        "metadata"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/nonzeroId"
+        },
+        "package": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854775807
+        },
+        "source_type": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "enum": [
+            "flow_fragment",
+            "dialogue",
+            "dialogue_fragment",
+            "hub",
+            "jump",
+            "condition",
+            "instruction",
+            "entity",
+            "user_folder",
+            "comment",
+            "asset",
+            "other"
+          ]
+        },
+        "parent": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/nonzeroId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "technical_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "display_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "menu_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "speaker": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/nonzeroId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "script": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/script"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "input_pins": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nonzeroId"
+          },
+          "maxItems": 50000,
+          "uniqueItems": true
+        },
+        "output_pins": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nonzeroId"
+          },
+          "maxItems": 50000,
+          "uniqueItems": true
+        },
+        "properties": {
+          "type": "object"
+        },
+        "template": {},
+        "metadata": {
+          "type": "object"
+        },
+        "condition": {
+          "$ref": "#/$defs/condition"
+        },
+        "event": {
+          "$ref": "#/$defs/event"
+        }
+      },
+      "additionalProperties": false
+    },
+    "pin": {
+      "type": "object",
+      "required": [
+        "id",
+        "owner",
+        "direction",
+        "index",
+        "script",
+        "properties"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/nonzeroId"
+        },
+        "owner": {
+          "$ref": "#/$defs/nonzeroId"
+        },
+        "direction": {
+          "enum": [
+            "input",
+            "output"
+          ]
+        },
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854775807
+        },
+        "script": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/script"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "properties": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    "edge": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "source",
+        "source_pin",
+        "target",
+        "target_pin",
+        "index",
+        "label",
+        "properties"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/nonzeroId"
+        },
+        "kind": {
+          "enum": [
+            "connection",
+            "jump"
+          ]
+        },
+        "source": {
+          "$ref": "#/$defs/nonzeroId"
+        },
+        "source_pin": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/nonzeroId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "target": {
+          "$ref": "#/$defs/nonzeroId"
+        },
+        "target_pin": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/nonzeroId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854775807
+        },
+        "label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "properties": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    "choice": {
+      "type": "object",
+      "required": [
+        "edge",
+        "source",
+        "source_pin",
+        "target",
+        "text_source"
+      ],
+      "properties": {
+        "edge": {
+          "$ref": "#/$defs/nonzeroId"
+        },
+        "source": {
+          "$ref": "#/$defs/nonzeroId"
+        },
+        "source_pin": {
+          "$ref": "#/$defs/nonzeroId"
+        },
+        "target": {
+          "$ref": "#/$defs/nonzeroId"
+        },
+        "text_source": {
+          "enum": [
+            "edge_label",
+            "target_menu_text",
+            "target_text",
+            "none"
+          ]
+        },
+        "condition": {
+          "$ref": "#/$defs/condition"
+        },
+        "event": {
+          "$ref": "#/$defs/event"
+        }
+      },
+      "additionalProperties": false
+    },
+    "variableNamespace": {
+      "type": "object",
+      "required": [
+        "name",
+        "metadata",
+        "variables"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/id"
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "variables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "maxItems": 50000,
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "variable": {
+      "type": "object",
+      "required": [
+        "namespace",
+        "name",
+        "source_type",
+        "kind",
+        "value",
+        "raw_value",
+        "description",
+        "metadata"
+      ],
+      "properties": {
+        "namespace": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "$ref": "#/$defs/id"
+        },
+        "source_type": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "enum": [
+            "boolean",
+            "integer",
+            "float",
+            "string",
+            "other"
+          ]
+        },
+        "value": {},
+        "raw_value": {},
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "metadata": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "boolean"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "integer"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "integer",
+                "minimum": -9223372036854775808,
+                "maximum": 9223372036854775807
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "float"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "string"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "hierarchyEntry": {
+      "type": "object",
+      "required": [
+        "id",
+        "parent",
+        "index",
+        "depth",
+        "properties"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/nonzeroId"
+        },
+        "parent": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/nonzeroId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854775807
+        },
+        "depth": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 64
+        },
+        "properties": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    "pg03Warning": {
+      "type": "object",
+      "required": [
+        "kind",
+        "source",
+        "reference"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "missing_node",
+            "missing_pin",
+            "missing_parent",
+            "missing_speaker",
+            "missing_hierarchy_object",
+            "hierarchy_parent_mismatch",
+            "unknown_type",
+            "unknown_variable_type",
+            "missing_script",
+            "localization_keys"
+          ]
+        },
+        "source": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reference": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "dialogue": {
+      "type": "object",
+      "required": [
+        "version",
+        "text_mode",
+        "metadata",
+        "definitions",
+        "packages",
+        "nodes",
+        "pins",
+        "edges",
+        "choices",
+        "variable_namespaces",
+        "variables",
+        "hierarchy",
+        "warnings"
+      ],
+      "properties": {
+        "version": {
+          "type": "integer",
+          "const": 1
+        },
+        "text_mode": {
+          "enum": [
+            "literal",
+            "localization_keys"
+          ]
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "definitions": {
+          "type": "array",
+          "items": {},
+          "maxItems": 50000
+        },
+        "packages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/package"
+          },
+          "maxItems": 50000
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/node"
+          },
+          "maxItems": 50000
+        },
+        "pins": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pin"
+          },
+          "maxItems": 50000
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/edge"
+          },
+          "maxItems": 50000
+        },
+        "choices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/choice"
+          },
+          "maxItems": 50000
+        },
+        "variable_namespaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/variableNamespace"
+          },
+          "maxItems": 50000
+        },
+        "variables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/variable"
+          },
+          "maxItems": 50000
+        },
+        "hierarchy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/hierarchyEntry"
+          },
+          "maxItems": 50000
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pg03Warning"
+          },
+          "maxItems": 50000
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
