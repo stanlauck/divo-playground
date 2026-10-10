@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "title": "Field Lantern — production report",
+  "subtitle": "Synthetic planning review",
+  "author": "Example Crew",
+  "date": "2026-10-10",
+  "language": "ru-RU",
+  "summary": "An invented miniature production: a paper lantern crosses a painted courtyard. Все данные вымышлены.",
+  "sections": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Plan #1: keep *all* checks literal. No <markup>, [links], or hidden #code. Русский текст: фонарь готов."
+        },
+        {
+          "type": "heading",
+          "text": "Daily checks",
+          "level": 2
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Prepare paper props",
+            "Check the quiet courtyard"
+          ]
+        },
+        {
+          "type": "numbered",
+          "items": [
+            "Place the lantern",
+            "Record the invented rehearsal"
+          ]
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Area",
+            "Status",
+            "Count"
+          ],
+          "rows": [
+            [
+              "Courtyard | north",
+              "Ready *pending* check",
+              "3"
+            ],
+            [
+              "Workshop",
+              "Свет готов",
+              "2"
+            ]
+          ],
+          "caption": "Synthetic resource table"
+        },
+        {
+          "type": "key_values",
+          "pairs": [
+            [
+              "Coordinator",
+              "Example Crew"
+            ],
+            [
+              "Stage",
+              "Paper courtyard"
+            ]
+          ]
+        },
+        {
+          "type": "code",
+          "language": "text",
+          "text": "cue = \"lantern\"\n# literal * _ @ < > $ ` ~ // \\ \"\n```"
+        },
+        {
+          "type": "quote",
+          "text": "Small props can tell a large invented story.",
+          "attribution": "Fictional planning note"
+        },
+        {
+          "type": "callout",
+          "kind": "note",
+          "text": "All counts are synthetic."
+        },
+        {
+          "type": "callout",
+          "kind": "warning",
+          "text": "Confirm the paper rig before rehearsal."
+        },
+        {
+          "type": "callout",
+          "kind": "error",
+          "text": "Example issue: spare lantern not yet assigned."
+        },
+        {
+          "type": "callout",
+          "kind": "success",
+          "text": "Painted backdrop check complete."
+        }
+      ],
+      "sections": [
+        {
+          "id": "resources",
+          "title": "Resource detail",
+          "level": 2,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "Two paper lanterns and three painted panels are reserved."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "visuals",
+      "title": "Visual plan",
+      "blocks": [
+        {
+          "type": "page_break"
+        },
+        {
+          "type": "image",
+          "path": "missing-lantern.png",
+          "caption": "Invented lantern reference (placeholder)",
+          "width_percent": 65
+        }
+      ]
+    },
+    {
+      "id": "appendix",
+      "title": "Optional appendix",
+      "optional": true,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Extra synthetic rehearsal notes; omitted unless requested."
+        }
+      ]
+    }
+  ]
+}
