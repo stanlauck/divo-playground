@@ -4,13 +4,13 @@ Synthetic planning review
 
 Example Crew
 
-2026\-10\-10
+2026-10-10
 
-An invented miniature production\: a paper lantern crosses a painted courtyard\. Все данные вымышлены\.
+An invented miniature production: a paper lantern crosses a painted courtyard. Все данные вымышлены.
 
 # Overview
 
-Plan \#1\: keep \*all\* checks literal\. No \<markup\>\, \[links\]\, or hidden \#code\. Русский текст\: фонарь готов\.
+Plan \#1: keep \*all\* checks literal. No \<markup\>, \[links\], or hidden \#code. Русский текст: фонарь готов.
 
 ## Daily checks
 
@@ -38,25 +38,25 @@ cue = "lantern"
 ```
 ````
 
-> Small props can tell a large invented story\.
+> Small props can tell a large invented story.
 >
 > — Fictional planning note
 
-> **Note:** All counts are synthetic\.
+> **Note:** All counts are synthetic.
 
-> **Warning:** Confirm the paper rig before rehearsal\.
+> **Warning:** Confirm the paper rig before rehearsal.
 
-> **Error:** Example issue\: spare lantern not yet assigned\.
+> **Error:** Example issue: spare lantern not yet assigned.
 
-> **Success:** Painted backdrop check complete\.
+> **Success:** Painted backdrop check complete.
 
 ## Resource detail
 
-Two paper lanterns and three painted panels are reserved\.
+Two paper lanterns and three painted panels are reserved.
 
 # Visual plan
 
 <!-- page break -->
 
-![Invented lantern reference \(placeholder\)](missing-lantern.png)
+![Invented lantern reference (placeholder)](missing-lantern.png)
 

@@ -108,28 +108,45 @@ fn lf(s: &str) -> String {
 
 /// CommonMark literal text; only renderer-generated markup is interpreted.
 /// GFM cells and headings use generated <br> for embedded line breaks.
+///
+/// Escaping is context-aware so the Markdown stays readable: characters that
+/// can open inline constructs anywhere (`\ * _ ` [ ] < > | ~ & #`) are always
+/// escaped; block starters are escaped only at the start of a line (`- + > =`
+/// and a leading number followed by `.` or `)`); everything else (`.`, `:`,
+/// `,`, `-` inside words, quotes, parentheses) is left as written.
 fn md(s: &str) -> String {
+    const ALWAYS: &str = "\\*_`[]<>|~&#";
+    const LINE_START: &str = "-+>=";
     let mut out = String::new();
-    let mut leading = true;
-    for c in lf(s).chars() {
-        match c {
-            '\n' => {
-                out.push_str("<br>");
-                leading = true;
-            }
-            '\t' => out.push_str("&#9;"),
-            ' ' if leading => out.push_str("&#32;"),
-            c if c.is_control() => {
+    for (line_index, line) in lf(s).split('\n').enumerate() {
+        if line_index > 0 {
+            out.push_str("<br>");
+        }
+        let body = line.trim_start_matches(' ');
+        for _ in 0..line.len() - body.len() {
+            out.push_str("&#32;");
+        }
+        let mut first = true;
+        let mut digits_only = true;
+        let mut saw_digit = false;
+        for c in body.chars() {
+            if c == '\t' {
+                out.push_str("&#9;");
+            } else if c.is_control() {
                 let _ = write!(out, "&#{};", c as u32);
-            }
-            c if c.is_ascii_punctuation() => {
-                out.push('\\');
+            } else {
+                let block_start = first && LINE_START.contains(c);
+                let ordered = digits_only && saw_digit && (c == '.' || c == ')');
+                if ALWAYS.contains(c) || block_start || ordered {
+                    out.push('\\');
+                }
                 out.push(c);
-                leading = false;
             }
-            c => {
-                out.push(c);
-                leading = false;
+            first = false;
+            if c.is_ascii_digit() {
+                saw_digit = true;
+            } else {
+                digits_only = false;
             }
         }
     }

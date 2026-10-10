@@ -141,16 +141,29 @@ block_test!(
 );
 
 #[test]
-fn markdown_table_escapes_every_ascii_special_character() {
-    for c in (b'!'..=b'~')
-        .map(char::from)
-        .filter(char::is_ascii_punctuation)
-    {
+fn markdown_table_escapes_every_inline_special_character() {
+    for c in "\\*_`[]<>|~&#".chars() {
         let cell = format!("{c}before{c}after{c}");
         let rendered = md(json!({"type":"table","columns":[cell],"rows":[[cell]]}));
         let expected = format!("\\{c}before\\{c}after\\{c}");
         assert!(rendered.contains(&expected), "{c}: {rendered}");
     }
+}
+#[test]
+fn markdown_escapes_block_starters_only_at_line_start() {
+    for prefix in ["- x", "+ x", "> x", "= x", "1. x", "12) x"] {
+        let r = md(json!({"type":"paragraph","text":prefix}));
+        let (lead, rest) = prefix.split_at(prefix.find(['-', '+', '>', '=', '.', ')']).unwrap());
+        assert!(r.contains(&format!("{lead}\\{rest}")), "{prefix}: {r}");
+    }
+    // Readable prose keeps its punctuation when it cannot open a construct.
+    let r = md(
+        json!({"type":"paragraph","text":"Shot 2026-10-10: ready, take 1. Plan (B) \"ok\"; a + b = c > d"}),
+    );
+    assert!(
+        r.contains("Shot 2026-10-10: ready, take 1. Plan (B) \"ok\"; a + b = c \\> d"),
+        "{r}"
+    );
 }
 #[test]
 fn typst_table_preserves_every_special_character_as_string_data() {
