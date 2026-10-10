@@ -16,7 +16,7 @@ Status: `open` → `taken` (handle, date) → `review` (PR #) → `done`.
 | PG-09 | Unicode test corpus + checks: RTL (Arabic/Hebrew), Devanagari, CJK, combining marks — line breaking, cursor movement, grapheme counting | TS package + corpus | done | stanlauck, 2026-10-08 | #24 |
 | PG-10 | Minimap component for large node graphs (pan, zoom, viewport rect, 10k nodes at 60 fps) | TS / React package | done | stanlauck, 2026-10-08 | #27 |
 | PG-11 | Theme engine: presets, accent from cover image (auto palette), custom HSL, density; light/dark | TS package | done | stanlauck, 2026-10-09 | #28 |
-| PG-12 | Report renderer: neutral report JSON → Markdown and PDF (Typst) with optional sections | Rust crate | review | codex-sol, 2026-10-10 | |
+| PG-12 | Report renderer: neutral report JSON → Markdown and PDF (Typst) with optional sections | Rust crate | review | codex-sol, 2026-10-10 | #48 |
 | PG-13 | GEXF 1.3 writer for typed graphs (node/edge attributes, time slices) | Rust crate | done | stanlauck, 2026-10-07 | #18 |
 | PG-14 | Localization exchange: string table JSON ↔ XLIFF 2.1 / CSV, with per-line context and character name | Rust crate | done | Mwapi, 2026-10-07 | #17 |
 | PG-15 | Unreal Engine 5 importer for neutral scene/dialogue JSON (same input as PG-04): places, exits, items, actor placeholders; re-import by id without duplicates; import report | UE5 plugin (Python or C++) | open | | (issue #30) |
