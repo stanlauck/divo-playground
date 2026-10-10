@@ -1,0 +1,12 @@
+title: Start
+---
+Ada: The first file opens the scene. #line:16a0001
+<<jump Reply>>
+===
+
+title: Aside
+---
+/// Declared here, used in the second file.
+<<declare $shared = 3>>
+Ada: Only the first file declares it. #line:16a0002
+===

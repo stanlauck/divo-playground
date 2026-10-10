@@ -1,0 +1,7 @@
+{
+  "sources": [
+    "16-cross-file-a.yarn",
+    "16-cross-file-b.yarn"
+  ],
+  "findings": []
+}

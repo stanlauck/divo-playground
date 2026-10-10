@@ -1,0 +1,13 @@
+title: Start
+---
+<<declare $gold = 0>>
+Ada: The merchant waits by the stall. #line:10a0001
+-> Buy the map. <<if $gold >= 10>> #line:10o0001
+    Ada: A fine choice. #line:10a0002
+-> Haggle first. <<if $gold > 0 and $gold < 10>> #line:10o0002
+    Ada: Numbers, then. #line:10a0003
+-> Buy nothing. #line:10o0003
+    <<stop>>
+-> Leave quietly. #line:10o0004
+Ada: The road continues either way. #line:10a0004
+===

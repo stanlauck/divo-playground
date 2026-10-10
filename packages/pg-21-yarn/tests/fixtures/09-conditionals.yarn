@@ -1,0 +1,22 @@
+title: Start
+---
+<<declare $visits = 0>>
+<<if $visits == 0>>
+    Ada: This is your first time here. #line:9a0001
+<<elseif $visits < 3>>
+    Ada: A handful of visits, no more. #line:9a0002
+    <<if $visits == 2>>
+        Ada: The second of them. #line:9a0003
+    <<else>>
+        Ada: Not the second. #line:9a0004
+    <<endif>>
+<<else>>
+    Ada: You know this room as well as I do. #line:9a0005
+<<endif>>
+Ada: After the block. #line:9a0006
+-> Stay and read. #line:9o0001
+    <<if $gateOpen>>
+        Ada: The gate is open. #line:9a0007
+    <<endif>>
+-> Leave now. #line:9o0002
+===

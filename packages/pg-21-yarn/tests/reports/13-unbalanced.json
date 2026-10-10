@@ -1,0 +1,47 @@
+{
+  "sources": [
+    "13-unbalanced.yarn"
+  ],
+  "findings": [
+    {
+      "file": "13-unbalanced.yarn",
+      "line": 4,
+      "col": 1,
+      "code": "unbalanced_conditional",
+      "severity": "error",
+      "message": "`<<if>>` has no matching `<<endif>>`"
+    },
+    {
+      "file": "13-unbalanced.yarn",
+      "line": 10,
+      "col": 1,
+      "code": "unbalanced_conditional",
+      "severity": "error",
+      "message": "`<<else>>` has no matching `<<if>>`"
+    },
+    {
+      "file": "13-unbalanced.yarn",
+      "line": 12,
+      "col": 1,
+      "code": "unbalanced_conditional",
+      "severity": "error",
+      "message": "`<<endif>>` has no matching `<<if>>`"
+    },
+    {
+      "file": "13-unbalanced.yarn",
+      "line": 22,
+      "col": 1,
+      "code": "unbalanced_conditional",
+      "severity": "error",
+      "message": "`<<elseif>>` after `<<else>>`"
+    },
+    {
+      "file": "13-unbalanced.yarn",
+      "line": 32,
+      "col": 1,
+      "code": "trailing_content_after_command",
+      "severity": "warning",
+      "message": "`<<else>>` takes no condition"
+    }
+  ]
+}

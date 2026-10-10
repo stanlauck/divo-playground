@@ -1,0 +1,15 @@
+{
+  "sources": [
+    "12-empty-untitled.yarn"
+  ],
+  "findings": [
+    {
+      "file": "12-empty-untitled.yarn",
+      "line": 12,
+      "col": 1,
+      "code": "missing_node_title",
+      "severity": "error",
+      "message": "node has no usable `title:` header; an `untitled` scope was assigned"
+    }
+  ]
+}

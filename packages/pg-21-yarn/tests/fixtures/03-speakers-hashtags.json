@@ -1,0 +1,866 @@
+{
+  "version": 1,
+  "text_mode": "literal",
+  "metadata": {
+    "files": [
+      "03-speakers-hashtags.yarn"
+    ],
+    "generator": "pg-21-yarn 0.1.0",
+    "source_format": "yarn"
+  },
+  "definitions": [],
+  "packages": [
+    {
+      "index": 0,
+      "name": "03-speakers-hashtags",
+      "metadata": {
+        "path": "03-speakers-hashtags.yarn"
+      },
+      "node_ids": [
+        "Start",
+        "Start:1",
+        "Start:2",
+        "Start:3",
+        "Start:4",
+        "Start:5",
+        "Start:6",
+        "Start:7",
+        "Start:8",
+        "Start:9",
+        "Start:10",
+        "Start:11",
+        "Start:12"
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "Start",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "Start",
+      "display_name": "Start",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start#in"
+      ],
+      "output_pins": [
+        "Start#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 1
+      }
+    },
+    {
+      "id": "Start:1",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": "You came back.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Start:1#in"
+      ],
+      "output_pins": [
+        "Start:1#out"
+      ],
+      "properties": {
+        "line_id": "3a0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 4
+      }
+    },
+    {
+      "id": "Start:2",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": "The lamp above the desk flickers.",
+      "menu_text": null,
+      "speaker": "Narrator",
+      "script": null,
+      "input_pins": [
+        "Start:2#in"
+      ],
+      "output_pins": [
+        "Start:2#out"
+      ],
+      "properties": {
+        "line_id": "3a0002",
+        "markup": false,
+        "tags": [
+          "atmosphere",
+          "night"
+        ]
+      },
+      "template": null,
+      "metadata": {
+        "col": 11,
+        "line": 5
+      }
+    },
+    {
+      "id": "Start:3",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": "Press # to continue.",
+      "menu_text": null,
+      "speaker": "Bob",
+      "script": null,
+      "input_pins": [
+        "Start:3#in"
+      ],
+      "output_pins": [
+        "Start:3#out"
+      ],
+      "properties": {
+        "line_id": "3a0003",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 6
+      }
+    },
+    {
+      "id": "Start:4",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": "An escaped # stays literal text.",
+      "menu_text": null,
+      "speaker": "Cy",
+      "script": null,
+      "input_pins": [
+        "Start:4#in"
+      ],
+      "output_pins": [
+        "Start:4#out"
+      ],
+      "properties": {
+        "line_id": "3a0004",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 5,
+        "line": 7
+      }
+    },
+    {
+      "id": "Start:5",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": "The url http://example.com/a#b is prose.",
+      "menu_text": null,
+      "speaker": "Dee",
+      "script": null,
+      "input_pins": [
+        "Start:5#in"
+      ],
+      "output_pins": [
+        "Start:5#out"
+      ],
+      "properties": {
+        "line_id": "3a0005",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 8
+      }
+    },
+    {
+      "id": "Start:6",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": "Quoted \"# not a tag\" is prose too.",
+      "menu_text": null,
+      "speaker": "Eve",
+      "script": null,
+      "input_pins": [
+        "Start:6#in"
+      ],
+      "output_pins": [
+        "Start:6#out"
+      ],
+      "properties": {
+        "line_id": "3a0006",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 9
+      }
+    },
+    {
+      "id": "Start:7",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": "Tag then a trailing comment.",
+      "menu_text": null,
+      "speaker": "Fay",
+      "script": null,
+      "input_pins": [
+        "Start:7#in"
+      ],
+      "output_pins": [
+        "Start:7#out"
+      ],
+      "properties": {
+        "line_id": "3a0007",
+        "markup": false,
+        "tags": [
+          "kept"
+        ]
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 10
+      }
+    },
+    {
+      "id": "Start:8",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": "No speaker on this line at all.",
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start:8#in"
+      ],
+      "output_pins": [
+        "Start:8#out"
+      ],
+      "properties": {
+        "line_id": "3a0008",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 11
+      }
+    },
+    {
+      "id": "Start:9",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": "10:30 in the morning is not a speaker.",
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start:9#in"
+      ],
+      "output_pins": [
+        "Start:9#out"
+      ],
+      "properties": {
+        "line_id": "3a0009",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 12
+      }
+    },
+    {
+      "id": "Start:10",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": "Hyphens and apostrophes are allowed: it's fine.",
+      "menu_text": null,
+      "speaker": "Mary-Jane",
+      "script": null,
+      "input_pins": [
+        "Start:10#in"
+      ],
+      "output_pins": [
+        "Start:10#out"
+      ],
+      "properties": {
+        "line_id": "3a0010",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 12,
+        "line": 13
+      }
+    },
+    {
+      "id": "Start:11",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": "A leading underscore is allowed.",
+      "menu_text": null,
+      "speaker": "_Narrator",
+      "script": null,
+      "input_pins": [
+        "Start:11#in"
+      ],
+      "output_pins": [
+        "Start:11#out"
+      ],
+      "properties": {
+        "line_id": "3a0011",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 12,
+        "line": 14
+      }
+    },
+    {
+      "id": "Start:12",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": "Inline comment after text.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Start:12#in"
+      ],
+      "output_pins": [
+        "Start:12#out"
+      ],
+      "properties": {
+        "line_id": null,
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 15
+      }
+    }
+  ],
+  "pins": [
+    {
+      "id": "Start#in",
+      "owner": "Start",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start#out",
+      "owner": "Start",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1#in",
+      "owner": "Start:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1#out",
+      "owner": "Start:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2#in",
+      "owner": "Start:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2#out",
+      "owner": "Start:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:3#in",
+      "owner": "Start:3",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:3#out",
+      "owner": "Start:3",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:4#in",
+      "owner": "Start:4",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:4#out",
+      "owner": "Start:4",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:5#in",
+      "owner": "Start:5",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:5#out",
+      "owner": "Start:5",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:6#in",
+      "owner": "Start:6",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:6#out",
+      "owner": "Start:6",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:7#in",
+      "owner": "Start:7",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:7#out",
+      "owner": "Start:7",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:8#in",
+      "owner": "Start:8",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:8#out",
+      "owner": "Start:8",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:9#in",
+      "owner": "Start:9",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:9#out",
+      "owner": "Start:9",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:10#in",
+      "owner": "Start:10",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:10#out",
+      "owner": "Start:10",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:11#in",
+      "owner": "Start:11",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:11#out",
+      "owner": "Start:11",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:12#in",
+      "owner": "Start:12",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:12#out",
+      "owner": "Start:12",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    }
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "kind": "connection",
+      "source": "Start",
+      "source_pin": "Start#out",
+      "target": "Start:1",
+      "target_pin": "Start:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e1",
+      "kind": "connection",
+      "source": "Start:1",
+      "source_pin": "Start:1#out",
+      "target": "Start:2",
+      "target_pin": "Start:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e2",
+      "kind": "connection",
+      "source": "Start:2",
+      "source_pin": "Start:2#out",
+      "target": "Start:3",
+      "target_pin": "Start:3#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e3",
+      "kind": "connection",
+      "source": "Start:3",
+      "source_pin": "Start:3#out",
+      "target": "Start:4",
+      "target_pin": "Start:4#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e4",
+      "kind": "connection",
+      "source": "Start:4",
+      "source_pin": "Start:4#out",
+      "target": "Start:5",
+      "target_pin": "Start:5#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e5",
+      "kind": "connection",
+      "source": "Start:5",
+      "source_pin": "Start:5#out",
+      "target": "Start:6",
+      "target_pin": "Start:6#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e6",
+      "kind": "connection",
+      "source": "Start:6",
+      "source_pin": "Start:6#out",
+      "target": "Start:7",
+      "target_pin": "Start:7#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e7",
+      "kind": "connection",
+      "source": "Start:7",
+      "source_pin": "Start:7#out",
+      "target": "Start:8",
+      "target_pin": "Start:8#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e8",
+      "kind": "connection",
+      "source": "Start:8",
+      "source_pin": "Start:8#out",
+      "target": "Start:9",
+      "target_pin": "Start:9#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e9",
+      "kind": "connection",
+      "source": "Start:9",
+      "source_pin": "Start:9#out",
+      "target": "Start:10",
+      "target_pin": "Start:10#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e10",
+      "kind": "connection",
+      "source": "Start:10",
+      "source_pin": "Start:10#out",
+      "target": "Start:11",
+      "target_pin": "Start:11#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e11",
+      "kind": "connection",
+      "source": "Start:11",
+      "source_pin": "Start:11#out",
+      "target": "Start:12",
+      "target_pin": "Start:12#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    }
+  ],
+  "choices": [],
+  "variable_namespaces": [
+    {
+      "name": "yarn",
+      "metadata": {},
+      "variables": []
+    }
+  ],
+  "variables": [],
+  "hierarchy": [
+    {
+      "id": "Start",
+      "parent": null,
+      "index": 0,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "Start:1",
+      "parent": "Start",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:2",
+      "parent": "Start",
+      "index": 1,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:3",
+      "parent": "Start",
+      "index": 2,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:4",
+      "parent": "Start",
+      "index": 3,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:5",
+      "parent": "Start",
+      "index": 4,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:6",
+      "parent": "Start",
+      "index": 5,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:7",
+      "parent": "Start",
+      "index": 6,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:8",
+      "parent": "Start",
+      "index": 7,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:9",
+      "parent": "Start",
+      "index": 8,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:10",
+      "parent": "Start",
+      "index": 9,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:11",
+      "parent": "Start",
+      "index": 10,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:12",
+      "parent": "Start",
+      "index": 11,
+      "depth": 1,
+      "properties": {}
+    }
+  ],
+  "warnings": []
+}

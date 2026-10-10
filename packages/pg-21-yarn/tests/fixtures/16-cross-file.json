@@ -1,0 +1,906 @@
+{
+  "version": 1,
+  "text_mode": "literal",
+  "metadata": {
+    "files": [
+      "16-cross-file-a.yarn",
+      "16-cross-file-b.yarn"
+    ],
+    "generator": "pg-21-yarn 0.1.0",
+    "source_format": "yarn"
+  },
+  "definitions": [],
+  "packages": [
+    {
+      "index": 0,
+      "name": "16-cross-file-a",
+      "metadata": {
+        "path": "16-cross-file-a.yarn"
+      },
+      "node_ids": [
+        "Start",
+        "Start:1",
+        "Start:2",
+        "Aside",
+        "Aside:1"
+      ]
+    },
+    {
+      "index": 1,
+      "name": "16-cross-file-b",
+      "metadata": {
+        "path": "16-cross-file-b.yarn"
+      },
+      "node_ids": [
+        "Reply",
+        "Reply:1",
+        "Reply:2",
+        "Reply:3",
+        "Reply:3:1",
+        "Reply:3:1:1",
+        "Reply:3:2",
+        "Reply:3:2:1"
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "Start",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "Start",
+      "display_name": "Start",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start#in"
+      ],
+      "output_pins": [
+        "Start#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 1
+      }
+    },
+    {
+      "id": "Start:1",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": "The first file opens the scene.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Start:1#in"
+      ],
+      "output_pins": [
+        "Start:1#out"
+      ],
+      "properties": {
+        "line_id": "16a0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 3
+      }
+    },
+    {
+      "id": "Start:2",
+      "package": 0,
+      "source_type": "Jump",
+      "kind": "jump",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start:2#in"
+      ],
+      "output_pins": [
+        "Start:2#out"
+      ],
+      "properties": {
+        "target": "Reply"
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 4
+      }
+    },
+    {
+      "id": "Aside",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "Aside",
+      "display_name": "Aside",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Aside#in"
+      ],
+      "output_pins": [
+        "Aside#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 7
+      }
+    },
+    {
+      "id": "Aside:1",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Aside",
+      "technical_name": null,
+      "display_name": null,
+      "text": "Only the first file declares it.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Aside:1#in"
+      ],
+      "output_pins": [
+        "Aside:1#out"
+      ],
+      "properties": {
+        "line_id": "16a0002",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 11
+      }
+    },
+    {
+      "id": "Reply",
+      "package": 1,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "Reply",
+      "display_name": "Reply",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Reply#in"
+      ],
+      "output_pins": [
+        "Reply#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 1
+      }
+    },
+    {
+      "id": "Reply:1",
+      "package": 1,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Reply",
+      "technical_name": null,
+      "display_name": null,
+      "text": "The second file answers, holding {$shared}.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Reply:1#in"
+      ],
+      "output_pins": [
+        "Reply:1#out"
+      ],
+      "properties": {
+        "line_id": "16b0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 3
+      }
+    },
+    {
+      "id": "Reply:2",
+      "package": 1,
+      "source_type": "Set",
+      "kind": "instruction",
+      "parent": "Reply",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "instruction",
+        "text": "set $shared += 1"
+      },
+      "input_pins": [
+        "Reply:2#in"
+      ],
+      "output_pins": [
+        "Reply:2#out"
+      ],
+      "properties": {
+        "args": "$shared += 1",
+        "command": "set",
+        "expression": "1",
+        "operator": "+=",
+        "variable": "shared"
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 4
+      }
+    },
+    {
+      "id": "Reply:3",
+      "package": 1,
+      "source_type": "OptionGroup",
+      "kind": "hub",
+      "parent": "Reply",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Reply:3#in"
+      ],
+      "output_pins": [
+        "Reply:3#out"
+      ],
+      "properties": {
+        "index": 1
+      },
+      "template": null,
+      "metadata": {
+        "col": 4,
+        "line": 5
+      }
+    },
+    {
+      "id": "Reply:3:1",
+      "package": 1,
+      "source_type": "Option",
+      "kind": "dialogue_fragment",
+      "parent": "Reply:3",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": "Take the answer.",
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Reply:3:1#in"
+      ],
+      "output_pins": [
+        "Reply:3:1#out"
+      ],
+      "properties": {
+        "line_id": "16b0002",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 4,
+        "line": 5
+      }
+    },
+    {
+      "id": "Reply:3:1:1",
+      "package": 1,
+      "source_type": "Jump",
+      "kind": "jump",
+      "parent": "Reply:3:1",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Reply:3:1:1#in"
+      ],
+      "output_pins": [
+        "Reply:3:1:1#out"
+      ],
+      "properties": {
+        "target": "Start"
+      },
+      "template": null,
+      "metadata": {
+        "col": 5,
+        "line": 6
+      }
+    },
+    {
+      "id": "Reply:3:2",
+      "package": 1,
+      "source_type": "Option",
+      "kind": "dialogue_fragment",
+      "parent": "Reply:3",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": "Refuse the answer.",
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Reply:3:2#in"
+      ],
+      "output_pins": [
+        "Reply:3:2#out"
+      ],
+      "properties": {
+        "line_id": "16b0003",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 4,
+        "line": 7
+      }
+    },
+    {
+      "id": "Reply:3:2:1",
+      "package": 1,
+      "source_type": "Jump",
+      "kind": "jump",
+      "parent": "Reply:3:2",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Reply:3:2:1#in"
+      ],
+      "output_pins": [
+        "Reply:3:2:1#out"
+      ],
+      "properties": {
+        "target": "Aside"
+      },
+      "template": null,
+      "metadata": {
+        "col": 5,
+        "line": 8
+      }
+    }
+  ],
+  "pins": [
+    {
+      "id": "Start#in",
+      "owner": "Start",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start#out",
+      "owner": "Start",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1#in",
+      "owner": "Start:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1#out",
+      "owner": "Start:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2#in",
+      "owner": "Start:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2#out",
+      "owner": "Start:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Aside#in",
+      "owner": "Aside",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Aside#out",
+      "owner": "Aside",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Aside:1#in",
+      "owner": "Aside:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Aside:1#out",
+      "owner": "Aside:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Reply#in",
+      "owner": "Reply",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Reply#out",
+      "owner": "Reply",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Reply:1#in",
+      "owner": "Reply:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Reply:1#out",
+      "owner": "Reply:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Reply:2#in",
+      "owner": "Reply:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Reply:2#out",
+      "owner": "Reply:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Reply:3#in",
+      "owner": "Reply:3",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Reply:3#out",
+      "owner": "Reply:3",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Reply:3:1#in",
+      "owner": "Reply:3:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Reply:3:1#out",
+      "owner": "Reply:3:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Reply:3:1:1#in",
+      "owner": "Reply:3:1:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Reply:3:1:1#out",
+      "owner": "Reply:3:1:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Reply:3:2#in",
+      "owner": "Reply:3:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Reply:3:2#out",
+      "owner": "Reply:3:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Reply:3:2:1#in",
+      "owner": "Reply:3:2:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Reply:3:2:1#out",
+      "owner": "Reply:3:2:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    }
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "kind": "connection",
+      "source": "Start",
+      "source_pin": "Start#out",
+      "target": "Start:1",
+      "target_pin": "Start:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e1",
+      "kind": "connection",
+      "source": "Start:1",
+      "source_pin": "Start:1#out",
+      "target": "Start:2",
+      "target_pin": "Start:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e2",
+      "kind": "jump",
+      "source": "Start:2",
+      "source_pin": "Start:2#out",
+      "target": "Reply",
+      "target_pin": "Reply#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e3",
+      "kind": "connection",
+      "source": "Aside",
+      "source_pin": "Aside#out",
+      "target": "Aside:1",
+      "target_pin": "Aside:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e4",
+      "kind": "connection",
+      "source": "Reply",
+      "source_pin": "Reply#out",
+      "target": "Reply:1",
+      "target_pin": "Reply:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e5",
+      "kind": "connection",
+      "source": "Reply:1",
+      "source_pin": "Reply:1#out",
+      "target": "Reply:2",
+      "target_pin": "Reply:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e6",
+      "kind": "connection",
+      "source": "Reply:2",
+      "source_pin": "Reply:2#out",
+      "target": "Reply:3",
+      "target_pin": "Reply:3#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e7",
+      "kind": "connection",
+      "source": "Reply:3",
+      "source_pin": "Reply:3#out",
+      "target": "Reply:3:1",
+      "target_pin": "Reply:3:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e8",
+      "kind": "connection",
+      "source": "Reply:3:1",
+      "source_pin": "Reply:3:1#out",
+      "target": "Reply:3:1:1",
+      "target_pin": "Reply:3:1:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e9",
+      "kind": "jump",
+      "source": "Reply:3:1:1",
+      "source_pin": "Reply:3:1:1#out",
+      "target": "Start",
+      "target_pin": "Start#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e10",
+      "kind": "connection",
+      "source": "Reply:3",
+      "source_pin": "Reply:3#out",
+      "target": "Reply:3:2",
+      "target_pin": "Reply:3:2#in",
+      "index": 1,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e11",
+      "kind": "connection",
+      "source": "Reply:3:2",
+      "source_pin": "Reply:3:2#out",
+      "target": "Reply:3:2:1",
+      "target_pin": "Reply:3:2:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e12",
+      "kind": "jump",
+      "source": "Reply:3:2:1",
+      "source_pin": "Reply:3:2:1#out",
+      "target": "Aside",
+      "target_pin": "Aside#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    }
+  ],
+  "choices": [
+    {
+      "edge": "e7",
+      "source": "Reply:3",
+      "source_pin": "Reply:3#out",
+      "target": "Reply:3:1",
+      "text_source": "target_menu_text"
+    },
+    {
+      "edge": "e10",
+      "source": "Reply:3",
+      "source_pin": "Reply:3#out",
+      "target": "Reply:3:2",
+      "text_source": "target_menu_text"
+    }
+  ],
+  "variable_namespaces": [
+    {
+      "name": "yarn",
+      "metadata": {},
+      "variables": [
+        "shared"
+      ]
+    }
+  ],
+  "variables": [
+    {
+      "namespace": "yarn",
+      "name": "shared",
+      "source_type": "declare",
+      "kind": "integer",
+      "value": 3,
+      "raw_value": "3",
+      "description": "Declared here, used in the second file.",
+      "metadata": {}
+    }
+  ],
+  "hierarchy": [
+    {
+      "id": "Start",
+      "parent": null,
+      "index": 0,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "Start:1",
+      "parent": "Start",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:2",
+      "parent": "Start",
+      "index": 1,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Aside",
+      "parent": null,
+      "index": 1,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "Aside:1",
+      "parent": "Aside",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Reply",
+      "parent": null,
+      "index": 2,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "Reply:1",
+      "parent": "Reply",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Reply:2",
+      "parent": "Reply",
+      "index": 1,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Reply:3",
+      "parent": "Reply",
+      "index": 2,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Reply:3:1",
+      "parent": "Reply:3",
+      "index": 0,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "Reply:3:1:1",
+      "parent": "Reply:3:1",
+      "index": 0,
+      "depth": 3,
+      "properties": {}
+    },
+    {
+      "id": "Reply:3:2",
+      "parent": "Reply:3",
+      "index": 1,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "Reply:3:2:1",
+      "parent": "Reply:3:2",
+      "index": 0,
+      "depth": 3,
+      "properties": {}
+    }
+  ],
+  "warnings": []
+}

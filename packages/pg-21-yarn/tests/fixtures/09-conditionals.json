@@ -1,0 +1,992 @@
+{
+  "version": 1,
+  "text_mode": "literal",
+  "metadata": {
+    "files": [
+      "09-conditionals.yarn"
+    ],
+    "generator": "pg-21-yarn 0.1.0",
+    "source_format": "yarn"
+  },
+  "definitions": [],
+  "packages": [
+    {
+      "index": 0,
+      "name": "09-conditionals",
+      "metadata": {
+        "path": "09-conditionals.yarn"
+      },
+      "node_ids": [
+        "Start",
+        "Start:1",
+        "Start:1:1",
+        "Start:1:2",
+        "Start:1:3",
+        "Start:1:3:1",
+        "Start:1:3:2",
+        "Start:1:4",
+        "Start:2",
+        "Start:3",
+        "Start:3:1",
+        "Start:3:1:1",
+        "Start:3:1:1:1",
+        "Start:3:2"
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "Start",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "Start",
+      "display_name": "Start",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start#in"
+      ],
+      "output_pins": [
+        "Start#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 1
+      }
+    },
+    {
+      "id": "Start:1",
+      "package": 0,
+      "source_type": "If",
+      "kind": "condition",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "condition",
+        "text": "$visits == 0"
+      },
+      "input_pins": [
+        "Start:1#in"
+      ],
+      "output_pins": [
+        "Start:1#out"
+      ],
+      "properties": {},
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 4
+      }
+    },
+    {
+      "id": "Start:1:1",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start:1",
+      "technical_name": null,
+      "display_name": null,
+      "text": "This is your first time here.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Start:1:1#in"
+      ],
+      "output_pins": [
+        "Start:1:1#out"
+      ],
+      "properties": {
+        "clause": "if",
+        "line_id": "9a0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 10,
+        "line": 5
+      }
+    },
+    {
+      "id": "Start:1:2",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start:1",
+      "technical_name": null,
+      "display_name": null,
+      "text": "A handful of visits, no more.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Start:1:2#in"
+      ],
+      "output_pins": [
+        "Start:1:2#out"
+      ],
+      "properties": {
+        "clause": "elseif:$visits < 3",
+        "line_id": "9a0002",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 10,
+        "line": 7
+      }
+    },
+    {
+      "id": "Start:1:3",
+      "package": 0,
+      "source_type": "If",
+      "kind": "condition",
+      "parent": "Start:1",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "condition",
+        "text": "$visits == 2"
+      },
+      "input_pins": [
+        "Start:1:3#in"
+      ],
+      "output_pins": [
+        "Start:1:3#out"
+      ],
+      "properties": {
+        "clause": "elseif:$visits < 3"
+      },
+      "template": null,
+      "metadata": {
+        "col": 5,
+        "line": 8
+      }
+    },
+    {
+      "id": "Start:1:3:1",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start:1:3",
+      "technical_name": null,
+      "display_name": null,
+      "text": "The second of them.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Start:1:3:1#in"
+      ],
+      "output_pins": [
+        "Start:1:3:1#out"
+      ],
+      "properties": {
+        "clause": "if",
+        "line_id": "9a0003",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 14,
+        "line": 9
+      }
+    },
+    {
+      "id": "Start:1:3:2",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start:1:3",
+      "technical_name": null,
+      "display_name": null,
+      "text": "Not the second.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Start:1:3:2#in"
+      ],
+      "output_pins": [
+        "Start:1:3:2#out"
+      ],
+      "properties": {
+        "clause": "else",
+        "line_id": "9a0004",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 14,
+        "line": 11
+      }
+    },
+    {
+      "id": "Start:1:4",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start:1",
+      "technical_name": null,
+      "display_name": null,
+      "text": "You know this room as well as I do.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Start:1:4#in"
+      ],
+      "output_pins": [
+        "Start:1:4#out"
+      ],
+      "properties": {
+        "clause": "else",
+        "line_id": "9a0005",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 10,
+        "line": 14
+      }
+    },
+    {
+      "id": "Start:2",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": "After the block.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Start:2#in"
+      ],
+      "output_pins": [
+        "Start:2#out"
+      ],
+      "properties": {
+        "line_id": "9a0006",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 16
+      }
+    },
+    {
+      "id": "Start:3",
+      "package": 0,
+      "source_type": "OptionGroup",
+      "kind": "hub",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start:3#in"
+      ],
+      "output_pins": [
+        "Start:3#out"
+      ],
+      "properties": {
+        "index": 1
+      },
+      "template": null,
+      "metadata": {
+        "col": 4,
+        "line": 17
+      }
+    },
+    {
+      "id": "Start:3:1",
+      "package": 0,
+      "source_type": "Option",
+      "kind": "dialogue_fragment",
+      "parent": "Start:3",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": "Stay and read.",
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start:3:1#in"
+      ],
+      "output_pins": [
+        "Start:3:1#out"
+      ],
+      "properties": {
+        "line_id": "9o0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 4,
+        "line": 17
+      }
+    },
+    {
+      "id": "Start:3:1:1",
+      "package": 0,
+      "source_type": "If",
+      "kind": "condition",
+      "parent": "Start:3:1",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "condition",
+        "text": "$gateOpen"
+      },
+      "input_pins": [
+        "Start:3:1:1#in"
+      ],
+      "output_pins": [
+        "Start:3:1:1#out"
+      ],
+      "properties": {},
+      "template": null,
+      "metadata": {
+        "col": 5,
+        "line": 18
+      }
+    },
+    {
+      "id": "Start:3:1:1:1",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start:3:1:1",
+      "technical_name": null,
+      "display_name": null,
+      "text": "The gate is open.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Start:3:1:1:1#in"
+      ],
+      "output_pins": [
+        "Start:3:1:1:1#out"
+      ],
+      "properties": {
+        "clause": "if",
+        "line_id": "9a0007",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 14,
+        "line": 19
+      }
+    },
+    {
+      "id": "Start:3:2",
+      "package": 0,
+      "source_type": "Option",
+      "kind": "dialogue_fragment",
+      "parent": "Start:3",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": "Leave now.",
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start:3:2#in"
+      ],
+      "output_pins": [
+        "Start:3:2#out"
+      ],
+      "properties": {
+        "line_id": "9o0002",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 4,
+        "line": 21
+      }
+    }
+  ],
+  "pins": [
+    {
+      "id": "Start#in",
+      "owner": "Start",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start#out",
+      "owner": "Start",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1#in",
+      "owner": "Start:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1#out",
+      "owner": "Start:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1:1#in",
+      "owner": "Start:1:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1:1#out",
+      "owner": "Start:1:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1:2#in",
+      "owner": "Start:1:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1:2#out",
+      "owner": "Start:1:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1:3#in",
+      "owner": "Start:1:3",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1:3#out",
+      "owner": "Start:1:3",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1:3:1#in",
+      "owner": "Start:1:3:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1:3:1#out",
+      "owner": "Start:1:3:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1:3:2#in",
+      "owner": "Start:1:3:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1:3:2#out",
+      "owner": "Start:1:3:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1:4#in",
+      "owner": "Start:1:4",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1:4#out",
+      "owner": "Start:1:4",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2#in",
+      "owner": "Start:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2#out",
+      "owner": "Start:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:3#in",
+      "owner": "Start:3",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:3#out",
+      "owner": "Start:3",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:3:1#in",
+      "owner": "Start:3:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:3:1#out",
+      "owner": "Start:3:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:3:1:1#in",
+      "owner": "Start:3:1:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:3:1:1#out",
+      "owner": "Start:3:1:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:3:1:1:1#in",
+      "owner": "Start:3:1:1:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:3:1:1:1#out",
+      "owner": "Start:3:1:1:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:3:2#in",
+      "owner": "Start:3:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:3:2#out",
+      "owner": "Start:3:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    }
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "kind": "connection",
+      "source": "Start",
+      "source_pin": "Start#out",
+      "target": "Start:1",
+      "target_pin": "Start:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e1",
+      "kind": "connection",
+      "source": "Start:1",
+      "source_pin": "Start:1#out",
+      "target": "Start:1:1",
+      "target_pin": "Start:1:1#in",
+      "index": 0,
+      "label": "if",
+      "properties": {}
+    },
+    {
+      "id": "e2",
+      "kind": "connection",
+      "source": "Start:1:1",
+      "source_pin": "Start:1:1#out",
+      "target": "Start:2",
+      "target_pin": "Start:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e3",
+      "kind": "connection",
+      "source": "Start:1",
+      "source_pin": "Start:1#out",
+      "target": "Start:1:2",
+      "target_pin": "Start:1:2#in",
+      "index": 1,
+      "label": "elseif:$visits < 3",
+      "properties": {}
+    },
+    {
+      "id": "e4",
+      "kind": "connection",
+      "source": "Start:1:2",
+      "source_pin": "Start:1:2#out",
+      "target": "Start:1:3",
+      "target_pin": "Start:1:3#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e5",
+      "kind": "connection",
+      "source": "Start:1:3",
+      "source_pin": "Start:1:3#out",
+      "target": "Start:1:3:1",
+      "target_pin": "Start:1:3:1#in",
+      "index": 0,
+      "label": "if",
+      "properties": {}
+    },
+    {
+      "id": "e6",
+      "kind": "connection",
+      "source": "Start:1:3:1",
+      "source_pin": "Start:1:3:1#out",
+      "target": "Start:2",
+      "target_pin": "Start:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e7",
+      "kind": "connection",
+      "source": "Start:1:3",
+      "source_pin": "Start:1:3#out",
+      "target": "Start:1:3:2",
+      "target_pin": "Start:1:3:2#in",
+      "index": 1,
+      "label": "else",
+      "properties": {}
+    },
+    {
+      "id": "e8",
+      "kind": "connection",
+      "source": "Start:1:3:2",
+      "source_pin": "Start:1:3:2#out",
+      "target": "Start:2",
+      "target_pin": "Start:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e9",
+      "kind": "connection",
+      "source": "Start:1",
+      "source_pin": "Start:1#out",
+      "target": "Start:1:4",
+      "target_pin": "Start:1:4#in",
+      "index": 2,
+      "label": "else",
+      "properties": {}
+    },
+    {
+      "id": "e10",
+      "kind": "connection",
+      "source": "Start:1:4",
+      "source_pin": "Start:1:4#out",
+      "target": "Start:2",
+      "target_pin": "Start:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e11",
+      "kind": "connection",
+      "source": "Start:2",
+      "source_pin": "Start:2#out",
+      "target": "Start:3",
+      "target_pin": "Start:3#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e12",
+      "kind": "connection",
+      "source": "Start:3",
+      "source_pin": "Start:3#out",
+      "target": "Start:3:1",
+      "target_pin": "Start:3:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e13",
+      "kind": "connection",
+      "source": "Start:3:1",
+      "source_pin": "Start:3:1#out",
+      "target": "Start:3:1:1",
+      "target_pin": "Start:3:1:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e14",
+      "kind": "connection",
+      "source": "Start:3:1:1",
+      "source_pin": "Start:3:1:1#out",
+      "target": "Start:3:1:1:1",
+      "target_pin": "Start:3:1:1:1#in",
+      "index": 0,
+      "label": "if",
+      "properties": {}
+    },
+    {
+      "id": "e15",
+      "kind": "connection",
+      "source": "Start:3",
+      "source_pin": "Start:3#out",
+      "target": "Start:3:2",
+      "target_pin": "Start:3:2#in",
+      "index": 1,
+      "label": null,
+      "properties": {}
+    }
+  ],
+  "choices": [
+    {
+      "edge": "e12",
+      "source": "Start:3",
+      "source_pin": "Start:3#out",
+      "target": "Start:3:1",
+      "text_source": "target_menu_text"
+    },
+    {
+      "edge": "e15",
+      "source": "Start:3",
+      "source_pin": "Start:3#out",
+      "target": "Start:3:2",
+      "text_source": "target_menu_text"
+    }
+  ],
+  "variable_namespaces": [
+    {
+      "name": "yarn",
+      "metadata": {},
+      "variables": [
+        "visits"
+      ]
+    }
+  ],
+  "variables": [
+    {
+      "namespace": "yarn",
+      "name": "visits",
+      "source_type": "declare",
+      "kind": "integer",
+      "value": 0,
+      "raw_value": "0",
+      "description": null,
+      "metadata": {}
+    }
+  ],
+  "hierarchy": [
+    {
+      "id": "Start",
+      "parent": null,
+      "index": 0,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "Start:1",
+      "parent": "Start",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:1:1",
+      "parent": "Start:1",
+      "index": 0,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "Start:1:2",
+      "parent": "Start:1",
+      "index": 1,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "Start:1:3",
+      "parent": "Start:1",
+      "index": 2,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "Start:1:3:1",
+      "parent": "Start:1:3",
+      "index": 0,
+      "depth": 3,
+      "properties": {}
+    },
+    {
+      "id": "Start:1:3:2",
+      "parent": "Start:1:3",
+      "index": 1,
+      "depth": 3,
+      "properties": {}
+    },
+    {
+      "id": "Start:1:4",
+      "parent": "Start:1",
+      "index": 3,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "Start:2",
+      "parent": "Start",
+      "index": 1,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:3",
+      "parent": "Start",
+      "index": 2,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:3:1",
+      "parent": "Start:3",
+      "index": 0,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "Start:3:1:1",
+      "parent": "Start:3:1",
+      "index": 0,
+      "depth": 3,
+      "properties": {}
+    },
+    {
+      "id": "Start:3:1:1:1",
+      "parent": "Start:3:1:1",
+      "index": 0,
+      "depth": 4,
+      "properties": {}
+    },
+    {
+      "id": "Start:3:2",
+      "parent": "Start:3",
+      "index": 1,
+      "depth": 2,
+      "properties": {}
+    }
+  ],
+  "warnings": []
+}

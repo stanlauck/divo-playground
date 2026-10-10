@@ -1,0 +1,16 @@
+title: Start
+---
+// A whole-line comment is dropped.
+Ada: You came back. #line:3a0001
+Narrator: The lamp above the desk flickers. #line:3a0002 #atmosphere #night
+Bob: Press # to continue. #line:3a0003
+Cy: An escaped \# stays literal text. #line:3a0004
+Dee: The url http://example.com/a#b is prose. #line:3a0005
+Eve: Quoted "# not a tag" is prose too. #line:3a0006
+Fay: Tag then a trailing comment. #line:3a0007 #kept // dropped
+No speaker on this line at all. #line:3a0008
+10:30 in the morning is not a speaker. #line:3a0009
+Mary-Jane: Hyphens and apostrophes are allowed: it's fine. #line:3a0010
+_Narrator: A leading underscore is allowed. #line:3a0011
+Ada: Inline comment after text. // dropped before any tag
+===

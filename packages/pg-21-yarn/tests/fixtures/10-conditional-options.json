@@ -1,0 +1,795 @@
+{
+  "version": 1,
+  "text_mode": "literal",
+  "metadata": {
+    "files": [
+      "10-conditional-options.yarn"
+    ],
+    "generator": "pg-21-yarn 0.1.0",
+    "source_format": "yarn"
+  },
+  "definitions": [],
+  "packages": [
+    {
+      "index": 0,
+      "name": "10-conditional-options",
+      "metadata": {
+        "path": "10-conditional-options.yarn"
+      },
+      "node_ids": [
+        "Start",
+        "Start:1",
+        "Start:2",
+        "Start:2:1",
+        "Start:2:1:1",
+        "Start:2:2",
+        "Start:2:2:1",
+        "Start:2:3",
+        "Start:2:3:1",
+        "Start:2:4",
+        "Start:3"
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "Start",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "Start",
+      "display_name": "Start",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start#in"
+      ],
+      "output_pins": [
+        "Start#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 1
+      }
+    },
+    {
+      "id": "Start:1",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": "The merchant waits by the stall.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Start:1#in"
+      ],
+      "output_pins": [
+        "Start:1#out"
+      ],
+      "properties": {
+        "line_id": "10a0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 4
+      }
+    },
+    {
+      "id": "Start:2",
+      "package": 0,
+      "source_type": "OptionGroup",
+      "kind": "hub",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start:2#in"
+      ],
+      "output_pins": [
+        "Start:2#out"
+      ],
+      "properties": {
+        "index": 1
+      },
+      "template": null,
+      "metadata": {
+        "col": 4,
+        "line": 5
+      }
+    },
+    {
+      "id": "Start:2:1",
+      "package": 0,
+      "source_type": "Option",
+      "kind": "dialogue_fragment",
+      "parent": "Start:2",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": "Buy the map.",
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start:2:1#in"
+      ],
+      "output_pins": [
+        "Start:2:1#out"
+      ],
+      "properties": {
+        "condition": "$gold >= 10",
+        "line_id": "10o0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 4,
+        "line": 5
+      }
+    },
+    {
+      "id": "Start:2:1:1",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start:2:1",
+      "technical_name": null,
+      "display_name": null,
+      "text": "A fine choice.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Start:2:1:1#in"
+      ],
+      "output_pins": [
+        "Start:2:1:1#out"
+      ],
+      "properties": {
+        "line_id": "10a0002",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 10,
+        "line": 6
+      }
+    },
+    {
+      "id": "Start:2:2",
+      "package": 0,
+      "source_type": "Option",
+      "kind": "dialogue_fragment",
+      "parent": "Start:2",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": "Haggle first.",
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start:2:2#in"
+      ],
+      "output_pins": [
+        "Start:2:2#out"
+      ],
+      "properties": {
+        "condition": "$gold > 0 and $gold < 10",
+        "line_id": "10o0002",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 4,
+        "line": 7
+      }
+    },
+    {
+      "id": "Start:2:2:1",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start:2:2",
+      "technical_name": null,
+      "display_name": null,
+      "text": "Numbers, then.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Start:2:2:1#in"
+      ],
+      "output_pins": [
+        "Start:2:2:1#out"
+      ],
+      "properties": {
+        "line_id": "10a0003",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 10,
+        "line": 8
+      }
+    },
+    {
+      "id": "Start:2:3",
+      "package": 0,
+      "source_type": "Option",
+      "kind": "dialogue_fragment",
+      "parent": "Start:2",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": "Buy nothing.",
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start:2:3#in"
+      ],
+      "output_pins": [
+        "Start:2:3#out"
+      ],
+      "properties": {
+        "line_id": "10o0003",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 4,
+        "line": 9
+      }
+    },
+    {
+      "id": "Start:2:3:1",
+      "package": 0,
+      "source_type": "Stop",
+      "kind": "jump",
+      "parent": "Start:2:3",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start:2:3:1#in"
+      ],
+      "output_pins": [
+        "Start:2:3:1#out"
+      ],
+      "properties": {
+        "target": "stop"
+      },
+      "template": null,
+      "metadata": {
+        "col": 5,
+        "line": 10
+      }
+    },
+    {
+      "id": "Start:2:4",
+      "package": 0,
+      "source_type": "Option",
+      "kind": "dialogue_fragment",
+      "parent": "Start:2",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": "Leave quietly.",
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start:2:4#in"
+      ],
+      "output_pins": [
+        "Start:2:4#out"
+      ],
+      "properties": {
+        "line_id": "10o0004",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 4,
+        "line": 11
+      }
+    },
+    {
+      "id": "Start:3",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": "The road continues either way.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Start:3#in"
+      ],
+      "output_pins": [
+        "Start:3#out"
+      ],
+      "properties": {
+        "line_id": "10a0004",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 12
+      }
+    }
+  ],
+  "pins": [
+    {
+      "id": "Start#in",
+      "owner": "Start",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start#out",
+      "owner": "Start",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1#in",
+      "owner": "Start:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1#out",
+      "owner": "Start:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2#in",
+      "owner": "Start:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2#out",
+      "owner": "Start:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1#in",
+      "owner": "Start:2:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1#out",
+      "owner": "Start:2:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:1#in",
+      "owner": "Start:2:1:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:1#out",
+      "owner": "Start:2:1:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:2#in",
+      "owner": "Start:2:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:2#out",
+      "owner": "Start:2:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:2:1#in",
+      "owner": "Start:2:2:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:2:1#out",
+      "owner": "Start:2:2:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:3#in",
+      "owner": "Start:2:3",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:3#out",
+      "owner": "Start:2:3",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:3:1#in",
+      "owner": "Start:2:3:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:3:1#out",
+      "owner": "Start:2:3:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:4#in",
+      "owner": "Start:2:4",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:4#out",
+      "owner": "Start:2:4",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:3#in",
+      "owner": "Start:3",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:3#out",
+      "owner": "Start:3",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    }
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "kind": "connection",
+      "source": "Start",
+      "source_pin": "Start#out",
+      "target": "Start:1",
+      "target_pin": "Start:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e1",
+      "kind": "connection",
+      "source": "Start:1",
+      "source_pin": "Start:1#out",
+      "target": "Start:2",
+      "target_pin": "Start:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e2",
+      "kind": "connection",
+      "source": "Start:2",
+      "source_pin": "Start:2#out",
+      "target": "Start:2:1",
+      "target_pin": "Start:2:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e3",
+      "kind": "connection",
+      "source": "Start:2:1",
+      "source_pin": "Start:2:1#out",
+      "target": "Start:2:1:1",
+      "target_pin": "Start:2:1:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e4",
+      "kind": "connection",
+      "source": "Start:2:1:1",
+      "source_pin": "Start:2:1:1#out",
+      "target": "Start:3",
+      "target_pin": "Start:3#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e5",
+      "kind": "connection",
+      "source": "Start:2",
+      "source_pin": "Start:2#out",
+      "target": "Start:2:2",
+      "target_pin": "Start:2:2#in",
+      "index": 1,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e6",
+      "kind": "connection",
+      "source": "Start:2:2",
+      "source_pin": "Start:2:2#out",
+      "target": "Start:2:2:1",
+      "target_pin": "Start:2:2:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e7",
+      "kind": "connection",
+      "source": "Start:2:2:1",
+      "source_pin": "Start:2:2:1#out",
+      "target": "Start:3",
+      "target_pin": "Start:3#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e8",
+      "kind": "connection",
+      "source": "Start:2",
+      "source_pin": "Start:2#out",
+      "target": "Start:2:3",
+      "target_pin": "Start:2:3#in",
+      "index": 2,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e9",
+      "kind": "connection",
+      "source": "Start:2:3",
+      "source_pin": "Start:2:3#out",
+      "target": "Start:2:3:1",
+      "target_pin": "Start:2:3:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e10",
+      "kind": "connection",
+      "source": "Start:2",
+      "source_pin": "Start:2#out",
+      "target": "Start:2:4",
+      "target_pin": "Start:2:4#in",
+      "index": 3,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e11",
+      "kind": "connection",
+      "source": "Start:2:4",
+      "source_pin": "Start:2:4#out",
+      "target": "Start:3",
+      "target_pin": "Start:3#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    }
+  ],
+  "choices": [
+    {
+      "edge": "e2",
+      "source": "Start:2",
+      "source_pin": "Start:2#out",
+      "target": "Start:2:1",
+      "text_source": "target_menu_text"
+    },
+    {
+      "edge": "e5",
+      "source": "Start:2",
+      "source_pin": "Start:2#out",
+      "target": "Start:2:2",
+      "text_source": "target_menu_text"
+    },
+    {
+      "edge": "e8",
+      "source": "Start:2",
+      "source_pin": "Start:2#out",
+      "target": "Start:2:3",
+      "text_source": "target_menu_text"
+    },
+    {
+      "edge": "e10",
+      "source": "Start:2",
+      "source_pin": "Start:2#out",
+      "target": "Start:2:4",
+      "text_source": "target_menu_text"
+    }
+  ],
+  "variable_namespaces": [
+    {
+      "name": "yarn",
+      "metadata": {},
+      "variables": [
+        "gold"
+      ]
+    }
+  ],
+  "variables": [
+    {
+      "namespace": "yarn",
+      "name": "gold",
+      "source_type": "declare",
+      "kind": "integer",
+      "value": 0,
+      "raw_value": "0",
+      "description": null,
+      "metadata": {}
+    }
+  ],
+  "hierarchy": [
+    {
+      "id": "Start",
+      "parent": null,
+      "index": 0,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "Start:1",
+      "parent": "Start",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:2",
+      "parent": "Start",
+      "index": 1,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1",
+      "parent": "Start:2",
+      "index": 0,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:1",
+      "parent": "Start:2:1",
+      "index": 0,
+      "depth": 3,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:2",
+      "parent": "Start:2",
+      "index": 1,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:2:1",
+      "parent": "Start:2:2",
+      "index": 0,
+      "depth": 3,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:3",
+      "parent": "Start:2",
+      "index": 2,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:3:1",
+      "parent": "Start:2:3",
+      "index": 0,
+      "depth": 3,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:4",
+      "parent": "Start:2",
+      "index": 3,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "Start:3",
+      "parent": "Start",
+      "index": 2,
+      "depth": 1,
+      "properties": {}
+    }
+  ],
+  "warnings": []
+}

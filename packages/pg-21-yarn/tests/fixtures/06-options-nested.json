@@ -1,0 +1,1089 @@
+{
+  "version": 1,
+  "text_mode": "literal",
+  "metadata": {
+    "files": [
+      "06-options-nested.yarn"
+    ],
+    "generator": "pg-21-yarn 0.1.0",
+    "source_format": "yarn"
+  },
+  "definitions": [],
+  "packages": [
+    {
+      "index": 0,
+      "name": "06-options-nested",
+      "metadata": {
+        "path": "06-options-nested.yarn"
+      },
+      "node_ids": [
+        "Start",
+        "Start:1",
+        "Start:2",
+        "Start:2:1",
+        "Start:2:1:1",
+        "Start:2:1:2",
+        "Start:2:1:2:1",
+        "Start:2:1:2:1:1",
+        "Start:2:1:2:2",
+        "Start:2:1:2:2:1",
+        "Start:2:1:2:3",
+        "Start:2:2",
+        "Start:2:2:1",
+        "Start:2:3",
+        "End",
+        "End:1"
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "Start",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "Start",
+      "display_name": "Start",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start#in"
+      ],
+      "output_pins": [
+        "Start#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 1
+      }
+    },
+    {
+      "id": "Start:1",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": "Choose a road.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Start:1#in"
+      ],
+      "output_pins": [
+        "Start:1#out"
+      ],
+      "properties": {
+        "line_id": "6a0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 3
+      }
+    },
+    {
+      "id": "Start:2",
+      "package": 0,
+      "source_type": "OptionGroup",
+      "kind": "hub",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start:2#in"
+      ],
+      "output_pins": [
+        "Start:2#out"
+      ],
+      "properties": {
+        "index": 1
+      },
+      "template": null,
+      "metadata": {
+        "col": 4,
+        "line": 4
+      }
+    },
+    {
+      "id": "Start:2:1",
+      "package": 0,
+      "source_type": "Option",
+      "kind": "dialogue_fragment",
+      "parent": "Start:2",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": "Outer one.",
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start:2:1#in"
+      ],
+      "output_pins": [
+        "Start:2:1#out"
+      ],
+      "properties": {
+        "line_id": "6o0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 4,
+        "line": 4
+      }
+    },
+    {
+      "id": "Start:2:1:1",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start:2:1",
+      "technical_name": null,
+      "display_name": null,
+      "text": "You picked the first.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Start:2:1:1#in"
+      ],
+      "output_pins": [
+        "Start:2:1:1#out"
+      ],
+      "properties": {
+        "line_id": "6a0002",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 10,
+        "line": 5
+      }
+    },
+    {
+      "id": "Start:2:1:2",
+      "package": 0,
+      "source_type": "OptionGroup",
+      "kind": "hub",
+      "parent": "Start:2:1",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start:2:1:2#in"
+      ],
+      "output_pins": [
+        "Start:2:1:2#out"
+      ],
+      "properties": {
+        "index": 2
+      },
+      "template": null,
+      "metadata": {
+        "col": 8,
+        "line": 6
+      }
+    },
+    {
+      "id": "Start:2:1:2:1",
+      "package": 0,
+      "source_type": "Option",
+      "kind": "dialogue_fragment",
+      "parent": "Start:2:1:2",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": "Inner one.",
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start:2:1:2:1#in"
+      ],
+      "output_pins": [
+        "Start:2:1:2:1#out"
+      ],
+      "properties": {
+        "line_id": "6o0002",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 8,
+        "line": 6
+      }
+    },
+    {
+      "id": "Start:2:1:2:1:1",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start:2:1:2:1",
+      "technical_name": null,
+      "display_name": null,
+      "text": "Deeper still.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Start:2:1:2:1:1#in"
+      ],
+      "output_pins": [
+        "Start:2:1:2:1:1#out"
+      ],
+      "properties": {
+        "line_id": "6a0003",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 14,
+        "line": 7
+      }
+    },
+    {
+      "id": "Start:2:1:2:2",
+      "package": 0,
+      "source_type": "Option",
+      "kind": "dialogue_fragment",
+      "parent": "Start:2:1:2",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": "Inner two.",
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start:2:1:2:2#in"
+      ],
+      "output_pins": [
+        "Start:2:1:2:2#out"
+      ],
+      "properties": {
+        "line_id": "6o0003",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 8,
+        "line": 8
+      }
+    },
+    {
+      "id": "Start:2:1:2:2:1",
+      "package": 0,
+      "source_type": "Jump",
+      "kind": "jump",
+      "parent": "Start:2:1:2:2",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start:2:1:2:2:1#in"
+      ],
+      "output_pins": [
+        "Start:2:1:2:2:1#out"
+      ],
+      "properties": {
+        "target": "End"
+      },
+      "template": null,
+      "metadata": {
+        "col": 9,
+        "line": 9
+      }
+    },
+    {
+      "id": "Start:2:1:2:3",
+      "package": 0,
+      "source_type": "Option",
+      "kind": "dialogue_fragment",
+      "parent": "Start:2:1:2",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": "Inner three.",
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start:2:1:2:3#in"
+      ],
+      "output_pins": [
+        "Start:2:1:2:3#out"
+      ],
+      "properties": {
+        "line_id": "6o0004",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 8,
+        "line": 10
+      }
+    },
+    {
+      "id": "Start:2:2",
+      "package": 0,
+      "source_type": "Option",
+      "kind": "dialogue_fragment",
+      "parent": "Start:2",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": "Outer two.",
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start:2:2#in"
+      ],
+      "output_pins": [
+        "Start:2:2#out"
+      ],
+      "properties": {
+        "line_id": "6o0005",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 4,
+        "line": 11
+      }
+    },
+    {
+      "id": "Start:2:2:1",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start:2:2",
+      "technical_name": null,
+      "display_name": null,
+      "text": "This body is indented with one tab.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Start:2:2:1#in"
+      ],
+      "output_pins": [
+        "Start:2:2:1#out"
+      ],
+      "properties": {
+        "line_id": "6a0004",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 7,
+        "line": 12
+      }
+    },
+    {
+      "id": "Start:2:3",
+      "package": 0,
+      "source_type": "Option",
+      "kind": "dialogue_fragment",
+      "parent": "Start:2",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": "Outer three.",
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start:2:3#in"
+      ],
+      "output_pins": [
+        "Start:2:3#out"
+      ],
+      "properties": {
+        "line_id": "6o0006",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 4,
+        "line": 13
+      }
+    },
+    {
+      "id": "End",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "End",
+      "display_name": "End",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "End#in"
+      ],
+      "output_pins": [
+        "End#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 16
+      }
+    },
+    {
+      "id": "End:1",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "End",
+      "technical_name": null,
+      "display_name": null,
+      "text": "It ends here.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "End:1#in"
+      ],
+      "output_pins": [
+        "End:1#out"
+      ],
+      "properties": {
+        "line_id": "6b0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 18
+      }
+    }
+  ],
+  "pins": [
+    {
+      "id": "Start#in",
+      "owner": "Start",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start#out",
+      "owner": "Start",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1#in",
+      "owner": "Start:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1#out",
+      "owner": "Start:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2#in",
+      "owner": "Start:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2#out",
+      "owner": "Start:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1#in",
+      "owner": "Start:2:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1#out",
+      "owner": "Start:2:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:1#in",
+      "owner": "Start:2:1:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:1#out",
+      "owner": "Start:2:1:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:2#in",
+      "owner": "Start:2:1:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:2#out",
+      "owner": "Start:2:1:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:2:1#in",
+      "owner": "Start:2:1:2:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:2:1#out",
+      "owner": "Start:2:1:2:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:2:1:1#in",
+      "owner": "Start:2:1:2:1:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:2:1:1#out",
+      "owner": "Start:2:1:2:1:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:2:2#in",
+      "owner": "Start:2:1:2:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:2:2#out",
+      "owner": "Start:2:1:2:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:2:2:1#in",
+      "owner": "Start:2:1:2:2:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:2:2:1#out",
+      "owner": "Start:2:1:2:2:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:2:3#in",
+      "owner": "Start:2:1:2:3",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:2:3#out",
+      "owner": "Start:2:1:2:3",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:2#in",
+      "owner": "Start:2:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:2#out",
+      "owner": "Start:2:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:2:1#in",
+      "owner": "Start:2:2:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:2:1#out",
+      "owner": "Start:2:2:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:3#in",
+      "owner": "Start:2:3",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:3#out",
+      "owner": "Start:2:3",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "End#in",
+      "owner": "End",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "End#out",
+      "owner": "End",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "End:1#in",
+      "owner": "End:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "End:1#out",
+      "owner": "End:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    }
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "kind": "connection",
+      "source": "Start",
+      "source_pin": "Start#out",
+      "target": "Start:1",
+      "target_pin": "Start:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e1",
+      "kind": "connection",
+      "source": "Start:1",
+      "source_pin": "Start:1#out",
+      "target": "Start:2",
+      "target_pin": "Start:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e2",
+      "kind": "connection",
+      "source": "Start:2",
+      "source_pin": "Start:2#out",
+      "target": "Start:2:1",
+      "target_pin": "Start:2:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e3",
+      "kind": "connection",
+      "source": "Start:2:1",
+      "source_pin": "Start:2:1#out",
+      "target": "Start:2:1:1",
+      "target_pin": "Start:2:1:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e4",
+      "kind": "connection",
+      "source": "Start:2:1:1",
+      "source_pin": "Start:2:1:1#out",
+      "target": "Start:2:1:2",
+      "target_pin": "Start:2:1:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e5",
+      "kind": "connection",
+      "source": "Start:2:1:2",
+      "source_pin": "Start:2:1:2#out",
+      "target": "Start:2:1:2:1",
+      "target_pin": "Start:2:1:2:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e6",
+      "kind": "connection",
+      "source": "Start:2:1:2:1",
+      "source_pin": "Start:2:1:2:1#out",
+      "target": "Start:2:1:2:1:1",
+      "target_pin": "Start:2:1:2:1:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e7",
+      "kind": "connection",
+      "source": "Start:2:1:2",
+      "source_pin": "Start:2:1:2#out",
+      "target": "Start:2:1:2:2",
+      "target_pin": "Start:2:1:2:2#in",
+      "index": 1,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e8",
+      "kind": "connection",
+      "source": "Start:2:1:2:2",
+      "source_pin": "Start:2:1:2:2#out",
+      "target": "Start:2:1:2:2:1",
+      "target_pin": "Start:2:1:2:2:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e9",
+      "kind": "jump",
+      "source": "Start:2:1:2:2:1",
+      "source_pin": "Start:2:1:2:2:1#out",
+      "target": "End",
+      "target_pin": "End#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e10",
+      "kind": "connection",
+      "source": "Start:2:1:2",
+      "source_pin": "Start:2:1:2#out",
+      "target": "Start:2:1:2:3",
+      "target_pin": "Start:2:1:2:3#in",
+      "index": 2,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e11",
+      "kind": "connection",
+      "source": "Start:2",
+      "source_pin": "Start:2#out",
+      "target": "Start:2:2",
+      "target_pin": "Start:2:2#in",
+      "index": 1,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e12",
+      "kind": "connection",
+      "source": "Start:2:2",
+      "source_pin": "Start:2:2#out",
+      "target": "Start:2:2:1",
+      "target_pin": "Start:2:2:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e13",
+      "kind": "connection",
+      "source": "Start:2",
+      "source_pin": "Start:2#out",
+      "target": "Start:2:3",
+      "target_pin": "Start:2:3#in",
+      "index": 2,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e14",
+      "kind": "connection",
+      "source": "End",
+      "source_pin": "End#out",
+      "target": "End:1",
+      "target_pin": "End:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    }
+  ],
+  "choices": [
+    {
+      "edge": "e2",
+      "source": "Start:2",
+      "source_pin": "Start:2#out",
+      "target": "Start:2:1",
+      "text_source": "target_menu_text"
+    },
+    {
+      "edge": "e5",
+      "source": "Start:2:1:2",
+      "source_pin": "Start:2:1:2#out",
+      "target": "Start:2:1:2:1",
+      "text_source": "target_menu_text"
+    },
+    {
+      "edge": "e7",
+      "source": "Start:2:1:2",
+      "source_pin": "Start:2:1:2#out",
+      "target": "Start:2:1:2:2",
+      "text_source": "target_menu_text"
+    },
+    {
+      "edge": "e10",
+      "source": "Start:2:1:2",
+      "source_pin": "Start:2:1:2#out",
+      "target": "Start:2:1:2:3",
+      "text_source": "target_menu_text"
+    },
+    {
+      "edge": "e11",
+      "source": "Start:2",
+      "source_pin": "Start:2#out",
+      "target": "Start:2:2",
+      "text_source": "target_menu_text"
+    },
+    {
+      "edge": "e13",
+      "source": "Start:2",
+      "source_pin": "Start:2#out",
+      "target": "Start:2:3",
+      "text_source": "target_menu_text"
+    }
+  ],
+  "variable_namespaces": [
+    {
+      "name": "yarn",
+      "metadata": {},
+      "variables": []
+    }
+  ],
+  "variables": [],
+  "hierarchy": [
+    {
+      "id": "Start",
+      "parent": null,
+      "index": 0,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "Start:1",
+      "parent": "Start",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:2",
+      "parent": "Start",
+      "index": 1,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1",
+      "parent": "Start:2",
+      "index": 0,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:1",
+      "parent": "Start:2:1",
+      "index": 0,
+      "depth": 3,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:2",
+      "parent": "Start:2:1",
+      "index": 1,
+      "depth": 3,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:2:1",
+      "parent": "Start:2:1:2",
+      "index": 0,
+      "depth": 4,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:2:1:1",
+      "parent": "Start:2:1:2:1",
+      "index": 0,
+      "depth": 5,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:2:2",
+      "parent": "Start:2:1:2",
+      "index": 1,
+      "depth": 4,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:2:2:1",
+      "parent": "Start:2:1:2:2",
+      "index": 0,
+      "depth": 5,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:1:2:3",
+      "parent": "Start:2:1:2",
+      "index": 2,
+      "depth": 4,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:2",
+      "parent": "Start:2",
+      "index": 1,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:2:1",
+      "parent": "Start:2:2",
+      "index": 0,
+      "depth": 3,
+      "properties": {}
+    },
+    {
+      "id": "Start:2:3",
+      "parent": "Start:2",
+      "index": 2,
+      "depth": 2,
+      "properties": {}
+    },
+    {
+      "id": "End",
+      "parent": null,
+      "index": 1,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "End:1",
+      "parent": "End",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    }
+  ],
+  "warnings": []
+}

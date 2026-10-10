@@ -1,0 +1,22 @@
+title: Repeated
+---
+Ada: The first block called Repeated. #line:14a0001
+===
+
+title: Repeated
+---
+Ada: The second block called Repeated. #line:14a0002
+<<jump Repeated>>
+===
+
+title: Repeated
+---
+Ada: The third block called Repeated. #line:14a0003
+===
+
+title: LineIds
+---
+Ada: First use of the id. #line:14b0001
+Ada: Second use of the same id. #line:14b0001
+Ada: A third line, and the id repeats again. #line:14b0001
+===

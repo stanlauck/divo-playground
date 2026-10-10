@@ -1,0 +1,705 @@
+{
+  "version": 1,
+  "text_mode": "literal",
+  "metadata": {
+    "files": [
+      "08-variables.yarn"
+    ],
+    "generator": "pg-21-yarn 0.1.0",
+    "source_format": "yarn"
+  },
+  "definitions": [],
+  "packages": [
+    {
+      "index": 0,
+      "name": "08-variables",
+      "metadata": {
+        "path": "08-variables.yarn"
+      },
+      "node_ids": [
+        "Start",
+        "Start:1",
+        "Start:2",
+        "Start:3",
+        "Start:4",
+        "Start:5",
+        "Start:6",
+        "Start:7"
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "Start",
+      "package": 0,
+      "source_type": "Node",
+      "kind": "flow_fragment",
+      "parent": null,
+      "technical_name": "Start",
+      "display_name": "Start",
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": null,
+      "input_pins": [
+        "Start#in"
+      ],
+      "output_pins": [
+        "Start#out"
+      ],
+      "properties": {
+        "headers": {},
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 1
+      }
+    },
+    {
+      "id": "Start:1",
+      "package": 0,
+      "source_type": "Set",
+      "kind": "instruction",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "instruction",
+        "text": "set $gold = 5"
+      },
+      "input_pins": [
+        "Start:1#in"
+      ],
+      "output_pins": [
+        "Start:1#out"
+      ],
+      "properties": {
+        "args": "$gold = 5",
+        "command": "set",
+        "expression": "5",
+        "operator": "=",
+        "variable": "gold"
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 16
+      }
+    },
+    {
+      "id": "Start:2",
+      "package": 0,
+      "source_type": "Set",
+      "kind": "instruction",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "instruction",
+        "text": "set $gold += 2"
+      },
+      "input_pins": [
+        "Start:2#in"
+      ],
+      "output_pins": [
+        "Start:2#out"
+      ],
+      "properties": {
+        "args": "$gold += 2",
+        "command": "set",
+        "expression": "2",
+        "operator": "+=",
+        "variable": "gold"
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 17
+      }
+    },
+    {
+      "id": "Start:3",
+      "package": 0,
+      "source_type": "Set",
+      "kind": "instruction",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "instruction",
+        "text": "set $gold -= 1"
+      },
+      "input_pins": [
+        "Start:3#in"
+      ],
+      "output_pins": [
+        "Start:3#out"
+      ],
+      "properties": {
+        "args": "$gold -= 1",
+        "command": "set",
+        "expression": "1",
+        "operator": "-=",
+        "variable": "gold"
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 18
+      }
+    },
+    {
+      "id": "Start:4",
+      "package": 0,
+      "source_type": "Set",
+      "kind": "instruction",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "instruction",
+        "text": "set $gold *= 3"
+      },
+      "input_pins": [
+        "Start:4#in"
+      ],
+      "output_pins": [
+        "Start:4#out"
+      ],
+      "properties": {
+        "args": "$gold *= 3",
+        "command": "set",
+        "expression": "3",
+        "operator": "*=",
+        "variable": "gold"
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 19
+      }
+    },
+    {
+      "id": "Start:5",
+      "package": 0,
+      "source_type": "Set",
+      "kind": "instruction",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "instruction",
+        "text": "set $gold /= 2"
+      },
+      "input_pins": [
+        "Start:5#in"
+      ],
+      "output_pins": [
+        "Start:5#out"
+      ],
+      "properties": {
+        "args": "$gold /= 2",
+        "command": "set",
+        "expression": "2",
+        "operator": "/=",
+        "variable": "gold"
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 20
+      }
+    },
+    {
+      "id": "Start:6",
+      "package": 0,
+      "source_type": "Set",
+      "kind": "instruction",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": null,
+      "menu_text": null,
+      "speaker": null,
+      "script": {
+        "language": "yarn",
+        "role": "instruction",
+        "text": "set $gold to 9"
+      },
+      "input_pins": [
+        "Start:6#in"
+      ],
+      "output_pins": [
+        "Start:6#out"
+      ],
+      "properties": {
+        "args": "$gold to 9",
+        "command": "set",
+        "expression": "9",
+        "operator": "to",
+        "variable": "gold"
+      },
+      "template": null,
+      "metadata": {
+        "col": 1,
+        "line": 21
+      }
+    },
+    {
+      "id": "Start:7",
+      "package": 0,
+      "source_type": "Line",
+      "kind": "dialogue_fragment",
+      "parent": "Start",
+      "technical_name": null,
+      "display_name": null,
+      "text": "The arithmetic is never evaluated.",
+      "menu_text": null,
+      "speaker": "Ada",
+      "script": null,
+      "input_pins": [
+        "Start:7#in"
+      ],
+      "output_pins": [
+        "Start:7#out"
+      ],
+      "properties": {
+        "line_id": "8a0001",
+        "markup": false,
+        "tags": []
+      },
+      "template": null,
+      "metadata": {
+        "col": 6,
+        "line": 23
+      }
+    }
+  ],
+  "pins": [
+    {
+      "id": "Start#in",
+      "owner": "Start",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start#out",
+      "owner": "Start",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1#in",
+      "owner": "Start:1",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:1#out",
+      "owner": "Start:1",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2#in",
+      "owner": "Start:2",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:2#out",
+      "owner": "Start:2",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:3#in",
+      "owner": "Start:3",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:3#out",
+      "owner": "Start:3",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:4#in",
+      "owner": "Start:4",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:4#out",
+      "owner": "Start:4",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:5#in",
+      "owner": "Start:5",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:5#out",
+      "owner": "Start:5",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:6#in",
+      "owner": "Start:6",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:6#out",
+      "owner": "Start:6",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:7#in",
+      "owner": "Start:7",
+      "direction": "input",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    },
+    {
+      "id": "Start:7#out",
+      "owner": "Start:7",
+      "direction": "output",
+      "index": 0,
+      "script": null,
+      "properties": {}
+    }
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "kind": "connection",
+      "source": "Start",
+      "source_pin": "Start#out",
+      "target": "Start:1",
+      "target_pin": "Start:1#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e1",
+      "kind": "connection",
+      "source": "Start:1",
+      "source_pin": "Start:1#out",
+      "target": "Start:2",
+      "target_pin": "Start:2#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e2",
+      "kind": "connection",
+      "source": "Start:2",
+      "source_pin": "Start:2#out",
+      "target": "Start:3",
+      "target_pin": "Start:3#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e3",
+      "kind": "connection",
+      "source": "Start:3",
+      "source_pin": "Start:3#out",
+      "target": "Start:4",
+      "target_pin": "Start:4#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e4",
+      "kind": "connection",
+      "source": "Start:4",
+      "source_pin": "Start:4#out",
+      "target": "Start:5",
+      "target_pin": "Start:5#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e5",
+      "kind": "connection",
+      "source": "Start:5",
+      "source_pin": "Start:5#out",
+      "target": "Start:6",
+      "target_pin": "Start:6#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    },
+    {
+      "id": "e6",
+      "kind": "connection",
+      "source": "Start:6",
+      "source_pin": "Start:6#out",
+      "target": "Start:7",
+      "target_pin": "Start:7#in",
+      "index": 0,
+      "label": null,
+      "properties": {}
+    }
+  ],
+  "choices": [],
+  "variable_namespaces": [
+    {
+      "name": "yarn",
+      "metadata": {},
+      "variables": [
+        "gold",
+        "gateOpen",
+        "playerName",
+        "ratio",
+        "day",
+        "flag",
+        "label",
+        "odd",
+        "weird",
+        "computed"
+      ]
+    }
+  ],
+  "variables": [
+    {
+      "namespace": "yarn",
+      "name": "gold",
+      "source_type": "declare",
+      "kind": "integer",
+      "value": 0,
+      "raw_value": "0",
+      "description": "Gold the player carries.",
+      "metadata": {}
+    },
+    {
+      "namespace": "yarn",
+      "name": "gateOpen",
+      "source_type": "declare",
+      "kind": "boolean",
+      "value": false,
+      "raw_value": "false",
+      "description": "Whether the gate stands open.",
+      "metadata": {}
+    },
+    {
+      "namespace": "yarn",
+      "name": "playerName",
+      "source_type": "declare",
+      "kind": "string",
+      "value": "Wren",
+      "raw_value": "\"Wren\"",
+      "description": "The name the player chose.",
+      "metadata": {}
+    },
+    {
+      "namespace": "yarn",
+      "name": "ratio",
+      "source_type": "declare",
+      "kind": "float",
+      "value": 0.25,
+      "raw_value": "0.25",
+      "description": null,
+      "metadata": {}
+    },
+    {
+      "namespace": "yarn",
+      "name": "day",
+      "source_type": "declare",
+      "kind": "integer",
+      "value": 3,
+      "raw_value": "3",
+      "description": null,
+      "metadata": {}
+    },
+    {
+      "namespace": "yarn",
+      "name": "flag",
+      "source_type": "declare",
+      "kind": "boolean",
+      "value": true,
+      "raw_value": "true",
+      "description": null,
+      "metadata": {}
+    },
+    {
+      "namespace": "yarn",
+      "name": "label",
+      "source_type": "declare",
+      "kind": "string",
+      "value": "six",
+      "raw_value": "\"six\"",
+      "description": null,
+      "metadata": {}
+    },
+    {
+      "namespace": "yarn",
+      "name": "odd",
+      "source_type": "declare",
+      "kind": "integer",
+      "value": 7,
+      "raw_value": "7",
+      "description": null,
+      "metadata": {}
+    },
+    {
+      "namespace": "yarn",
+      "name": "weird",
+      "source_type": "declare",
+      "kind": "integer",
+      "value": 1,
+      "raw_value": "1",
+      "description": null,
+      "metadata": {}
+    },
+    {
+      "namespace": "yarn",
+      "name": "computed",
+      "source_type": "declare",
+      "kind": "other",
+      "value": "$gold + 1",
+      "raw_value": "$gold + 1",
+      "description": null,
+      "metadata": {}
+    }
+  ],
+  "hierarchy": [
+    {
+      "id": "Start",
+      "parent": null,
+      "index": 0,
+      "depth": 0,
+      "properties": {}
+    },
+    {
+      "id": "Start:1",
+      "parent": "Start",
+      "index": 0,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:2",
+      "parent": "Start",
+      "index": 1,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:3",
+      "parent": "Start",
+      "index": 2,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:4",
+      "parent": "Start",
+      "index": 3,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:5",
+      "parent": "Start",
+      "index": 4,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:6",
+      "parent": "Start",
+      "index": 5,
+      "depth": 1,
+      "properties": {}
+    },
+    {
+      "id": "Start:7",
+      "parent": "Start",
+      "index": 6,
+      "depth": 1,
+      "properties": {}
+    }
+  ],
+  "warnings": [
+    {
+      "kind": "unknown_variable_type",
+      "source": "08-variables.yarn",
+      "reference": null
+    },
+    {
+      "kind": "unknown_variable_type",
+      "source": "08-variables.yarn",
+      "reference": null
+    },
+    {
+      "kind": "unknown_variable_type",
+      "source": "08-variables.yarn",
+      "reference": null
+    }
+  ]
+}

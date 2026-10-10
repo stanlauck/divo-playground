@@ -1,0 +1,39 @@
+{
+  "sources": [
+    "14-duplicates.yarn"
+  ],
+  "findings": [
+    {
+      "file": "14-duplicates.yarn",
+      "line": 6,
+      "col": 1,
+      "code": "duplicate_node_title",
+      "severity": "warning",
+      "message": "node title `Repeated` is already defined; this block becomes `Repeated~2`"
+    },
+    {
+      "file": "14-duplicates.yarn",
+      "line": 12,
+      "col": 1,
+      "code": "duplicate_node_title",
+      "severity": "warning",
+      "message": "node title `Repeated` is already defined; this block becomes `Repeated~3`"
+    },
+    {
+      "file": "14-duplicates.yarn",
+      "line": 20,
+      "col": 6,
+      "code": "duplicate_line_id",
+      "severity": "error",
+      "message": "`#line:14b0001` is already used by 14-duplicates.yarn line 19 column 6"
+    },
+    {
+      "file": "14-duplicates.yarn",
+      "line": 21,
+      "col": 6,
+      "code": "duplicate_line_id",
+      "severity": "error",
+      "message": "`#line:14b0001` is already used by 14-duplicates.yarn line 19 column 6"
+    }
+  ]
+}

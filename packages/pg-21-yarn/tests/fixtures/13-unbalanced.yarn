@@ -1,0 +1,35 @@
+title: Unbalanced
+---
+Ada: Before. #line:13a0001
+<<if $x == 1>>
+    Ada: Inside an if with no endif. #line:13a0002
+===
+
+title: StrayElse
+---
+<<else>>
+Ada: An else with no if. #line:13b0001
+<<endif>>
+Ada: An endif with no if. #line:13b0002
+===
+
+title: ElseifAfterElse
+---
+<<if $y>>
+    Ada: The if body. #line:13c0001
+<<else>>
+    Ada: The else body. #line:13c0002
+<<elseif $z>>
+    Ada: Too late for an elseif. #line:13c0003
+<<endif>>
+Ada: After the block. #line:13c0004
+===
+
+title: ElseWithCondition
+---
+<<if $a>>
+    Ada: Then. #line:13d0001
+<<else $b>>
+    Ada: Else takes no condition. #line:13d0002
+<<endif>>
+===
